@@ -14,9 +14,9 @@ from datetime import datetime
 import calendar
 from PyQt5.QtWidgets import QApplication, QWidget, QCalendarWidget, QDialog, QDialogButtonBox, QVBoxLayout
 from PyQt5.QtCore import QDate
-#from connection import connection, cursor, close_connection
+from connection import connection, cursor, close_connection
 import picture
-#from psycopg2.extensions import AsIs
+from psycopg2.extensions import AsIs
 
 
 
@@ -348,7 +348,7 @@ class Ui_MainWindow(object):
 		self.DateIcon.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.DateIcon.setAutoFillBackground(False)
 		self.DateIcon.setObjectName("DateIcon")
-		self.DateIcon.setIcon(QtGui.QIcon('calendar.png'))
+		self.DateIcon.setIcon(QtGui.QIcon('pictures/calendar.png'))
 		size = QtCore.QSize(40, 40)
 		self.DateIcon.setIconSize(size)
 		
@@ -520,28 +520,6 @@ class Ui_MainWindow(object):
 		self.MeasurementTitle.setObjectName("MeasurementTitle")
 
 		
-		
-		self.Cancel = QtWidgets.QPushButton(self.centralwidget)
-		self.Cancel.setGeometry(QtCore.QRect(1450, 850, 75, 23))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.Cancel.sizePolicy().hasHeightForWidth())
-		self.Cancel.setSizePolicy(sizePolicy)
-		self.Cancel.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.Cancel.setAutoFillBackground(False)
-		self.Cancel.setObjectName("Cancel")
-
-		self.Submit = QtWidgets.QPushButton(self.centralwidget)
-		self.Submit.setGeometry(QtCore.QRect(1370, 850, 75, 23))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.Submit.sizePolicy().hasHeightForWidth())
-		self.Submit.setSizePolicy(sizePolicy)
-		self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.Submit.setAutoFillBackground(False)
-		self.Submit.setObjectName("Submit")
 
 		self.PriceBox = QtWidgets.QLineEdit(self.centralwidget)
 		self.PriceBox.setGeometry(QtCore.QRect(1370, 700, 101, 61))
@@ -809,6 +787,8 @@ class Ui_MainWindow(object):
 		self.CmCenterBack.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
 		self.CmCenterBack.setObjectName("CmCenterBack")
 		self.gridLayout.addWidget(self.CmCenterBack, 4, 2, 1, 1)
+
+
 		self.CenterFrontLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
@@ -834,6 +814,8 @@ class Ui_MainWindow(object):
 		self.CmDressSkirtWaist.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
 		self.CmDressSkirtWaist.setObjectName("CmDressSkirtWaist")
 		self.gridLayout.addWidget(self.CmDressSkirtWaist, 6, 5, 1, 1)
+
+
 		self.SleeveLengthLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
@@ -864,13 +846,14 @@ class Ui_MainWindow(object):
 		self.AboveBustLabel.setFont(SmallKhmerFont)
 		self.AboveBustLabel.setObjectName("AboveBustLabel")
 		self.gridLayout.addWidget(self.AboveBustLabel, 3, 3, 1, 1, QtCore.Qt.AlignHCenter)
+
+
 		self.CmArmPit = QtWidgets.QLabel(self.ShirtDressSkirtBox)
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
 		sizePolicy.setVerticalStretch(80)
 		sizePolicy.setHeightForWidth(self.CmArmPit.sizePolicy().hasHeightForWidth())
 		self.CmArmPit.setSizePolicy(sizePolicy)
-		
 		self.CmArmPit.setFont(ENGFont)
 		self.CmArmPit.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.CmArmPit.setAutoFillBackground(False)
@@ -889,8 +872,10 @@ class Ui_MainWindow(object):
 		self.ArmpitLabel.setAutoFillBackground(False)
 		self.ArmpitLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
 		self.ArmpitLabel.setObjectName("ArmpitLabel")
-
 		self.gridLayout.addWidget(self.ArmpitLabel, 0, 6, 1, 1, QtCore.Qt.AlignHCenter)
+
+
+
 		self.ABLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
@@ -1007,32 +992,6 @@ class Ui_MainWindow(object):
 		self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
 		self.line.setObjectName("line")
 
-		self.PreviewTitle = QtWidgets.QLabel(self.centralwidget)
-		self.PreviewTitle.setGeometry(QtCore.QRect(1350, 50, 101, 51))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.PreviewTitle.sizePolicy().hasHeightForWidth())
-		self.PreviewTitle.setSizePolicy(sizePolicy)
-		self.PreviewTitle.setFont(BigKhmerFont)
-		self.PreviewTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.PreviewTitle.setAutoFillBackground(False)
-		self.PreviewTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-		self.PreviewTitle.setObjectName("PreviewTitle")
-
-		self.ShirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-		self.ShirtRadio.setGeometry(QtCore.QRect(1330, 96, 61, 31))
-		self.ShirtRadio.setFont(SmallKhmerFont)
-		self.ShirtRadio.setObjectName("ShirtRadio")
-
-		self.DressRadio = QtWidgets.QRadioButton(self.centralwidget)
-		self.DressRadio.setGeometry(QtCore.QRect(1400, 96, 61, 31))
-		self.DressRadio.setFont(SmallKhmerFont)
-		self.DressRadio.setObjectName("DressRadio")
-		self.PantRadio = QtWidgets.QRadioButton(self.centralwidget)
-		self.PantRadio.setGeometry(QtCore.QRect(1470, 96, 82, 31))
-		self.PantRadio.setFont(SmallKhmerFont)
-		self.PantRadio.setObjectName("PantRadio")
 
 		self.line_2 = QtWidgets.QFrame(self.centralwidget)
 		self.line_2.setGeometry(QtCore.QRect(1190, 0, 20, 961))
@@ -1040,68 +999,7 @@ class Ui_MainWindow(object):
 		self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
 		self.line_2.setObjectName("line_2")
 		
-		self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
-		self.textBrowser_4.setGeometry(QtCore.QRect(170, 30, 341, 201))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.textBrowser_4.sizePolicy().hasHeightForWidth())
-		self.textBrowser_4.setSizePolicy(sizePolicy)
-		self.textBrowser_4.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.textBrowser_4.setAutoFillBackground(False)
-		self.textBrowser_4.setInputMethodHints(QtCore.Qt.ImhNone)
-		self.textBrowser_4.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_4.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_4.setReadOnly(True)
-		self.textBrowser_4.setObjectName("textBrowser_4")
-		
-		self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
-		self.textBrowser_5.setGeometry(QtCore.QRect(570, 30, 291, 201))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.textBrowser_5.sizePolicy().hasHeightForWidth())
-		self.textBrowser_5.setSizePolicy(sizePolicy)
-		self.textBrowser_5.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.textBrowser_5.setAutoFillBackground(False)
-		self.textBrowser_5.setInputMethodHints(QtCore.Qt.ImhNone)
-		self.textBrowser_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_5.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_5.setObjectName("textBrowser_5")
-		self.textBrowser_6 = QtWidgets.QTextBrowser(self.centralwidget)
-		self.textBrowser_6.setGeometry(QtCore.QRect(170, 240, 341, 171))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.textBrowser_6.sizePolicy().hasHeightForWidth())
-		self.textBrowser_6.setSizePolicy(sizePolicy)
-		self.textBrowser_6.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.textBrowser_6.setAutoFillBackground(False)
-		self.textBrowser_6.setInputMethodHints(QtCore.Qt.ImhNone)
-		self.textBrowser_6.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_6.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_6.setObjectName("textBrowser_6")
-		self.textBrowser_7 = QtWidgets.QTextBrowser(self.centralwidget)
-		self.textBrowser_7.setGeometry(QtCore.QRect(570, 240, 291, 171))
-		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-		sizePolicy.setHorizontalStretch(70)
-		sizePolicy.setVerticalStretch(80)
-		sizePolicy.setHeightForWidth(self.textBrowser_7.sizePolicy().hasHeightForWidth())
-		self.textBrowser_7.setSizePolicy(sizePolicy)
-		self.textBrowser_7.setLayoutDirection(QtCore.Qt.LeftToRight)
-		self.textBrowser_7.setAutoFillBackground(False)
-		self.textBrowser_7.setInputMethodHints(QtCore.Qt.ImhNone)
-		self.textBrowser_7.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_7.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.textBrowser_7.setObjectName("textBrowser_7")
-		self.SkirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-		self.SkirtRadio.setGeometry(QtCore.QRect(1260, 96, 61, 31))
-		self.SkirtRadio.setFont(SmallKhmerFont)
-		self.SkirtRadio.setObjectName("SkirtRadio")
-
 	
-	   
-		
 		self.PantGroupBox = QtWidgets.QGroupBox(self.centralwidget)
 		self.PantGroupBox.setGeometry(QtCore.QRect(840, 450, 271, 511))
 		self.PantGroupBox.setFont(BigKhmerFont)
@@ -1274,71 +1172,152 @@ class Ui_MainWindow(object):
 		self.CmAnkle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
 		self.CmAnkle.setObjectName("CmAnkle")
 		self.PantGroupLayout.addWidget(self.CmAnkle, 9, 2, 1, 1)
+		
+		'''
+		END OF MEASUREMENTS BOX
+		'''
 
 		'''
-		START OF connect slots and signals
+		START OF PREVIEW
 		'''
-		self.DateIcon.clicked.connect(self.EditDate)
+		self.PreviewTitle = QtWidgets.QLabel(self.centralwidget)
+		self.PreviewTitle.setGeometry(QtCore.QRect(1350, 50, 101, 51))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.PreviewTitle.sizePolicy().hasHeightForWidth())
+		self.PreviewTitle.setSizePolicy(sizePolicy)
+		self.PreviewTitle.setFont(BigKhmerFont)
+		self.PreviewTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.PreviewTitle.setAutoFillBackground(False)
+		self.PreviewTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+		self.PreviewTitle.setObjectName("PreviewTitle")
+
+		self.ShirtRadio = QtWidgets.QRadioButton(self.centralwidget)
+		self.ShirtRadio.setGeometry(QtCore.QRect(1330, 96, 61, 31))
+		self.ShirtRadio.setFont(SmallKhmerFont)
+		self.ShirtRadio.setObjectName("ShirtRadio")
+
+		self.DressRadio = QtWidgets.QRadioButton(self.centralwidget)
+		self.DressRadio.setGeometry(QtCore.QRect(1400, 96, 61, 31))
+		self.DressRadio.setFont(SmallKhmerFont)
+		self.DressRadio.setObjectName("DressRadio")
+
+		self.PantRadio = QtWidgets.QRadioButton(self.centralwidget)
+		self.PantRadio.setGeometry(QtCore.QRect(1470, 96, 82, 31))
+		self.PantRadio.setFont(SmallKhmerFont)
+		self.PantRadio.setObjectName("PantRadio")
+
+		self.SkirtRadio = QtWidgets.QRadioButton(self.centralwidget)
+		self.SkirtRadio.setGeometry(QtCore.QRect(1260, 96, 61, 31))
+		self.SkirtRadio.setFont(SmallKhmerFont)
+		self.SkirtRadio.setObjectName("SkirtRadio")
+
+		#add widgets for 4 pictures
+		self.RadioPicLabel = QtWidgets.QLabel(self.centralwidget)
+		self.RadioPicLabel.setGeometry(QtCore.QRect(1100, 150, 621, 531))
+		self.RadioPicLabel.setObjectName("RadioPicLabel")
+
 		'''
-		END OF connect slots and signals
+		END OF PREVIEW
+		'''
+
+		'''
+		START OF TEXTBROWSER BOXES
 		'''
 		
+		self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
+		self.textBrowser_4.setGeometry(QtCore.QRect(170, 30, 341, 201))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.textBrowser_4.sizePolicy().hasHeightForWidth())
+		self.textBrowser_4.setSizePolicy(sizePolicy)
+		self.textBrowser_4.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.textBrowser_4.setAutoFillBackground(False)
+		self.textBrowser_4.setInputMethodHints(QtCore.Qt.ImhNone)
+		self.textBrowser_4.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_4.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_4.setReadOnly(True)
+		self.textBrowser_4.setObjectName("textBrowser_4")
 		
+		self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
+		self.textBrowser_5.setGeometry(QtCore.QRect(570, 30, 291, 201))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.textBrowser_5.sizePolicy().hasHeightForWidth())
+		self.textBrowser_5.setSizePolicy(sizePolicy)
+		self.textBrowser_5.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.textBrowser_5.setAutoFillBackground(False)
+		self.textBrowser_5.setInputMethodHints(QtCore.Qt.ImhNone)
+		self.textBrowser_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_5.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_5.setObjectName("textBrowser_5")
+		self.textBrowser_6 = QtWidgets.QTextBrowser(self.centralwidget)
+		self.textBrowser_6.setGeometry(QtCore.QRect(170, 240, 341, 171))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.textBrowser_6.sizePolicy().hasHeightForWidth())
+		self.textBrowser_6.setSizePolicy(sizePolicy)
+		self.textBrowser_6.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.textBrowser_6.setAutoFillBackground(False)
+		self.textBrowser_6.setInputMethodHints(QtCore.Qt.ImhNone)
+		self.textBrowser_6.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_6.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_6.setObjectName("textBrowser_6")
+		self.textBrowser_7 = QtWidgets.QTextBrowser(self.centralwidget)
+		self.textBrowser_7.setGeometry(QtCore.QRect(570, 240, 291, 171))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.textBrowser_7.sizePolicy().hasHeightForWidth())
+		self.textBrowser_7.setSizePolicy(sizePolicy)
+		self.textBrowser_7.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.textBrowser_7.setAutoFillBackground(False)
+		self.textBrowser_7.setInputMethodHints(QtCore.Qt.ImhNone)
+		self.textBrowser_7.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_7.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.textBrowser_7.setObjectName("textBrowser_7")
 
-		#raising -> divide this into functions
-		#disable to not show in UI, used to get correct date format to database
-		self.DeadlineBox.raise_()
-		self.textBrowser_7.raise_()
-		self.textBrowser_6.raise_()
-		self.textBrowser_5.raise_()
-		self.textBrowser_4.raise_()
+
+
+		''' 
+		END OF TEXT BROWSER BOXES
+		'''
+
 		
-		self.StaffNameBox.raise_()
-		self.DeadlineSelectedLabel.raise_()
-		self.DateIcon.raise_()
-		self.ShirtDressSkirtBox.raise_()
-		self.StaffTitle.raise_()
-		self.PhoneLabel.raise_()
-		self.DeadlineLabel.raise_()
-		self.MeasurementTitle.raise_()
-		self.CustomerInfoTitle.raise_()
-		self.ColorLabel.raise_()
-		self.StaffNameLabel.raise_()
-		self.StyleLabel.raise_()
-		self.MaterialsLabel.raise_()
-		self.AddressLabel.raise_()
-		self.CustomerNameLabel.raise_()
-		self.CustomerPreferencesTitle.raise_()
-		self.Cancel.raise_()
-		self.Submit.raise_()
-		self.PriceBox.raise_()
-		self.PriceLabel.raise_()
-		self.line.raise_()
-		self.SpecialReqTitle.raise_()
-		self.PreviewTitle.raise_()
-		self.ShirtRadio.raise_()
-		self.DressRadio.raise_()
-		self.PantRadio.raise_()
-		self.line_2.raise_()
-		self.SkirtRadio.raise_()
-		self.CustomerNameBox.raise_()
-		self.PhoneBox.raise_()
-		self.AddressBox.raise_()
-		self.ColorBox.raise_()
-		self.StyleBox.raise_()
-		self.MaterialBox.raise_()
-		self.SpecialReqBox.raise_()
-		self.PantGroupBox.raise_()
+		''' Submit & Cancel '''
+		self.Cancel = QtWidgets.QPushButton(self.centralwidget)
+		self.Cancel.setGeometry(QtCore.QRect(1450, 850, 75, 23))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.Cancel.sizePolicy().hasHeightForWidth())
+		self.Cancel.setSizePolicy(sizePolicy)
+		self.Cancel.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.Cancel.setAutoFillBackground(False)
+		self.Cancel.setObjectName("Cancel")
 
-		'''
-		START OF MEASUREMENTS BOX
-		'''
+		self.Submit = QtWidgets.QPushButton(self.centralwidget)
+		self.Submit.setGeometry(QtCore.QRect(1370, 850, 75, 23))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.Submit.sizePolicy().hasHeightForWidth())
+		self.Submit.setSizePolicy(sizePolicy)
+		self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.Submit.setAutoFillBackground(False)
+		self.Submit.setObjectName("Submit")
+		''' Submit & Cancel '''
 
-		#menu bar
+		
+		self.RaiseWidgets()
+		#####show all widgets above
 		MainWindow.setCentralWidget(self.centralwidget)
 		
-		
-
+	
 		self.menubar = QtWidgets.QMenuBar(MainWindow)
 		self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 20))
 		self.menubar.setObjectName("menubar")
@@ -1387,27 +1366,74 @@ class Ui_MainWindow(object):
 		self.menubar.addAction(self.MenuView.menuAction())
 		self.menubar.addAction(self.MenuAbout.menuAction())
 		
-		self.retranslateUi(MainWindow)
+
+		
+
+
+
+		
+		#self.Submit.clicked.connect(self.sendCustomerDetails)
+		#self.Submit.clicked.connect(self.test)
+		#self.Submit.clicked.connect(self.getCustomerDetails)
+		'''
+		START OF connect slots and signals
+		'''
+		#date selection 
+		self.DateIcon.clicked.connect(self.EditDate)
 
 		#connect radio buttons and pictures
 		self.ShirtRadio.toggled.connect(self.select_pic)
 		self.DressRadio.toggled.connect(self.select_pic)
 		self.PantRadio.toggled.connect(self.select_pic)
 		self.SkirtRadio.toggled.connect(self.select_pic)
-
-		#add widgets for 4 pictures
-
-		self.RadioPicLabel = QtWidgets.QLabel(self.centralwidget)
-		self.RadioPicLabel.setGeometry(QtCore.QRect(1100, 150, 621, 531))
-		self.RadioPicLabel.setObjectName("RadioPicLabel")
-
-		
-		#self.Submit.clicked.connect(self.sendCustomerDetails)
-		#self.Submit.clicked.connect(self.test)
-		#self.Submit.clicked.connect(self.getCustomerDetails)
-
+		'''
+		END OF connect slots and signals
+		'''
+		self.retranslateUi(MainWindow)
 		QtCore.QMetaObject.connectSlotsByName(MainWindow)
 	
+	def RaiseWidgets(self): 
+		self.DeadlineBox.raise_()
+		self.textBrowser_7.raise_()
+		self.textBrowser_6.raise_()
+		self.textBrowser_5.raise_()
+		self.textBrowser_4.raise_()
+		self.StaffNameBox.raise_()
+		self.DeadlineSelectedLabel.raise_()
+		self.DateIcon.raise_()
+		self.ShirtDressSkirtBox.raise_()
+		self.StaffTitle.raise_()
+		self.PhoneLabel.raise_()
+		self.DeadlineLabel.raise_()
+		self.MeasurementTitle.raise_()
+		self.CustomerInfoTitle.raise_()
+		self.ColorLabel.raise_()
+		self.StaffNameLabel.raise_()
+		self.StyleLabel.raise_()
+		self.MaterialsLabel.raise_()
+		self.AddressLabel.raise_()
+		self.CustomerNameLabel.raise_()
+		self.CustomerPreferencesTitle.raise_()
+		self.Cancel.raise_()
+		self.Submit.raise_()
+		self.PriceBox.raise_()
+		self.PriceLabel.raise_()
+		self.line.raise_()
+		self.SpecialReqTitle.raise_()
+		self.PreviewTitle.raise_()
+		self.ShirtRadio.raise_()
+		self.DressRadio.raise_()
+		self.PantRadio.raise_()
+		self.line_2.raise_()
+		self.SkirtRadio.raise_()
+		self.CustomerNameBox.raise_()
+		self.PhoneBox.raise_()
+		self.AddressBox.raise_()
+		self.ColorBox.raise_()
+		self.StyleBox.raise_()
+		self.MaterialBox.raise_()
+		self.SpecialReqBox.raise_()
+		self.PantGroupBox.raise_()
 	
 	def select_pic(self):
 		#_translate = QtCore.QCoreApplication.translate
