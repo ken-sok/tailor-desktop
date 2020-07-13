@@ -26,7 +26,9 @@ class Ui_MainWindow(object):
 	#DO NOT MOVE
 	complete_input = 0
 	added_customer = 0
-
+	added_order = 0
+	added_material = 0 
+	clothes_type = ""
 	def setupUi(self, MainWindow):
 
 		'''
@@ -285,10 +287,10 @@ class Ui_MainWindow(object):
 		self.PhoneBox.setGeometry(QtCore.QRect(340, 110, 161, 31))
 		self.PhoneBox.setFont(SmallKhmerFont)
 		self.PhoneBox.setObjectName("PhoneBox")
-
-		self.AddressBox = QtWidgets.QLineEdit(self.centralwidget)
-		self.AddressBox.setGeometry(QtCore.QRect(340, 150, 161, 31))
+		
+		self.AddressBox = QtWidgets.QPlainTextEdit(self.centralwidget)
 		self.AddressBox.setFont(SmallKhmerFont)
+		self.AddressBox.setGeometry(QtCore.QRect(340, 150, 160, 70))
 		self.AddressBox.setObjectName("AddressBox")
 
 		'''
@@ -326,7 +328,7 @@ class Ui_MainWindow(object):
 
 		
 		self.DeadlineLabel = QtWidgets.QLabel(self.centralwidget)
-		self.DeadlineLabel.setGeometry(QtCore.QRect(190, 340, 121, 31))
+		self.DeadlineLabel.setGeometry(QtCore.QRect(190, 340, 110, 31))
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
 		sizePolicy.setVerticalStretch(80)
@@ -384,6 +386,7 @@ class Ui_MainWindow(object):
 		self.DeadlineSelectedLabel.setObjectName("DeadlineSelectedLabel")
 
 		#label to send date to database
+		#not in Ui
 		self.DeadlineBox = QtWidgets.QLabel(self.centralwidget)
 		self.DeadlineBox.setGeometry(QtCore.QRect(370, 341, 1, 1))
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
@@ -458,19 +461,19 @@ class Ui_MainWindow(object):
 		self.MaterialsLabel.setObjectName("MaterialsLabel")
 
 		#user inputs
-		self.ColorBox = QtWidgets.QLineEdit(self.centralwidget)
-		self.ColorBox.setGeometry(QtCore.QRect(680, 69, 171, 31))
-		self.ColorBox.setFont(SmallKhmerFont)
-		self.ColorBox.setObjectName("ColorBox")
-
-		self.StyleBox = QtWidgets.QLineEdit(self.centralwidget)
-		self.StyleBox.setGeometry(QtCore.QRect(680, 109, 171, 31))
-		self.StyleBox.setFont(SmallKhmerFont)
-		self.StyleBox.setObjectName("StyleBox")
 		self.MaterialBox = QtWidgets.QLineEdit(self.centralwidget)
-		self.MaterialBox.setGeometry(QtCore.QRect(680, 149, 171, 31))
+		self.MaterialBox.setGeometry(QtCore.QRect(680, 69, 171, 31))
 		self.MaterialBox.setFont(SmallKhmerFont)
 		self.MaterialBox.setObjectName("MaterialBox")
+
+		self.ColorBox = QtWidgets.QLineEdit(self.centralwidget)
+		self.ColorBox.setGeometry(QtCore.QRect(680, 109, 171, 31))
+		self.ColorBox.setFont(SmallKhmerFont)
+		self.ColorBox.setObjectName("ColorBox")
+		self.StyleBox = QtWidgets.QLineEdit(self.centralwidget)
+		self.StyleBox.setGeometry(QtCore.QRect(680, 149, 171, 31))
+		self.StyleBox.setFont(SmallKhmerFont)
+		self.StyleBox.setObjectName("StyleBox")
 
 		'''
 		END OF CUSTOMER PREFERENCES BOX
@@ -1290,7 +1293,7 @@ class Ui_MainWindow(object):
 		
 		''' Submit & Cancel '''
 		self.Cancel = QtWidgets.QPushButton(self.centralwidget)
-		self.Cancel.setGeometry(QtCore.QRect(1450, 850, 75, 23))
+		self.Cancel.setGeometry(QtCore.QRect(1490, 850, 130, 50))
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
 		sizePolicy.setVerticalStretch(80)
@@ -1298,10 +1301,11 @@ class Ui_MainWindow(object):
 		self.Cancel.setSizePolicy(sizePolicy)
 		self.Cancel.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.Cancel.setAutoFillBackground(False)
+		self.Cancel.setFont(SmallKhmerFont)
 		self.Cancel.setObjectName("Cancel")
 
 		self.Submit = QtWidgets.QPushButton(self.centralwidget)
-		self.Submit.setGeometry(QtCore.QRect(1370, 850, 75, 23))
+		self.Submit.setGeometry(QtCore.QRect(1370, 850, 100, 50))
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
 		sizePolicy.setVerticalStretch(80)
@@ -1309,74 +1313,94 @@ class Ui_MainWindow(object):
 		self.Submit.setSizePolicy(sizePolicy)
 		self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
 		self.Submit.setAutoFillBackground(False)
+		self.Submit.setFont(SmallKhmerFont)
 		self.Submit.setObjectName("Submit")
+
+
+		self.SubmitMsg = QtWidgets.QLabel(self.centralwidget)
+		self.SubmitMsg.setGeometry(QtCore.QRect(1350, 920, 300, 23))
+		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+		sizePolicy.setHorizontalStretch(70)
+		sizePolicy.setVerticalStretch(80)
+		sizePolicy.setHeightForWidth(self.SubmitMsg.sizePolicy().hasHeightForWidth())
+		self.SubmitMsg.setSizePolicy(sizePolicy)
+		self.SubmitMsg.setFont(SmallKhmerFont)
+		self.SubmitMsg.setLayoutDirection(QtCore.Qt.LeftToRight)
+		self.SubmitMsg.setAutoFillBackground(False)
 		''' Submit & Cancel '''
 
 		
 		self.RaiseWidgets()
 		#####show all widgets above
 		MainWindow.setCentralWidget(self.centralwidget)
+		#####show all widgets above
+
+
+		#menu bar
+
+		#action 
+		self.ActionNewOrder = QtWidgets.QAction(MainWindow)
+		self.ActionNewOrder.setObjectName("ActionNewOrder")
+		self.ActionNewOrder.setFont(SmallKhmerFont)
 		
-	
+		self.ActionViewAllOrders = QtWidgets.QAction(MainWindow)
+		self.ActionViewAllOrders.setObjectName("ActionViewAllOrders")
+		self.ActionViewAllOrders.setFont(SmallKhmerFont)
+		
+		self.ActionAbout = QtWidgets.QAction(MainWindow)
+		self.ActionAbout.setObjectName("ActionAbout")
+		self.ActionAbout.setFont(SmallKhmerFont)
+		self.ActionAbout = QtWidgets.QAction(MainWindow)
+		
+
+
+		#create statusbar at bottom of application
+	   
+		#self.StatusBar = QtWidgets.QStatusBar(MainWindow)
+		#self.StatusBar.setObjectName("StatusBar")
+		#MainWindow.setStatusBar(self.StatusBar)
+		
+
+		#create menubar
+
 		self.menubar = QtWidgets.QMenuBar(MainWindow)
 		self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 20))
 		self.menubar.setObjectName("menubar")
+		self.menubar.setFont(SmallKhmerFont)
+	
 
+		
+		#menu buttons
+		'''
 		self.MenuNewOrder = QtWidgets.QMenu(self.menubar)
 		self.MenuNewOrder.setObjectName("MenuNewOrder")
-		self.MenuNewOrder.setFont(SmallKhmerFont)
+		self.MenuNewOrder.addAction(self.ActionNewOrder)
 
 		self.MenuAbout = QtWidgets.QMenu(self.menubar)
 		self.MenuAbout.setObjectName("MenuAbout")
-		self.MenuAbout.setFont(SmallKhmerFont)
+		self.MenuAbout.addAction(self.ActionAbout)
 		
 		self.MenuView = QtWidgets.QMenu(self.menubar)
 		self.MenuView.setObjectName("MenuView")
-		self.MenuView.setFont(SmallKhmerFont)
+		self.MenuView.addAction(self.ActionViewAllOrders)
+		
+		self.menubar.addMenu(self.MenuNewOrder)
+		self.menubar.addMenu(self.MenuView)
+		self.menubar.addMenu(self.MenuAbout)
+		'''
 
-		#action 
-		self.actionNew = QtWidgets.QAction(MainWindow)
-		self.actionNew.setObjectName("actionNew")
-		self.actionNew.setFont(SmallKhmerFont)
-		self.actionNew = QtWidgets.QAction(MainWindow)
+		self.menubar.addAction(self.ActionNewOrder)
+		self.menubar.addAction(self.ActionViewAllOrders)
+		self.menubar.addAction(self.ActionAbout)
 		
-		self.actionAll_Orders = QtWidgets.QAction(MainWindow)
-		self.actionAll_Orders.setObjectName("actionAll_Orders")
-		
-
-		
-		#u need to connect each menu option to an action 
+		#put menubar into main window
 		MainWindow.setMenuBar(self.menubar)
-		''''
-		self.statusBar = QtWidgets.QStatusBar(MainWindow)
-		self.statusBar.setObjectName("statusBar")
-		MainWindow.setStatusBar(self.statusBar)
-		'''
 
-		
-		#connection action and button 
-		
 	
-		#set menu bar functions
-		
-		self.actionNew.triggered.connect(self.clearInput)
-
-
-		self.menubar.addAction(self.MenuNewOrder.menuAction())
-		self.menubar.addAction(self.MenuView.menuAction())
-		self.menubar.addAction(self.MenuAbout.menuAction())
 		
 
-		
-
-
-
-		
-		#self.Submit.clicked.connect(self.sendCustomerDetails)
-		#self.Submit.clicked.connect(self.test)
-		#self.Submit.clicked.connect(self.getCustomerDetails)
 		'''
-		START OF connect slots and signals
+		START OF connect slots and signals for Ui 
 		'''
 		#date selection 
 		self.DateIcon.clicked.connect(self.EditDate)
@@ -1386,6 +1410,18 @@ class Ui_MainWindow(object):
 		self.DressRadio.toggled.connect(self.select_pic)
 		self.PantRadio.toggled.connect(self.select_pic)
 		self.SkirtRadio.toggled.connect(self.select_pic)
+		'''
+		self.ShirtRadio.toggled.connect(self.checkRequiredInputs)
+		self.DressRadio.toggled.connect(self.checkRequiredInputs)
+		self.PantRadio.toggled.connect(self.checkRequiredInputs)
+		self.SkirtRadio.toggled.connect(self.checkRequiredInputs)
+
+		self.ShirtRadio.toggled.connect(self.insertMaterialDetails)
+		self.DressRadio.toggled.connect(self.insertMaterialDetails)
+		self.PantRadio.toggled.connect(self.insertMaterialDetails)
+		self.SkirtRadio.toggled.connect(self.insertMaterialDetails)
+		'''
+		
 		'''
 		END OF connect slots and signals
 		'''
@@ -1429,9 +1465,9 @@ class Ui_MainWindow(object):
 		self.CustomerNameBox.raise_()
 		self.PhoneBox.raise_()
 		self.AddressBox.raise_()
+		self.MaterialBox.raise_()
 		self.ColorBox.raise_()
 		self.StyleBox.raise_()
-		self.MaterialBox.raise_()
 		self.SpecialReqBox.raise_()
 		self.PantGroupBox.raise_()
 	
@@ -1439,10 +1475,11 @@ class Ui_MainWindow(object):
 		#_translate = QtCore.QCoreApplication.translate
 		radioBtn = self.centralwidget.sender()
 
+		self.clothes_type = ""
 		if radioBtn.isChecked():
 		
-			
-			if (radioBtn.text() == "សំពត់"):
+			self.clothes_type = radioBtn.text()
+			if (self.clothes_type  == "សំពត់"):
 				#skirt
 				
 
@@ -1470,141 +1507,189 @@ class Ui_MainWindow(object):
 				'''
 				#above is sample 
 
-			elif (radioBtn.text() == "រ៉ូប"):
+			elif (self.clothes_type  == "រ៉ូប"):
 					#dress
 				
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/dress.jpg);")
 
 				
 				
-			elif (radioBtn.text() == "អាវ"):
+			elif (self.clothes_type  == "អាវ"):
 				#shirt
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
 
 			
 
-			elif (radioBtn.text() == "ខោ"):
+			elif (self.clothes_type  == "ខោ"):
 					#pant
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
-				
+			
 
+		
+		
+				
+	'''delete lateer'''
 	def test(self):
 		print('yay')
-		text = self.CustomerNameBox.text()
-		print(text)
+		#text = self.CustomerNameBox.text()
+		#print(text)
+	'''delete lateer'''
 
 	def checkRequiredInputs(self): 
+
+		'''This function is for checking that all required fields are given by user before interaction with database'''
 		
 		#customer 
 		customer_name = self.CustomerNameBox.text()
-		address = self.AddressBox.text()
+		#address = self.AddressBox.toPlainText()
 		telephone = self.PhoneBox.text()
 
 		#order
 		price = self.PriceBox.text()
 		customer_name = self.CustomerNameBox.text()
-		staff = self.StaffNameBox.text()
-		#date_ordered = day+'/'+month+'/'+year
-		deadline = self.DeadlineBox.text()
-		#print(deadline)
-		progress = '0'
-		req = self.SReq.toPlainText()
-		#print(req)
-		#get customer ID                            
+		#staff = self.StaffNameBox.text()
+		deadline = self.DeadlineSelectedLabel.text()
+		#progress = '0'
+		#req = self.SpecialReqBox.toPlainText()
+		color = self.ColorBox.text()	
+		style = self.StyleBox.text()
+		material = self.MaterialBox.text()
 
-		if (price == "" or customer_name == "" or deadline == "" or telephone == ""): 
-			self.feedbackSubmit(0)
-			if price == "": 
+		#radio button
+		clothes_type = self.clothes_type
+		#print(clothes_type)
+
+		
+	
+		                          
+		#reset color
+		self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
+		self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+		self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+		self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+		self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
+		self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+		self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+		self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+
+		self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
+		self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
+		self.PantRadio.setStyleSheet("color: black; background-color: light grey")
+		self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+		self.SkirtRadio.setChecked(False)
+		self.ShirtRadio.setChecked(False)
+		self.PantRadio.setChecked(False)
+		self.DressRadio.setChecked(False) 
+
+
+		if (price == "$" or customer_name == "" or deadline == "សូមចុចរូបប្រតិទិន" or telephone == "" or style == "" or material == ""  or color == ""
+		or clothes_type == ""): 
+
+			
+			if price == "$": 
 				self.PriceLabel.setStyleSheet("color: red; background-color: light grey") 
 			if customer_name == "":
 				self.CustomerNameLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
-			if deadline == "":
+			if deadline == "សូមចុចរូបប្រតិទិន":
 				self.DeadlineLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
 			if telephone == "":
 				self.PhoneLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
-			#self.status = 0
+			if style == "": 
+				self.StyleLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+			if material == "":
+				self.MaterialsLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+			if color == "":
+				self.ColorLabel.setStyleSheet("color: red; background-color: #d7dbdd")
+			if clothes_type == "":
+				self.SkirtRadio.setStyleSheet("color: red; background-color: light grey")
+				self.ShirtRadio.setStyleSheet("color: red; background-color: light grey")
+				self.PantRadio.setStyleSheet("color: red; background-color: light grey")
+				self.DressRadio.setStyleSheet("color: red; background-color: light grey")
+			self.feedbackSubmit(0)
+
+
 
 		else: 
-			self.feedbackSubmit(1)
+			
 			self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
 			self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 			self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 			self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 			self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
+			self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+			self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+			self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+			self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
+			self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
+			self.PantRadio.setStyleSheet("color: black; background-color: light grey")
+			self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+			self.feedbackSubmit(1)
 			self.complete_input = 1
-			print("completed")
+			print("completed inputs")
 			
-			'''
-			#insert to table
-			self.insertCustomerDetails()
-			self.insertOrderDetails()
-			'''
-		#return self.status
 
 	def insertCustomerDetails(self):
 
+		'''gather info from view and send to db'''
 		if (self.complete_input == 1): 
 			customer_name = self.CustomerNameBox.text()
-			address = self.AddressBox.text()
+			address = self.AddressBox.toPlainText()
 			telephone = self.PhoneBox.text()
 			insertCustomer(customer_name, address, telephone)
 			self.added_customer = 1
 
-		'''
-		if customer_name == "" or telephone == "": 
-			self.feedbackSubmit(0)
-		else: 
-			#insert customer details to customer table
-			insertCustomer(customer_name, address, telephone)
-			self.feedbackSubmit(1)
-		'''
+
 
 	def insertOrderDetails(self): 
-
+		'''gather info from view and send to db'''
 		if ((self.complete_input == 1) and (self.added_customer == 1)): 
 			
 			price = self.PriceBox.text()
 			customer_name = self.CustomerNameBox.text()
 			staff = self.StaffNameBox.text()
-			
 			deadline = self.DeadlineBox.text()
-			
 			progress = '1'
-			req = self.SReq.toPlainText()
+			req = self.SpecialReqBox.toPlainText()
 			
 			#get customer ID
 			customer_id = getCustomerID()
-			
 			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req)
+			self.added_order = 1
+
+	def insertMaterialDetails(self): 
+		'''gather info from view and send to db'''
+		if ((self.complete_input == 1) and (self.added_order == 1)): 
 		
-		'''
-		if price == "" or customer_name == "" or deadline == "": 
-			self.feedbackSubmit(0)
-		else: 
-			#insert customer details to customer table
-			customer_id = getCustomerID()
-			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req)
-			self.feedbackSubmit(1)
-		#insert order details into order table
-		'''
+			
+			clothes_type = self.clothes_type
+			style = self.StyleBox.text()
+			color = self.ColorBox.text()
+			material = self.MaterialBox.text()
+			
+			#get order id
+			order_id = getOrderID()
+			insertMaterial(order_id,clothes_type, material, color, style)
+			self.added_material = 1
+				
+		
 
 	def feedbackSubmit(self, completed): 
 		_translate = QtCore.QCoreApplication.translate
 		
 		#clear old message
-		self.submit_msg.setText(_translate("MainWindow", ""))
+		self.SubmitMsg.setText(_translate("MainWindow", ""))
 		
 		if (completed): 
-			self.submit_msg.setText(_translate("MainWindow", "ប្រតិបត្តិការជោគជ័យ!"))
+			self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការជោគជ័យ!"))
 		elif (completed == 0) : 
-			self.submit_msg.setText(_translate("MainWindow", "ប្រតិបត្តិការបរាជ័យ!សូមបំពេញព័ត៍មានបន្ថែម"))
+			self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការបរាជ័យ!សូមបំពេញព័ត៍មានបន្ថែម"))
 
 	def retranslateUi(self, MainWindow):
 		_translate = QtCore.QCoreApplication.translate
 		MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
 		self.StaffTitle.setText(_translate("MainWindow", "ព័ត៌មានបុគ្គលិក"))
 		self.PhoneLabel.setText(_translate("MainWindow", "លេខទូរស័ព្ទ:"))
-		self.DeadlineLabel.setText(_translate("MainWindow", "កាលបរិច្ឆេទ:"))
+		self.DeadlineLabel.setText(_translate("MainWindow", "កាលកំណត់:"))
 		self.MeasurementTitle.setText(_translate("MainWindow", "ការវាស់វែងអតិថិជន"))
 		self.CustomerInfoTitle.setText(_translate("MainWindow", "ព័ត៌មានអតិថិជន"))
 		self.ColorLabel.setText(_translate("MainWindow", "ពណ៌:"))
@@ -1654,7 +1739,7 @@ class Ui_MainWindow(object):
 		self.ShirtRadio.setText(_translate("MainWindow", "អាវ"))
 		self.DressRadio.setText(_translate("MainWindow", "រ៉ូប"))
 		self.PantRadio.setText(_translate("MainWindow", "ខោ"))
-		
+		self.SkirtRadio.setText(_translate("MainWindow", "សំពត់"))
 		self.textBrowser_4.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 	"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 	"p, li { white-space: pre-wrap; }\n"
@@ -1676,7 +1761,7 @@ class Ui_MainWindow(object):
 	"</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
 	"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
 		
-		self.SkirtRadio.setText(_translate("MainWindow", "សំពត់"))
+		
 		self.PantGroupBox.setTitle(_translate("MainWindow", "ខោ"))
 		self.ThighLabel.setText(_translate("MainWindow", "ទំហំភ្លៅ:"))
 		self.OutseamLabel.setText(_translate("MainWindow", "សំរុងខោ:"))
@@ -1694,30 +1779,23 @@ class Ui_MainWindow(object):
 		self.CmAnkle.setText(_translate("MainWindow", "cm"))
 		self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
 		self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white")
+		self.SubmitMsg.setText(_translate("MainWindow", ""))
 
 		#menu buttons
-		self.MenuNewOrder.setTitle(_translate("MainWindow", "កម្មង់ថ្មី"))
-		self.MenuAbout.setTitle(_translate("MainWindow", "កម្មវិធី"))
-		self.MenuView.setTitle(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
+		self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
+		self.ActionAbout.setText(_translate("MainWindow", "អំពីកម្មវិធី"))
+		self.ActionViewAllOrders.setText(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
 
-		#use to connect with menu button
-		#self.actionNew.setText(_translate("MainWindow", "កម្មង់ថ្មី11111"))
-		self.actionAll_Orders.setText(_translate("MainWindow", "All Orders"))
 		
 		
-
-		#color
-		
-
-		#self.DeadlineBox.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
-	#@QtCore.pyqtSlot(int, int, int)
+	
 	def PrintDate(self, day, month, year):
-		#print(day,month,year)
+		
 		_translate = QtCore.QCoreApplication.translate
-		#change DeadlineSelectedLabel name to deadline later
+		
 		self.DeadlineSelectedLabel.setText(_translate("MainWindow", f'{day}/{month}/{year}'))
 		self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
-		#self.DeadlineLabel.setText(_translate("MainWindow", f'{day}/{month}/{year}'))
+		
 	def getDate(self, day, month, year): 
 		_translate = QtCore.QCoreApplication.translate
 		self.DeadlineBox.setText(_translate("MainWindow", f'{year}/{month}/{day}'))
@@ -1728,111 +1806,41 @@ class Ui_MainWindow(object):
 	def EditDate(self):
 		self.dialog = CalendarWindow()
 		self.dialog.submitted.connect(self.PrintDate)
-		#self.dialog.submitted.connect(self.insertOrderDetails)
 		self.dialog.submitted.connect(self.getDate)
 		self.dialog.show()
 
 	def clearInput(self): 
 		_translate = QtCore.QCoreApplication.translate
+		self.CustomerNameBox.setText(_translate("MainWindow", ''))
 		self.StaffNameBox.setText(_translate("MainWindow", ''))
-		self.colorbox.setText(_translate("MainWindow", ''))
-		self.stylebox.setText(_translate("MainWindow", ''))
-		
+		self.MaterialBox.setText(_translate("MainWindow", ''))
+		self.ColorBox.setText(_translate("MainWindow", ''))
 		self.PhoneBox.setText(_translate("MainWindow", ''))
-		self.AddressBox.setText(_translate("MainWindow", ''))
-		self.materialbox.setText(_translate("MainWindow", ''))
-		self.PriceBox.setText(_translate("MainWindow", ''))
-		self.CIDbox.setText(_translate("MainWindow", ''))
+		self.AddressBox.setPlainText(_translate("MainWindow", ''))
+		self.StyleBox.setText(_translate("MainWindow", ''))
+		self.PriceBox.setText(_translate("MainWindow", '$'))
 		self.DeadlineBox.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
-		self.submit_msg.setText(_translate("MainWindow", ''))
-		self.SReq.setPlainText(_translate("MainWindow", ''))
-
-
+		self.SubmitMsg.setText(_translate("MainWindow", ''))
+		self.SpecialReqBox.setPlainText(_translate("MainWindow", ''))
 		self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
 		self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 		self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 		self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
 		self.DeadlineBox.setStyleSheet("color: black; background-color: white")
+		self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
+		self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+		self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+		self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+		self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
+		self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
+		self.PantRadio.setStyleSheet("color: black; background-color: light grey")
+		self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+		self.SkirtRadio.setChecked(False)
+		self.ShirtRadio.setChecked(False)
+		self.PantRadio.setChecked(False)
+		self.DressRadio.setChecked(False) 
 		
-		
-
-	# Create a Controller/Model class to connect the GUI and database
-class appModel:
-	"""model class."""
-	def __init__(self, view):
-		"""Controller initializer."""
-		
-		self._view = view
-		# Connect signals and slots
-		self._connectSignals()
-
-		#interact with database here
-	
-	def _connectSignals(self):
-		"""Connect signals and slots."""
-		#trying to get Submit signal here
-		#self._view.Submit.clicked.connect(self.sendCustomerDetails)
-		#self._view.Submit.clicked.connect(lambda : print('here'))
-		
-		print(self._view.complete_input)
-			
-		self._view.Submit.clicked.connect(self._view.checkRequiredInputs)	
-		
-		self._view.Submit.clicked.connect(self._view.insertCustomerDetails)
-		#insert to orders table 
-		self._view.Submit.clicked.connect(self._view.insertOrderDetails)
-		
-		#print(self._view.status)
-			
-
-
-		self._view.Cancel.clicked.connect(self._view.clearInput)
-		self._view.MenuNewOrder.triggered.connect(self._view.clearInput)
-		#self._view.CustomerNameBox.textChanged.connect(textchanged)
-			 
-		
-
-	#connect view buttons with database
-
-	def insertCustomer(customer_name, address, telephone):
-		'''insert customer details to customer tables'''
-		#add 1 entry to table
-		table = 'customers'
-		postgres_insert_query = 'INSERT INTO %s (customer_name, address, telephone) VALUES (%s,%s,%s)'
-		record_to_insert = (AsIs(table), customer_name, address, telephone,)
-		cursor.execute(postgres_insert_query, record_to_insert)
-		connection.commit()
-		count = cursor.rowcount
-		print(count, "Record inserted successfully into customers table")
-
-	def insertOrder(price, customer_name, staff, deadline, progress, customer_id, req):
-		'''insert Order details to Order tables'''
-		table = 'orders'
-
-		
-		#add 1 entry to table
-		postgres_insert_query = 'INSERT INTO %s (price, customer_name, staff, deadline, progress, customer_id, requests) VALUES (%s,%s,%s,%s,%s,%s,%s)'
-		record_to_insert = (AsIs(table), price, customer_name, staff, deadline, progress, customer_id, req)
-		cursor.execute(postgres_insert_query, record_to_insert)
-		connection.commit()
-		count = cursor.rowcount
-		print(count, "Record inserted successfully into orders table")
-
-	def getCustomerID(): 
-	
-	#helper function to include customer id into orders table
-	#table = 'customers'
-	#add 1 entry to table
-		postgres_getID_query = 'SELECT currval(pg_get_serial_sequence(%s,%s))'
-		record_to_getID = ('customers', 'ID')
-		cursor.execute(postgres_getID_query, record_to_getID)
-		customerID = cursor.fetchone()
-		print(customerID, 'is customer ID for this order')
-		return customerID
-
-
-
-
+#calendar class
 class CalendarWindow(QDialog):
 	global currentYear, currentMonth, currentDay
 
@@ -1879,6 +1887,112 @@ class CalendarWindow(QDialog):
 			
 		)
 
+		
+
+
+
+
+# Create a Controller class to connect the GUI and database
+class appController:
+	"""Controller class."""
+	def __init__(self, view):
+		"""Controller initializer."""
+		
+		self._view = view
+		# Connect signals and slots
+		self._connectSignals()
+
+		#interact with database here
+	
+	def _connectSignals(self):
+		"""Connect signals and slots."""
+		#trying to get Submit signal here
+	
+		#print(self._view.complete_input)
+			
+		self._view.Submit.clicked.connect(self._view.checkRequiredInputs)	
+		
+		#insert to customers table
+		self._view.Submit.clicked.connect(self._view.insertCustomerDetails)
+
+		#insert to orders table 
+		self._view.Submit.clicked.connect(self._view.insertOrderDetails)
+
+		#insert to materials table 
+		self._view.Submit.clicked.connect(self._view.insertMaterialDetails)
+
+		#clear all inputs
+		self._view.Cancel.clicked.connect(self._view.clearInput)
+		self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
+		#self._view.CustomerNameBox.textChanged.connect(textchanged)
+			 
+		
+#MODEL FUNCTIONS
+def insertCustomer(customer_name, address, telephone):
+	'''insert customer details to customer tables'''
+	#add 1 entry to table
+	table = 'customers'
+	postgres_insert_query = 'INSERT INTO %s (customer_name, address, telephone) VALUES (%s,%s,%s)'
+	record_to_insert = (AsIs(table), customer_name, address, telephone,)
+	cursor.execute(postgres_insert_query, record_to_insert)
+	connection.commit()
+	count = cursor.rowcount
+	print(count, "Record inserted successfully into customers table")
+
+def insertOrder(price, customer_name, staff, deadline, progress, customer_id, req):
+	'''insert Order details to Order tables'''
+	table = 'orders'
+	
+	#add 1 entry to table
+	postgres_insert_query = 'INSERT INTO %s (price, customer_name, staff, deadline, progress, customer_id, requests) VALUES (%s,%s,%s,%s,%s,%s,%s)'
+	record_to_insert = (AsIs(table), price, customer_name, staff, deadline, progress, customer_id, req)
+	cursor.execute(postgres_insert_query, record_to_insert)
+	connection.commit()
+	count = cursor.rowcount
+	print(count, "Record inserted successfully into orders table")
+
+def insertMaterial(order_id, type_clothes, material, color, style):
+	'''insert customer preferences into materials table'''
+
+	table = 'materials'
+	
+	#add 1 entry to table
+	postgres_insert_query = 'INSERT INTO %s (order_id, type, material, color, style) VALUES (%s,%s,%s,%s,%s)'
+	record_to_insert = (AsIs(table), order_id, type_clothes, material, color, style)
+	cursor.execute(postgres_insert_query, record_to_insert)
+	connection.commit()
+	count = cursor.rowcount
+	print(count, "Record inserted successfully into materials table")
+
+
+def getCustomerID(): 
+
+	#helper function to include customer id into orders table
+	#table = 'customers'
+	#add 1 entry to table
+	postgres_getID_query = 'SELECT currval(pg_get_serial_sequence(%s,%s))'
+	record_to_getID = ('customers', 'ID')
+	cursor.execute(postgres_getID_query, record_to_getID)
+	customerID = cursor.fetchone()
+	print(customerID, 'is customer ID for this order')
+
+	return customerID
+
+
+def getOrderID(): 
+
+	#helper function to include customer id into orders table
+	#table = 'customers'
+	#add 1 entry to table
+	postgres_getID_query = 'SELECT currval(pg_get_serial_sequence(%s,%s))'
+	record_to_getID = ('orders', 'ID')
+	cursor.execute(postgres_getID_query, record_to_getID)
+	orderID = cursor.fetchone()
+	print(orderID, 'is order ID for this order')
+
+	return orderID
+
+
 
 
 if __name__ == "__main__":
@@ -1889,14 +2003,14 @@ if __name__ == "__main__":
 
 	#QtCore.Qt.AA_DisableHighDpiScaling
 	#show GUI
-ui = Ui_MainWindow()
-ui.setupUi(MainWindow)
+	ui = Ui_MainWindow()
+	ui.setupUi(MainWindow)
 
-MainWindow.show()
+	MainWindow.show()
 	# Create instances of the model/controller
-appModel(view=ui)
+	appController(view=ui)
 
-app.exec_()
+	app.exec_()
 
-close_connection(connection, cursor)
-sys.exit()
+	close_connection(connection, cursor)
+	sys.exit()
