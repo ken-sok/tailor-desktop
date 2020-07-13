@@ -1,0 +1,1 @@
+pyrcc5 -o picture.py picture.qrc

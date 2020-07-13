@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>dress.jpg</file>
+    <file>pant.jpg</file>
+    <file>skirt.jpg</file>
+    <file>shirt.jpg</file>
+  </qresource>
+</RCC>
