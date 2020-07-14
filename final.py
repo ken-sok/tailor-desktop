@@ -17,8 +17,15 @@ from PyQt5.QtCore import QDate
 from connection import connection, cursor, close_connection
 import picture
 from psycopg2.extensions import AsIs
-from ViewOrders import OrdersWindow
+#from ViewOrders import OrdersWindow
 
+#for dialog orders
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
+import sys
+
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
 class Ui_MainWindow(object):
 
@@ -30,13 +37,6 @@ class Ui_MainWindow(object):
 	added_material = 0 
 	clothes_type = ""
 
-	def ViewAllOrders(self):
-		
-		self.OrdersWindow = QtWidgets.QMainWindow()
-		self.OrdersUi = OrdersWindow()
-		self.OrdersUi.show()
-		#MainWindow.hide()
-		self.OrdersUi.loaddata()
 
 	def setupUi(self, MainWindow):
 
@@ -1414,6 +1414,7 @@ class Ui_MainWindow(object):
 		self.SkirtRadio.toggled.connect(self.insertMaterialDetails)
 		'''
 		
+		self.ActionViewAllOrders.triggered.connect(self.ViewAllOrders)
 		'''
 		END OF connect slots and signals
 		'''
@@ -1553,7 +1554,7 @@ class Ui_MainWindow(object):
 
 		
 	
-		                          
+								  
 		#reset color
 		self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
 		self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
@@ -1799,7 +1800,12 @@ class Ui_MainWindow(object):
 		self.dialog = CalendarWindow()
 		self.dialog.submitted.connect(self.PrintDate)
 		self.dialog.submitted.connect(self.getDate)
-		self.dialog.show()
+		self.dialog.exec_()
+	def ViewAllOrders(self):
+		self.orderdialog = TableView()
+		self.orderdialog.show()
+		self.orderdialog.loaddata()
+  
 
 	def clearInput(self): 
 		_translate = QtCore.QCoreApplication.translate
@@ -1879,6 +1885,117 @@ class CalendarWindow(QDialog):
 			
 		)
 
+
+class TableView(QDialog):
+
+	# constructor
+	def __init__(self):
+		super(TableView, self).__init__()
+		self.setWindowTitle('All Orders')
+		#self.setGeometry(300, 300, 450, 300)
+		self.setMinimumSize(QtCore.QSize(1920, 1080))
+		#self.setMaximumSize(QtCore.QSize(450, 300))
+		self.initUI()
+		self.setWindowModality(QtCore.Qt.ApplicationModal)
+
+
+	def initUI(self):
+		self.tableWidget = QTableWidget(self)
+		self.tableWidget.resize(1920, 1080)
+		self.tableWidget.setAlternatingRowColors(True)
+		self.tableWidget.setColumnCount(8)
+		self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
+		self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+		self.tableWidget.horizontalHeader().setStretchLastSection(False)
+		self.tableWidget.verticalHeader().setVisible(False)
+		self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
+		self.tableWidget.verticalHeader().setStretchLastSection(False)
+		self.tableWidget.setHorizontalHeaderLabels(("លេខសម្គាល់ការកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខសម្គាល់អតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
+		self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+	def loaddata(self):
+	
+
+		#table_name = 'orders'
+		print("Table Before updating record ")
+		
+		sql_select_query = 'SELECT "ID" ,price,customer_name, customer_id, staff, date_ordered, deadline FROM %s'
+		record_to_query = (AsIs("orders"),)
+		cursor.execute(sql_select_query, record_to_query)
+		all_rows = cursor.fetchall()
+
+		'''
+		START OF Font FORMATTING
+		'''
+
+		SmallKhmerFont = QtGui.QFont()
+		SmallKhmerFont.setFamily("KhmerOS")
+		SmallKhmerFont.setPointSize(30)
+
+		BigKhmerFont = QtGui.QFont()
+		BigKhmerFont.setFamily("KhmerOS")
+		BigKhmerFont.setPointSize(40)
+
+		ENGFont = QtGui.QFont()
+		ENGFont.setFamily("Palatino Linotype")
+		ENGFont.setPointSize(10)
+
+		'''
+		END OF Font FORMATTING
+		'''
+	
+		self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
+		self.tableWidget.setFont(SmallKhmerFont)
+
+		for row in all_rows:
+			print(row)
+
+		self.tableWidget.setRowCount(0)
+		for row_number, row_data in enumerate(all_rows):
+			self.tableWidget.insertRow(row_number)
+			for column_number, data in enumerate(row_data):
+				print(str(data))
+				self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))
+				self.tableWidget.setRowHeight(row_number, 50)
+				
+				'''
+				#combo box
+				combo_box_options = [("0%",1),("25%",2),("50%",3),("75%",4), ("100%",5)]
+				#value_in_db = [1, 2, 3, 4, 5]
+				combo = QComboBox()
+				combo.setCurrentIndex(0) 
+				
+				for (t, i) in combo_box_options:
+					combo.addItem(t,i)
+					combo.currentIndexChanged.connect(self.selectionchange)
+					self.tableWidget.setCellWidget(row_number,7,combo)
+				''' 
+
+		for row_number in range(0,len(all_rows)): 
+			#combo box
+			combo_box_options1 = ["0%","25%","50%","75%", "100%"]
+			#combo_box_options2 = [1,2,3,4,5]
+			#combo_box_options = [("0%",1),("25%",2),("50%",3),("75%",4), ("100%",5)]
+			#value_in_db = [1, 2, 3, 4, 5]
+			combo = QComboBox()
+
+			#get current index from db
+			combo.setCurrentIndex(0) 
+			#for (t, i) in combo_box_options:
+			combo.addItems(combo_box_options1)
+			combo.currentIndexChanged.connect(self.getDataComboBox)
+			self.tableWidget.setCellWidget(row_number,7,combo)	
+
+	def getDataComboBox(self, index):
+		print(index)
+		#print(row_number)
+		rows = sorted(set(index.row() for index in
+						self.tableWidget.selectedIndexes()))
+		for row in rows:
+			#print('Row %d is selected' % row)
+			#send new progress to database 
+			print(index)
+			
 		
 
 
@@ -1895,7 +2012,9 @@ class appController:
 		self._connectSignals()
 
 		#interact with database here
-	
+ 
+
+			
 	def _connectSignals(self):
 		"""Connect signals and slots."""
 		#trying to get Submit signal here
@@ -1993,12 +2112,12 @@ if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
 	MainWindow = QtWidgets.QMainWindow()
 
-
+	
 	#QtCore.Qt.AA_DisableHighDpiScaling
 	#show GUI
 	ui = Ui_MainWindow()
 	ui.setupUi(MainWindow)
-
+	
 	MainWindow.show()
 	# Create instances of the model/controller
 	appController(view=ui)
@@ -2007,3 +2126,5 @@ if __name__ == "__main__":
 
 	close_connection(connection, cursor)
 	sys.exit()
+
+

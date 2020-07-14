@@ -10,15 +10,9 @@ import time
 import os
 from connection import connection, cursor, close_connection
 from psycopg2.extensions import AsIs
-#from final import Ui_MainWindow
+
 
 class InsertDialog(QDialog):
-	def openWindow(self):
-		self.Window = QtWidgets.QMainWindow()
-		self.ui = Ui_MainWindow()
-		self.ui.setupUi(self.window)
-		self.window.show()
-		
 
 	def __init__(self, *args, **kwargs):
 		super(InsertDialog, self).__init__(*args, **kwargs)
@@ -138,32 +132,9 @@ class DeleteDialog(QDialog):
 
 class OrdersWindow(QMainWindow):
 
-	def SubmitNewOrder(self): 
-		'''
+	
 
-		self.OrdersWindow = QtWidgets.QMainWindow()
-		self.OrdersUi = OrdersWindow()
-		self.OrdersUi.show()
-		MainWindow.hide()
-		self.OrdersUi.loaddata()
-
-		MainWindow = QtWidgets.QMainWindow()
-
-		#QtCore.Qt.AA_DisableHighDpiScaling
-		#show GUI
-		ui = Ui_MainWindow()
-		ui.setupUi(MainWindow)
-
-		MainWindow.show()
-		# Create instances of the model/controller
-		appController(view=ui)
-
-		app.exec_()
-
-		close_connection(connection, cursor)
-		sys.exit()
-
-		'''
+	#def SubmitNewOrder(final.Ui_MainWindow): 
 	def __init__(self, *args, **kwargs):
 		super(OrdersWindow, self).__init__(*args, **kwargs)
 		self.setWindowIcon(QIcon('icon/g2.png'))  #window icon
@@ -335,8 +306,6 @@ class OrdersWindow(QMainWindow):
 				cursor.insertText(model.item(row, column).text())
 				cursor.movePosition(QTextCursor.NextCell)
 				
-				
-
 		document.print_(printer)
 
 	def insert(self):
