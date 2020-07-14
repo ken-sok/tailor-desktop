@@ -17,7 +17,7 @@ from PyQt5.QtCore import QDate
 from connection import connection, cursor, close_connection
 import picture
 from psycopg2.extensions import AsIs
-
+from ViewOrders import OrdersWindow
 
 
 class Ui_MainWindow(object):
@@ -29,6 +29,15 @@ class Ui_MainWindow(object):
 	added_order = 0
 	added_material = 0 
 	clothes_type = ""
+
+	def ViewAllOrders(self):
+		
+		self.OrdersWindow = QtWidgets.QMainWindow()
+		self.OrdersUi = OrdersWindow()
+		self.OrdersUi.show()
+		#MainWindow.hide()
+		self.OrdersUi.loaddata()
+
 	def setupUi(self, MainWindow):
 
 		'''
@@ -1370,24 +1379,7 @@ class Ui_MainWindow(object):
 	
 
 		
-		#menu buttons
-		'''
-		self.MenuNewOrder = QtWidgets.QMenu(self.menubar)
-		self.MenuNewOrder.setObjectName("MenuNewOrder")
-		self.MenuNewOrder.addAction(self.ActionNewOrder)
-
-		self.MenuAbout = QtWidgets.QMenu(self.menubar)
-		self.MenuAbout.setObjectName("MenuAbout")
-		self.MenuAbout.addAction(self.ActionAbout)
-		
-		self.MenuView = QtWidgets.QMenu(self.menubar)
-		self.MenuView.setObjectName("MenuView")
-		self.MenuView.addAction(self.ActionViewAllOrders)
-		
-		self.menubar.addMenu(self.MenuNewOrder)
-		self.menubar.addMenu(self.MenuView)
-		self.menubar.addMenu(self.MenuAbout)
-		'''
+		#add actions to
 
 		self.menubar.addAction(self.ActionNewOrder)
 		self.menubar.addAction(self.ActionViewAllOrders)
@@ -1924,6 +1916,7 @@ class appController:
 		#clear all inputs
 		self._view.Cancel.clicked.connect(self._view.clearInput)
 		self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
+		self._view.ActionViewAllOrders.triggered.connect(self._view.ViewAllOrders)
 		#self._view.CustomerNameBox.textChanged.connect(textchanged)
 			 
 		

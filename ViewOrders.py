@@ -10,6 +10,7 @@ import time
 import os
 from connection import connection, cursor, close_connection
 from psycopg2.extensions import AsIs
+#from final import Ui_MainWindow
 
 class InsertDialog(QDialog):
 	def openWindow(self):
@@ -133,12 +134,38 @@ class DeleteDialog(QDialog):
 			self.close()
 		except Exception:
 			QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
-########################################################################################################################
 
-class MainWindow(QMainWindow):
-	
+
+class OrdersWindow(QMainWindow):
+
+	def SubmitNewOrder(self): 
+		'''
+
+		self.OrdersWindow = QtWidgets.QMainWindow()
+		self.OrdersUi = OrdersWindow()
+		self.OrdersUi.show()
+		MainWindow.hide()
+		self.OrdersUi.loaddata()
+
+		MainWindow = QtWidgets.QMainWindow()
+
+		#QtCore.Qt.AA_DisableHighDpiScaling
+		#show GUI
+		ui = Ui_MainWindow()
+		ui.setupUi(MainWindow)
+
+		MainWindow.show()
+		# Create instances of the model/controller
+		appController(view=ui)
+
+		app.exec_()
+
+		close_connection(connection, cursor)
+		sys.exit()
+
+		'''
 	def __init__(self, *args, **kwargs):
-		super(MainWindow, self).__init__(*args, **kwargs)
+		super(OrdersWindow, self).__init__(*args, **kwargs)
 		self.setWindowIcon(QIcon('icon/g2.png'))  #window icon
 
 		'''
@@ -151,19 +178,20 @@ class MainWindow(QMainWindow):
 
 		help_menu = self.menuBar().addMenu("&About")
 		self.setWindowTitle("All Order List")
-		self.setMinimumSize(800, 600)
+		self.setMinimumSize(1920, 1080)
 
 		self.tableWidget = QTableWidget()
 		self.setCentralWidget(self.tableWidget)
 		self.tableWidget.setAlternatingRowColors(True)
 		self.tableWidget.setColumnCount(8)
-		self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+		self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
 		self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-		self.tableWidget.horizontalHeader().setStretchLastSection(True)
+		self.tableWidget.horizontalHeader().setStretchLastSection(False)
 		self.tableWidget.verticalHeader().setVisible(False)
-		self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+		self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
 		self.tableWidget.verticalHeader().setStretchLastSection(False)
-		self.tableWidget.setHorizontalHeaderLabels(("Order ID", "Price", "Customer Name", "Customer ID", "Staff","Date Ordered", "Deadline", "Progress"))
+		self.tableWidget.setHorizontalHeaderLabels(("លេខសម្គាល់ការកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខសម្គាល់អតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
+		self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 		self.tableWidget.cellClicked.connect(self.getDataComboBox)
 
 		
@@ -237,11 +265,11 @@ class MainWindow(QMainWindow):
 
 		SmallKhmerFont = QtGui.QFont()
 		SmallKhmerFont.setFamily("KhmerOS")
-		SmallKhmerFont.setPointSize(20)
+		SmallKhmerFont.setPointSize(30)
 
 		BigKhmerFont = QtGui.QFont()
 		BigKhmerFont.setFamily("KhmerOS")
-		BigKhmerFont.setPointSize(30)
+		BigKhmerFont.setPointSize(40)
 
 		ENGFont = QtGui.QFont()
 		ENGFont.setFamily("Palatino Linotype")
@@ -250,7 +278,9 @@ class MainWindow(QMainWindow):
 		'''
 		END OF Font FORMATTING
 		'''
-		
+	
+		self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
+		self.tableWidget.setFont(SmallKhmerFont)
 
 		for row in all_rows:
 			print(row)
@@ -262,10 +292,7 @@ class MainWindow(QMainWindow):
 				print(str(data))
 				self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))
 				self.tableWidget.setRowHeight(row_number, 50)
-				if (column_number == 2): 
-					font = QtGui.QFont()
-					font.setPointSize(30)
-					self.tableWidget.setFont(self.SmallKhmerFont)
+				
 				'''
 				#combo box
 				combo_box_options = [("0%",1),("25%",2),("50%",3),("75%",4), ("100%",5)]
@@ -338,9 +365,18 @@ class MainWindow(QMainWindow):
 			#print('Row %d is selected' % row)
 			#send new progress to database 
 			print(index)
-app = QApplication(sys.argv)
-if(QDialog.Accepted == True):
-	window = MainWindow()
-	window.show()
-	window.loaddata()
-sys.exit(app.exec_())
+		
+
+
+
+if __name__ == "__main__":
+	
+	app = QApplication(sys.argv)
+	MainWindow = QtWidgets.QMainWindow()
+	if(QDialog.Accepted == True):
+		window = OrdersWindow()
+		window.show()
+		window.loaddata()
+	sys.exit(app.exec_())
+
+
