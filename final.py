@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from datetime import datetime
 import calendar
-from PyQt5.QtWidgets import QApplication, QWidget, QCalendarWidget, QDialog, QDialogButtonBox, QVBoxLayout
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QDate
 from connection import connection, cursor, close_connection
 import picture
@@ -20,12 +20,12 @@ from psycopg2.extensions import AsIs
 #from ViewOrders import OrdersWindow
 
 #for dialog orders
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+#from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
+#from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QComboBox, QPushButton
 
 class Ui_MainWindow(object):
 
@@ -1641,7 +1641,7 @@ class Ui_MainWindow(object):
 			customer_name = self.CustomerNameBox.text()
 			staff = self.StaffNameBox.text()
 			deadline = self.DeadlineBox.text()
-			progress = '1'
+			progress = '0'
 			req = self.SpecialReqBox.toPlainText()
 			
 			#get customer ID
@@ -1661,7 +1661,10 @@ class Ui_MainWindow(object):
 			
 			#get order id
 			order_id = getOrderID()
-			insertMaterial(order_id,clothes_type, material, color, style)
+
+			#get customer ID
+			customer_id = getCustomerID()
+			insertMaterial(order_id, customer_id, clothes_type, material, color, style)
 			self.added_material = 1
 				
 		
@@ -1900,6 +1903,15 @@ class TableView(QDialog):
 
 
 	def initUI(self):
+		layout = QVBoxLayout()
+		self.setLayout(layout)
+
+		toolbar = QToolBar()
+
+		toolbar.setMovable(False)
+		#self.addToolBar(toolbar)
+
+		layout.addWidget(toolbar)
 		self.tableWidget = QTableWidget(self)
 		self.tableWidget.resize(1920, 1080)
 		self.tableWidget.setAlternatingRowColors(True)
@@ -1912,14 +1924,27 @@ class TableView(QDialog):
 		self.tableWidget.verticalHeader().setStretchLastSection(False)
 		self.tableWidget.setHorizontalHeaderLabels(("លេខសម្គាល់ការកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខសម្គាល់អតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
 		self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+		layout.addWidget(self.tableWidget)
+
+		
+		#toolbar buttons
+		btn_ac_delete = QAction(QIcon("icon/d1.png"), "Delete", self) #delete
+		btn_ac_delete.triggered.connect(self.delete)
+		btn_ac_delete.setStatusTip("Delete User")
+		toolbar.addAction(btn_ac_delete)
+
+		btn_ac_refresh = QAction(QIcon("icon/r3.png"),"Refresh",self)   #refresh icon
+		btn_ac_refresh.triggered.connect(self.loaddata)
+		btn_ac_refresh.setStatusTip("Refresh Table")
+		toolbar.addAction(btn_ac_refresh)
 
 	def loaddata(self):
 	
 
 		#table_name = 'orders'
-		print("Table Before updating record ")
+		#print("Table Before updating record ")
 		
-		sql_select_query = 'SELECT "ID" ,price,customer_name, customer_id, staff, date_ordered, deadline FROM %s'
+		sql_select_query = 'SELECT "ID" , price, customer_name, customer_id, staff, date_ordered, deadline, progress FROM %s'
 		record_to_query = (AsIs("orders"),)
 		cursor.execute(sql_select_query, record_to_query)
 		all_rows = cursor.fetchall()
@@ -1947,8 +1972,8 @@ class TableView(QDialog):
 		self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
 		self.tableWidget.setFont(SmallKhmerFont)
 
-		for row in all_rows:
-			print(row)
+		#for row in all_rows:
+		#	print(row)
 
 		self.tableWidget.setRowCount(0)
 		for row_number, row_data in enumerate(all_rows):
@@ -1957,32 +1982,24 @@ class TableView(QDialog):
 				print(str(data))
 				self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))
 				self.tableWidget.setRowHeight(row_number, 50)
-				
-				'''
-				#combo box
-				combo_box_options = [("0%",1),("25%",2),("50%",3),("75%",4), ("100%",5)]
-				#value_in_db = [1, 2, 3, 4, 5]
-				combo = QComboBox()
-				combo.setCurrentIndex(0) 
-				
-				for (t, i) in combo_box_options:
-					combo.addItem(t,i)
-					combo.currentIndexChanged.connect(self.selectionchange)
-					self.tableWidget.setCellWidget(row_number,7,combo)
-				''' 
+
+
+
 
 		for row_number in range(0,len(all_rows)): 
 			#combo box
 			combo_box_options1 = ["0%","25%","50%","75%", "100%"]
-			#combo_box_options2 = [1,2,3,4,5]
-			#combo_box_options = [("0%",1),("25%",2),("50%",3),("75%",4), ("100%",5)]
-			#value_in_db = [1, 2, 3, 4, 5]
+
 			combo = QComboBox()
 
 			#get current index from db
-			combo.setCurrentIndex(0) 
+
+			
+			
 			#for (t, i) in combo_box_options:
 			combo.addItems(combo_box_options1)
+			#combo.setCurrentIndex(1)
+			combo.setCurrentIndex(int(all_rows[row_number][7])) 
 			combo.currentIndexChanged.connect(self.getDataComboBox)
 			self.tableWidget.setCellWidget(row_number,7,combo)	
 
@@ -1995,8 +2012,75 @@ class TableView(QDialog):
 			#print('Row %d is selected' % row)
 			#send new progress to database 
 			print(index)
+
+	def delete(self):
+		dlg = DeleteDialog()
+		dlg.exec_()
 			
-		
+class DeleteDialog(QDialog):
+	def __init__(self, *args, **kwargs):
+		super(DeleteDialog, self).__init__(*args, **kwargs)
+
+		self.QBtn = QPushButton()
+		self.QBtn.setText("Delete")
+
+		self.setWindowTitle("Delete Customer")
+		self.setFixedWidth(300)
+		self.setFixedHeight(100)
+		self.QBtn.clicked.connect(self.deletecustomer)
+		layout = QVBoxLayout()
+
+		self.deleteinput = QLineEdit()
+		self.onlyInt = QtGui.QIntValidator()
+		self.deleteinput.setValidator(self.onlyInt)
+		self.deleteinput.setPlaceholderText("Customer ID")
+		layout.addWidget(self.deleteinput)
+		layout.addWidget(self.QBtn)
+		self.setLayout(layout)
+
+	def deletecustomer(self):
+
+		delrol = ""
+		delrol = self.deleteinput.text()
+		try:
+			#delete customer
+			postgres_delete_query = 'DELETE from customers WHERE "ID"='+str(delrol)
+			connection.commit()
+			count = cursor.rowcount
+			cursor.execute(postgres_delete_query)
+			print(count, "Record deleted successfully in customers table")
+			
+			#delete order
+			postgres_delete_query = 'DELETE from orders WHERE customer_id ='+str(delrol)
+			connection.commit()
+			count = cursor.rowcount
+			cursor.execute(postgres_delete_query)
+			print(count, "Record deleted successfully in orders table")
+
+
+			#delete measurements
+
+
+
+			#delete preferences/materials
+			postgres_delete_query = 'DELETE from materials WHERE customer_id ='+str(delrol)
+			connection.commit()
+			count = cursor.rowcount
+			cursor.execute(postgres_delete_query)
+			print(count, "Record deleted successfully in materials table")
+
+			QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
+			self.close()
+		except Exception:
+			QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')		
+	
+	
+
+
+
+	
+	
+
 
 
 
@@ -2063,14 +2147,14 @@ def insertOrder(price, customer_name, staff, deadline, progress, customer_id, re
 	count = cursor.rowcount
 	print(count, "Record inserted successfully into orders table")
 
-def insertMaterial(order_id, type_clothes, material, color, style):
+def insertMaterial(order_id, customer_id, type_clothes, material, color, style):
 	'''insert customer preferences into materials table'''
 
 	table = 'materials'
 	
 	#add 1 entry to table
-	postgres_insert_query = 'INSERT INTO %s (order_id, type, material, color, style) VALUES (%s,%s,%s,%s,%s)'
-	record_to_insert = (AsIs(table), order_id, type_clothes, material, color, style)
+	postgres_insert_query = 'INSERT INTO %s (order_id, type, material, color, style, customer_id) VALUES (%s,%s,%s,%s,%s,%s)'
+	record_to_insert = (AsIs(table), order_id, type_clothes, material, color, style, customer_id)
 	cursor.execute(postgres_insert_query, record_to_insert)
 	connection.commit()
 	count = cursor.rowcount
@@ -2103,9 +2187,7 @@ def getOrderID():
 	print(orderID, 'is order ID for this order')
 
 	return orderID
-
-
-
+	
 
 if __name__ == "__main__":
 	import sys

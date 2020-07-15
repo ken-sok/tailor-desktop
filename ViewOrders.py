@@ -66,7 +66,7 @@ class SearchDialog(QDialog):
 		layout = QVBoxLayout()
 
 		self.searchinput = QLineEdit()
-		self.onlyInt = QIntValidator()
+		self.onlyInt = QtGui.QIntValidator()
 		self.searchinput.setValidator(self.onlyInt)
 		self.searchinput.setPlaceholderText("Customer ID")
 		layout.addWidget(self.searchinput)
@@ -120,7 +120,7 @@ class DeleteDialog(QDialog):
 		try:
 			self.conn = sqlite3.connect("database.db")
 			self.c = self.conn.cursor()
-			self.c.execute("DELETE from customer WHERE roll="+str(delrol))
+			self.c.execute("DELETE from customers WHERE roll="+str(delrol))
 			self.conn.commit()
 			self.c.close()
 			self.conn.close()
