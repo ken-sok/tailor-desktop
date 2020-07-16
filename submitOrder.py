@@ -1470,6 +1470,133 @@ class Ui_MainWindow(object):
 		radioBtn = self.centralwidget.sender()
 
 		self.clothes_type = ""
+
+
+		#clear all readonlys
+
+		
+		self.AroundBustBox.setReadOnly(False)
+		self.AroundBustBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+
+		self.NeckArmHoldBox.setReadOnly(False)
+		self.NeckArmHoldBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+
+		self.WaistBox.setReadOnly(False)
+		self.WaistBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.ABBox.setReadOnly(False)
+		self.ABBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.HipBox.setReadOnly(False)
+		self.HipBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+		self.AboveBustBox.setReadOnly(False)
+		self.AboveBustBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+		self.CenterFrontBox.setReadOnly(False)
+		self.CenterFrontBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+		self.ShoulderBox.setReadOnly(False)
+		self.ShoulderBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.AFBox.setReadOnly(False)
+		self.AFBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.CenterBackBox.setReadOnly(False)
+		self.CenterBackBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.UpperHipsBox.setReadOnly(False)
+		self.UpperHipsBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.ArmpitBox.setReadOnly(False)
+		self.ArmpitBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.SkirtLengthBox.setReadOnly(False)
+		self.SkirtLengthBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+
+		self.SleeveLengthBox.setReadOnly(False)
+		self.SleeveLengthBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.BustHeightBox.setReadOnly(False)
+		self.BustHeightBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+
+		self.InseamBox.setReadOnly(False)
+		self.InseamBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.OutseamBox.setReadOnly(False)
+		self.OutseamBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.ThighBox.setReadOnly(False)
+		self.ThighBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.PantHipBox.setReadOnly(False)
+		self.PantHipBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.AnkleBox.setReadOnly(False)
+		self.AnkleBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		self.CalfBox.setReadOnly(False)
+		self.CalfBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+		
+		self.PantWaistBox.setReadOnly(False)
+		self.PantWaistBox.setStyleSheet("QLineEdit"
+								"{"
+								"background : white;"
+								"}")
+
+
 		if radioBtn.isChecked():
 		
 			self.clothes_type = radioBtn.text()
@@ -1479,44 +1606,308 @@ class Ui_MainWindow(object):
 
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
 				
-				
-				'''
-				self.skirtwidthpic.setGeometry(QtCore.QRect(1200, 610, 81, 31))
-				self.skirtwidthpic.setObjectName("skirtwidthpic")
-				
-
-				self.skirtwidthpic.show()
-		
-				
-
+			
 				#set readonly in boxes we don't need for skirt
+				self.AroundBustBox.setReadOnly(True)
+				self.AroundBustBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				
+
+				self.NeckArmHoldBox.setReadOnly(True)
+				self.NeckArmHoldBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+
+				self.ABBox.setReadOnly(True)
+				self.ABBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+
+				
+				self.AboveBustBox.setReadOnly(True)
+				self.AboveBustBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				
+				self.CenterFrontBox.setReadOnly(True)
+				self.CenterFrontBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				
+				self.ShoulderBox.setReadOnly(True)
+				self.ShoulderBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.AFBox.setReadOnly(True)
+				self.AFBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.CenterBackBox.setReadOnly(True)
+				self.CenterBackBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.UpperHipsBox.setReadOnly(True)
+				self.UpperHipsBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.ArmpitBox.setReadOnly(True)
+				self.ArmpitBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+			
+
+				self.SleeveLengthBox.setReadOnly(True)
+				self.SleeveLengthBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.BustHeightBox.setReadOnly(True)
+				self.BustHeightBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				
+
+				self.InseamBox.setReadOnly(True)
+				self.InseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.OutseamBox.setReadOnly(True)
+				self.OutseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.ThighBox.setReadOnly(True)
+				self.ThighBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.PantHipBox.setReadOnly(True)
+				self.PantHipBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.AnkleBox.setReadOnly(True)
+				self.AnkleBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				self.CalfBox.setReadOnly(True)
+				self.CalfBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+				
+				self.PantWaistBox.setReadOnly(True)
+				self.PantWaistBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : gray;"
+										"}")
+
 				
 			
 
-				self.BustHeightBox.setReadOnly(True)
-				self.BustHeightBox.setStyleSheet("QLineEdit"
-								"{"
-								"background : grey;"
-								"}") 
-				'''
-				#above is sample 
+			
 
 			elif (self.clothes_type  == "រ៉ូប"):
 					#dress
 				
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/dress.jpg);")
 
+		
+				#boxes we don't need for dress
+				self.InseamBox.setReadOnly(True)
+				self.InseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.OutseamBox.setReadOnly(True)
+				self.OutseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.ThighBox.setReadOnly(True)
+				self.ThighBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.PantHipBox.setReadOnly(True)
+				self.PantHipBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.AnkleBox.setReadOnly(True)
+				self.AnkleBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.CalfBox.setReadOnly(True)
+				self.CalfBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.PantWaistBox.setReadOnly(True)
+				self.PantWaistBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+
+
 				
 				
 			elif (self.clothes_type  == "អាវ"):
 				#shirt
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
-
+								#boxes we don't need for dress
+				self.InseamBox.setReadOnly(True)
+				self.InseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.OutseamBox.setReadOnly(True)
+				self.OutseamBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.ThighBox.setReadOnly(True)
+				self.ThighBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.PantHipBox.setReadOnly(True)
+				self.PantHipBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.AnkleBox.setReadOnly(True)
+				self.AnkleBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.CalfBox.setReadOnly(True)
+				self.CalfBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.PantWaistBox.setReadOnly(True)
+				self.PantWaistBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.SkirtLengthBox.setReadOnly(True)
+				self.SkirtLengthBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.HipBox.setReadOnly(True)
+				self.HipBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
 			
 
 			elif (self.clothes_type  == "ខោ"):
-					#pant
+				#pant
 				self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
+
+
+				self.AroundBustBox.setReadOnly(True)
+				self.AroundBustBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+
+				self.NeckArmHoldBox.setReadOnly(True)
+				self.NeckArmHoldBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+
+				self.WaistBox.setReadOnly(True)
+				self.WaistBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.ABBox.setReadOnly(True)
+				self.ABBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.HipBox.setReadOnly(True)
+				self.HipBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.AboveBustBox.setReadOnly(True)
+				self.AboveBustBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.CenterFrontBox.setReadOnly(True)
+				self.CenterFrontBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				
+				self.ShoulderBox.setReadOnly(True)
+				self.ShoulderBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.AFBox.setReadOnly(True)
+				self.AFBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.CenterBackBox.setReadOnly(True)
+				self.CenterBackBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.UpperHipsBox.setReadOnly(True)
+				self.UpperHipsBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.ArmpitBox.setReadOnly(True)
+				self.ArmpitBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.SkirtLengthBox.setReadOnly(True)
+				self.SkirtLengthBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+
+				self.SleeveLengthBox.setReadOnly(True)
+				self.SleeveLengthBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
+				self.BustHeightBox.setReadOnly(True)
+				self.BustHeightBox.setStyleSheet("QLineEdit"
+										"{"
+										"background : grey;"
+										"}")
 			
 
 		
@@ -1552,10 +1943,7 @@ class Ui_MainWindow(object):
 		#radio button
 		clothes_type = self.clothes_type
 		#print(clothes_type)
-
-		
-	
-								  
+	  
 		#reset color
 		self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
 		self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
@@ -1635,7 +2023,7 @@ class Ui_MainWindow(object):
 			else: 
 				customer_id = self.customer_id
 
-			insertCustomer(customer_name, address, telephone, 1, customer_id)
+			insertCustomer(customer_name, address, telephone, self.updating, customer_id)
 			self.added_customer = 1
 
 
@@ -1657,7 +2045,7 @@ class Ui_MainWindow(object):
 			else: 
 				customer_id = self.customer_id
 
-			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, 1)
+			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, self.updating)
 			self.added_order = 1
 
 	def insertMaterialDetails(self): 
@@ -1676,12 +2064,86 @@ class Ui_MainWindow(object):
 				customer_id = getCustomerID()
 			else: 
 				customer_id = self.customer_id
+				order_id = 0
 			
 			#pass dummy order id when updating
-			order_id = 0
+			
 
-			insertMaterial(order_id, customer_id, clothes_type, material, color, style, 1)
+			insertMaterial(order_id, customer_id, clothes_type, material, color, style, self.updating)
 			self.added_material = 1
+
+	def insertMeasurementDetails(self):
+
+		#get clothes type 
+		clothes_type = self.clothes_type
+		#update = self.updating
+		
+		#check if we are updating or inserting new entry
+		if self.updating == 0:
+			order_id = getOrderID()
+			customer_id = getCustomerID()
+		else: 
+			order_id = 0
+			customer_id = self.customer_id
+
+		if clothes_type == "សំពត់":
+			
+			skirt_length = self.SkirtLengthBox.text()
+			skirt_waist = self.WaistBox.text()
+			skirt_hip = self.HipBox.text()
+
+			insertSkirtMeasurements(order_id, customer_id, skirt_length, skirt_waist, skirt_hip, self.updating)
+
+
+		elif clothes_type == "ខោ":
+			
+			inseam = self.InseamBox.text()
+			outseam= self.OutseamBox.text()
+			pant_thigh = self.ThighBox.text()
+			pant_hip = self.PantHipBox.text()
+			ankle = self.AnkleBox.text()
+			calf = self.CalfBox.text()
+			pant_waist = self.PantWaistBox.text()
+
+			insertPantMeasurements(order_id, customer_id, inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist, self.updating)
+
+		elif clothes_type == "អាវ":
+			around_bust = self.AroundBustBox.text()
+			neck_armhold = self.NeckArmHoldBox.text()
+			dress_waist = self.WaistBox.text()
+			ab = self.ABBox.text()
+			above_bust = self.AboveBustBox.text()
+			center_front = self.CenterFrontBox.text()
+			shoulder = self.ShoulderBox.text()
+			af = self.AFBox.text()
+			center_back = self.CenterBackBox.text()
+			upper_hips = self.UpperHipsBox.text()
+			armpit = self.ArmpitBox.text()
+			sleeve_length = self.SleeveLengthBox.text()
+			bust_height = self.BustHeightBox.text()
+			
+			insertShirtMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back, 
+			upper_hips, armpit, sleeve_length, bust_height, self.updating)
+
+		elif clothes_type == "រ៉ូប": 
+			around_bust = self.AroundBustBox.text()
+			neck_armhold = self.NeckArmHoldBox.text()
+			dress_waist = self.WaistBox.text()
+			ab = self.ABBox.text()
+			hip = self.HipBox.text()
+			above_bust = self.AboveBustBox.text()
+			center_front = self.CenterFrontBox.text()
+			shoulder = self.ShoulderBox.text()
+			af = self.AFBox.text()
+			center_back = self.CenterBackBox.text()
+			upper_hips = self.UpperHipsBox.text()
+			armpit = self.ArmpitBox.text()
+			skirt_length = self.SkirtLengthBox.text()
+			sleeve_length = self.SleeveLengthBox.text()
+			bust_height = self.BustHeightBox.text()
+
+			insertDressMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, 
+			upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, self.updating)
 				
 		
 
@@ -2085,25 +2547,29 @@ class TableView(QDialog):
 			combo = QComboBox()
 
 			#get current index from db
-
-			
-			
-			#for (t, i) in combo_box_options:
 			combo.addItems(combo_box_options1)
-			#combo.setCurrentIndex(1)
 			combo.setCurrentIndex(int(all_rows[row_number][7])) 
-			combo.currentIndexChanged.connect(self.getDataComboBox)
+			combo.currentIndexChanged.connect(self.UpdateProgressPercent)
 			self.tableWidget.setCellWidget(row_number,7,combo)	
 
-	def getDataComboBox(self, index):
-		print(index)
+	def UpdateProgressPercent(self, index):
+		
 		#print(row_number)
+	
+
 		rows = sorted(set(index.row() for index in
 						self.tableWidget.selectedIndexes()))
 		for row in rows:
-			#print('Row %d is selected' % row)
-			#send new progress to database 
+			print('Row %d is selected' % row)
+			#send new progress to database
 			print(index)
+
+		#get customer ID from selected row 
+		r = self.tableWidget.currentRow()
+		customer_id = self.tableWidget.item(r,3).text()
+
+		#update table 
+		UpdateProcess(index, customer_id)
 
 	def delete(self):
 		dlg = DeleteDialog()
@@ -2245,6 +2711,9 @@ class appController:
 		#insert to materials table 
 		self._view.Submit.clicked.connect(self._view.insertMaterialDetails)
 
+		#insert to measurements table
+		self._view.Submit.clicked.connect(self._view.insertMeasurementDetails)
+
 		#clear all inputs
 		self._view.Cancel.clicked.connect(self._view.clearInput)
 		self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
@@ -2294,7 +2763,94 @@ def insertOrder(price, customer_name, staff, deadline, progress, customer_id, re
 		count = cursor.rowcount
 		print(count, "Record updated successfully into orders table")
 
+def UpdateProcess(progress, customer_id):
 
+	'''update progress in view all orders'''
+
+	table = 'orders'
+	postgres_update_query = 'UPDATE %s SET progress = %s WHERE customer_id = %s'
+	record_to_update = (AsIs(table), progress, customer_id)
+	cursor.execute(postgres_update_query, record_to_update)
+	connection.commit()
+	count = cursor.rowcount
+	print(count, "Progress updated successfully into orders table")
+
+
+def insertSkirtMeasurements(order_id, customer_id, skirt_length, skirt_waist, skirt_hip, update):
+	'''insert Order details to skirt_measurement tables'''
+	table = 'skirt_measurements'
+	
+	if update == 0:
+		#add 1 entry to table
+		postgres_insert_query = 'INSERT INTO %s (order_id, customer_id, skirt_length, skirt_waist, skirt_hip) VALUES (%s,%s,%s,%s,%s)'
+		record_to_insert = (AsIs(table), order_id, customer_id, skirt_length, skirt_waist, skirt_hip)
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into skirt table")
+
+	'''
+	else: 
+		postgres_update_query = 'UPDATE %s SET price = %s , customer_name = %s, staff = %s, deadline = %s, requests = %s WHERE customer_id = %s'
+		record_to_update = (AsIs(table), price, customer_name, staff, deadline, req, customer_id)
+		cursor.execute(postgres_update_query, record_to_update)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record updated successfully into orders table")
+	'''
+
+def insertDressMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, 
+	upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, update):
+
+	'''insert Order details to dress_measurement tables'''
+	table = 'dress_measurements'
+	
+	if update == 0:
+		#add 1 entry to table
+		postgres_insert_query = 'INSERT INTO %s (order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+		
+		record_to_insert = (AsIs(table), order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, 
+	upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length)
+
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into dress table")
+
+def insertShirtMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back, 
+	upper_hips, armpit, sleeve_length, bust_height, update):
+
+	'''insert Order details to shirt_measurement tables'''
+	table = 'shirt_measurements'
+	
+	if update == 0:
+		#add 1 entry to table
+		postgres_insert_query = 'INSERT INTO %s (order_id, customer_id, around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+		
+		record_to_insert = (AsIs(table), order_id, customer_id, around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back,
+		upper_hips, armpit, sleeve_length, bust_height)
+
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into shirt table")
+			
+
+def insertPantMeasurements(order_id, customer_id, inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist, update):
+
+	'''insert Order details to pant_measurement tables'''
+	table = 'pant_measurements'
+	
+	if update == 0:
+		#add 1 entry to table
+		postgres_insert_query = 'INSERT INTO %s (order_id, customer_id, inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+		
+		record_to_insert = (AsIs(table), order_id, customer_id, inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist)
+
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into pant table")
 
 def insertMaterial(order_id, customer_id, type_clothes, material, color, style, update):
 	'''insert customer preferences into materials table'''
