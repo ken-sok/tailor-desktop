@@ -36,7 +36,8 @@ class Ui_MainWindow(object):
 	added_order = 0
 	added_material = 0 
 	clothes_type = ""
-
+	updating = 0
+	customer_id = 0
 
 	def setupUi(self, MainWindow):
 
@@ -534,7 +535,7 @@ class Ui_MainWindow(object):
 		
 
 		self.PriceBox = QtWidgets.QLineEdit(self.centralwidget)
-		self.PriceBox.setGeometry(QtCore.QRect(1370, 700, 101, 61))
+		self.PriceBox.setGeometry(QtCore.QRect(1370, 700, 120, 61))
 		sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 		sizePolicy.setHorizontalStretch(70)
 		sizePolicy.setVerticalStretch(80)
@@ -1628,7 +1629,13 @@ class Ui_MainWindow(object):
 			customer_name = self.CustomerNameBox.text()
 			address = self.AddressBox.toPlainText()
 			telephone = self.PhoneBox.text()
-			insertCustomer(customer_name, address, telephone)
+			
+			if self.updating == 0: 
+				customer_id = 0 
+			else: 
+				customer_id = self.customer_id
+
+			insertCustomer(customer_name, address, telephone, 1, customer_id)
 			self.added_customer = 1
 
 
@@ -1645,8 +1652,12 @@ class Ui_MainWindow(object):
 			req = self.SpecialReqBox.toPlainText()
 			
 			#get customer ID
-			customer_id = getCustomerID()
-			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req)
+			if self.updating == 0:
+				customer_id = getCustomerID()
+			else: 
+				customer_id = self.customer_id
+
+			insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, 1)
 			self.added_order = 1
 
 	def insertMaterialDetails(self): 
@@ -1660,11 +1671,16 @@ class Ui_MainWindow(object):
 			material = self.MaterialBox.text()
 			
 			#get order id
-			order_id = getOrderID()
+			if self.updating == 0:
+				order_id = getOrderID()
+				customer_id = getCustomerID()
+			else: 
+				customer_id = self.customer_id
+			
+			#pass dummy order id when updating
+			order_id = 0
 
-			#get customer ID
-			customer_id = getCustomerID()
-			insertMaterial(order_id, customer_id, clothes_type, material, color, style)
+			insertMaterial(order_id, customer_id, clothes_type, material, color, style, 1)
 			self.added_material = 1
 				
 		
@@ -1804,13 +1820,81 @@ class Ui_MainWindow(object):
 		self.dialog.submitted.connect(self.PrintDate)
 		self.dialog.submitted.connect(self.getDate)
 		self.dialog.exec_()
+
 	def ViewAllOrders(self):
 		self.orderdialog = TableView()
+		self.orderdialog.customerEditID.connect(self.GetOrderDetails)
+		#self.orderdialog.customerEditID.connect(GetUpdateCustomerID)
+		
 		self.orderdialog.show()
 		self.orderdialog.loaddata()
+	
+
+
+	def GetOrderDetails(self, customer_id):
+		print('view' + customer_id)
+
+		self.customer_id = customer_id
+		#get information from database according to customer ID
+		#consider dictionary instead
+		OrderDetails = FetchOrdersDetailsEdit(customer_id)
+		#print(OrderDetails)
+
+		#alter view 
+		_translate = QtCore.QCoreApplication.translate
+		
+		#font for date
+		SmallKhmerFont = QtGui.QFont()
+		SmallKhmerFont.setFamily("KhmerOS")
+		SmallKhmerFont.setPointSize(18)
+		
+		
+		self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
+		self.PhoneBox.setText(_translate("MainWindow", str(OrderDetails['telephone'])))
+		self.AddressBox.setPlainText(_translate("MainWindow", str(OrderDetails['address'])))
+
+	
+		self.StaffNameBox.setText(_translate("MainWindow", str(OrderDetails['staff'])))
+		self.DeadlineBox.setText(_translate("MainWindow", str(OrderDetails['deadline'])))
+		
+		deadline = OrderDetails['deadline'].strftime("%d/%m/%Y")
+
+		self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
+		self.DeadlineSelectedLabel.setText(_translate("MainWindow", deadline))
+		
+		#print(str(OrderDetails['deadline'][2]) + str(OrderDetails['deadline'][1] + str(OrderDetails['deadline'][0])))
+		#print(deadline)
+		#qDate.day(), qDate.month(), qDate.year()
+
+		
+		self.StyleBox.setText(_translate("MainWindow", str(OrderDetails['style'])))
+		self.MaterialBox.setText(_translate("MainWindow", str(OrderDetails['material'])))
+		self.ColorBox.setText(_translate("MainWindow", str(OrderDetails['color'])))
+
+		self.SpecialReqBox.setPlainText(_translate("MainWindow", str(OrderDetails['special'])))
+		
+		
+		
+		#radio 
+		if OrderDetails['type'] == "សំពត់": 
+			self.SkirtRadio.setChecked(True)
+		elif OrderDetails['type'] == "ខោ":
+			self.PantRadio.setChecked(True)
+		elif OrderDetails['type'] == "រ៉ូប":
+			self.DressRadio.setChecked(True)
+		elif OrderDetails['type'] == "អាវ":
+			self.ShirtRadio.setChecked(True)
+		
+		self.PriceBox.setText(_translate("MainWindow", str(OrderDetails['price'])))
+		
+		#change the model functions to include update commands
+	
+		self.updating = 1
+	
   
 
 	def clearInput(self): 
+
 		_translate = QtCore.QCoreApplication.translate
 		self.CustomerNameBox.setText(_translate("MainWindow", ''))
 		self.StaffNameBox.setText(_translate("MainWindow", ''))
@@ -1840,6 +1924,7 @@ class Ui_MainWindow(object):
 		self.ShirtRadio.setChecked(False)
 		self.PantRadio.setChecked(False)
 		self.DressRadio.setChecked(False) 
+		self.updating = 0
 		
 #calendar class
 class CalendarWindow(QDialog):
@@ -1885,11 +1970,13 @@ class CalendarWindow(QDialog):
 		
 		self.submitted.emit(
 			qDate.day(), qDate.month(), qDate.year()
-			
 		)
 
 
 class TableView(QDialog):
+
+	customerEditID = QtCore.pyqtSignal(str)
+
 
 	# constructor
 	def __init__(self):
@@ -1937,6 +2024,11 @@ class TableView(QDialog):
 		btn_ac_refresh.triggered.connect(self.loaddata)
 		btn_ac_refresh.setStatusTip("Refresh Table")
 		toolbar.addAction(btn_ac_refresh)
+
+		btn_ac_edit = QAction(QIcon("icon/edit.png"),"Edit",self)   #edit icon
+		btn_ac_edit.triggered.connect(self.edit)
+		btn_ac_edit.setStatusTip("Edit Order")
+		toolbar.addAction(btn_ac_edit)
 
 	def loaddata(self):
 	
@@ -2016,6 +2108,19 @@ class TableView(QDialog):
 	def delete(self):
 		dlg = DeleteDialog()
 		dlg.exec_()
+	
+	def edit(self): 
+		self.Editdlg = EditDialog()
+		self.Editdlg.submitted.connect(self.EditCustomerID)
+		self.Editdlg.exec_()
+
+	def EditCustomerID(self, customer_id):
+		
+		self.customerEditID.emit(
+			customer_id
+		)
+
+		self.close()
 			
 class DeleteDialog(QDialog):
 	def __init__(self, *args, **kwargs):
@@ -2071,18 +2176,42 @@ class DeleteDialog(QDialog):
 
 			QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
 			self.close()
+
 		except Exception:
-			QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')		
+			QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
+
+class EditDialog(QDialog):
+
+	submitted = QtCore.pyqtSignal(str)
 	
-	
+	def __init__(self, *args, **kwargs):
+		super(EditDialog, self).__init__(*args, **kwargs)
 
+		self.QBtn = QPushButton()
+		self.QBtn.setText("Edit")
 
+		self.setWindowTitle("Edit Customer")
+		self.setFixedWidth(300)
+		self.setFixedHeight(100)
+		self.QBtn.clicked.connect(self.Editcustomer)
+		layout = QVBoxLayout()
 
-	
-	
+		self.Editinput = QLineEdit()
+		self.onlyInt = QtGui.QIntValidator()
+		self.Editinput.setValidator(self.onlyInt)
+		self.Editinput.setPlaceholderText("Customer ID")
+		layout.addWidget(self.Editinput)
+		layout.addWidget(self.QBtn)
+		self.setLayout(layout)
 
+	def Editcustomer(self):
+		Editrol = ""
+		Editrol = self.Editinput.text()
 
-
+		self.submitted.emit(
+			Editrol
+		)
+		self.close()
 
 
 # Create a Controller class to connect the GUI and database
@@ -2124,41 +2253,70 @@ class appController:
 			 
 		
 #MODEL FUNCTIONS
-def insertCustomer(customer_name, address, telephone):
+def insertCustomer(customer_name, address, telephone, update, customer_id):
 	'''insert customer details to customer tables'''
 	#add 1 entry to table
 	table = 'customers'
-	postgres_insert_query = 'INSERT INTO %s (customer_name, address, telephone) VALUES (%s,%s,%s)'
-	record_to_insert = (AsIs(table), customer_name, address, telephone,)
-	cursor.execute(postgres_insert_query, record_to_insert)
-	connection.commit()
-	count = cursor.rowcount
-	print(count, "Record inserted successfully into customers table")
+	if update == 0: 
+		postgres_insert_query = 'INSERT INTO %s (customer_name, address, telephone) VALUES (%s,%s,%s)'
+		record_to_insert = (AsIs(table), customer_name, address, telephone,)
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into customers table")
+	else: 
+		postgres_update_query = 'UPDATE %s SET customer_name = %s, address = %s, telephone = %s WHERE "ID" = %s'
+		record_to_update = (AsIs(table), customer_name, address, telephone, customer_id)
+		cursor.execute(postgres_update_query, record_to_update)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record updated successfully into customers table")
 
-def insertOrder(price, customer_name, staff, deadline, progress, customer_id, req):
+	
+
+def insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, update):
 	'''insert Order details to Order tables'''
 	table = 'orders'
 	
-	#add 1 entry to table
-	postgres_insert_query = 'INSERT INTO %s (price, customer_name, staff, deadline, progress, customer_id, requests) VALUES (%s,%s,%s,%s,%s,%s,%s)'
-	record_to_insert = (AsIs(table), price, customer_name, staff, deadline, progress, customer_id, req)
-	cursor.execute(postgres_insert_query, record_to_insert)
-	connection.commit()
-	count = cursor.rowcount
-	print(count, "Record inserted successfully into orders table")
+	if update == 0:
+		#add 1 entry to table
+		postgres_insert_query = 'INSERT INTO %s (price, customer_name, staff, deadline, progress, customer_id, requests) VALUES (%s,%s,%s,%s,%s,%s,%s)'
+		record_to_insert = (AsIs(table), price, customer_name, staff, deadline, progress, customer_id, req)
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into orders table")
+	else: 
+		postgres_update_query = 'UPDATE %s SET price = %s , customer_name = %s, staff = %s, deadline = %s, requests = %s WHERE customer_id = %s'
+		record_to_update = (AsIs(table), price, customer_name, staff, deadline, req, customer_id)
+		cursor.execute(postgres_update_query, record_to_update)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record updated successfully into orders table")
 
-def insertMaterial(order_id, customer_id, type_clothes, material, color, style):
+
+
+def insertMaterial(order_id, customer_id, type_clothes, material, color, style, update):
 	'''insert customer preferences into materials table'''
 
 	table = 'materials'
 	
+	if update == 0:
 	#add 1 entry to table
-	postgres_insert_query = 'INSERT INTO %s (order_id, type, material, color, style, customer_id) VALUES (%s,%s,%s,%s,%s,%s)'
-	record_to_insert = (AsIs(table), order_id, type_clothes, material, color, style, customer_id)
-	cursor.execute(postgres_insert_query, record_to_insert)
-	connection.commit()
-	count = cursor.rowcount
-	print(count, "Record inserted successfully into materials table")
+		postgres_insert_query = 'INSERT INTO %s (order_id, type, material, color, style, customer_id) VALUES (%s,%s,%s,%s,%s,%s)'
+		record_to_insert = (AsIs(table), order_id, type_clothes, material, color, style, customer_id)
+		cursor.execute(postgres_insert_query, record_to_insert)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record inserted successfully into materials table")
+	else: 
+		postgres_update_query = 'UPDATE %s SET type = %s, material = %s, color = %s, style = %s WHERE customer_id = %s'
+		record_to_update = (AsIs(table), type_clothes, material, color, style, customer_id)
+		cursor.execute(postgres_update_query, record_to_update)
+		connection.commit()
+		count = cursor.rowcount
+		print(count, "Record updated successfully into materials table")
+
 
 
 def getCustomerID(): 
@@ -2175,6 +2333,8 @@ def getCustomerID():
 	return customerID
 
 
+
+
 def getOrderID(): 
 
 	#helper function to include customer id into orders table
@@ -2187,7 +2347,65 @@ def getOrderID():
 	print(orderID, 'is order ID for this order')
 
 	return orderID
+
+def FetchOrdersDetailsEdit(customer_id): 
 	
+	#table_name = 'orders'
+	#print("Table Before updating record ")
+	
+
+	#dictionary to store 1 order details
+	order_details = dict()
+
+
+	sql_select_query = 'SELECT price, customer_name, staff, requests, deadline FROM %s WHERE customer_id = %s'
+	record_to_query = (AsIs("orders"), customer_id )
+	cursor.execute(sql_select_query, record_to_query)
+	all_rows = cursor.fetchone()
+
+	#add to dict
+	print(all_rows)
+	order_details['price'] = all_rows[0]
+	order_details['customer_name'] = all_rows[1]
+	order_details['staff'] = all_rows[2]
+	order_details['deadline'] = all_rows[4]
+	order_details['special'] = all_rows[3]
+
+
+	#telephone, address
+	sql_select_query = 'SELECT address, telephone FROM %s WHERE "ID" = %s'
+	record_to_query = (AsIs("customers"), customer_id)
+	cursor.execute(sql_select_query, record_to_query)
+	all_rows = cursor.fetchone()
+
+	#add to dict
+	print(all_rows)
+	order_details['address'] = all_rows[0]
+	order_details['telephone'] = all_rows[1]
+	
+	#style, material, color, type
+	sql_select_query = 'SELECT material, color, style, type FROM %s WHERE customer_id = %s'
+	record_to_query = (AsIs("materials"), customer_id)
+	cursor.execute(sql_select_query, record_to_query)
+	all_rows = cursor.fetchone()
+
+	print(all_rows)
+	order_details['material'] = all_rows[0]
+	order_details['color'] = all_rows[1]
+	order_details['style'] = all_rows[2]
+	order_details['type'] = all_rows[3]
+
+
+	#measurements for later
+
+
+	return order_details
+
+
+
+	
+	
+	 
 
 if __name__ == "__main__":
 	import sys
