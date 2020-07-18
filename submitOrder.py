@@ -573,21 +573,25 @@ class Ui_MainWindow(object):
 		self.AroundBustBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.AroundBustBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.AroundBustBox.setObjectName("AroundBustBox")
+		self.AroundBustBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.AroundBustBox, 4, 4, 1, 1)
 
 		self.NeckArmHoldBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.NeckArmHoldBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.NeckArmHoldBox.setObjectName("NeckArmHoldBox")
+		self.NeckArmHoldBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.NeckArmHoldBox, 1, 4, 1, 1)
 		
 		self.WaistBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.WaistBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.WaistBox.setObjectName("WaistBox")
+		self.WaistBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.WaistBox, 6, 4, 1, 1)
 
 		self.ABBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.ABBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.ABBox.setObjectName("ABBox")
+		self.ABBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.ABBox, 0, 4, 1, 1)
 
 		self.DressSkirtWaistLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
@@ -638,6 +642,7 @@ class Ui_MainWindow(object):
 		self.HipBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.HipBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.HipBox.setObjectName("HipBox")
+		self.HipBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.HipBox, 0, 1, 1, 1)
 
 		
@@ -915,26 +920,33 @@ class Ui_MainWindow(object):
 		self.AboveBustBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.AboveBustBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.AboveBustBox.setObjectName("AboveBustBox")
+		self.AboveBustBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.AboveBustBox, 3, 4, 1, 1)
 
 		self.CenterFrontBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.CenterFrontBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.CenterFrontBox.setObjectName("CenterFrontBox")
+		self.CenterFrontBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.CenterFrontBox, 3, 1, 1, 1)
 
 		self.ShoulderBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.ShoulderBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.ShoulderBox.setObjectName("ShoulderBox")
+		self.ShoulderBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.ShoulderBox, 5, 1, 1, 1)
 
 		self.AFBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.AFBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.AFBox.setObjectName("AFBox")
+		self.AFBox.setFixedSize(120,50)
+		self.AFBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.AFBox, 6, 1, 1, 1)
+		
 
 		self.CenterBackBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.CenterBackBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.CenterBackBox.setObjectName("CenterBackBox")
+		self.CenterBackBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.CenterBackBox, 4, 1, 1, 1)
 		
 
@@ -942,6 +954,7 @@ class Ui_MainWindow(object):
 		self.UpperHipsBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.UpperHipsBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.UpperHipsBox.setObjectName("UpperHipsBox")
+		self.UpperHipsBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.UpperHipsBox, 3, 7, 1, 1)
 
 
@@ -949,6 +962,7 @@ class Ui_MainWindow(object):
 		self.ArmpitBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.ArmpitBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.ArmpitBox.setObjectName("ArmpitBox")
+		self.ArmpitBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.ArmpitBox, 0, 7, 1, 1)
 
 		self.SkirtLengthLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
@@ -959,11 +973,13 @@ class Ui_MainWindow(object):
 		self.SkirtLengthBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.SkirtLengthBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.SkirtLengthBox.setObjectName("SkirtLengthBox")
+		self.SkirtLengthBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.SkirtLengthBox, 1, 1, 1, 1)
 
 		self.SleeveLengthBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.SleeveLengthBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.SleeveLengthBox.setObjectName("SleeveLengthBox")
+		self.SleeveLengthBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.SleeveLengthBox, 1, 7, 1, 1)
 
 		self.AFLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
@@ -997,6 +1013,7 @@ class Ui_MainWindow(object):
 		self.BustHeightBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
 		self.BustHeightBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.BustHeightBox.setObjectName("BustHeightBox")
+		self.BustHeightBox.setFixedSize(120,50)
 		self.gridLayout.addWidget(self.BustHeightBox, 5, 4, 1, 1)
 
 		self.line = QtWidgets.QFrame(self.centralwidget)
@@ -1044,12 +1061,14 @@ class Ui_MainWindow(object):
 		self.InseamBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.InseamBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.InseamBox.setObjectName("InseamBox")
+		self.InseamBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.InseamBox, 3, 1, 1, 1)
 		
 
 		self.OutseamBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.OutseamBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.OutseamBox.setObjectName("OutseamBox")
+		self.OutseamBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.OutseamBox, 6, 1, 1, 1)
 		
 		self.PantHipLabel = QtWidgets.QLabel(self.PantGroupBox)
@@ -1066,6 +1085,7 @@ class Ui_MainWindow(object):
 		self.ThighBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.ThighBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.ThighBox.setObjectName("ThighBox")
+		self.ThighBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.ThighBox, 7, 1, 1, 1)
 		
 		self.PantWaistLabel = QtWidgets.QLabel(self.PantGroupBox)
@@ -1076,21 +1096,25 @@ class Ui_MainWindow(object):
 		self.PantHipBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.PantHipBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.PantHipBox.setObjectName("PantHipBox")
+		self.PantHipBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.PantHipBox, 2, 1, 1, 1)
 
 		self.AnkleBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.AnkleBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.AnkleBox.setObjectName("AnkleBox")
+		self.AnkleBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.AnkleBox, 9, 1, 1, 1)
 
 		self.CalfBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.CalfBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.CalfBox.setObjectName("CalfBox")
+		self.CalfBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.CalfBox, 8, 1, 1, 1)
 
 		self.PantWaistBox = QtWidgets.QLineEdit(self.PantGroupBox)
 		self.PantWaistBox.setAlignment(QtCore.Qt.AlignCenter)
 		self.PantWaistBox.setObjectName("PantWaistBox")
+		self.PantWaistBox.setFixedSize(120,50)
 		self.PantGroupLayout.addWidget(self.PantWaistBox, 1, 1, 1, 1)
 
 		self.CmInseam = QtWidgets.QLabel(self.PantGroupBox)
@@ -2382,10 +2406,49 @@ class Ui_MainWindow(object):
 		self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
 		self.PantRadio.setStyleSheet("color: black; background-color: light grey")
 		self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+		
+		self.SkirtRadio.setAutoExclusive(False)
 		self.SkirtRadio.setChecked(False)
+		self.SkirtRadio.setAutoExclusive(True)
+
+		self.ShirtRadio.setAutoExclusive(False)
 		self.ShirtRadio.setChecked(False)
+		self.ShirtRadio.setAutoExclusive(True)
+
+		self.PantRadio.setAutoExclusive(False)
 		self.PantRadio.setChecked(False)
+		self.PantRadio.setAutoExclusive(True)
+
+		self.DressRadio.setAutoExclusive(False)
 		self.DressRadio.setChecked(False) 
+		self.DressRadio.setAutoExclusive(True)
+
+
+		#clear measurement boxes
+		self.AroundBustBox.setText(_translate("MainWindow", ''))
+		self.NeckArmHoldBox.setText(_translate("MainWindow", ''))
+		self.WaistBox.setText(_translate("MainWindow", ''))
+		self.ABBox.setText(_translate("MainWindow", ''))
+		self.HipBox.setText(_translate("MainWindow", ''))
+		self.AboveBustBox.setText(_translate("MainWindow", ''))
+		self.CenterFrontBox.setText(_translate("MainWindow", ''))
+		self.ShoulderBox.setText(_translate("MainWindow", ''))
+		self.AFBox.setText(_translate("MainWindow", ''))
+		self.CenterBackBox.setText(_translate("MainWindow", ''))
+		self.UpperHipsBox.setText(_translate("MainWindow", ''))
+		self.ArmpitBox.setText(_translate("MainWindow", ''))
+		self.SkirtLengthBox.setText(_translate("MainWindow", ''))
+		self.SleeveLengthBox.setText(_translate("MainWindow", ''))
+		self.BustHeightBox.setText(_translate("MainWindow", ''))
+
+		self.InseamBox.setText(_translate("MainWindow", ''))
+		self.OutseamBox.setText(_translate("MainWindow", ''))
+		self.ThighBox.setText(_translate("MainWindow", ''))
+		self.PantHipBox.setText(_translate("MainWindow", ''))
+		self.AnkleBox.setText(_translate("MainWindow", ''))
+		self.CalfBox.setText(_translate("MainWindow", ''))
+		self.PantWaistBox.setText(_translate("MainWindow", ''))
+
 		self.updating = 0
 		
 #calendar class
