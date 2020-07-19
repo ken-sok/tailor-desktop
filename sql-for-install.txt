@@ -1,0 +1,109 @@
+CREATE DATABASE tailor_store
+    WITH 
+    OWNER = tailor_owner
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+CREATE TABLE public.customers
+(
+    "ID" smallint NOT NULL DEFAULT nextval('"customers_ID_seq"'::regclass),
+    customer_name name COLLATE pg_catalog."C" NOT NULL,
+    address text COLLATE pg_catalog."default",
+    telephone text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT customers_pkey PRIMARY KEY ("ID")
+)
+
+CREATE TABLE public.dress_measurements
+(
+    order_id smallint NOT NULL,
+    around_bust real NOT NULL,
+    neck_armhold real NOT NULL,
+    ab real NOT NULL,
+    dress_waist real NOT NULL,
+    hip real NOT NULL,
+    above_bust real NOT NULL,
+    center_front real NOT NULL,
+    shoulder real NOT NULL,
+    af real NOT NULL,
+    center_back real NOT NULL,
+    upper_hips real NOT NULL,
+    armpit real NOT NULL,
+    skirt_length real NOT NULL,
+    sleeve_length real NOT NULL,
+    bust_height real NOT NULL,
+    customer_id smallint NOT NULL,
+    CONSTRAINT dress_measurements_pkey PRIMARY KEY (order_id)
+)
+
+
+CREATE TABLE public.materials
+(
+    order_id smallint NOT NULL,
+    material text COLLATE pg_catalog."default" NOT NULL,
+    color text COLLATE pg_catalog."default" NOT NULL,
+    style text COLLATE pg_catalog."default" NOT NULL,
+    type name COLLATE pg_catalog."C" NOT NULL,
+    customer_id smallint NOT NULL DEFAULT 0,
+    CONSTRAINT materials_pkey PRIMARY KEY (order_id)
+)
+
+CREATE TABLE public.orders
+(
+    "ID" smallint NOT NULL DEFAULT nextval('"orders_ID_seq"'::regclass),
+    price money NOT NULL,
+    customer_name name COLLATE pg_catalog."C" NOT NULL,
+    staff name COLLATE pg_catalog."C",
+    date_ordered date NOT NULL DEFAULT CURRENT_DATE,
+    deadline date NOT NULL,
+    progress smallint,
+    customer_id smallint NOT NULL,
+    requests text COLLATE pg_catalog."default",
+    CONSTRAINT orders_pkey PRIMARY KEY ("ID")
+)
+
+CREATE TABLE public.pant_measurements
+(
+    order_id smallint NOT NULL,
+    pant_hip real,
+    pant_thigh real,
+    calf real,
+    inseam real,
+    outseam real,
+    ankle real,
+    pant_waist real,
+    customer_id smallint NOT NULL,
+    CONSTRAINT pant_measurements_pkey PRIMARY KEY (order_id)
+)
+
+CREATE TABLE public.shirt_measurements
+(
+    order_id smallint NOT NULL,
+    around_bust real NOT NULL,
+    neck_armhold real NOT NULL,
+    ab real NOT NULL,
+    dress_waist real NOT NULL,
+    above_bust real NOT NULL,
+    center_front real NOT NULL,
+    shoulder real NOT NULL,
+    af real NOT NULL,
+    bust_height real NOT NULL,
+    center_back real NOT NULL,
+    upper_hips real NOT NULL,
+    armpit real NOT NULL,
+    sleeve_length real NOT NULL,
+    customer_id smallint NOT NULL,
+    CONSTRAINT shirt_measurements_pkey PRIMARY KEY (order_id)
+)
+
+CREATE TABLE public.skirt_measurements
+(
+    order_id smallint NOT NULL,
+    skirt_hip real NOT NULL,
+    skirt_waist real NOT NULL,
+    customer_id smallint NOT NULL,
+    skirt_length real,
+    CONSTRAINT skirt_measurments_pkey PRIMARY KEY (order_id)
+)
