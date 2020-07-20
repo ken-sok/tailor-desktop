@@ -1337,13 +1337,13 @@ class Ui_MainWindow(object):
 
 
         self.SubmitMsg = QtWidgets.QLabel(self.centralwidget)
-        self.SubmitMsg.setGeometry(QtCore.QRect(1350, 920, 300, 23))
+        self.SubmitMsg.setGeometry(QtCore.QRect(1350, 920, 400, 40))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
         sizePolicy.setHeightForWidth(self.SubmitMsg.sizePolicy().hasHeightForWidth())
         self.SubmitMsg.setSizePolicy(sizePolicy)
-        self.SubmitMsg.setFont(SmallKhmerFont)
+        self.SubmitMsg.setFont(BigKhmerFont)
         self.SubmitMsg.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.SubmitMsg.setAutoFillBackground(False)
         ''' END OF Submit & Cancel '''
@@ -2202,8 +2202,8 @@ class Ui_MainWindow(object):
         self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិធិជន"))
-        self.Cancel.setText(_translate("MainWindow", "លុបចោលការកម្មង់"))
-        self.Submit.setText(_translate("MainWindow", "បំពេញរួចរាល់"))
+        self.Cancel.setText(_translate("MainWindow", "Cancel"))
+        self.Submit.setText(_translate("MainWindow", "OK"))
         self.PriceBox.setText(_translate("MainWindow", "$"))
         self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ:"))
         self.ShirtDressSkirtBox.setTitle(_translate("MainWindow", "អាវ រ៉ូប​ និងសំពត់"))
@@ -2767,8 +2767,8 @@ class TableView(QDialog):
         UpdateProcess(index, customer_id)
 
     def delete(self):
-        dlg = DeleteDialog()
-        dlg.exec_()
+        self.Deletedlg = DeleteDialog()
+        self.Deletedlg.exec_()
     
     def edit(self): 
         self.Editdlg = EditDialog()
@@ -2823,61 +2823,63 @@ class DeleteDialog(QDialog):
         delrol = ""
         delrol = self.deleteinput.text()
 
-        try:
-            #delete customer
-            postgres_delete_query = 'DELETE from customers WHERE "ID"='+str(delrol)
-            connection.commit()
-            count = cursor.rowcount
-            cursor.execute(postgres_delete_query)
-            print(count, "Record deleted successfully in customers table")
-            
-            #delete order
-            postgres_delete_query = 'DELETE from orders WHERE customer_id ='+str(delrol)
-            connection.commit()
-            count = cursor.rowcount
-            cursor.execute(postgres_delete_query)
-            print(count, "Record deleted successfully in orders table")
+        if delrol != "":
+            try:
+                #delete customer
+                postgres_delete_query = 'DELETE from customers WHERE "ID"='+str(delrol)
+                connection.commit()
+                count = cursor.rowcount
+                cursor.execute(postgres_delete_query)
+                print(count, "Record deleted successfully in customers table")
+                
+                #delete order
+                postgres_delete_query = 'DELETE from orders WHERE customer_id ='+str(delrol)
+                connection.commit()
+                count = cursor.rowcount
+                cursor.execute(postgres_delete_query)
+                print(count, "Record deleted successfully in orders table")
 
 
-            #delete measurements
+                #delete measurements
 
-            #check which type 
-            sql_select_query = 'SELECT type FROM materials WHERE customer_id ='+str(delrol)
-            cursor.execute(sql_select_query)
-            clothes_type = cursor.fetchone()
-            print('clothe'+ clothes_type[0])
+                #check which type 
+                sql_select_query = 'SELECT type FROM materials WHERE customer_id ='+str(delrol)
+                cursor.execute(sql_select_query)
+                clothes_type = cursor.fetchone()
+                print('clothe'+ clothes_type[0])
 
-            if clothes_type[0] == "សំពត់":
-                table = 'skirt_measurements'
-            elif clothes_type[0] == "ខោ":
-                table = 'pant_measurements'
-            elif clothes_type[0] == "រ៉ូប":
-                table = 'dress_measurements'
-            elif clothes_type[0] == "អាវ":
-                table = 'shirt_measurements'
+                if clothes_type[0] == "សំពត់":
+                    table = 'skirt_measurements'
+                elif clothes_type[0] == "ខោ":
+                    table = 'pant_measurements'
+                elif clothes_type[0] == "រ៉ូប":
+                    table = 'dress_measurements'
+                elif clothes_type[0] == "អាវ":
+                    table = 'shirt_measurements'
 
-            #delete from measurements
-            postgres_delete_query = 'DELETE from %s WHERE customer_id ='+str(delrol)
-            record_to_delete = (AsIs(table),)
-            cursor.execute(postgres_delete_query, record_to_delete)
-            connection.commit()
-            count = cursor.rowcount
-            print(count, f"Record deleted successfully in {table} table")
+                #delete from measurements
+                postgres_delete_query = 'DELETE from %s WHERE customer_id ='+str(delrol)
+                record_to_delete = (AsIs(table),)
+                cursor.execute(postgres_delete_query, record_to_delete)
+                connection.commit()
+                count = cursor.rowcount
+                print(count, f"Record deleted successfully in {table} table")
 
-            #delete preferences/materials
-            postgres_delete_query = 'DELETE from materials WHERE customer_id ='+str(delrol)
-            connection.commit()
-            count = cursor.rowcount
-            cursor.execute(postgres_delete_query)
-            print(count, "Record deleted successfully in materials table")
+                #delete preferences/materials
+                postgres_delete_query = 'DELETE from materials WHERE customer_id ='+str(delrol)
+                connection.commit()
+                count = cursor.rowcount
+                cursor.execute(postgres_delete_query)
+                print(count, "Record deleted successfully in materials table")
 
 
 
-            QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
-            self.close()
+                QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
+                self.close()
 
-        except Exception:
-            QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
+            except Exception:
+                QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
+                self.close()
 
 
 #dialog class to edit 1 order's details
@@ -2918,11 +2920,11 @@ class EditDialog(QDialog):
     def Editcustomer(self):
         Editrol = ""
         Editrol = self.Editinput.text()
-
-        self.submitted.emit(
-            Editrol
-        )
-        self.close()
+        if Editrol != "":
+            self.submitted.emit(
+                Editrol
+            )
+            self.close()
 
 
 #dialog class to search for customer's orders
@@ -2963,12 +2965,12 @@ class SearchDialog(QDialog):
 
         searchrol = ""
         searchrol = self.searchinput.text()
-        
-        self.customer_name.emit(
-            searchrol
-        )
+        if searchrol != "": 
+            self.customer_name.emit(
+                searchrol
+            )
 
-        self.close()
+            self.close()
 
 # Create a Controller class to connect the GUI and database
 class appController:
