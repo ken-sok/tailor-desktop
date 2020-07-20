@@ -9,11 +9,37 @@ CREATE DATABASE tailor_store
 
 CREATE TABLE public.customers
 (
-    "ID" smallint NOT NULL DEFAULT nextval('"customers_ID_seq"'::regclass),
-    customer_name name COLLATE pg_catalog."C" NOT NULL,
-    address text COLLATE pg_catalog."default",
-    telephone text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT customers_pkey PRIMARY KEY ("ID")
+    "ID" smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
+    customer_name name NOT NULL,
+    address text,
+    telephone text NOT NULL,
+    PRIMARY KEY ("ID")
+)
+
+CREATE TABLE public.orders
+(
+    "ID" smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
+    price money NOT NULL DEFAULT 0.00,
+    customer_name name NOT NULL,
+    staff name,
+    date_ordered date NOT NULL DEFAULT CURRENT_DATE,
+    deadline date NOT NULL,
+    progress smallint,
+    customer_id smallint NOT NULL,
+    requests text,
+    PRIMARY KEY ("ID")
+)
+
+
+CREATE TABLE public.materials
+(
+    order_id smallint NOT NULL,
+    material text NOT NULL,
+    color text NOT NULL,
+    style text NOT NULL,
+    type name NOT NULL,
+    customer_id smallint NOT NULL DEFAULT 0,
+    PRIMARY KEY (order_id)
 )
 
 CREATE TABLE public.dress_measurements
@@ -35,34 +61,9 @@ CREATE TABLE public.dress_measurements
     sleeve_length real NOT NULL,
     bust_height real NOT NULL,
     customer_id smallint NOT NULL,
-    CONSTRAINT dress_measurements_pkey PRIMARY KEY (order_id)
+    PRIMARY KEY (order_id)
 )
 
-
-CREATE TABLE public.materials
-(
-    order_id smallint NOT NULL,
-    material text COLLATE pg_catalog."default" NOT NULL,
-    color text COLLATE pg_catalog."default" NOT NULL,
-    style text COLLATE pg_catalog."default" NOT NULL,
-    type name COLLATE pg_catalog."C" NOT NULL,
-    customer_id smallint NOT NULL DEFAULT 0,
-    CONSTRAINT materials_pkey PRIMARY KEY (order_id)
-)
-
-CREATE TABLE public.orders
-(
-    "ID" smallint NOT NULL DEFAULT nextval('"orders_ID_seq"'::regclass),
-    price money NOT NULL,
-    customer_name name COLLATE pg_catalog."C" NOT NULL,
-    staff name COLLATE pg_catalog."C",
-    date_ordered date NOT NULL DEFAULT CURRENT_DATE,
-    deadline date NOT NULL,
-    progress smallint,
-    customer_id smallint NOT NULL,
-    requests text COLLATE pg_catalog."default",
-    CONSTRAINT orders_pkey PRIMARY KEY ("ID")
-)
 
 CREATE TABLE public.pant_measurements
 (
@@ -75,7 +76,7 @@ CREATE TABLE public.pant_measurements
     ankle real,
     pant_waist real,
     customer_id smallint NOT NULL,
-    CONSTRAINT pant_measurements_pkey PRIMARY KEY (order_id)
+    PRIMARY KEY (order_id)
 )
 
 CREATE TABLE public.shirt_measurements
@@ -95,7 +96,7 @@ CREATE TABLE public.shirt_measurements
     armpit real NOT NULL,
     sleeve_length real NOT NULL,
     customer_id smallint NOT NULL,
-    CONSTRAINT shirt_measurements_pkey PRIMARY KEY (order_id)
+    PRIMARY KEY (order_id)
 )
 
 CREATE TABLE public.skirt_measurements
@@ -104,6 +105,6 @@ CREATE TABLE public.skirt_measurements
     skirt_hip real NOT NULL,
     skirt_waist real NOT NULL,
     customer_id smallint NOT NULL,
-    skirt_length real,
-    CONSTRAINT skirt_measurments_pkey PRIMARY KEY (order_id)
+    skirt_length real NOT NULL,
+    PRIMARY KEY (order_id)
 )
