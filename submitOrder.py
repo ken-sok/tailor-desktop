@@ -7,7 +7,7 @@ from connection import connection, cursor, close_connection
 import picture
 from psycopg2.extensions import AsIs
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import *
 import sys
 
 
@@ -2279,7 +2279,10 @@ class Ui_MainWindow(object):
         self.orderdialog.show()
         self.orderdialog.loaddata(customer_name = "")
     
-
+    def aboutdeveloper(self):
+        '''function to show about developer details'''
+        self.aboutdialog = AboutDialog()
+        self.aboutdialog.show()
 
     def GetOrderDetails(self, customer_id):
         
@@ -2493,7 +2496,33 @@ class Ui_MainWindow(object):
 
         
         self.updating = 0
-        
+
+#about-dialog
+class AboutDialog(QDialog):
+    def __init__ (self):
+        super(AboutDialog, self).__init__()
+        self.setWindowTitle("About Dev")
+        self.setGeometry(0, 0, 200, 100)
+        self.setMaximumSize(QtCore.QSize(200, 100))
+        self.setMinimumSize(QtCore.QSize(200, 100))
+        self.setWindowModality(QtCore.Qt.ApplicationModal)
+        self.initUI()
+
+    def initUI(self):
+        Panha = QLabel()
+        Kheang = QLabel()
+        Panha.setText("PANHA 0965622000")
+        Kheang.setText("Kheang 085811647")
+        Panha.setAlignment(Qt.AlignCenter)
+        Kheang.setAlignment(Qt.AlignCenter)
+
+        Vbox = QVBoxLayout()
+        Vbox.addWidget(Panha)
+        Vbox.addStretch()
+        Vbox.addWidget(Kheang)
+        self.setLayout(Vbox)
+        #self.btn.clicked.connect(self.ActionAbout)
+
 #calendar class for staff to select deadline
 class CalendarWindow(QDialog):
     global currentYear, currentMonth, currentDay
@@ -2931,7 +2960,9 @@ class appController:
         
         #view all orders
         self._view.ActionViewAllOrders.triggered.connect(self._view.ViewAllOrders)
-
+ 
+        #About Developer 
+        self._view.ActionAbout.triggered.connect(self._view.aboutdeveloper)
         
              
         
