@@ -14,7 +14,7 @@ CREATE TABLE public.customers
     address text,
     telephone text NOT NULL,
     PRIMARY KEY ("ID")
-)
+);
 
 CREATE TABLE public.orders
 (
@@ -28,7 +28,7 @@ CREATE TABLE public.orders
     customer_id smallint NOT NULL,
     requests text,
     PRIMARY KEY ("ID")
-)
+);
 
 
 CREATE TABLE public.materials
@@ -40,7 +40,7 @@ CREATE TABLE public.materials
     type name NOT NULL,
     customer_id smallint NOT NULL DEFAULT 0,
     PRIMARY KEY (order_id)
-)
+);
 
 CREATE TABLE public.dress_measurements
 (
@@ -62,7 +62,7 @@ CREATE TABLE public.dress_measurements
     bust_height real NOT NULL,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
-)
+);
 
 
 CREATE TABLE public.pant_measurements
@@ -77,7 +77,7 @@ CREATE TABLE public.pant_measurements
     pant_waist real,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
-)
+);
 
 CREATE TABLE public.shirt_measurements
 (
@@ -97,7 +97,7 @@ CREATE TABLE public.shirt_measurements
     sleeve_length real NOT NULL,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
-)
+);
 
 CREATE TABLE public.skirt_measurements
 (
@@ -107,4 +107,4 @@ CREATE TABLE public.skirt_measurements
     customer_id smallint NOT NULL,
     skirt_length real NOT NULL,
     PRIMARY KEY (order_id)
-)
+);

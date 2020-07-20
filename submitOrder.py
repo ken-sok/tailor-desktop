@@ -1463,12 +1463,25 @@ class Ui_MainWindow(object):
         self.clothes_type = ""
 
         #clear all readonlys
+        SmallKhmerFont = QtGui.QFont()
+        SmallKhmerFont.setFamily("KhmerOS")
+        SmallKhmerFont.setPointSize(20)
+
+        BigKhmerFont = QtGui.QFont()
+        BigKhmerFont.setFamily("KhmerOS")
+        BigKhmerFont.setPointSize(30)
+
+        ENGFont = QtGui.QFont()
+        ENGFont.setFamily("Palatino Linotype")
+        ENGFont.setPointSize(10)
         
         self.AroundBustBox.setReadOnly(False)
         self.AroundBustBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.AroundBustBox.setFont(SmallKhmerFont)
+        
         
 
         self.NeckArmHoldBox.setReadOnly(False)
@@ -1476,116 +1489,151 @@ class Ui_MainWindow(object):
                                 "{"
                                 "background : white;"
                                 "}")
+        self.NeckArmHoldBox.setFont(SmallKhmerFont)
 
         self.WaistBox.setReadOnly(False)
         self.WaistBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.WaistBox.setFont(SmallKhmerFont)
+
         self.ABBox.setReadOnly(False)
         self.ABBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.ABBox.setFont(SmallKhmerFont)
+
+
         self.HipBox.setReadOnly(False)
         self.HipBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.HipBox.setFont(SmallKhmerFont)
         
         self.AboveBustBox.setReadOnly(False)
         self.AboveBustBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
-        
+        self.AboveBustBox.setFont(SmallKhmerFont)
+
         self.CenterFrontBox.setReadOnly(False)
         self.CenterFrontBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.CenterFrontBox.setFont(SmallKhmerFont)
         
         self.ShoulderBox.setReadOnly(False)
         self.ShoulderBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.ShoulderBox.setFont(SmallKhmerFont)
+
         self.AFBox.setReadOnly(False)
         self.AFBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.AFBox.setFont(SmallKhmerFont)
+
         self.CenterBackBox.setReadOnly(False)
         self.CenterBackBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+
+        self.CenterBackBox.setFont(SmallKhmerFont)
+
         self.UpperHipsBox.setReadOnly(False)
         self.UpperHipsBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.UpperHipsBox.setFont(SmallKhmerFont)
+
+
         self.ArmpitBox.setReadOnly(False)
         self.ArmpitBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.ArmpitBox.setFont(SmallKhmerFont)
+
         self.SkirtLengthBox.setReadOnly(False)
         self.SkirtLengthBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.SkirtLengthBox.setFont(SmallKhmerFont)
 
         self.SleeveLengthBox.setReadOnly(False)
         self.SleeveLengthBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.SleeveLengthBox.setFont(SmallKhmerFont)
+
         self.BustHeightBox.setReadOnly(False)
         self.BustHeightBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
-        
+        self.BustHeightBox.setFont(SmallKhmerFont)
 
         self.InseamBox.setReadOnly(False)
         self.InseamBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.InseamBox.setFont(SmallKhmerFont)
+
         self.OutseamBox.setReadOnly(False)
         self.OutseamBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.OutseamBox.setFont(SmallKhmerFont)
+
         self.ThighBox.setReadOnly(False)
         self.ThighBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.ThighBox.setFont(SmallKhmerFont)
+
         self.PantHipBox.setReadOnly(False)
         self.PantHipBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.PantHipBox.setFont(SmallKhmerFont)
+
         self.AnkleBox.setReadOnly(False)
         self.AnkleBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
+        self.AnkleBox.setFont(SmallKhmerFont)
+
         self.CalfBox.setReadOnly(False)
         self.CalfBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
-        
+        self.CalfBox.setFont(SmallKhmerFont)
+
         self.PantWaistBox.setReadOnly(False)
         self.PantWaistBox.setStyleSheet("QLineEdit"
                                 "{"
                                 "background : white;"
                                 "}")
 
-
+        self.PantWaistBox.setFont(SmallKhmerFont)
         if radioBtn.isChecked():
         
             self.clothes_type = radioBtn.text()
