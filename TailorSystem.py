@@ -11,6 +11,26 @@ from PyQt5.QtCore import *
 import sys
 
 
+'''
+START OF Font FORMATTING
+'''
+
+SmallKhmerFont = QtGui.QFont()
+SmallKhmerFont.setFamily("Khmer OS")
+SmallKhmerFont.setPointSize(10)
+
+BigKhmerFont = QtGui.QFont()
+BigKhmerFont.setFamily("Khmer OS")
+BigKhmerFont.setPointSize(16)
+
+ENGFont = QtGui.QFont()
+ENGFont.setFamily("Palatino Linotype")
+ENGFont.setPointSize(10)
+
+'''
+END OF Font FORMATTING
+'''
+
 
 class Ui_MainWindow(object):
 
@@ -33,14 +53,14 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.ApplicationModal)
         MainWindow.setEnabled(True)
-        MainWindow.resize(1920, 1080)
+        #MainWindow.resize(1920, 1080)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1920, 1080))
-        MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
+        MainWindow.setMinimumSize(QtCore.QSize(800, 600))
+        #MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
         MainWindow.setSizeIncrement(QtCore.QSize(15, 14))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -188,26 +208,6 @@ class Ui_MainWindow(object):
         END OF MAIN WINDOW
         '''
 
-        '''
-        START OF Font FORMATTING
-        '''
-
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
-        SmallKhmerFont.setPointSize(20)
-
-        BigKhmerFont = QtGui.QFont()
-        BigKhmerFont.setFamily("KhmerOS")
-        BigKhmerFont.setPointSize(30)
-
-        ENGFont = QtGui.QFont()
-        ENGFont.setFamily("Palatino Linotype")
-        ENGFont.setPointSize(10)
-
-        '''
-        END OF Font FORMATTING
-        '''
-    
         '''
         START OF Customer BOX 
         '''
@@ -1462,19 +1462,8 @@ class Ui_MainWindow(object):
         radioBtn = self.centralwidget.sender()
         self.clothes_type = ""
 
-        #clear all readonlys
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
-        SmallKhmerFont.setPointSize(20)
 
-        BigKhmerFont = QtGui.QFont()
-        BigKhmerFont.setFamily("KhmerOS")
-        BigKhmerFont.setPointSize(30)
 
-        ENGFont = QtGui.QFont()
-        ENGFont.setFamily("Palatino Linotype")
-        ENGFont.setPointSize(10)
-        
         self.AroundBustBox.setReadOnly(False)
         self.AroundBustBox.setStyleSheet("QLineEdit"
                                 "{"
@@ -2344,11 +2333,12 @@ class Ui_MainWindow(object):
         #alter view 
         _translate = QtCore.QCoreApplication.translate
         
+        '''
         #font for date
         SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
+        SmallKhmerFont.setFamily("Khmer OS")
         SmallKhmerFont.setPointSize(18)
-        
+        '''
         
         self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
         self.PhoneBox.setText(_translate("MainWindow", str(OrderDetails['telephone'])))
@@ -2655,6 +2645,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setStretchLastSection(False)
         self.tableWidget.setHorizontalHeaderLabels(("លេខសម្គាល់ការកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខសម្គាល់អតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
         layout.addWidget(self.tableWidget)
 
@@ -2698,25 +2689,7 @@ class TableView(QDialog):
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
 
-        '''
-        START OF Font FORMATTING
-        '''
-
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
-        SmallKhmerFont.setPointSize(30)
-
-        BigKhmerFont = QtGui.QFont()
-        BigKhmerFont.setFamily("KhmerOS")
-        BigKhmerFont.setPointSize(40)
-
-        ENGFont = QtGui.QFont()
-        ENGFont.setFamily("Palatino Linotype")
-        ENGFont.setPointSize(10)
-
-        '''
-        END OF Font FORMATTING
-        '''
+        #font here
     
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setFont(SmallKhmerFont)
@@ -2795,7 +2768,7 @@ class DeleteDialog(QDialog):
         super(DeleteDialog, self).__init__(*args, **kwargs)
         
         SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
+        SmallKhmerFont.setFamily("Khmer OS")
         SmallKhmerFont.setPointSize(30)
         
         self.QBtn = QPushButton()
@@ -2892,7 +2865,7 @@ class EditDialog(QDialog):
         
 
         SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
+        SmallKhmerFont.setFamily("Khmer OS")
         SmallKhmerFont.setPointSize(30)
 
         self.QBtn = QPushButton()
@@ -2936,7 +2909,7 @@ class SearchDialog(QDialog):
         super(SearchDialog, self).__init__(*args, **kwargs)
 
         SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("KhmerOS")
+        SmallKhmerFont.setFamily("Khmer OS")
         SmallKhmerFont.setPointSize(30)
         
         self.QBtn = QPushButton()
@@ -3366,7 +3339,10 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
 
     
- 
+    #import font
+    _id = QtGui.QFontDatabase.addApplicationFont("font/KhmerOS.ttf")
+    print(QtGui.QFontDatabase.applicationFontFamilies(_id))
+
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
