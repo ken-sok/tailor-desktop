@@ -17,15 +17,21 @@ START OF Font FORMATTING
 
 SmallKhmerFont = QtGui.QFont()
 SmallKhmerFont.setFamily("Khmer OS")
-SmallKhmerFont.setPointSize(10)
+SmallKhmerFont.setPointSize(14)
 
 BigKhmerFont = QtGui.QFont()
 BigKhmerFont.setFamily("Khmer OS")
-BigKhmerFont.setPointSize(16)
+BigKhmerFont.setPointSize(20)
+
+DeadlineSmallKhmerFont = QtGui.QFont()
+DeadlineSmallKhmerFont.setFamily("Khmer OS")
+DeadlineSmallKhmerFont.setPointSize(14)
 
 ENGFont = QtGui.QFont()
 ENGFont.setFamily("Palatino Linotype")
-ENGFont.setPointSize(10)
+ENGFont.setPointSize(15)
+
+
 
 '''
 END OF Font FORMATTING
@@ -352,7 +358,7 @@ class Ui_MainWindow(object):
 
         #user input name of staff
         self.StaffNameBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.StaffNameBox.setGeometry(QtCore.QRect(310, 300, 180, 31))
+        self.StaffNameBox.setGeometry(QtCore.QRect(310, 300, 220, 31))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -367,14 +373,15 @@ class Ui_MainWindow(object):
         self.StaffNameBox.setObjectName("StaffNameBox")
 
         #label to show date chosen
+        
         self.DeadlineSelectedLabel = QtWidgets.QLabel(self.centralwidget)
-        self.DeadlineSelectedLabel.setGeometry(QtCore.QRect(370, 341, 120, 40))
+        self.DeadlineSelectedLabel.setGeometry(QtCore.QRect(370, 341, 160, 40))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
         sizePolicy.setHeightForWidth(self.DeadlineSelectedLabel.sizePolicy().hasHeightForWidth())
         self.DeadlineSelectedLabel.setSizePolicy(sizePolicy)
-        self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
+        self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
         self.DeadlineSelectedLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineSelectedLabel.setAutoFillBackground(False)
         self.DeadlineSelectedLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -403,7 +410,7 @@ class Ui_MainWindow(object):
         START OF CUSTOMER PREFERENCES BOX
         '''
         self.CustomerPreferencesTitle = QtWidgets.QLabel(self.centralwidget)
-        self.CustomerPreferencesTitle.setGeometry(QtCore.QRect(650, 27, 150, 51))
+        self.CustomerPreferencesTitle.setGeometry(QtCore.QRect(750, 27, 200, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -416,7 +423,7 @@ class Ui_MainWindow(object):
         self.CustomerPreferencesTitle.setObjectName("CustomerPreferencesTitle")
 
         self.ColorLabel = QtWidgets.QLabel(self.centralwidget)
-        self.ColorLabel.setGeometry(QtCore.QRect(580, 100, 91, 51))
+        self.ColorLabel.setGeometry(QtCore.QRect(680, 130, 91, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -429,7 +436,7 @@ class Ui_MainWindow(object):
         self.ColorLabel.setObjectName("ColorLabel")
 
         self.StyleLabel = QtWidgets.QLabel(self.centralwidget)
-        self.StyleLabel.setGeometry(QtCore.QRect(580, 150, 81, 31))
+        self.StyleLabel.setGeometry(QtCore.QRect(680, 180, 81, 31))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -443,7 +450,7 @@ class Ui_MainWindow(object):
 
 
         self.MaterialsLabel = QtWidgets.QLabel(self.centralwidget)
-        self.MaterialsLabel.setGeometry(QtCore.QRect(580, 60, 91, 51))
+        self.MaterialsLabel.setGeometry(QtCore.QRect(680, 90, 140, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -457,16 +464,17 @@ class Ui_MainWindow(object):
 
         #user inputs
         self.MaterialBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.MaterialBox.setGeometry(QtCore.QRect(680, 69, 171, 31))
+        self.MaterialBox.setGeometry(QtCore.QRect(820, 99, 171, 31))
         self.MaterialBox.setFont(SmallKhmerFont)
         self.MaterialBox.setObjectName("MaterialBox")
 
         self.ColorBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.ColorBox.setGeometry(QtCore.QRect(680, 109, 171, 31))
+        self.ColorBox.setGeometry(QtCore.QRect(820, 139, 171, 31))
         self.ColorBox.setFont(SmallKhmerFont)
         self.ColorBox.setObjectName("ColorBox")
+
         self.StyleBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.StyleBox.setGeometry(QtCore.QRect(680, 149, 171, 31))
+        self.StyleBox.setGeometry(QtCore.QRect(820, 179, 171, 31))
         self.StyleBox.setFont(SmallKhmerFont)
         self.StyleBox.setObjectName("StyleBox")
 
@@ -479,7 +487,7 @@ class Ui_MainWindow(object):
         START OF CUSTOMER PREFERENCES BOX
         '''
         self.SpecialReqTitle = QtWidgets.QLabel(self.centralwidget)
-        self.SpecialReqTitle.setGeometry(QtCore.QRect(650, 240, 171, 51))
+        self.SpecialReqTitle.setGeometry(QtCore.QRect(750, 240, 171, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -493,7 +501,7 @@ class Ui_MainWindow(object):
 
         self.SpecialReqBox = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.SpecialReqBox.setFont(SmallKhmerFont)
-        self.SpecialReqBox.setGeometry(QtCore.QRect(580, 290, 271, 111))
+        self.SpecialReqBox.setGeometry(QtCore.QRect(680, 290, 310, 111))
         self.SpecialReqBox.setObjectName("SpecialReqBox")
 
         '''
@@ -520,20 +528,22 @@ class Ui_MainWindow(object):
         
 
         self.PriceBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.PriceBox.setGeometry(QtCore.QRect(1370, 700, 120, 61))
+        self.PriceBox.setGeometry(QtCore.QRect(1590, 700, 200, 61))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
         sizePolicy.setHeightForWidth(self.PriceBox.sizePolicy().hasHeightForWidth())
         self.PriceBox.setSizePolicy(sizePolicy)
-        self.PriceBox.setFont(SmallKhmerFont)
+        self.onlyInt = QtGui.QIntValidator()
+        self.PriceBox.setValidator(self.onlyInt)
+        self.PriceBox.setFont(ENGFont)
         self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PriceBox.setAutoFillBackground(False)
         self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
         self.PriceBox.setObjectName("PriceBox")
 
         self.PriceLabel = QtWidgets.QLabel(self.centralwidget)
-        self.PriceLabel.setGeometry(QtCore.QRect(1300, 710, 71, 41))
+        self.PriceLabel.setGeometry(QtCore.QRect(1450, 710, 130, 41))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -547,7 +557,7 @@ class Ui_MainWindow(object):
 
 
         self.ShirtDressSkirtBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.ShirtDressSkirtBox.setGeometry(QtCore.QRect(0, 450, 791, 521))
+        self.ShirtDressSkirtBox.setGeometry(QtCore.QRect(0, 450, 900, 521))
         self.ShirtDressSkirtBox.setFont(BigKhmerFont)
         self.ShirtDressSkirtBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ShirtDressSkirtBox.setObjectName("ShirtDressSkirtBox")
@@ -1001,22 +1011,22 @@ class Ui_MainWindow(object):
         self.BustHeightBox.setFixedSize(120,50)
         self.gridLayout.addWidget(self.BustHeightBox, 5, 4, 1, 1)
 
-        self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(260, 430, 941, 20))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
+        self.HorizLine = QtWidgets.QFrame(self.centralwidget)
+        self.HorizLine.setGeometry(QtCore.QRect(260, 430, 1050, 20))
+        self.HorizLine.setFrameShape(QtWidgets.QFrame.HLine)
+        self.HorizLine.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.HorizLine.setObjectName("HorizLine")
 
 
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(1190, 0, 20, 961))
+        self.line_2.setGeometry(QtCore.QRect(1300, 0, 20, 961))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         
     
         self.PantGroupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.PantGroupBox.setGeometry(QtCore.QRect(840, 450, 271, 511))
+        self.PantGroupBox.setGeometry(QtCore.QRect(940, 450, 320, 511))
         self.PantGroupBox.setFont(BigKhmerFont)
         self.PantGroupBox.setObjectName("PantGroupBox")
 
@@ -1203,7 +1213,7 @@ class Ui_MainWindow(object):
         START OF PREVIEW
         '''
         self.PreviewTitle = QtWidgets.QLabel(self.centralwidget)
-        self.PreviewTitle.setGeometry(QtCore.QRect(1350, 50, 101, 51))
+        self.PreviewTitle.setGeometry(QtCore.QRect(1550, 50, 101, 51))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
@@ -1216,28 +1226,28 @@ class Ui_MainWindow(object):
         self.PreviewTitle.setObjectName("PreviewTitle")
 
         self.ShirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.ShirtRadio.setGeometry(QtCore.QRect(1330, 96, 61, 31))
+        self.ShirtRadio.setGeometry(QtCore.QRect(1530, 96, 61, 31))
         self.ShirtRadio.setFont(SmallKhmerFont)
         self.ShirtRadio.setObjectName("ShirtRadio")
 
         self.DressRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.DressRadio.setGeometry(QtCore.QRect(1400, 96, 61, 31))
+        self.DressRadio.setGeometry(QtCore.QRect(1600, 96, 61, 31))
         self.DressRadio.setFont(SmallKhmerFont)
         self.DressRadio.setObjectName("DressRadio")
 
         self.PantRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.PantRadio.setGeometry(QtCore.QRect(1470, 96, 82, 31))
+        self.PantRadio.setGeometry(QtCore.QRect(1670, 96, 82, 31))
         self.PantRadio.setFont(SmallKhmerFont)
         self.PantRadio.setObjectName("PantRadio")
 
         self.SkirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.SkirtRadio.setGeometry(QtCore.QRect(1260, 96, 61, 31))
+        self.SkirtRadio.setGeometry(QtCore.QRect(1440, 96, 68, 31))
         self.SkirtRadio.setFont(SmallKhmerFont)
         self.SkirtRadio.setObjectName("SkirtRadio")
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel(self.centralwidget)
-        self.RadioPicLabel.setGeometry(QtCore.QRect(1100, 150, 621, 531))
+        self.RadioPicLabel.setGeometry(QtCore.QRect(1300, 150, 621, 531))
         self.RadioPicLabel.setObjectName("RadioPicLabel")
 
         '''
@@ -1248,60 +1258,64 @@ class Ui_MainWindow(object):
         START OF TEXTBROWSER BOXES
         '''
         
-        self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_4.setGeometry(QtCore.QRect(170, 30, 341, 201))
+        self.CustomerInfoGroupBackground = QtWidgets.QTextBrowser(self.centralwidget)
+        self.CustomerInfoGroupBackground.setGeometry(QtCore.QRect(170, 30, 400, 201))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.textBrowser_4.sizePolicy().hasHeightForWidth())
-        self.textBrowser_4.setSizePolicy(sizePolicy)
-        self.textBrowser_4.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser_4.setAutoFillBackground(False)
-        self.textBrowser_4.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.textBrowser_4.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_4.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_4.setReadOnly(True)
-        self.textBrowser_4.setObjectName("textBrowser_4")
+        sizePolicy.setHeightForWidth(self.CustomerInfoGroupBackground.sizePolicy().hasHeightForWidth())
+        self.CustomerInfoGroupBackground.setSizePolicy(sizePolicy)
+        self.CustomerInfoGroupBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CustomerInfoGroupBackground.setAutoFillBackground(False)
+        self.CustomerInfoGroupBackground.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.CustomerInfoGroupBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.CustomerInfoGroupBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.CustomerInfoGroupBackground.setReadOnly(True)
+        self.CustomerInfoGroupBackground.setObjectName("CustomerInfoGroupBackground")
         
-        self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_5.setGeometry(QtCore.QRect(570, 30, 291, 201))
+        self.CustomerPrefGroupBackground = QtWidgets.QTextBrowser(self.centralwidget)
+        self.CustomerPrefGroupBackground.setGeometry(QtCore.QRect(640, 30, 400, 201))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.textBrowser_5.sizePolicy().hasHeightForWidth())
-        self.textBrowser_5.setSizePolicy(sizePolicy)
-        self.textBrowser_5.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser_5.setAutoFillBackground(False)
-        self.textBrowser_5.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.textBrowser_5.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_5.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_5.setObjectName("textBrowser_5")
-        self.textBrowser_6 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_6.setGeometry(QtCore.QRect(170, 240, 341, 171))
+        sizePolicy.setHeightForWidth(self.CustomerPrefGroupBackground.sizePolicy().hasHeightForWidth())
+        self.CustomerPrefGroupBackground.setSizePolicy(sizePolicy)
+        self.CustomerPrefGroupBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CustomerPrefGroupBackground.setAutoFillBackground(False)
+        self.CustomerPrefGroupBackground.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.CustomerPrefGroupBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.CustomerPrefGroupBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.CustomerPrefGroupBackground.setObjectName("CustomerPrefGroupBackground")
+        
+        
+        self.StaffInfoBackground = QtWidgets.QTextBrowser(self.centralwidget)
+        self.StaffInfoBackground.setGeometry(QtCore.QRect(170, 240, 400, 171))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.textBrowser_6.sizePolicy().hasHeightForWidth())
-        self.textBrowser_6.setSizePolicy(sizePolicy)
-        self.textBrowser_6.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser_6.setAutoFillBackground(False)
-        self.textBrowser_6.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.textBrowser_6.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_6.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_6.setObjectName("textBrowser_6")
-        self.textBrowser_7 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_7.setGeometry(QtCore.QRect(570, 240, 291, 171))
+        sizePolicy.setHeightForWidth(self.StaffInfoBackground.sizePolicy().hasHeightForWidth())
+        self.StaffInfoBackground.setSizePolicy(sizePolicy)
+        self.StaffInfoBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.StaffInfoBackground.setAutoFillBackground(False)
+        self.StaffInfoBackground.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.StaffInfoBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.StaffInfoBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.StaffInfoBackground.setObjectName("StaffInfoBackground")
+
+
+        self.SpecialReqBackground = QtWidgets.QTextBrowser(self.centralwidget)
+        self.SpecialReqBackground.setGeometry(QtCore.QRect(640, 240, 400, 171))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(70)
         sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.textBrowser_7.sizePolicy().hasHeightForWidth())
-        self.textBrowser_7.setSizePolicy(sizePolicy)
-        self.textBrowser_7.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.textBrowser_7.setAutoFillBackground(False)
-        self.textBrowser_7.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.textBrowser_7.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_7.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.textBrowser_7.setObjectName("textBrowser_7")
+        sizePolicy.setHeightForWidth(self.SpecialReqBackground.sizePolicy().hasHeightForWidth())
+        self.SpecialReqBackground.setSizePolicy(sizePolicy)
+        self.SpecialReqBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.SpecialReqBackground.setAutoFillBackground(False)
+        self.SpecialReqBackground.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.SpecialReqBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SpecialReqBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SpecialReqBackground.setObjectName("SpecialReqBackground")
 
 
 
@@ -1416,10 +1430,10 @@ class Ui_MainWindow(object):
     
     def RaiseWidgets(self): 
         self.DeadlineBox.raise_()
-        self.textBrowser_7.raise_()
-        self.textBrowser_6.raise_()
-        self.textBrowser_5.raise_()
-        self.textBrowser_4.raise_()
+        self.SpecialReqBackground.raise_()
+        self.StaffInfoBackground.raise_()
+        self.CustomerPrefGroupBackground.raise_()
+        self.CustomerInfoGroupBackground.raise_()
         self.StaffNameBox.raise_()
         self.DeadlineSelectedLabel.raise_()
         self.DateIcon.raise_()
@@ -1440,7 +1454,7 @@ class Ui_MainWindow(object):
         self.Submit.raise_()
         self.PriceBox.raise_()
         self.PriceLabel.raise_()
-        self.line.raise_()
+        self.HorizLine.raise_()
         self.SpecialReqTitle.raise_()
         self.PreviewTitle.raise_()
         self.ShirtRadio.raise_()
@@ -1973,11 +1987,11 @@ class Ui_MainWindow(object):
         self.DressRadio.setChecked(False) 
 
 
-        if (price == "$" or customer_name == "" or deadline == "សូមចុចរូបប្រតិទិន" or telephone == "" or style == "" or material == ""  or color == ""
+        if (price == "" or customer_name == "" or deadline == "សូមចុចរូបប្រតិទិន" or telephone == "" or style == "" or material == ""  or color == ""
         or clothes_type == ""): 
 
             
-            if price == "$": 
+            if price == "": 
                 self.PriceLabel.setStyleSheet("color: red; background-color: light grey") 
             if customer_name == "":
                 self.CustomerNameLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
@@ -2193,8 +2207,8 @@ class Ui_MainWindow(object):
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិធិជន"))
         self.Cancel.setText(_translate("MainWindow", "Cancel"))
         self.Submit.setText(_translate("MainWindow", "OK"))
-        self.PriceBox.setText(_translate("MainWindow", "$"))
-        self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ:"))
+        self.PriceBox.setText(_translate("MainWindow", ""))
+        self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ: ($)"))
         self.ShirtDressSkirtBox.setTitle(_translate("MainWindow", "អាវ រ៉ូប​ និងសំពត់"))
         self.DressSkirtWaistLabel.setText(_translate("MainWindow", "ជំុវិញចង្កេះ:"))
         self.CmUpperHips.setText(_translate("MainWindow", "cm"))
@@ -2213,7 +2227,7 @@ class Ui_MainWindow(object):
         self.CmShoulder.setText(_translate("MainWindow", "cm"))
         self.ShoulderLabel.setText(_translate("MainWindow", "ស្មា:"))
         self.CmCenterBack.setText(_translate("MainWindow", "cm"))
-        self.CenterFrontLabel.setText(_translate("MainWindow", "គល់កមុខដល់ចង្កេះ:"))
+        self.CenterFrontLabel.setText(_translate("MainWindow", "គល់កមុខដល់\nចង្កេះ:"))
         self.CmDressSkirtWaist.setText(_translate("MainWindow", "cm"))
         self.SleeveLengthLabel.setText(_translate("MainWindow", "សំរុងដៃអាវ:"))
         self.CmSleeveLength.setText(_translate("MainWindow", "cm"))
@@ -2225,7 +2239,7 @@ class Ui_MainWindow(object):
         self.BustHeightLabel.setText(_translate("MainWindow", "កំពស់ដើមទ្រូង:"))
         self.SkirtLengthLabel.setText(_translate("MainWindow", "សំរុងសំពត់:"))
         self.AFLabel.setText(_translate("MainWindow", "សន្ទះមុខ:"))
-        self.CenterBackLabel.setText(_translate("MainWindow", "គល់កក្រោយដល់ចង្កេះ:"))
+        self.CenterBackLabel.setText(_translate("MainWindow", "គល់កក្រោយ\nដល់ចង្កេះ:"))
         self.SpecialReqTitle.setText(_translate("MainWindow", "សំណើពិសេស:"))
         self.PreviewTitle.setText(_translate("MainWindow", "រូបគំរូ"))
         self.ShirtRadio.setText(_translate("MainWindow", "អាវ"))
@@ -2234,22 +2248,22 @@ class Ui_MainWindow(object):
         self.SkirtRadio.setText(_translate("MainWindow", "សំពត់"))
 
 
-        self.textBrowser_4.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.CustomerInfoGroupBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
     "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
     "p, li { white-space: pre-wrap; }\n"
     "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
     "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.textBrowser_5.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.CustomerPrefGroupBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
     "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
     "p, li { white-space: pre-wrap; }\n"
     "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
     "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.textBrowser_6.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.StaffInfoBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
     "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
     "p, li { white-space: pre-wrap; }\n"
     "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
     "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.textBrowser_7.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.SpecialReqBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
     "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
     "p, li { white-space: pre-wrap; }\n"
     "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
@@ -2348,7 +2362,7 @@ class Ui_MainWindow(object):
         self.StaffNameBox.setText(_translate("MainWindow", str(OrderDetails['staff'])))
         self.DeadlineBox.setText(_translate("MainWindow", str(OrderDetails['deadline'])))
         deadline = OrderDetails['deadline'].strftime("%d/%m/%Y")
-        self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
+        self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
         self.DeadlineSelectedLabel.setText(_translate("MainWindow", deadline))
 
         self.StyleBox.setText(_translate("MainWindow", str(OrderDetails['style'])))
@@ -2472,7 +2486,7 @@ class Ui_MainWindow(object):
         self.PhoneBox.setText(_translate("MainWindow", ''))
         self.AddressBox.setPlainText(_translate("MainWindow", ''))
         self.StyleBox.setText(_translate("MainWindow", ''))
-        self.PriceBox.setText(_translate("MainWindow", '$'))
+        self.PriceBox.setText(_translate("MainWindow", ''))
         self.DeadlineBox.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
         self.SubmitMsg.setText(_translate("MainWindow", ''))
         self.SpecialReqBox.setPlainText(_translate("MainWindow", ''))
@@ -2547,10 +2561,11 @@ class AboutDialog(QDialog):
         self.initUI()
 
     def initUI(self):
+        
         Panha = QLabel()
         Kheang = QLabel()
-        Panha.setText("PANHA 0965622000")
-        Kheang.setText("Kheang 085811647")
+        Panha.setText("PANHA 0965622000\nUX/UI Designer")
+        Kheang.setText("Kheang 085811647\nBackend Developer")
         Panha.setAlignment(Qt.AlignCenter)
         Kheang.setAlignment(Qt.AlignCenter)
 
@@ -2580,16 +2595,18 @@ class CalendarWindow(QDialog):
         self.setMaximumSize(QtCore.QSize(450, 300))
         self.initUI()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
-
+        self.setWindowFlags(
+            QtCore.Qt.Window |
+            QtCore.Qt.CustomizeWindowHint |
+            QtCore.Qt.WindowTitleHint |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowStaysOnTopHint
+            )
+        
     def initUI(self):
         self.calendar = QCalendarWidget(self)
         self.calendar.move(20, 20)
         self.calendar.setGridVisible(True)
-
-        #self.calendar.setMinimumDate(QDate(currentYear, currentMonth - 1, currentDay))
-        #self.calendar.setMaximumDate(QDate(
-        #	currentYear, currentMonth + 1, calendar.monthrange(currentYear, currentMonth)[1]))
-
         
         self.calendar.setSelectedDate(QDate(currentYear, currentMonth, currentDay))
         self.datelabel = QtWidgets.QLabel(self)
@@ -2618,11 +2635,12 @@ class TableView(QDialog):
         super(TableView, self).__init__()
         self.setWindowTitle('All Orders')
         #self.setGeometry(300, 300, 450, 300)
-        self.setMinimumSize(QtCore.QSize(1920, 1080))
+        self.setMinimumSize(QtCore.QSize(1200, 800))
         #self.setMaximumSize(QtCore.QSize(450, 300))
         self.initUI()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
-
+        self.setWindowFlag(Qt.WindowMinimizeButtonHint, True)
+        self.setWindowFlag(Qt.WindowMaximizeButtonHint, True)
 
     def initUI(self):
         layout = QVBoxLayout()
@@ -2634,7 +2652,7 @@ class TableView(QDialog):
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
-        self.tableWidget.resize(1920, 1080)
+        #self.tableWidget.resize(800, 600)
         self.tableWidget.setAlternatingRowColors(True)
         self.tableWidget.setColumnCount(8)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
@@ -2643,7 +2661,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខសម្គាល់ការកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខសម្គាល់អតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខអតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
@@ -2699,12 +2717,11 @@ class TableView(QDialog):
         for row_number, row_data in enumerate(all_rows):
             self.tableWidget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                #print(str(data))
-                self.tableWidget.setItem(row_number, column_number,QTableWidgetItem(str(data)))
+                item = QTableWidgetItem(str(data))
+                item.setFlags(QtCore.Qt.ItemIsEnabled)
+                item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                self.tableWidget.setItem(row_number, column_number,item)
                 self.tableWidget.setRowHeight(row_number, 50)
-
-
-
 
         for row_number in range(0,len(all_rows)): 
             #combo box
@@ -2766,10 +2783,14 @@ class DeleteDialog(QDialog):
     
     def __init__(self, *args, **kwargs):
         super(DeleteDialog, self).__init__(*args, **kwargs)
-        
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("Khmer OS")
-        SmallKhmerFont.setPointSize(30)
+
+        self.setWindowFlags(
+            QtCore.Qt.Window |
+            QtCore.Qt.CustomizeWindowHint |
+            QtCore.Qt.WindowTitleHint |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowStaysOnTopHint
+            )
         
         self.QBtn = QPushButton()
         self.QBtn.setText("Delete")
@@ -2863,10 +2884,14 @@ class EditDialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(EditDialog, self).__init__(*args, **kwargs)
         
+        self.setWindowFlags(
+            QtCore.Qt.Window |
+            QtCore.Qt.CustomizeWindowHint |
+            QtCore.Qt.WindowTitleHint |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowStaysOnTopHint
+            )
 
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("Khmer OS")
-        SmallKhmerFont.setPointSize(30)
 
         self.QBtn = QPushButton()
         self.QBtn.setText("Edit")
@@ -2908,14 +2933,18 @@ class SearchDialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(SearchDialog, self).__init__(*args, **kwargs)
 
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("Khmer OS")
-        SmallKhmerFont.setPointSize(30)
-        
+        self.setWindowFlags(
+            QtCore.Qt.Window |
+            QtCore.Qt.CustomizeWindowHint |
+            QtCore.Qt.WindowTitleHint |
+            QtCore.Qt.WindowCloseButtonHint |
+            QtCore.Qt.WindowStaysOnTopHint
+            )       
+
         self.QBtn = QPushButton()
         self.QBtn.setText("Search")
 
-        self.setWindowTitle("Search user")
+        self.setWindowTitle("Search customer")
         self.setFixedWidth(300)
         self.setFixedHeight(100)
         self.QBtn.clicked.connect(self.searchcustomer)

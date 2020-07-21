@@ -1,3 +1,16 @@
+CREATE ROLE tailor_owner WITH
+  LOGIN
+  SUPERUSER
+  INHERIT
+  CREATEDB
+  CREATEROLE
+  REPLICATION
+  PASSWORD 'tailor';
+
+GRANT pg_execute_server_program, pg_monitor, pg_read_all_settings, pg_read_all_stats, pg_read_server_files, pg_signal_backend, pg_stat_scan_tables, pg_write_server_files TO tailor_owner;
+GRANT postgres TO tailor_owner WITH ADMIN OPTION;
+
+
 CREATE DATABASE tailor_store
     WITH 
     OWNER = tailor_owner
@@ -45,21 +58,21 @@ CREATE TABLE public.materials
 CREATE TABLE public.dress_measurements
 (
     order_id smallint NOT NULL,
-    around_bust real NOT NULL,
-    neck_armhold real NOT NULL,
-    ab real NOT NULL,
-    dress_waist real NOT NULL,
-    hip real NOT NULL,
-    above_bust real NOT NULL,
-    center_front real NOT NULL,
-    shoulder real NOT NULL,
-    af real NOT NULL,
-    center_back real NOT NULL,
-    upper_hips real NOT NULL,
-    armpit real NOT NULL,
-    skirt_length real NOT NULL,
-    sleeve_length real NOT NULL,
-    bust_height real NOT NULL,
+    around_bust text NOT NULL,
+    neck_armhold text NOT NULL,
+    ab text NOT NULL,
+    dress_waist text NOT NULL,
+    hip text NOT NULL,
+    above_bust text NOT NULL,
+    center_front text NOT NULL,
+    shoulder text NOT NULL,
+    af text NOT NULL,
+    center_back text NOT NULL,
+    upper_hips text NOT NULL,
+    armpit text NOT NULL,
+    skirt_length text NOT NULL,
+    sleeve_length text NOT NULL,
+    bust_height text NOT NULL,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
 );
@@ -68,13 +81,13 @@ CREATE TABLE public.dress_measurements
 CREATE TABLE public.pant_measurements
 (
     order_id smallint NOT NULL,
-    pant_hip real,
-    pant_thigh real,
-    calf real,
-    inseam real,
-    outseam real,
-    ankle real,
-    pant_waist real,
+    pant_hip text,
+    pant_thigh text,
+    calf text,
+    inseam text,
+    outseam text,
+    ankle text,
+    pant_waist text,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
 );
@@ -82,19 +95,19 @@ CREATE TABLE public.pant_measurements
 CREATE TABLE public.shirt_measurements
 (
     order_id smallint NOT NULL,
-    around_bust real NOT NULL,
-    neck_armhold real NOT NULL,
-    ab real NOT NULL,
-    dress_waist real NOT NULL,
-    above_bust real NOT NULL,
-    center_front real NOT NULL,
-    shoulder real NOT NULL,
-    af real NOT NULL,
-    bust_height real NOT NULL,
-    center_back real NOT NULL,
-    upper_hips real NOT NULL,
-    armpit real NOT NULL,
-    sleeve_length real NOT NULL,
+    around_bust text NOT NULL,
+    neck_armhold text NOT NULL,
+    ab text NOT NULL,
+    dress_waist text NOT NULL,
+    above_bust text NOT NULL,
+    center_front text NOT NULL,
+    shoulder text NOT NULL,
+    af text NOT NULL,
+    bust_height text NOT NULL,
+    center_back text NOT NULL,
+    upper_hips text NOT NULL,
+    armpit text NOT NULL,
+    sleeve_length text NOT NULL,
     customer_id smallint NOT NULL,
     PRIMARY KEY (order_id)
 );
@@ -102,9 +115,9 @@ CREATE TABLE public.shirt_measurements
 CREATE TABLE public.skirt_measurements
 (
     order_id smallint NOT NULL,
-    skirt_hip real NOT NULL,
-    skirt_waist real NOT NULL,
+    skirt_hip text NOT NULL,
+    skirt_waist text NOT NULL,
     customer_id smallint NOT NULL,
-    skirt_length real NOT NULL,
+    skirt_length text NOT NULL,
     PRIMARY KEY (order_id)
 );
