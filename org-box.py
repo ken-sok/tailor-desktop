@@ -1002,6 +1002,8 @@ class MainWindow(QMainWindow):
 
         widget = QWidget()
         
+        #self.retranslateUi()
+        
         #set layout 
         widget.setLayout(MainLayout)
         self.setCentralWidget(widget)

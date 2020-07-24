@@ -20,6 +20,7 @@ SmallKhmerFont.setFamily("Khmer OS")
 SmallKhmerFont.setPointSize(14)
 
 BigKhmerFont = QtGui.QFont()
+#BigKhmerFont.setBold(True) #cannot due to some reason
 BigKhmerFont.setFamily("Khmer OS")
 BigKhmerFont.setPointSize(20)
 
@@ -1113,7 +1114,7 @@ class Ui_MainWindow(object):
         self.PriceLabel.raise_()
         self.HorizLine.raise_()
         self.SpecialReqTitle.raise_()
-        self.PreviewTitle.raise_()
+        #self.PreviewTitle.raise_()
         self.ShirtRadio.raise_()
         self.DressRadio.raise_()
         self.PantRadio.raise_()
@@ -1130,7 +1131,7 @@ class Ui_MainWindow(object):
     
     def select_pic(self):
         
-        radioBtn = self.centralwidget.sender()
+        radioBtn = self.PreviewGroupBox.sender()
         self.clothes_type = ""
 
 
@@ -1849,7 +1850,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.StaffTitle.setText(_translate("MainWindow", "ព័ត៌មានបុគ្គលិក"))
         self.PhoneLabel.setText(_translate("MainWindow", "លេខទូរស័ព្ទ:"))
         self.DeadlineLabel.setText(_translate("MainWindow", "កាលកំណត់:"))
@@ -1897,8 +1897,8 @@ class Ui_MainWindow(object):
         self.SkirtLengthLabel.setText(_translate("MainWindow", "សំរុងសំពត់:"))
         self.AFLabel.setText(_translate("MainWindow", "សន្ទះមុខ:"))
         self.CenterBackLabel.setText(_translate("MainWindow", "គល់កក្រោយ\nដល់ចង្កេះ:"))
-        self.SpecialReqTitle.setText(_translate("MainWindow", "សំណើពិសេស:"))
-        self.PreviewTitle.setText(_translate("MainWindow", "រូបគំរូ"))
+        self.SpecialReqTitle.setText(_translate("MainWindow", "សំណើពិសេស"))
+        self.PreviewGroupBox.setTitle(_translate("MainWindow", "រូបគំរូ"))
         self.ShirtRadio.setText(_translate("MainWindow", "អាវ"))
         self.DressRadio.setText(_translate("MainWindow", "រ៉ូប"))
         self.PantRadio.setText(_translate("MainWindow", "ខោ"))
@@ -1919,8 +1919,9 @@ class Ui_MainWindow(object):
         self.CmCalf.setText(_translate("MainWindow", "cm"))
         self.CmAnkle.setText(_translate("MainWindow", "cm"))
         self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
-        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white")
+        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd ")
         self.SubmitMsg.setText(_translate("MainWindow", ""))
+        
 
         #menu buttons
         self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
