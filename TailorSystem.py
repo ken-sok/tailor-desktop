@@ -56,272 +56,119 @@ class Ui_MainWindow(object):
         START OF MAIN WINDOW
         '''
 
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.setWindowModality(QtCore.Qt.ApplicationModal)
-        MainWindow.setEnabled(True)
-        #MainWindow.resize(1920, 1080)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
-        MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(800, 600))
-        MainWindow.showMaximized()
-        #MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
-        MainWindow.setSizeIncrement(QtCore.QSize(15, 14))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Light, brush)
-        brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(153, 153, 153))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Light, brush)
-        brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(153, 153, 153))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Light, brush)
-        brush = QtGui.QBrush(QtGui.QColor(242, 242, 242))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Midlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Dark, brush)
-        brush = QtGui.QBrush(QtGui.QColor(153, 153, 153))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Mid, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(114, 114, 114))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(229, 229, 229))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
-        MainWindow.setPalette(palette)
-        MainWindow.setAutoFillBackground(False)
+        MainWindow.setWindowTitle("Tailor Management System")
+        MainLayout = QGridLayout()
+        MainLayout.setContentsMargins(10,10,10,10)
+        '''
+        START OF CUSTOMER BOX
+        '''
         
-        #central widget
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        '''
-        END OF MAIN WINDOW
-        '''
-
-        '''
-        START OF Customer BOX 
-        '''
-
+     
         #CustomerTitle 
-        self.CustomerInfoTitle = QtWidgets.QLabel(self.centralwidget)
-        self.CustomerInfoTitle.setGeometry(QtCore.QRect(270, 30, 211, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CustomerInfoTitle.sizePolicy().hasHeightForWidth())
-        self.CustomerInfoTitle.setSizePolicy(sizePolicy)
+        self.CustomerInfoTitle = QtWidgets.QLabel()
         self.CustomerInfoTitle.setFont(BigKhmerFont)
-        self.CustomerInfoTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CustomerInfoTitle.setMaximumSize(200,50)
         self.CustomerInfoTitle.setAutoFillBackground(False)
-        self.CustomerInfoTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CustomerInfoTitle.setObjectName("CustomerInfoTitle")
+        
 
 
         #CustomerAddress
-        self.AddressLabel = QtWidgets.QLabel(self.centralwidget)
-        self.AddressLabel.setGeometry(QtCore.QRect(190, 150, 111, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.AddressLabel.sizePolicy().hasHeightForWidth())
-        self.AddressLabel.setSizePolicy(sizePolicy)
+        self.AddressLabel = QtWidgets.QLabel()
         self.AddressLabel.setFont(SmallKhmerFont)
-        self.AddressLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.AddressLabel.setMaximumSize(110,50)
         self.AddressLabel.setAutoFillBackground(False)
-        self.AddressLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.AddressLabel.setObjectName("AddressLabel")
 
         #CustomerName
-        self.CustomerNameLabel = QtWidgets.QLabel(self.centralwidget)
-        self.CustomerNameLabel.setGeometry(QtCore.QRect(190, 68, 81, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CustomerNameLabel.sizePolicy().hasHeightForWidth())
-        self.CustomerNameLabel.setSizePolicy(sizePolicy)
+        self.CustomerNameLabel = QtWidgets.QLabel()
         self.CustomerNameLabel.setFont(SmallKhmerFont)
-        self.CustomerNameLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.CustomerNameLabel.setMaximumSize(110,50)
         self.CustomerNameLabel.setAutoFillBackground(False)
-        self.CustomerNameLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CustomerNameLabel.setObjectName("CustomerNameLabel")
 
 
 
         #CustomerTelephone
-        self.PhoneLabel = QtWidgets.QLabel(self.centralwidget)
+        self.PhoneLabel = QtWidgets.QLabel()
         self.PhoneLabel.setEnabled(True)
-        self.PhoneLabel.setGeometry(QtCore.QRect(190, 110, 121, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.PhoneLabel.sizePolicy().hasHeightForWidth())
-        self.PhoneLabel.setSizePolicy(sizePolicy)
         self.PhoneLabel.setFont(SmallKhmerFont)
-        self.PhoneLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PhoneLabel.setMaximumSize(110,50)
         self.PhoneLabel.setAutoFillBackground(False)
-        self.PhoneLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.PhoneLabel.setObjectName("PhoneLabel")
         
         #line edits for CUSTOMER
-        self.CustomerNameBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.CustomerNameBox.setGeometry(QtCore.QRect(340, 70, 161, 31))
+        self.CustomerNameBox = QtWidgets.QLineEdit()
+        self.CustomerNameBox.setMaximumSize(300, 50)
+        self.CustomerNameBox.setAlignment(Qt.AlignLeft)
         self.CustomerNameBox.setFont(SmallKhmerFont)
         self.CustomerNameBox.setObjectName("CustomerNameBox")
 
-        self.PhoneBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.PhoneBox.setGeometry(QtCore.QRect(340, 110, 161, 31))
+        self.PhoneBox = QtWidgets.QLineEdit()
+        self.PhoneBox.setMaximumSize(300, 50)
         self.PhoneBox.setFont(SmallKhmerFont)
+        self.PhoneBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PhoneBox.setObjectName("PhoneBox")
         
-        self.AddressBox = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.AddressBox = QtWidgets.QPlainTextEdit()
+        self.AddressBox.setMaximumSize(300, 50)
         self.AddressBox.setFont(SmallKhmerFont)
-        self.AddressBox.setGeometry(QtCore.QRect(340, 150, 160, 70))
         self.AddressBox.setObjectName("AddressBox")
+
+
+        '''
+        add to main layout
+        '''
+        #customer box
+
+        self.CustomerBoxGroup = QtWidgets.QGroupBox()
+        self.CustomerBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.CustomerBoxGroup.setMaximumSize(550, 400)
+        
+        CustomerBoxLayout = QGridLayout()
+        #CustomerBoxLayout.setSpacing(10)
+        
+        CustomerBoxLayout.addWidget(self.CustomerInfoTitle, 0, 0, 1, 1)
+        
+        CustomerBoxLayout.addWidget(self.CustomerNameLabel, 1, 0)
+        CustomerBoxLayout.addWidget(self.PhoneLabel, 2, 0)
+        CustomerBoxLayout.addWidget(self.AddressLabel, 3, 0)
+        
+
+        CustomerBoxLayout.addWidget(self.CustomerNameBox, 1, 1)
+        CustomerBoxLayout.addWidget(self.PhoneBox, 2, 1)
+        CustomerBoxLayout.addWidget(self.AddressBox, 3, 1)
+
+        
+
+        self.CustomerBoxGroup.setLayout(CustomerBoxLayout)
+
+
+
+        #MainLayout.addWidget(self.CustomerBoxGroup, 0, 0)
 
         '''
         END OF Customer BOX 
         '''
 
+        
+      
+
+
         '''
         START OF Staff BOX 
         '''
-        self.StaffTitle = QtWidgets.QLabel(self.centralwidget)
-        self.StaffTitle.setGeometry(QtCore.QRect(260, 240, 201, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.StaffTitle.sizePolicy().hasHeightForWidth())
-        self.StaffTitle.setSizePolicy(sizePolicy)
+
+        self.StaffTitle = QtWidgets.QLabel()
         self.StaffTitle.setFont(BigKhmerFont)
+        self.StaffTitle.setMaximumSize(200,50)
         self.StaffTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.StaffTitle.setAutoFillBackground(False)
         self.StaffTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.StaffTitle.setObjectName("StaffTitle")
 
-        self.StaffNameLabel = QtWidgets.QLabel(self.centralwidget)
-        self.StaffNameLabel.setGeometry(QtCore.QRect(190, 300, 71, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.StaffNameLabel.sizePolicy().hasHeightForWidth())
-        self.StaffNameLabel.setSizePolicy(sizePolicy)
+        self.StaffNameLabel = QtWidgets.QLabel()
+        self.StaffNameLabel.setMaximumSize(110, 50)
         self.StaffNameLabel.setFont(SmallKhmerFont)
         self.StaffNameLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.StaffNameLabel.setAutoFillBackground(False)
@@ -329,26 +176,16 @@ class Ui_MainWindow(object):
         self.StaffNameLabel.setObjectName("StaffNameLabel")
 
         
-        self.DeadlineLabel = QtWidgets.QLabel(self.centralwidget)
-        self.DeadlineLabel.setGeometry(QtCore.QRect(190, 340, 110, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.DeadlineLabel.sizePolicy().hasHeightForWidth())
-        self.DeadlineLabel.setSizePolicy(sizePolicy)
+        self.DeadlineLabel = QtWidgets.QLabel()
         self.DeadlineLabel.setFont(SmallKhmerFont)
+        self.DeadlineLabel.setMaximumSize(110, 50)
         self.DeadlineLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineLabel.setAutoFillBackground(False)
         self.DeadlineLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.DeadlineLabel.setObjectName("DeadlineLabel")
         
-        self.DateIcon = QtWidgets.QPushButton(self.centralwidget)
-        self.DateIcon.setGeometry(QtCore.QRect(308, 340, 40, 40))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.DateIcon.sizePolicy().hasHeightForWidth())
-        self.DateIcon.setSizePolicy(sizePolicy)
+        self.DateIcon = QtWidgets.QPushButton()
+        self.DateIcon.setMaximumSize(40,40)
         self.DateIcon.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DateIcon.setAutoFillBackground(False)
         self.DateIcon.setObjectName("DateIcon")
@@ -357,14 +194,10 @@ class Ui_MainWindow(object):
         self.DateIcon.setIconSize(size)
         
 
+
         #user input name of staff
-        self.StaffNameBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.StaffNameBox.setGeometry(QtCore.QRect(310, 300, 220, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.StaffNameBox.sizePolicy().hasHeightForWidth())
-        self.StaffNameBox.setSizePolicy(sizePolicy)
+        self.StaffNameBox = QtWidgets.QLineEdit()
+        self.StaffNameBox.setMaximumSize(300,50)
         self.StaffNameBox.setFont(SmallKhmerFont)
         self.StaffNameBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.StaffNameBox.setAutoFillBackground(False)
@@ -375,34 +208,58 @@ class Ui_MainWindow(object):
 
         #label to show date chosen
         
-        self.DeadlineSelectedLabel = QtWidgets.QLabel(self.centralwidget)
-        self.DeadlineSelectedLabel.setGeometry(QtCore.QRect(370, 341, 160, 40))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.DeadlineSelectedLabel.sizePolicy().hasHeightForWidth())
-        self.DeadlineSelectedLabel.setSizePolicy(sizePolicy)
+        self.DeadlineSelectedLabel = QtWidgets.QLabel()
+        self.DeadlineSelectedLabel.setMaximumSize(200,50)
         self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
         self.DeadlineSelectedLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.DeadlineSelectedLabel.setAutoFillBackground(False)
+        self.DeadlineSelectedLabel.setAutoFillBackground(True)
         self.DeadlineSelectedLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.DeadlineSelectedLabel.setObjectName("DeadlineSelectedLabel")
 
+
         #label to send date to database
         #not in Ui
-        self.DeadlineBox = QtWidgets.QLabel(self.centralwidget)
-        self.DeadlineBox.setGeometry(QtCore.QRect(370, 341, 1, 1))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.DeadlineBox.sizePolicy().hasHeightForWidth())
-        self.DeadlineBox.setSizePolicy(sizePolicy)
+        self.DeadlineBox = QtWidgets.QLabel()
+        #self.DeadlineBox.setGeometry(QtCore.QRect(0, 0, 0, 0))  
         self.DeadlineBox.setFont(SmallKhmerFont)
         self.DeadlineBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineBox.setAutoFillBackground(False)
         self.DeadlineBox.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.DeadlineBox.setObjectName("DeadlineBox")
+        #not in Ui
 
+
+
+        #staff box 
+
+        self.StaffBoxGroup = QtWidgets.QGroupBox()
+        self.StaffBoxGroup.setMaximumSize(550,400)
+        self.StaffBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        StaffBoxLayout = QGridLayout()
+        #StaffBoxLayout.setSpacing(10)
+        
+        StaffBoxLayout.addWidget(self.StaffTitle, 0, 0)
+        
+        StaffBoxLayout.addWidget(self.StaffNameLabel, 1, 0)
+        StaffBoxLayout.addWidget(self.DeadlineLabel, 2, 0)
+
+        StaffBoxLayout.addWidget(self.StaffNameBox, 1, 1)
+
+        #not in ui
+        StaffBoxLayout.addWidget(self.DeadlineBox, 2, 1)
+        #not in ui
+
+        DisplayDateRow = QHBoxLayout()
+        DisplayDateRow.addWidget(self.DateIcon)
+        DisplayDateRow.addWidget(self.DeadlineSelectedLabel)
+
+        StaffBoxLayout.addLayout(DisplayDateRow, 2, 1)
+
+        self.StaffBoxGroup.setLayout(StaffBoxLayout)
+
+        #MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
+               
         '''
         END OF Staff BOX 
         '''
@@ -410,716 +267,552 @@ class Ui_MainWindow(object):
         '''
         START OF CUSTOMER PREFERENCES BOX
         '''
-        self.CustomerPreferencesTitle = QtWidgets.QLabel(self.centralwidget)
-        self.CustomerPreferencesTitle.setGeometry(QtCore.QRect(750, 27, 200, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CustomerPreferencesTitle.sizePolicy().hasHeightForWidth())
-        self.CustomerPreferencesTitle.setSizePolicy(sizePolicy)
+
+
+        self.CustomerPreferencesTitle = QtWidgets.QLabel()
+        self.CustomerPreferencesTitle.setMaximumSize(200,50)
         self.CustomerPreferencesTitle.setFont(BigKhmerFont)
         self.CustomerPreferencesTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CustomerPreferencesTitle.setAutoFillBackground(False)
         self.CustomerPreferencesTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CustomerPreferencesTitle.setObjectName("CustomerPreferencesTitle")
 
-        self.ColorLabel = QtWidgets.QLabel(self.centralwidget)
-        self.ColorLabel.setGeometry(QtCore.QRect(680, 130, 91, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.ColorLabel.sizePolicy().hasHeightForWidth())
-        self.ColorLabel.setSizePolicy(sizePolicy)
+        self.ColorLabel = QtWidgets.QLabel()
+        self.ColorLabel.setMaximumSize(110,50)
         self.ColorLabel.setFont(SmallKhmerFont)
         self.ColorLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ColorLabel.setAutoFillBackground(False)
         self.ColorLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ColorLabel.setObjectName("ColorLabel")
 
-        self.StyleLabel = QtWidgets.QLabel(self.centralwidget)
-        self.StyleLabel.setGeometry(QtCore.QRect(680, 180, 81, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.StyleLabel.sizePolicy().hasHeightForWidth())
-        self.StyleLabel.setSizePolicy(sizePolicy)
+        self.StyleLabel = QtWidgets.QLabel()
         self.StyleLabel.setFont(SmallKhmerFont)
+        self.StyleLabel.setMaximumSize(110,50)
         self.StyleLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.StyleLabel.setAutoFillBackground(False)
         self.StyleLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.StyleLabel.setObjectName("StyleLabel")
 
 
-        self.MaterialsLabel = QtWidgets.QLabel(self.centralwidget)
-        self.MaterialsLabel.setGeometry(QtCore.QRect(680, 90, 140, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.MaterialsLabel.sizePolicy().hasHeightForWidth())
-        self.MaterialsLabel.setSizePolicy(sizePolicy)
+        self.MaterialsLabel = QtWidgets.QLabel()
         self.MaterialsLabel.setFont(SmallKhmerFont)
+        self.MaterialsLabel.setMaximumSize(140,50)
         self.MaterialsLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.MaterialsLabel.setAutoFillBackground(False)
         self.MaterialsLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.MaterialsLabel.setObjectName("MaterialsLabel")
 
         #user inputs
-        self.MaterialBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.MaterialBox.setGeometry(QtCore.QRect(820, 99, 171, 31))
+        self.MaterialBox = QtWidgets.QLineEdit()
         self.MaterialBox.setFont(SmallKhmerFont)
+        self.MaterialBox.setMaximumSize(300,50)
         self.MaterialBox.setObjectName("MaterialBox")
 
-        self.ColorBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.ColorBox.setGeometry(QtCore.QRect(820, 139, 171, 31))
+        self.ColorBox = QtWidgets.QLineEdit()
         self.ColorBox.setFont(SmallKhmerFont)
+        self.ColorBox.setMaximumSize(300,50)
         self.ColorBox.setObjectName("ColorBox")
 
-        self.StyleBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.StyleBox.setGeometry(QtCore.QRect(820, 179, 171, 31))
+        self.StyleBox = QtWidgets.QLineEdit()
         self.StyleBox.setFont(SmallKhmerFont)
+        self.StyleBox.setMaximumSize(300,50)
         self.StyleBox.setObjectName("StyleBox")
 
+        
+
+                
+        #preferences box
+        self.PreferencesBoxGroup = QtWidgets.QGroupBox()
+        self.PreferencesBoxGroup.setMaximumSize(550,400)
+        self.PreferencesBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        PreferencesBoxLayout = QGridLayout()
+
+        PreferencesBoxLayout.addWidget(self.CustomerPreferencesTitle, 0, 0)
+
+        PreferencesBoxLayout.addWidget(self.MaterialsLabel, 1, 0)
+        PreferencesBoxLayout.addWidget(self.ColorLabel, 2, 0)
+        PreferencesBoxLayout.addWidget(self.StyleLabel, 3, 0)
+
+        PreferencesBoxLayout.addWidget(self.MaterialBox, 1, 1)
+        PreferencesBoxLayout.addWidget(self.ColorBox, 2, 1)
+        PreferencesBoxLayout.addWidget(self.StyleBox, 3, 1)
+
+        self.PreferencesBoxGroup.setLayout(PreferencesBoxLayout)
+
+        #MainLayout.addWidget(self.PreferencesBoxGroup, 0, 1)
+
+        self.TopColGroup = QHBoxLayout()
+        self.TopColGroup.addWidget(self.CustomerBoxGroup)
+        self.TopColGroup.addWidget(self.PreferencesBoxGroup)
+        self.TopColGroup.addWidget(self.StaffBoxGroup)
+
+        MainLayout.addLayout(self.TopColGroup, 0, 0, 1, 2)
+        
         '''
         END OF CUSTOMER PREFERENCES BOX
         '''
 
         
         '''
-        START OF CUSTOMER PREFERENCES BOX
+        START OF SPECIAL REQ BOX
         '''
-        self.SpecialReqTitle = QtWidgets.QLabel(self.centralwidget)
-        self.SpecialReqTitle.setGeometry(QtCore.QRect(750, 240, 171, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.SpecialReqTitle.sizePolicy().hasHeightForWidth())
-        self.SpecialReqTitle.setSizePolicy(sizePolicy)
+
+
+        self.SpecialReqTitle = QtWidgets.QLabel()
         self.SpecialReqTitle.setFont(BigKhmerFont)
         self.SpecialReqTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.SpecialReqTitle.setAutoFillBackground(False)
         self.SpecialReqTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.SpecialReqTitle.setObjectName("SpecialReqTitle")
 
-        self.SpecialReqBox = QtWidgets.QPlainTextEdit(self.centralwidget)
+        self.SpecialReqBox = QtWidgets.QPlainTextEdit()
         self.SpecialReqBox.setFont(SmallKhmerFont)
-        self.SpecialReqBox.setGeometry(QtCore.QRect(680, 290, 310, 111))
         self.SpecialReqBox.setObjectName("SpecialReqBox")
 
+
+        #special req box
+        
+        self.SpecReqBoxGroup = QtWidgets.QGroupBox()
+        #self.SpecReqBoxGroup.setMaximumSize(550,400)
+        self.SpecReqBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        SpecReqBoxLayout = QGridLayout()
+    
+
+        SpecReqBoxLayout.addWidget(self.SpecialReqTitle, 0, 0)
+        SpecReqBoxLayout.addWidget(self.SpecialReqBox, 1, 0)
+        
+        self.SpecReqBoxGroup.setLayout(SpecReqBoxLayout)
+
+        MainLayout.addWidget(self.SpecReqBoxGroup, 1, 0, 1, 2)
+
+
         '''
-        END OF CUSTOMER PREFERENCES BOX
+        END OF SPECIAL REQ BOX
         '''
+
 
         '''
         START OF MEASUREMENTS BOX
         '''
 
-        self.MeasurementTitle = QtWidgets.QLabel(self.centralwidget)
-        self.MeasurementTitle.setGeometry(QtCore.QRect(20, 410, 250, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.MeasurementTitle.sizePolicy().hasHeightForWidth())
-        self.MeasurementTitle.setSizePolicy(sizePolicy)
+        #might delete
+        self.MeasurementTitle = QtWidgets.QLabel()
         self.MeasurementTitle.setFont(BigKhmerFont)
         self.MeasurementTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.MeasurementTitle.setAutoFillBackground(False)
         self.MeasurementTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.MeasurementTitle.setObjectName("MeasurementTitle")
 
-        
-
-        self.PriceBox = QtWidgets.QLineEdit(self.centralwidget)
-        self.PriceBox.setGeometry(QtCore.QRect(1590, 700, 200, 61))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.PriceBox.sizePolicy().hasHeightForWidth())
-        self.PriceBox.setSizePolicy(sizePolicy)
-        self.onlyInt = QtGui.QIntValidator()
-        self.PriceBox.setValidator(self.onlyInt)
-        self.PriceBox.setFont(ENGFont)
-        self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.PriceBox.setAutoFillBackground(False)
-        self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.PriceBox.setObjectName("PriceBox")
-
-        self.PriceLabel = QtWidgets.QLabel(self.centralwidget)
-        self.PriceLabel.setGeometry(QtCore.QRect(1450, 710, 130, 41))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.PriceLabel.sizePolicy().hasHeightForWidth())
-        self.PriceLabel.setSizePolicy(sizePolicy)
-        self.PriceLabel.setFont(BigKhmerFont)
-        self.PriceLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.PriceLabel.setAutoFillBackground(False)
-        self.PriceLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.PriceLabel.setObjectName("PriceLabel")
-
-
-        self.ShirtDressSkirtBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.ShirtDressSkirtBox.setGeometry(QtCore.QRect(0, 450, 900, 521))
+        self.ShirtDressSkirtBox = QtWidgets.QGroupBox()
         self.ShirtDressSkirtBox.setFont(BigKhmerFont)
         self.ShirtDressSkirtBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ShirtDressSkirtBox.setObjectName("ShirtDressSkirtBox")
 
-        self.gridLayout = QtWidgets.QGridLayout(self.ShirtDressSkirtBox)
-        self.gridLayout.setObjectName("gridLayout")
+        self.ShirtDressSkirtLayout = QtWidgets.QGridLayout()
 
-        self.AroundBustBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.AroundBustBox = QtWidgets.QLineEdit()
         self.AroundBustBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AroundBustBox.setObjectName("AroundBustBox")
-        self.AroundBustBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.AroundBustBox, 4, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.AroundBustBox, 4, 4, 1, 1)
 
-        self.NeckArmHoldBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.NeckArmHoldBox = QtWidgets.QLineEdit()
         self.NeckArmHoldBox.setAlignment(QtCore.Qt.AlignCenter)
         self.NeckArmHoldBox.setObjectName("NeckArmHoldBox")
-        self.NeckArmHoldBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.NeckArmHoldBox, 1, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldBox, 1, 4, 1, 1)
         
-        self.WaistBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.WaistBox = QtWidgets.QLineEdit()
         self.WaistBox.setAlignment(QtCore.Qt.AlignCenter)
         self.WaistBox.setObjectName("WaistBox")
-        self.WaistBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.WaistBox, 6, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.WaistBox, 6, 4, 1, 1)
 
-        self.ABBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.ABBox = QtWidgets.QLineEdit()
         self.ABBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ABBox.setObjectName("ABBox")
-        self.ABBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.ABBox, 0, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.ABBox, 0, 4, 1, 1)
 
-        self.DressSkirtWaistLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.DressSkirtWaistLabel = QtWidgets.QLabel()
         self.DressSkirtWaistLabel.setObjectName("DressSkirtWaistLabel")
         self.DressSkirtWaistLabel.setFont(SmallKhmerFont)
-        self.gridLayout.addWidget(self.DressSkirtWaistLabel, 6, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.DressSkirtWaistLabel, 6, 3, 1, 1, QtCore.Qt.AlignHCenter)
 
 
-        self.UpperHipsLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.UpperHipsLabel = QtWidgets.QLabel()
         self.UpperHipsLabel.setFont(SmallKhmerFont)
         self.UpperHipsLabel.setObjectName("UpperHipsLabel")
-        self.gridLayout.addWidget(self.UpperHipsLabel, 3, 6, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsLabel, 3, 6, 1, 1)
         
-        self.CmUpperHips = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmUpperHips.sizePolicy().hasHeightForWidth())
-        self.CmUpperHips.setSizePolicy(sizePolicy)
+        self.CmUpperHips = QtWidgets.QLabel()
         self.CmUpperHips.setFont(ENGFont)
         self.CmUpperHips.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmUpperHips.setAutoFillBackground(False)
         self.CmUpperHips.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmUpperHips.setObjectName("CmUpperHips")
-        self.gridLayout.addWidget(self.CmUpperHips, 3, 8, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmUpperHips, 3, 8, 1, 1)
 
 
 
-        self.CmAroundBust = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmAroundBust.sizePolicy().hasHeightForWidth())
-        self.CmAroundBust.setSizePolicy(sizePolicy)
+        self.CmAroundBust = QtWidgets.QLabel()
         self.CmAroundBust.setFont(ENGFont)
         self.CmAroundBust.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmAroundBust.setAutoFillBackground(False)
         self.CmAroundBust.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAroundBust.setObjectName("CmAroundBust")
-        self.gridLayout.addWidget(self.CmAroundBust, 4, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmAroundBust, 4, 5, 1, 1)
 
 
-        self.HipLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.HipLabel = QtWidgets.QLabel()
         self.HipLabel.setFont(SmallKhmerFont)
         self.HipLabel.setObjectName("HipLabel")
-        self.gridLayout.addWidget(self.HipLabel, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.HipLabel, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
 
-        self.HipBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.HipBox = QtWidgets.QLineEdit()
         self.HipBox.setAlignment(QtCore.Qt.AlignCenter)
         self.HipBox.setObjectName("HipBox")
-        self.HipBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.HipBox, 0, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.HipBox, 0, 1, 1, 1)
 
         
-        self.CmCenterFront = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmCenterFront.sizePolicy().hasHeightForWidth())
-        self.CmCenterFront.setSizePolicy(sizePolicy)
+        self.CmCenterFront = QtWidgets.QLabel()
         self.CmCenterFront.setFont(ENGFont)
         self.CmCenterFront.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmCenterFront.setAutoFillBackground(False)
         self.CmCenterFront.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmCenterFront.setObjectName("CmCenterFront")
-        self.gridLayout.addWidget(self.CmCenterFront, 3, 2, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmCenterFront, 3, 2, 1, 1)
 
-        self.CmNeckArmHold = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmNeckArmHold.sizePolicy().hasHeightForWidth())
-        self.CmNeckArmHold.setSizePolicy(sizePolicy)
+        self.CmNeckArmHold = QtWidgets.QLabel()
         self.CmNeckArmHold.setFont(ENGFont)
         self.CmNeckArmHold.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmNeckArmHold.setAutoFillBackground(False)
         self.CmNeckArmHold.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmNeckArmHold.setObjectName("CmNeckArmHold")
-        self.gridLayout.addWidget(self.CmNeckArmHold, 1, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmNeckArmHold, 1, 5, 1, 1)
 
 
-        self.NeckArmHoldLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.NeckArmHoldLabel.sizePolicy().hasHeightForWidth())
-        self.NeckArmHoldLabel.setSizePolicy(sizePolicy)
+        self.NeckArmHoldLabel = QtWidgets.QLabel()
         self.NeckArmHoldLabel.setFont(SmallKhmerFont)
         self.NeckArmHoldLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.NeckArmHoldLabel.setAutoFillBackground(False)
         self.NeckArmHoldLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.NeckArmHoldLabel.setObjectName("NeckArmHoldLabel")
-        self.gridLayout.addWidget(self.NeckArmHoldLabel, 1, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldLabel, 1, 3, 1, 1, QtCore.Qt.AlignHCenter)
         
         
-        self.CmAB = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmAB.sizePolicy().hasHeightForWidth())
-        self.CmAB.setSizePolicy(sizePolicy)
+        self.CmAB = QtWidgets.QLabel()
         self.CmAB.setFont(ENGFont)
         self.CmAB.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmAB.setAutoFillBackground(False)
         self.CmAB.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAB.setObjectName("CmAB")
-        self.gridLayout.addWidget(self.CmAB, 0, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmAB, 0, 5, 1, 1)
 
 
-        self.CmHip = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmHip.sizePolicy().hasHeightForWidth())
-        self.CmHip.setSizePolicy(sizePolicy)
+        self.CmHip = QtWidgets.QLabel()
         self.CmHip.setFont(ENGFont)
         self.CmHip.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmHip.setAutoFillBackground(False)
         self.CmHip.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmHip.setObjectName("CmHip")
-        self.gridLayout.addWidget(self.CmHip, 0, 2, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmHip, 0, 2, 1, 1)
 
 
-        self.CmBustHeight = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmBustHeight.sizePolicy().hasHeightForWidth())
-        self.CmBustHeight.setSizePolicy(sizePolicy)
+        self.CmBustHeight = QtWidgets.QLabel()
         self.CmBustHeight.setFont(ENGFont)
         self.CmBustHeight.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmBustHeight.setAutoFillBackground(False)
         self.CmBustHeight.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmBustHeight.setObjectName("CmBustHeight")
-        self.gridLayout.addWidget(self.CmBustHeight, 5, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmBustHeight, 5, 5, 1, 1)
 
-        self.CmAboveBust = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmAboveBust.sizePolicy().hasHeightForWidth())
-        self.CmAboveBust.setSizePolicy(sizePolicy)
+        self.CmAboveBust = QtWidgets.QLabel()
         self.CmAboveBust.setFont(ENGFont)
         self.CmAboveBust.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmAboveBust.setAutoFillBackground(False)
         self.CmAboveBust.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAboveBust.setObjectName("CmAboveBust")
-        self.gridLayout.addWidget(self.CmAboveBust, 3, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmAboveBust, 3, 5, 1, 1)
 
-        self.CmSkirtLength = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmSkirtLength.sizePolicy().hasHeightForWidth())
-        self.CmSkirtLength.setSizePolicy(sizePolicy)
+        self.CmSkirtLength = QtWidgets.QLabel()
         self.CmSkirtLength.setFont(ENGFont)
         self.CmSkirtLength.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmSkirtLength.setAutoFillBackground(False)
         self.CmSkirtLength.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmSkirtLength.setObjectName("CmSkirtLength")
-        self.gridLayout.addWidget(self.CmSkirtLength, 1, 2, 1, 1)
-        self.CmAF = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmAF.sizePolicy().hasHeightForWidth())
-        self.CmAF.setSizePolicy(sizePolicy)
+        self.ShirtDressSkirtLayout.addWidget(self.CmSkirtLength, 1, 2, 1, 1)
         
+        self.CmAF = QtWidgets.QLabel()
         self.CmAF.setFont(ENGFont)
         self.CmAF.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmAF.setAutoFillBackground(False)
         self.CmAF.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAF.setObjectName("CmAF")
-        self.gridLayout.addWidget(self.CmAF, 6, 2, 1, 1)
-        self.CmShoulder = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmShoulder.sizePolicy().hasHeightForWidth())
-        self.CmShoulder.setSizePolicy(sizePolicy)
+        self.ShirtDressSkirtLayout.addWidget(self.CmAF, 6, 2, 1, 1)
+
+
+        self.CmShoulder = QtWidgets.QLabel()
         self.CmShoulder.setFont(ENGFont)
         self.CmShoulder.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmShoulder.setAutoFillBackground(False)
         self.CmShoulder.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmShoulder.setObjectName("CmShoulder")
-        self.gridLayout.addWidget(self.CmShoulder, 5, 2, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmShoulder, 5, 2, 1, 1)
         
-        self.ShoulderLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.ShoulderLabel.sizePolicy().hasHeightForWidth())
-        self.ShoulderLabel.setSizePolicy(sizePolicy)
+        self.ShoulderLabel = QtWidgets.QLabel()
         self.ShoulderLabel.setFont(SmallKhmerFont)
         self.ShoulderLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ShoulderLabel.setAutoFillBackground(False)
         self.ShoulderLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ShoulderLabel.setObjectName("ShoulderLabel")
-        self.gridLayout.addWidget(self.ShoulderLabel, 5, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.ShoulderLabel, 5, 0, 1, 1, QtCore.Qt.AlignHCenter)
 
 
-        self.CmCenterBack = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmCenterBack.sizePolicy().hasHeightForWidth())
-        self.CmCenterBack.setSizePolicy(sizePolicy)
+        self.CmCenterBack = QtWidgets.QLabel()
         self.CmCenterBack.setFont(ENGFont)
         self.CmCenterBack.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmCenterBack.setAutoFillBackground(False)
         self.CmCenterBack.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmCenterBack.setObjectName("CmCenterBack")
-        self.gridLayout.addWidget(self.CmCenterBack, 4, 2, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmCenterBack, 4, 2, 1, 1)
 
 
-        self.CenterFrontLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CenterFrontLabel.sizePolicy().hasHeightForWidth())
-        self.CenterFrontLabel.setSizePolicy(sizePolicy)
+        self.CenterFrontLabel = QtWidgets.QLabel()
         self.CenterFrontLabel.setFont(SmallKhmerFont)
         self.CenterFrontLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CenterFrontLabel.setAutoFillBackground(False)
         self.CenterFrontLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CenterFrontLabel.setObjectName("CenterFrontLabel")
-        self.gridLayout.addWidget(self.CenterFrontLabel, 3, 0, 1, 1, QtCore.Qt.AlignHCenter)
-        self.CmDressSkirtWaist = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmDressSkirtWaist.sizePolicy().hasHeightForWidth())
-        self.CmDressSkirtWaist.setSizePolicy(sizePolicy)
-        
+        self.ShirtDressSkirtLayout.addWidget(self.CenterFrontLabel, 3, 0, 1, 1, QtCore.Qt.AlignHCenter)
+
+        self.CmDressSkirtWaist = QtWidgets.QLabel()
         self.CmDressSkirtWaist.setFont(ENGFont)
         self.CmDressSkirtWaist.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmDressSkirtWaist.setAutoFillBackground(False)
         self.CmDressSkirtWaist.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmDressSkirtWaist.setObjectName("CmDressSkirtWaist")
-        self.gridLayout.addWidget(self.CmDressSkirtWaist, 6, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmDressSkirtWaist, 6, 5, 1, 1)
 
 
-        self.SleeveLengthLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.SleeveLengthLabel.sizePolicy().hasHeightForWidth())
-        self.SleeveLengthLabel.setSizePolicy(sizePolicy)
+        self.SleeveLengthLabel = QtWidgets.QLabel()
         self.SleeveLengthLabel.setFont(SmallKhmerFont)
         self.SleeveLengthLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.SleeveLengthLabel.setAutoFillBackground(False)
         self.SleeveLengthLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.SleeveLengthLabel.setObjectName("SleeveLengthLabel")
-        self.gridLayout.addWidget(self.SleeveLengthLabel, 1, 6, 1, 1, QtCore.Qt.AlignHCenter)
-        self.CmSleeveLength = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmSleeveLength.sizePolicy().hasHeightForWidth())
-        self.CmSleeveLength.setSizePolicy(sizePolicy)
-        
+        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthLabel, 1, 6, 1, 1, QtCore.Qt.AlignHCenter)
+
+
+        self.CmSleeveLength = QtWidgets.QLabel()
         self.CmSleeveLength.setFont(ENGFont)
         self.CmSleeveLength.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmSleeveLength.setAutoFillBackground(False)
         self.CmSleeveLength.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmSleeveLength.setObjectName("CmSleeveLength")
-        self.gridLayout.addWidget(self.CmSleeveLength, 1, 8, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmSleeveLength, 1, 8, 1, 1)
 
-        self.AboveBustLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.AboveBustLabel = QtWidgets.QLabel()
         self.AboveBustLabel.setFont(SmallKhmerFont)
         self.AboveBustLabel.setObjectName("AboveBustLabel")
-        self.gridLayout.addWidget(self.AboveBustLabel, 3, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.AboveBustLabel, 3, 3, 1, 1, QtCore.Qt.AlignHCenter)
 
-
-        self.CmArmPit = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmArmPit.sizePolicy().hasHeightForWidth())
-        self.CmArmPit.setSizePolicy(sizePolicy)
+        self.CmArmPit = QtWidgets.QLabel()
         self.CmArmPit.setFont(ENGFont)
         self.CmArmPit.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmArmPit.setAutoFillBackground(False)
         self.CmArmPit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmArmPit.setObjectName("CmArmPit")
-        self.gridLayout.addWidget(self.CmArmPit, 0, 8, 1, 1)
-        self.ArmpitLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.ArmpitLabel.sizePolicy().hasHeightForWidth())
+        self.ShirtDressSkirtLayout.addWidget(self.CmArmPit, 0, 8, 1, 1)
 
-        self.ArmpitLabel.setSizePolicy(sizePolicy)
+        self.ArmpitLabel = QtWidgets.QLabel()
         self.ArmpitLabel.setFont(SmallKhmerFont)
         self.ArmpitLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ArmpitLabel.setAutoFillBackground(False)
         self.ArmpitLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ArmpitLabel.setObjectName("ArmpitLabel")
-        self.gridLayout.addWidget(self.ArmpitLabel, 0, 6, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.ArmpitLabel, 0, 6, 1, 1, QtCore.Qt.AlignHCenter)
 
 
 
-        self.ABLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.ABLabel.sizePolicy().hasHeightForWidth())
-        self.ABLabel.setSizePolicy(sizePolicy)
+        self.ABLabel = QtWidgets.QLabel()
         self.ABLabel.setFont(SmallKhmerFont)
         self.ABLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ABLabel.setAutoFillBackground(False)
         self.ABLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ABLabel.setObjectName("ABLabel")
-        self.gridLayout.addWidget(self.ABLabel, 0, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.ABLabel, 0, 3, 1, 1, QtCore.Qt.AlignHCenter)
     
-        self.AroundBustLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.AroundBustLabel = QtWidgets.QLabel()
         self.AroundBustLabel.setFont(SmallKhmerFont)
         self.AroundBustLabel.setObjectName("AroundBustLabel")
-        self.gridLayout.addWidget(self.AroundBustLabel, 4, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.AroundBustLabel, 4, 3, 1, 1, QtCore.Qt.AlignHCenter)
 
-        self.BustHeightLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.BustHeightLabel = QtWidgets.QLabel()
         self.BustHeightLabel.setFont(SmallKhmerFont)
         self.BustHeightLabel.setObjectName("BustHeightLabel")
-        self.gridLayout.addWidget(self.BustHeightLabel, 5, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.BustHeightLabel, 5, 3, 1, 1, QtCore.Qt.AlignHCenter)
 
-        self.AboveBustBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.AboveBustBox = QtWidgets.QLineEdit()
         self.AboveBustBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AboveBustBox.setObjectName("AboveBustBox")
-        self.AboveBustBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.AboveBustBox, 3, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.AboveBustBox, 3, 4, 1, 1)
 
-        self.CenterFrontBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.CenterFrontBox = QtWidgets.QLineEdit()
         self.CenterFrontBox.setAlignment(QtCore.Qt.AlignCenter)
         self.CenterFrontBox.setObjectName("CenterFrontBox")
-        self.CenterFrontBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.CenterFrontBox, 3, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CenterFrontBox, 3, 1, 1, 1)
 
-        self.ShoulderBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.ShoulderBox = QtWidgets.QLineEdit()
         self.ShoulderBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ShoulderBox.setObjectName("ShoulderBox")
-        self.ShoulderBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.ShoulderBox, 5, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.ShoulderBox, 5, 1, 1, 1)
 
-        self.AFBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.AFBox = QtWidgets.QLineEdit()
         self.AFBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AFBox.setObjectName("AFBox")
-        self.AFBox.setFixedSize(120,50)
-        self.AFBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.AFBox, 6, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.AFBox, 6, 1, 1, 1)
         
 
-        self.CenterBackBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.CenterBackBox = QtWidgets.QLineEdit()
         self.CenterBackBox.setAlignment(QtCore.Qt.AlignCenter)
         self.CenterBackBox.setObjectName("CenterBackBox")
-        self.CenterBackBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.CenterBackBox, 4, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CenterBackBox, 4, 1, 1, 1)
         
 
         
-        self.UpperHipsBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.UpperHipsBox = QtWidgets.QLineEdit()
         self.UpperHipsBox.setAlignment(QtCore.Qt.AlignCenter)
         self.UpperHipsBox.setObjectName("UpperHipsBox")
-        self.UpperHipsBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.UpperHipsBox, 3, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsBox, 3, 7, 1, 1)
 
 
         
-        self.ArmpitBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.ArmpitBox = QtWidgets.QLineEdit()
         self.ArmpitBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ArmpitBox.setObjectName("ArmpitBox")
-        self.ArmpitBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.ArmpitBox, 0, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.ArmpitBox, 0, 7, 1, 1)
 
-        self.SkirtLengthLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
+        self.SkirtLengthLabel = QtWidgets.QLabel()
         self.SkirtLengthLabel.setObjectName("SkirtLengthLabel")
         self.SkirtLengthLabel.setFont(SmallKhmerFont)
-        self.gridLayout.addWidget(self.SkirtLengthLabel, 1, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.SkirtLengthLabel, 1, 0, 1, 1, QtCore.Qt.AlignHCenter)
 
-        self.SkirtLengthBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.SkirtLengthBox = QtWidgets.QLineEdit()
         self.SkirtLengthBox.setAlignment(QtCore.Qt.AlignCenter)
         self.SkirtLengthBox.setObjectName("SkirtLengthBox")
-        self.SkirtLengthBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.SkirtLengthBox, 1, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.SkirtLengthBox, 1, 1, 1, 1)
 
-        self.SleeveLengthBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.SleeveLengthBox = QtWidgets.QLineEdit()
         self.SleeveLengthBox.setAlignment(QtCore.Qt.AlignCenter)
         self.SleeveLengthBox.setObjectName("SleeveLengthBox")
-        self.SleeveLengthBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.SleeveLengthBox, 1, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthBox, 1, 7, 1, 1)
 
-        self.AFLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.AFLabel.sizePolicy().hasHeightForWidth())
-        self.AFLabel.setSizePolicy(sizePolicy)
+        self.AFLabel = QtWidgets.QLabel()
         self.AFLabel.setFont(SmallKhmerFont)
         self.AFLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.AFLabel.setAutoFillBackground(False)
         self.AFLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.AFLabel.setObjectName("AFLabel")
-        self.gridLayout.addWidget(self.AFLabel, 6, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.AFLabel, 6, 0, 1, 1, QtCore.Qt.AlignHCenter)
         
 
 
-        self.CenterBackLabel = QtWidgets.QLabel(self.ShirtDressSkirtBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CenterBackLabel.sizePolicy().hasHeightForWidth())
-        self.CenterBackLabel.setSizePolicy(sizePolicy)
+        self.CenterBackLabel = QtWidgets.QLabel()
         self.CenterBackLabel.setFont(SmallKhmerFont)
         self.CenterBackLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CenterBackLabel.setAutoFillBackground(False)
         self.CenterBackLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CenterBackLabel.setObjectName("CenterBackLabel")
-        self.gridLayout.addWidget(self.CenterBackLabel, 4, 0, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CenterBackLabel, 4, 0, 1, 1)
 
-        self.BustHeightBox = QtWidgets.QLineEdit(self.ShirtDressSkirtBox)
+        self.BustHeightBox = QtWidgets.QLineEdit()
         self.BustHeightBox.setAlignment(QtCore.Qt.AlignCenter)
         self.BustHeightBox.setObjectName("BustHeightBox")
-        self.BustHeightBox.setFixedSize(120,50)
-        self.gridLayout.addWidget(self.BustHeightBox, 5, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.BustHeightBox, 5, 4, 1, 1)
 
-        self.HorizLine = QtWidgets.QFrame(self.centralwidget)
-        self.HorizLine.setGeometry(QtCore.QRect(260, 430, 1050, 20))
-        self.HorizLine.setFrameShape(QtWidgets.QFrame.HLine)
-        self.HorizLine.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.HorizLine.setObjectName("HorizLine")
-
-
-        self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(1300, 0, 20, 961))
-        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_2.setObjectName("line_2")
+        self.ShirtDressSkirtBox.setLayout(self.ShirtDressSkirtLayout)
         
-    
-        self.PantGroupBox = QtWidgets.QGroupBox(self.centralwidget)
+        #pant group box     
+        self.PantGroupBox = QtWidgets.QGroupBox()
         self.PantGroupBox.setGeometry(QtCore.QRect(940, 450, 320, 511))
-        self.PantGroupBox.setFont(BigKhmerFont)
         self.PantGroupBox.setObjectName("PantGroupBox")
+        self.PantGroupBox.setFont(BigKhmerFont)
 
-        self.PantGroupLayout = QtWidgets.QGridLayout(self.PantGroupBox)
+        self.PantGroupLayout = QtWidgets.QGridLayout()
         self.PantGroupLayout.setObjectName("PantGroupLayout")
 
 
-        self.ThighLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.ThighLabel = QtWidgets.QLabel()
         self.ThighLabel.setFont(SmallKhmerFont)
         self.ThighLabel.setObjectName("ThighLabel")
         self.PantGroupLayout.addWidget(self.ThighLabel, 7, 0, 1, 1)
 
-        self.OutseamLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.OutseamLabel = QtWidgets.QLabel()
         self.OutseamLabel.setFont(SmallKhmerFont)
         self.OutseamLabel.setObjectName("OutseamLabel")
         self.PantGroupLayout.addWidget(self.OutseamLabel, 6, 0, 1, 1)
 
-        self.CalfLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.CalfLabel = QtWidgets.QLabel()
         self.CalfLabel.setFont(SmallKhmerFont)
         self.CalfLabel.setObjectName("CalfLabel")
         self.PantGroupLayout.addWidget(self.CalfLabel, 8, 0, 1, 1)
 
-        self.InseamLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.InseamLabel = QtWidgets.QLabel()
         self.InseamLabel.setFont(SmallKhmerFont)
         self.InseamLabel.setObjectName("InseamLabel")
         self.PantGroupLayout.addWidget(self.InseamLabel, 3, 0, 1, 1)
-        self.InseamBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.InseamBox = QtWidgets.QLineEdit()
         self.InseamBox.setAlignment(QtCore.Qt.AlignCenter)
         self.InseamBox.setObjectName("InseamBox")
-        self.InseamBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.InseamBox, 3, 1, 1, 1)
         
 
-        self.OutseamBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.OutseamBox = QtWidgets.QLineEdit()
         self.OutseamBox.setAlignment(QtCore.Qt.AlignCenter)
         self.OutseamBox.setObjectName("OutseamBox")
-        self.OutseamBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.OutseamBox, 6, 1, 1, 1)
         
-        self.PantHipLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.PantHipLabel = QtWidgets.QLabel()
 
         self.PantHipLabel.setFont(SmallKhmerFont)
         self.PantHipLabel.setObjectName("PantHipLabel")
         self.PantGroupLayout.addWidget(self.PantHipLabel, 2, 0, 1, 1)
 
-        self.AnkleLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.AnkleLabel = QtWidgets.QLabel()
         self.AnkleLabel.setFont(SmallKhmerFont)
         self.AnkleLabel.setObjectName("AnkleLabel")
         self.PantGroupLayout.addWidget(self.AnkleLabel, 9, 0, 1, 1)
 
-        self.ThighBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.ThighBox = QtWidgets.QLineEdit()
         self.ThighBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ThighBox.setObjectName("ThighBox")
-        self.ThighBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.ThighBox, 7, 1, 1, 1)
         
-        self.PantWaistLabel = QtWidgets.QLabel(self.PantGroupBox)
+        self.PantWaistLabel = QtWidgets.QLabel()
         self.PantWaistLabel.setFont(SmallKhmerFont)
         self.PantWaistLabel.setObjectName("label")
         self.PantGroupLayout.addWidget(self.PantWaistLabel, 1, 0, 1, 1)
 
-        self.PantHipBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.PantHipBox = QtWidgets.QLineEdit()
         self.PantHipBox.setAlignment(QtCore.Qt.AlignCenter)
         self.PantHipBox.setObjectName("PantHipBox")
-        self.PantHipBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.PantHipBox, 2, 1, 1, 1)
 
-        self.AnkleBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.AnkleBox = QtWidgets.QLineEdit()
         self.AnkleBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AnkleBox.setObjectName("AnkleBox")
-        self.AnkleBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.AnkleBox, 9, 1, 1, 1)
 
-        self.CalfBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.CalfBox = QtWidgets.QLineEdit()
         self.CalfBox.setAlignment(QtCore.Qt.AlignCenter)
         self.CalfBox.setObjectName("CalfBox")
-        self.CalfBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.CalfBox, 8, 1, 1, 1)
 
-        self.PantWaistBox = QtWidgets.QLineEdit(self.PantGroupBox)
+        self.PantWaistBox = QtWidgets.QLineEdit()
         self.PantWaistBox.setAlignment(QtCore.Qt.AlignCenter)
         self.PantWaistBox.setObjectName("PantWaistBox")
-        self.PantWaistBox.setFixedSize(120,50)
         self.PantGroupLayout.addWidget(self.PantWaistBox, 1, 1, 1, 1)
 
-        self.CmInseam = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmInseam.sizePolicy().hasHeightForWidth())
-        self.CmInseam.setSizePolicy(sizePolicy)
-        
+        self.CmInseam = QtWidgets.QLabel()
         self.CmInseam.setFont(ENGFont)
         self.CmInseam.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmInseam.setAutoFillBackground(False)
@@ -1127,84 +820,62 @@ class Ui_MainWindow(object):
         self.CmInseam.setObjectName("CmInseam")
         self.PantGroupLayout.addWidget(self.CmInseam, 3, 2, 1, 1)
 
-        self.CmPantHip = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmPantHip.sizePolicy().hasHeightForWidth())
-        self.CmPantHip.setSizePolicy(sizePolicy)
-        
+        self.CmPantHip = QtWidgets.QLabel()
         self.CmPantHip.setFont(ENGFont)
         self.CmPantHip.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmPantHip.setAutoFillBackground(False)
         self.CmPantHip.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmPantHip.setObjectName("CmPantHip")
         self.PantGroupLayout.addWidget(self.CmPantHip, 2, 2, 1, 1)
-        self.CmPantWaist = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmPantWaist.sizePolicy().hasHeightForWidth())
-        self.CmPantWaist.setSizePolicy(sizePolicy)
         
+        self.CmPantWaist = QtWidgets.QLabel()
         self.CmPantWaist.setFont(ENGFont)
         self.CmPantWaist.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmPantWaist.setAutoFillBackground(False)
         self.CmPantWaist.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmPantWaist.setObjectName("CmPantWaist")
         self.PantGroupLayout.addWidget(self.CmPantWaist, 1, 2, 1, 1)
-        self.CmOutseam = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmOutseam.sizePolicy().hasHeightForWidth())
-        self.CmOutseam.setSizePolicy(sizePolicy)
-        
+
+        self.CmOutseam = QtWidgets.QLabel()
         self.CmOutseam.setFont(ENGFont)
         self.CmOutseam.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmOutseam.setAutoFillBackground(False)
         self.CmOutseam.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmOutseam.setObjectName("CmOutseam")
         self.PantGroupLayout.addWidget(self.CmOutseam, 6, 2, 1, 1)
-        self.CmThigh = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmThigh.sizePolicy().hasHeightForWidth())
-        self.CmThigh.setSizePolicy(sizePolicy)
-        
+
+        self.CmThigh = QtWidgets.QLabel()
         self.CmThigh.setFont(ENGFont)
         self.CmThigh.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmThigh.setAutoFillBackground(False)
         self.CmThigh.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmThigh.setObjectName("CmThigh")
         self.PantGroupLayout.addWidget(self.CmThigh, 7, 2, 1, 1)
-        self.CmCalf = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmCalf.sizePolicy().hasHeightForWidth())
-        self.CmCalf.setSizePolicy(sizePolicy)
         
+        self.CmCalf = QtWidgets.QLabel()
         self.CmCalf.setFont(ENGFont)
         self.CmCalf.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmCalf.setAutoFillBackground(False)
         self.CmCalf.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmCalf.setObjectName("CmCalf")
         self.PantGroupLayout.addWidget(self.CmCalf, 8, 2, 1, 1)
-        self.CmAnkle = QtWidgets.QLabel(self.PantGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CmAnkle.sizePolicy().hasHeightForWidth())
-        self.CmAnkle.setSizePolicy(sizePolicy)
         
+        self.CmAnkle = QtWidgets.QLabel()
         self.CmAnkle.setFont(ENGFont)
         self.CmAnkle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CmAnkle.setAutoFillBackground(False)
         self.CmAnkle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAnkle.setObjectName("CmAnkle")
         self.PantGroupLayout.addWidget(self.CmAnkle, 9, 2, 1, 1)
+
+        self.PantGroupBox.setLayout(self.PantGroupLayout)
+
+
+                
+        #measurements group
+        
+        MainLayout.addWidget(self.ShirtDressSkirtBox, 2, 0)
+        MainLayout.addWidget(self.PantGroupBox, 2, 1)
         
         '''
         END OF MEASUREMENTS BOX
@@ -1213,161 +884,146 @@ class Ui_MainWindow(object):
         '''
         START OF PREVIEW
         '''
-        self.PreviewTitle = QtWidgets.QLabel(self.centralwidget)
-        self.PreviewTitle.setGeometry(QtCore.QRect(1550, 50, 101, 51))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.PreviewTitle.sizePolicy().hasHeightForWidth())
-        self.PreviewTitle.setSizePolicy(sizePolicy)
-        self.PreviewTitle.setFont(BigKhmerFont)
-        self.PreviewTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.PreviewTitle.setAutoFillBackground(False)
-        self.PreviewTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.PreviewTitle.setObjectName("PreviewTitle")
+        
+        self.PreviewGroupBox = QtWidgets.QGroupBox()
+        self.PreviewGroupBox.setFont(BigKhmerFont)
+        self.PreviewGroupBox.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PreviewGroupBox.setObjectName("PreviewGroupBox")
 
-        self.ShirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.ShirtRadio.setGeometry(QtCore.QRect(1530, 96, 61, 31))
+
+        self.RadioGroupBoxLayout = QtWidgets.QHBoxLayout()
+
+        self.ShirtRadio = QtWidgets.QRadioButton()
         self.ShirtRadio.setFont(SmallKhmerFont)
+        
         self.ShirtRadio.setObjectName("ShirtRadio")
 
-        self.DressRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.DressRadio.setGeometry(QtCore.QRect(1600, 96, 61, 31))
+        self.DressRadio = QtWidgets.QRadioButton()
         self.DressRadio.setFont(SmallKhmerFont)
+        
         self.DressRadio.setObjectName("DressRadio")
 
-        self.PantRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.PantRadio.setGeometry(QtCore.QRect(1670, 96, 82, 31))
+        self.PantRadio = QtWidgets.QRadioButton()
         self.PantRadio.setFont(SmallKhmerFont)
+        
         self.PantRadio.setObjectName("PantRadio")
 
-        self.SkirtRadio = QtWidgets.QRadioButton(self.centralwidget)
-        self.SkirtRadio.setGeometry(QtCore.QRect(1440, 96, 68, 31))
+        self.SkirtRadio = QtWidgets.QRadioButton()
         self.SkirtRadio.setFont(SmallKhmerFont)
+        
         self.SkirtRadio.setObjectName("SkirtRadio")
+        
+        self.RadioGroupBoxLayout.addWidget(self.ShirtRadio)
+        self.RadioGroupBoxLayout.addWidget(self.DressRadio)
+        self.RadioGroupBoxLayout.addWidget(self.PantRadio)
+        self.RadioGroupBoxLayout.addWidget(self.SkirtRadio)
+
+        
+
+        self.PreviewGroupLayout = QtWidgets.QVBoxLayout()
+
 
         #add widgets for 4 pictures
-        self.RadioPicLabel = QtWidgets.QLabel(self.centralwidget)
-        self.RadioPicLabel.setGeometry(QtCore.QRect(1300, 150, 621, 531))
+        self.RadioPicLabel = QtWidgets.QLabel()
+        self.RadioPicLabel.setMaximumSize(621, 531)
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
         self.RadioPicLabel.setObjectName("RadioPicLabel")
 
-        '''
-        END OF PREVIEW
-        '''
-
-        '''
-        START OF TEXTBROWSER BOXES
-        '''
-        
-        self.CustomerInfoGroupBackground = QtWidgets.QTextBrowser(self.centralwidget)
-        self.CustomerInfoGroupBackground.setGeometry(QtCore.QRect(170, 30, 400, 201))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CustomerInfoGroupBackground.sizePolicy().hasHeightForWidth())
-        self.CustomerInfoGroupBackground.setSizePolicy(sizePolicy)
-        self.CustomerInfoGroupBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.CustomerInfoGroupBackground.setAutoFillBackground(False)
-        self.CustomerInfoGroupBackground.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.CustomerInfoGroupBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.CustomerInfoGroupBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.CustomerInfoGroupBackground.setReadOnly(True)
-        self.CustomerInfoGroupBackground.setObjectName("CustomerInfoGroupBackground")
-        
-        self.CustomerPrefGroupBackground = QtWidgets.QTextBrowser(self.centralwidget)
-        self.CustomerPrefGroupBackground.setGeometry(QtCore.QRect(640, 30, 400, 201))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.CustomerPrefGroupBackground.sizePolicy().hasHeightForWidth())
-        self.CustomerPrefGroupBackground.setSizePolicy(sizePolicy)
-        self.CustomerPrefGroupBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.CustomerPrefGroupBackground.setAutoFillBackground(False)
-        self.CustomerPrefGroupBackground.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.CustomerPrefGroupBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.CustomerPrefGroupBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.CustomerPrefGroupBackground.setObjectName("CustomerPrefGroupBackground")
-        
-        
-        self.StaffInfoBackground = QtWidgets.QTextBrowser(self.centralwidget)
-        self.StaffInfoBackground.setGeometry(QtCore.QRect(170, 240, 400, 171))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.StaffInfoBackground.sizePolicy().hasHeightForWidth())
-        self.StaffInfoBackground.setSizePolicy(sizePolicy)
-        self.StaffInfoBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.StaffInfoBackground.setAutoFillBackground(False)
-        self.StaffInfoBackground.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.StaffInfoBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.StaffInfoBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.StaffInfoBackground.setObjectName("StaffInfoBackground")
+        self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
+        self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
 
 
-        self.SpecialReqBackground = QtWidgets.QTextBrowser(self.centralwidget)
-        self.SpecialReqBackground.setGeometry(QtCore.QRect(640, 240, 400, 171))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.SpecialReqBackground.sizePolicy().hasHeightForWidth())
-        self.SpecialReqBackground.setSizePolicy(sizePolicy)
-        self.SpecialReqBackground.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.SpecialReqBackground.setAutoFillBackground(False)
-        self.SpecialReqBackground.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.SpecialReqBackground.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.SpecialReqBackground.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.SpecialReqBackground.setObjectName("SpecialReqBackground")
+        PriceLayout = QHBoxLayout()
 
+        self.PriceBox = QtWidgets.QLineEdit()
+        self.PriceBox.setMaximumSize(300, 50)
+        self.onlyInt = QtGui.QIntValidator()
+        self.PriceBox.setValidator(self.onlyInt)
+        self.PriceBox.setFont(ENGFont)
+        self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PriceBox.setAutoFillBackground(False)
+        self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.PriceBox.setObjectName("PriceBox")
 
+    
+        self.PriceLabel = QtWidgets.QLabel()
+        self.PriceLabel.setMaximumSize(50,50)
+        self.PriceLabel.setFont(BigKhmerFont)
+        self.PriceLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PriceLabel.setAutoFillBackground(False)
+        self.PriceLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.PriceLabel.setObjectName("PriceLabel")
 
-        ''' 
-        END OF TEXT BROWSER BOXES
-        '''
+        PriceLayout.addWidget(self.PriceLabel)
+        PriceLayout.addWidget(self.PriceBox)
 
-        
+        self.PreviewGroupLayout.addLayout(PriceLayout)
+
         ''' START OF Submit & Cancel '''
-        self.Cancel = QtWidgets.QPushButton(self.centralwidget)
-        self.Cancel.setGeometry(QtCore.QRect(1490, 850, 130, 50))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.Cancel.sizePolicy().hasHeightForWidth())
-        self.Cancel.setSizePolicy(sizePolicy)
+        SubmitCancelLayout = QHBoxLayout()
+
+        self.Cancel = QtWidgets.QPushButton()
+        self.Cancel.setMaximumSize(130, 50)
         self.Cancel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Cancel.setAutoFillBackground(False)
         self.Cancel.setFont(SmallKhmerFont)
         self.Cancel.setObjectName("Cancel")
 
-        self.Submit = QtWidgets.QPushButton(self.centralwidget)
-        self.Submit.setGeometry(QtCore.QRect(1370, 850, 100, 50))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.Submit.sizePolicy().hasHeightForWidth())
-        self.Submit.setSizePolicy(sizePolicy)
+        self.Submit = QtWidgets.QPushButton()
+        self.Submit.setMaximumSize(100, 50)
         self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Submit.setAutoFillBackground(False)
         self.Submit.setFont(SmallKhmerFont)
         self.Submit.setObjectName("Submit")
 
+        SubmitCancelLayout.addWidget(self.Cancel)
+        SubmitCancelLayout.addWidget(self.Submit)
 
-        self.SubmitMsg = QtWidgets.QLabel(self.centralwidget)
-        self.SubmitMsg.setGeometry(QtCore.QRect(1350, 920, 400, 40))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(70)
-        sizePolicy.setVerticalStretch(80)
-        sizePolicy.setHeightForWidth(self.SubmitMsg.sizePolicy().hasHeightForWidth())
-        self.SubmitMsg.setSizePolicy(sizePolicy)
+        self.PreviewGroupLayout.addLayout(SubmitCancelLayout)
+
+        self.SubmitMsg = QtWidgets.QLabel()
+        self.SubmitMsg.setMaximumSize(400, 40)
         self.SubmitMsg.setFont(BigKhmerFont)
         self.SubmitMsg.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.SubmitMsg.setAutoFillBackground(False)
+
+        self.PreviewGroupLayout.addWidget(self.SubmitMsg)
+
         ''' END OF Submit & Cancel '''
 
+
+        self.PreviewGroupBox.setLayout(self.PreviewGroupLayout)
         
-        self.RaiseWidgets()
+
+
+
+
+        #preview group 
+        MainLayout.addWidget(self.PreviewGroupBox, 0, 2, 3, 2)
+
+        
+       
+
+        
+
+
+        #column strech
+        MainLayout.setColumnStretch(0,1)
+        MainLayout.setRowStretch(2, 3)
+        MainLayout.setColumnStretch(1,2)
+        MainLayout.setColumnStretch(2,3)
+        MainLayout.setSpacing(10)
+
+        widget = QWidget()
+        
+        #set layout 
+        widget.setLayout(MainLayout)
+        MainWindow.setCentralWidget(widget)
+
         #####show all widgets above
-        MainWindow.setCentralWidget(self.centralwidget)
-        #####show all widgets above
+        #MainWindow.RaiseWidgets()
+        
+  
 
 
         #menu bar
@@ -2205,7 +1861,7 @@ class Ui_MainWindow(object):
         self.MaterialsLabel.setText(_translate("MainWindow", "ប្រភេទក្រណាត់:"))
         self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
-        self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិធិជន"))
+        self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
         self.Cancel.setText(_translate("MainWindow", "Cancel"))
         self.Submit.setText(_translate("MainWindow", "OK"))
         self.PriceBox.setText(_translate("MainWindow", ""))
@@ -2246,31 +1902,7 @@ class Ui_MainWindow(object):
         self.ShirtRadio.setText(_translate("MainWindow", "អាវ"))
         self.DressRadio.setText(_translate("MainWindow", "រ៉ូប"))
         self.PantRadio.setText(_translate("MainWindow", "ខោ"))
-        self.SkirtRadio.setText(_translate("MainWindow", "សំពត់"))
-
-
-        self.CustomerInfoGroupBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    "p, li { white-space: pre-wrap; }\n"
-    "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
-    "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.CustomerPrefGroupBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    "p, li { white-space: pre-wrap; }\n"
-    "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
-    "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.StaffInfoBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    "p, li { white-space: pre-wrap; }\n"
-    "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
-    "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.SpecialReqBackground.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    "p, li { white-space: pre-wrap; }\n"
-    "</style></head><body style=\" SmallKhmerFont-family:\'MS Shell Dlg 2\'; SmallKhmerFont-size:8.25pt; SmallKhmerFont-weight:400; SmallKhmerFont-style:normal;\" bgcolor=\"#d7dbdd\">\n"
-    "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        
-        
+        self.SkirtRadio.setText(_translate("MainWindow", "សំពត់"))        
         self.PantGroupBox.setTitle(_translate("MainWindow", "ខោ"))
         self.ThighLabel.setText(_translate("MainWindow", "ទំហំភ្លៅ:"))
         self.OutseamLabel.setText(_translate("MainWindow", "សំរុងខោ:"))

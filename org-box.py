@@ -40,19 +40,14 @@ class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-         
+        
+        
         self.setWindowTitle("My Awesome App")
         MainLayout = QGridLayout()
-        MainLayout.setContentsMargins(0,0,0,0)
+        MainLayout.setContentsMargins(10,10,10,10)
         '''
         START OF CUSTOMER BOX
         '''
-
-        self.NameBoxBackground = QtWidgets.QTextBrowser()
-        self.NameBoxBackground.setMaximumSize(600,400)
-        self.NameBoxBackground.setReadOnly(True)
-        self.NameBoxBackground.setObjectName("BoxBackground")
-        self.NameBoxBackground.setStyleSheet('background-color: #d7dbdd')
         
      
         #CustomerTitle 
@@ -108,17 +103,47 @@ class MainWindow(QMainWindow):
 
 
         '''
+        add to main layout
+        '''
+        #customer box
+
+        self.CustomerBoxGroup = QtWidgets.QGroupBox()
+        self.CustomerBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.CustomerBoxGroup.setMaximumSize(550, 400)
+        
+        CustomerBoxLayout = QGridLayout()
+        #CustomerBoxLayout.setSpacing(10)
+        
+        CustomerBoxLayout.addWidget(self.CustomerInfoTitle, 0, 0, 1, 1)
+        
+        CustomerBoxLayout.addWidget(self.CustomerNameLabel, 1, 0)
+        CustomerBoxLayout.addWidget(self.PhoneLabel, 2, 0)
+        CustomerBoxLayout.addWidget(self.AddressLabel, 3, 0)
+        
+
+        CustomerBoxLayout.addWidget(self.CustomerNameBox, 1, 1)
+        CustomerBoxLayout.addWidget(self.PhoneBox, 2, 1)
+        CustomerBoxLayout.addWidget(self.AddressBox, 3, 1)
+
+        
+
+        self.CustomerBoxGroup.setLayout(CustomerBoxLayout)
+
+
+
+        #MainLayout.addWidget(self.CustomerBoxGroup, 0, 0)
+
+        '''
         END OF Customer BOX 
         '''
+
+        
+      
+
 
         '''
         START OF Staff BOX 
         '''
-        self.StaffBoxBackground = QtWidgets.QTextBrowser()
-        self.StaffBoxBackground.setMaximumSize(600,400)
-        self.StaffBoxBackground.setReadOnly(True)
-        self.StaffBoxBackground.setObjectName("BoxBackground")
-        self.StaffBoxBackground.setStyleSheet('background-color: #d7dbdd')
 
         self.StaffTitle = QtWidgets.QLabel()
         self.StaffTitle.setFont(BigKhmerFont)
@@ -190,22 +215,48 @@ class MainWindow(QMainWindow):
         #not in Ui
 
 
+
+        #staff box 
+
+        self.StaffBoxGroup = QtWidgets.QGroupBox()
+        self.StaffBoxGroup.setMaximumSize(550,400)
+        self.StaffBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        StaffBoxLayout = QGridLayout()
+        #StaffBoxLayout.setSpacing(10)
+        
+        StaffBoxLayout.addWidget(self.StaffTitle, 0, 0)
+        
+        StaffBoxLayout.addWidget(self.StaffNameLabel, 1, 0)
+        StaffBoxLayout.addWidget(self.DeadlineLabel, 2, 0)
+
+        StaffBoxLayout.addWidget(self.StaffNameBox, 1, 1)
+
+        #not in ui
+        StaffBoxLayout.addWidget(self.DeadlineBox, 2, 1)
+        #not in ui
+
+        DisplayDateRow = QHBoxLayout()
+        DisplayDateRow.addWidget(self.DateIcon)
+        DisplayDateRow.addWidget(self.DeadlineSelectedLabel)
+
+        StaffBoxLayout.addLayout(DisplayDateRow, 2, 1)
+
+        self.StaffBoxGroup.setLayout(StaffBoxLayout)
+
+        #MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
                
         '''
         END OF Staff BOX 
         '''
 
-
         '''
         START OF CUSTOMER PREFERENCES BOX
         '''
-        
-        self.CustomerPrefBoxBackground = QtWidgets.QTextBrowser()
-        self.CustomerPrefBoxBackground.setReadOnly(True)
-        self.CustomerPrefBoxBackground.setObjectName("BoxBackground")
-        self.CustomerPrefBoxBackground.setStyleSheet('background-color: #d7dbdd')
+
 
         self.CustomerPreferencesTitle = QtWidgets.QLabel()
+        self.CustomerPreferencesTitle.setMaximumSize(200,50)
         self.CustomerPreferencesTitle.setFont(BigKhmerFont)
         self.CustomerPreferencesTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.CustomerPreferencesTitle.setAutoFillBackground(False)
@@ -213,6 +264,7 @@ class MainWindow(QMainWindow):
         self.CustomerPreferencesTitle.setObjectName("CustomerPreferencesTitle")
 
         self.ColorLabel = QtWidgets.QLabel()
+        self.ColorLabel.setMaximumSize(110,50)
         self.ColorLabel.setFont(SmallKhmerFont)
         self.ColorLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.ColorLabel.setAutoFillBackground(False)
@@ -221,6 +273,7 @@ class MainWindow(QMainWindow):
 
         self.StyleLabel = QtWidgets.QLabel()
         self.StyleLabel.setFont(SmallKhmerFont)
+        self.StyleLabel.setMaximumSize(110,50)
         self.StyleLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.StyleLabel.setAutoFillBackground(False)
         self.StyleLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -229,6 +282,7 @@ class MainWindow(QMainWindow):
 
         self.MaterialsLabel = QtWidgets.QLabel()
         self.MaterialsLabel.setFont(SmallKhmerFont)
+        self.MaterialsLabel.setMaximumSize(140,50)
         self.MaterialsLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.MaterialsLabel.setAutoFillBackground(False)
         self.MaterialsLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -237,21 +291,49 @@ class MainWindow(QMainWindow):
         #user inputs
         self.MaterialBox = QtWidgets.QLineEdit()
         self.MaterialBox.setFont(SmallKhmerFont)
+        self.MaterialBox.setMaximumSize(300,50)
         self.MaterialBox.setObjectName("MaterialBox")
 
         self.ColorBox = QtWidgets.QLineEdit()
         self.ColorBox.setFont(SmallKhmerFont)
+        self.ColorBox.setMaximumSize(300,50)
         self.ColorBox.setObjectName("ColorBox")
 
         self.StyleBox = QtWidgets.QLineEdit()
         self.StyleBox.setFont(SmallKhmerFont)
+        self.StyleBox.setMaximumSize(300,50)
         self.StyleBox.setObjectName("StyleBox")
 
-        #label texts
-        self.MaterialsLabel.setText("ប្រភេទក្រណាត់:")
-        self.ColorLabel.setText("ពណ៌:")
-        self.StyleLabel.setText("រចនាបទ:")
-        self.CustomerPreferencesTitle.setText("ជម្រើសអតិធិជន")
+        
+
+                
+        #preferences box
+        self.PreferencesBoxGroup = QtWidgets.QGroupBox()
+        self.PreferencesBoxGroup.setMaximumSize(550,400)
+        self.PreferencesBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        PreferencesBoxLayout = QGridLayout()
+
+        PreferencesBoxLayout.addWidget(self.CustomerPreferencesTitle, 0, 0)
+
+        PreferencesBoxLayout.addWidget(self.MaterialsLabel, 1, 0)
+        PreferencesBoxLayout.addWidget(self.ColorLabel, 2, 0)
+        PreferencesBoxLayout.addWidget(self.StyleLabel, 3, 0)
+
+        PreferencesBoxLayout.addWidget(self.MaterialBox, 1, 1)
+        PreferencesBoxLayout.addWidget(self.ColorBox, 2, 1)
+        PreferencesBoxLayout.addWidget(self.StyleBox, 3, 1)
+
+        self.PreferencesBoxGroup.setLayout(PreferencesBoxLayout)
+
+        #MainLayout.addWidget(self.PreferencesBoxGroup, 0, 1)
+
+        self.TopColGroup = QHBoxLayout()
+        self.TopColGroup.addWidget(self.CustomerBoxGroup)
+        self.TopColGroup.addWidget(self.PreferencesBoxGroup)
+        self.TopColGroup.addWidget(self.StaffBoxGroup)
+
+        MainLayout.addLayout(self.TopColGroup, 0, 0, 1, 2)
         
         '''
         END OF CUSTOMER PREFERENCES BOX
@@ -261,10 +343,7 @@ class MainWindow(QMainWindow):
         '''
         START OF SPECIAL REQ BOX
         '''
-        self.SpecialReqBoxBackground = QtWidgets.QTextBrowser()
-        self.SpecialReqBoxBackground.setReadOnly(True)
-        self.SpecialReqBoxBackground.setObjectName("BoxBackground")
-        self.SpecialReqBoxBackground.setStyleSheet('background-color: #d7dbdd')
+
 
         self.SpecialReqTitle = QtWidgets.QLabel()
         self.SpecialReqTitle.setFont(BigKhmerFont)
@@ -277,10 +356,28 @@ class MainWindow(QMainWindow):
         self.SpecialReqBox.setFont(SmallKhmerFont)
         self.SpecialReqBox.setObjectName("SpecialReqBox")
 
-        self.SpecialReqTitle.setText("សំណើពិសេស:")
+
+        #special req box
+        
+        self.SpecReqBoxGroup = QtWidgets.QGroupBox()
+        #self.SpecReqBoxGroup.setMaximumSize(550,400)
+        self.SpecReqBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+
+        SpecReqBoxLayout = QGridLayout()
+    
+
+        SpecReqBoxLayout.addWidget(self.SpecialReqTitle, 0, 0)
+        SpecReqBoxLayout.addWidget(self.SpecialReqBox, 1, 0)
+        
+        self.SpecReqBoxGroup.setLayout(SpecReqBoxLayout)
+
+        MainLayout.addWidget(self.SpecReqBoxGroup, 1, 0, 1, 2)
+
+
         '''
         END OF SPECIAL REQ BOX
         '''
+
 
         '''
         START OF MEASUREMENTS BOX
@@ -293,7 +390,6 @@ class MainWindow(QMainWindow):
         self.MeasurementTitle.setAutoFillBackground(False)
         self.MeasurementTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.MeasurementTitle.setObjectName("MeasurementTitle")
-        #MainLayout.addWidget(self.MeasurementTitle, 2, 0)
 
         self.ShirtDressSkirtBox = QtWidgets.QGroupBox()
         self.ShirtDressSkirtBox.setFont(BigKhmerFont)
@@ -759,38 +855,18 @@ class MainWindow(QMainWindow):
         self.PantGroupLayout.addWidget(self.CmAnkle, 9, 2, 1, 1)
 
         self.PantGroupBox.setLayout(self.PantGroupLayout)
+
+
+                
+        #measurements group
+        
+        MainLayout.addWidget(self.ShirtDressSkirtBox, 2, 0)
+        MainLayout.addWidget(self.PantGroupBox, 2, 1)
         
         '''
         END OF MEASUREMENTS BOX
         '''
-        self.HorizLine = QtWidgets.QFrame()
-        self.HorizLine.setGeometry(QtCore.QRect(260, 430, 1050, 20))
-        self.HorizLine.setFrameShape(QtWidgets.QFrame.HLine)
-        self.HorizLine.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.HorizLine.setObjectName("HorizLine")
 
-        self.line_2 = QtWidgets.QFrame()
-        self.line_2.setGeometry(QtCore.QRect(1300, 0, 20, 961))
-        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_2.setObjectName("line_2")
-        
-        self.PriceBox = QtWidgets.QLineEdit()
-        self.onlyInt = QtGui.QIntValidator()
-        self.PriceBox.setValidator(self.onlyInt)
-        self.PriceBox.setFont(ENGFont)
-        self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.PriceBox.setAutoFillBackground(False)
-        self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
-        self.PriceBox.setObjectName("PriceBox")
-
-        self.PriceLabel = QtWidgets.QLabel()
-        self.PriceLabel.setFont(BigKhmerFont)
-        self.PriceLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.PriceLabel.setAutoFillBackground(False)
-        self.PriceLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.PriceLabel.setObjectName("PriceLabel")
-        
         '''
         START OF PREVIEW
         '''
@@ -835,142 +911,96 @@ class MainWindow(QMainWindow):
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
-        self.RadioPicLabel.setGeometry(QtCore.QRect(1300, 150, 621, 531))
+        self.RadioPicLabel.setMaximumSize(621, 531)
         self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
         self.RadioPicLabel.setObjectName("RadioPicLabel")
 
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
         self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
 
+
+        PriceLayout = QHBoxLayout()
+
+        self.PriceBox = QtWidgets.QLineEdit()
+        self.PriceBox.setMaximumSize(300, 50)
+        self.onlyInt = QtGui.QIntValidator()
+        self.PriceBox.setValidator(self.onlyInt)
+        self.PriceBox.setFont(ENGFont)
+        self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PriceBox.setAutoFillBackground(False)
+        self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
+        self.PriceBox.setObjectName("PriceBox")
+
+    
+        self.PriceLabel = QtWidgets.QLabel()
+        self.PriceLabel.setMaximumSize(50,50)
+        self.PriceLabel.setFont(BigKhmerFont)
+        self.PriceLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.PriceLabel.setAutoFillBackground(False)
+        self.PriceLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.PriceLabel.setObjectName("PriceLabel")
+
+        PriceLayout.addWidget(self.PriceLabel)
+        PriceLayout.addWidget(self.PriceBox)
+
+        self.PreviewGroupLayout.addLayout(PriceLayout)
+
+        ''' START OF Submit & Cancel '''
+        SubmitCancelLayout = QHBoxLayout()
+
+        self.Cancel = QtWidgets.QPushButton()
+        self.Cancel.setMaximumSize(130, 50)
+        self.Cancel.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Cancel.setAutoFillBackground(False)
+        self.Cancel.setFont(SmallKhmerFont)
+        self.Cancel.setObjectName("Cancel")
+
+        self.Submit = QtWidgets.QPushButton()
+        self.Submit.setMaximumSize(100, 50)
+        self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Submit.setAutoFillBackground(False)
+        self.Submit.setFont(SmallKhmerFont)
+        self.Submit.setObjectName("Submit")
+
+        SubmitCancelLayout.addWidget(self.Cancel)
+        SubmitCancelLayout.addWidget(self.Submit)
+
+        self.PreviewGroupLayout.addLayout(SubmitCancelLayout)
+
+        self.SubmitMsg = QtWidgets.QLabel()
+        self.SubmitMsg.setMaximumSize(400, 40)
+        self.SubmitMsg.setFont(BigKhmerFont)
+        self.SubmitMsg.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.SubmitMsg.setAutoFillBackground(False)
+
+        self.PreviewGroupLayout.addWidget(self.SubmitMsg)
+
+        ''' END OF Submit & Cancel '''
+
+
         self.PreviewGroupBox.setLayout(self.PreviewGroupLayout)
         
-        
-        '''
-        END OF PREVIEW
-        '''
-        
-        '''
-        add to main layout
-        '''
-        #customer box
 
-        self.CustomerBoxGroup = QtWidgets.QGroupBox()
-        self.CustomerBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
-        self.CustomerBoxGroup.setMaximumSize(400, 400)
-        
-        CustomerBoxLayout = QGridLayout()
-        CustomerBoxLayout.setSpacing(10)
-        #CustomerBoxLayout.addWidget(self.NameBoxBackground, 0, 0, 4, 2)
-        
-        CustomerBoxLayout.addWidget(self.CustomerInfoTitle, 0, 0, 1, 1)
-        
-        CustomerBoxLayout.addWidget(self.CustomerNameLabel, 1, 0)
-        CustomerBoxLayout.addWidget(self.PhoneLabel, 2, 0)
-        CustomerBoxLayout.addWidget(self.AddressLabel, 3, 0)
-        
-
-        CustomerBoxLayout.addWidget(self.CustomerNameBox, 1, 1)
-        CustomerBoxLayout.addWidget(self.PhoneBox, 2, 1)
-        CustomerBoxLayout.addWidget(self.AddressBox, 3, 1)
-
-        self.CustomerBoxGroup.setLayout(CustomerBoxLayout)
-        MainLayout.addWidget(self.CustomerBoxGroup, 0, 0)
-       
-
-
-        #staff box 
-
-        self.StaffBoxGroup = QtWidgets.QGroupBox()
-        self.StaffBoxGroup.setMaximumSize(400,400)
-        self.StaffBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
-
-        StaffBoxLayout = QGridLayout()
-        StaffBoxLayout.setSpacing(10)
-        
-        StaffBoxLayout.addWidget(self.StaffTitle, 0, 0)
-        
-        StaffBoxLayout.addWidget(self.StaffNameLabel, 1, 0)
-        StaffBoxLayout.addWidget(self.DeadlineLabel, 2, 0)
-
-        StaffBoxLayout.addWidget(self.StaffNameBox, 1, 1)
-
-        #not in ui
-        StaffBoxLayout.addWidget(self.DeadlineBox, 2, 1)
-        #not in ui
-
-        DisplayDateRow = QHBoxLayout()
-        DisplayDateRow.addWidget(self.DateIcon)
-        DisplayDateRow.addWidget(self.DeadlineSelectedLabel)
-
-        StaffBoxLayout.addLayout(DisplayDateRow, 2, 1)
-
-        self.StaffBoxGroup.setLayout(StaffBoxLayout)
-
-        #MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
-
-
-
-
-        #preferences box
-        self.PreferencesBoxGroup = QtWidgets.QGroupBox()
-        self.PreferencesBoxGroup.setMaximumSize(400,400)
-        self.PreferencesBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
-
-        PreferencesBoxLayout = QGridLayout()
-        PreferencesBoxLayout.addWidget(self.CustomerPrefBoxBackground, 0, 0, 4, 2)
-
-        PreferencesBoxLayout.addWidget(self.CustomerPreferencesTitle, 0, 0)
-
-        PreferencesBoxLayout.addWidget(self.MaterialsLabel, 1, 0)
-        PreferencesBoxLayout.addWidget(self.ColorLabel, 2, 0)
-        PreferencesBoxLayout.addWidget(self.StyleLabel, 3, 0)
-
-        PreferencesBoxLayout.addWidget(self.MaterialBox, 1, 1)
-        PreferencesBoxLayout.addWidget(self.ColorBox, 2, 1)
-        PreferencesBoxLayout.addWidget(self.StyleBox, 3, 1)
-
-        self.PreferencesBoxGroup.setLayout(PreferencesBoxLayout)
-
-        #MainLayout.addWidget(self.PreferencesBoxGroup, 0, 1)
-        
-
-        #special req box
-        
-        self.SpecReqBoxGroup = QtWidgets.QGroupBox()
-        self.SpecReqBoxGroup.setMaximumSize(400,400)
-        self.SpecReqBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
-
-        SpecReqBoxLayout = QGridLayout()
-        SpecReqBoxLayout.addWidget(self.SpecialReqBoxBackground, 0, 0, 2, 2)
-
-        SpecReqBoxLayout.addWidget(self.SpecialReqTitle, 0, 0)
-        SpecReqBoxLayout.addWidget(self.SpecialReqBox, 1, 0)
-        
-        self.SpecialReqBox.setLayout(SpecReqBoxLayout)
-
-        #MainLayout.addWidget(self.SpecialReqBox, 1, 1)
-
-
-        #measurements
-        
-        MainLayout.addWidget(self.ShirtDressSkirtBox, 2, 0)
-        MainLayout.addWidget(self.PantGroupBox, 2, 1)
 
 
 
         #preview group 
-        MainLayout.addWidget(self.PreviewGroupBox, 0, 2)
+        MainLayout.addWidget(self.PreviewGroupBox, 0, 2, 3, 2)
+
+        
+       
+
+        
 
 
         #column strech
-        #MainLayout.setColumnStretch(0,1)
-        #MainLayout.setColumnStretch(1,2)
-        #MainLayout.setColumnStretch(2,3)
-        
-        #dummy widget for central widget; used for setting layout
+        MainLayout.setColumnStretch(0,1)
+        MainLayout.setRowStretch(2, 3)
+        MainLayout.setColumnStretch(1,2)
+        MainLayout.setColumnStretch(2,3)
+        MainLayout.setSpacing(10)
+
         widget = QWidget()
-        
-        self.retranslateUi()
         
         #set layout 
         widget.setLayout(MainLayout)
@@ -989,11 +1019,11 @@ class MainWindow(QMainWindow):
         self.MaterialsLabel.setText(_translate("MainWindow", "ប្រភេទក្រណាត់:"))
         self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
-        self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិធិជន"))
-        #self.Cancel.setText(_translate("MainWindow", "Cancel"))
-        #self.Submit.setText(_translate("MainWindow", "OK"))
-        #self.PriceBox.setText(_translate("MainWindow", ""))
-        #self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ: ($)"))
+        self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
+        self.Cancel.setText(_translate("MainWindow", "Cancel"))
+        self.Submit.setText(_translate("MainWindow", "OK"))
+        self.PriceBox.setText(_translate("MainWindow", ""))
+        self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ: ($)"))
         self.ShirtDressSkirtBox.setTitle(_translate("MainWindow", "អាវ រ៉ូប​ និងសំពត់"))
         self.DressSkirtWaistLabel.setText(_translate("MainWindow", "ជំុវិញចង្កេះ:"))
         self.CmUpperHips.setText(_translate("MainWindow", "cm"))
@@ -1048,13 +1078,15 @@ class MainWindow(QMainWindow):
         self.CmAnkle.setText(_translate("MainWindow", "cm"))
         self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
         self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd ")
-        #self.SubmitMsg.setText(_translate("MainWindow", ""))
+        self.SubmitMsg.setText(_translate("MainWindow", ""))
         
 
         #menu buttons
         #self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
         #self.ActionAbout.setText(_translate("MainWindow", "អំពីកម្មវិធី"))
         #self.ActionViewAllOrders.setText(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
+    
+
 
 
         
