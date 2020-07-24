@@ -1084,9 +1084,9 @@ class MainWindow(QMainWindow):
         
 
         #menu buttons
-        #self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
-        #self.ActionAbout.setText(_translate("MainWindow", "អំពីកម្មវិធី"))
-        #self.ActionViewAllOrders.setText(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
+        self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
+        self.ActionAbout.setText(_translate("MainWindow", "អំពីកម្មវិធី"))
+        self.ActionViewAllOrders.setText(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
     
 
 

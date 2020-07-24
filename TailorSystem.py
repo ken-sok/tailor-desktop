@@ -58,6 +58,7 @@ class Ui_MainWindow(object):
         '''
 
         MainWindow.setWindowTitle("Tailor Management System")
+        #MainWindow.showMaximized()
         MainLayout = QGridLayout()
         MainLayout.setContentsMargins(10,10,10,10)
         '''
@@ -221,7 +222,7 @@ class Ui_MainWindow(object):
         #label to send date to database
         #not in Ui
         self.DeadlineBox = QtWidgets.QLabel()
-        #self.DeadlineBox.setGeometry(QtCore.QRect(0, 0, 0, 0))  
+        self.DeadlineBox.setMaximumSize(0,0) 
         self.DeadlineBox.setFont(SmallKhmerFont)
         self.DeadlineBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineBox.setAutoFillBackground(False)
@@ -398,7 +399,6 @@ class Ui_MainWindow(object):
         START OF MEASUREMENTS BOX
         '''
 
-        #might delete
         self.MeasurementTitle = QtWidgets.QLabel()
         self.MeasurementTitle.setFont(BigKhmerFont)
         self.MeasurementTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -948,7 +948,7 @@ class Ui_MainWindow(object):
 
     
         self.PriceLabel = QtWidgets.QLabel()
-        self.PriceLabel.setMaximumSize(50,50)
+        self.PriceLabel.setMaximumSize(120,50)
         self.PriceLabel.setFont(BigKhmerFont)
         self.PriceLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PriceLabel.setAutoFillBackground(False)
@@ -1630,7 +1630,7 @@ class Ui_MainWindow(object):
         self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
+        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
@@ -1678,7 +1678,7 @@ class Ui_MainWindow(object):
             self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
             self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
             self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
+            self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
             self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
             self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
             self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd")
@@ -1862,7 +1862,7 @@ class Ui_MainWindow(object):
         self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
-        self.Cancel.setText(_translate("MainWindow", "Cancel"))
+        self.Cancel.setText(_translate("MainWindow", "Clear"))
         self.Submit.setText(_translate("MainWindow", "OK"))
         self.PriceBox.setText(_translate("MainWindow", ""))
         self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ: ($)"))
@@ -1938,7 +1938,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         
         self.DeadlineSelectedLabel.setText(_translate("MainWindow", f'{day}/{month}/{year}'))
-        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: white") 
+        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
         
     def getDate(self, day, month, year): 
 
@@ -2270,6 +2270,7 @@ class TableView(QDialog):
         self.setWindowTitle('All Orders')
         #self.setGeometry(300, 300, 450, 300)
         self.setMinimumSize(QtCore.QSize(1200, 800))
+        self.showMaximized()
         #self.setMaximumSize(QtCore.QSize(450, 300))
         self.initUI()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
@@ -2295,7 +2296,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខអតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខអតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
@@ -2500,14 +2501,16 @@ class DeleteDialog(QDialog):
                 cursor.execute(postgres_delete_query)
                 print(count, "Record deleted successfully in materials table")
 
-
-
-                QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
+                
+                
                 self.close()
+                QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
 
             except Exception:
-                QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
+
+                
                 self.close()
+                QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
 
 
 #dialog class to edit 1 order's details
@@ -3009,7 +3012,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
-    MainWindow.show()
+    MainWindow.showMaximized()
 
     # Create instances of the model/controller
     appController(view=ui)
