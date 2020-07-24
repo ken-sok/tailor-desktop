@@ -35,6 +35,16 @@ ENGFont.setPointSize(15)
 END OF Font FORMATTING
 '''
 
+class Color(QWidget):
+
+    def __init__(self, color, *args, **kwargs):
+        super(Color, self).__init__(*args, **kwargs)
+        self.setAutoFillBackground(True)
+        
+        palette = self.palette()
+        palette.setColor(QtGui.QPalette.Window, QtGui.QColor(color))
+        self.setPalette(palette)
+
 
 class MainWindow(QMainWindow):
 
@@ -181,14 +191,19 @@ class MainWindow(QMainWindow):
         #label to send date to database
         #not in Ui
         self.DeadlineBox = QtWidgets.QLabel()
-        #self.DeadlineBox.setGeometry(QtCore.QRect(0, 0, 0, 0))  
+        #self.DeadlineBox.setGeometry(QtCore.QRect(0, 0, 0, 0))  #not in Ui
         self.DeadlineBox.setFont(SmallKhmerFont)
         self.DeadlineBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineBox.setAutoFillBackground(False)
         self.DeadlineBox.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.DeadlineBox.setObjectName("DeadlineBox")
-        #not in Ui
 
+
+        #label text - delete
+        self.StaffTitle.setText("ព័ត៌មានបុគ្គលិក")
+        self.StaffNameLabel.setText("ឈ្មោះ:")
+        self.DeadlineLabel.setText("កាលកំណត់:")
+        self.DeadlineSelectedLabel.setText('សូមចុចរូបប្រតិទិន')
 
                
         '''
@@ -906,7 +921,7 @@ class MainWindow(QMainWindow):
 
         self.StaffBoxGroup.setLayout(StaffBoxLayout)
 
-        #MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
+        MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
 
 
 
@@ -963,9 +978,9 @@ class MainWindow(QMainWindow):
 
 
         #column strech
-        #MainLayout.setColumnStretch(0,1)
-        #MainLayout.setColumnStretch(1,2)
-        #MainLayout.setColumnStretch(2,3)
+        MainLayout.setColumnStretch(0,1)
+        MainLayout.setColumnStretch(1,2)
+        MainLayout.setColumnStretch(2,3)
         
         #dummy widget for central widget; used for setting layout
         widget = QWidget()

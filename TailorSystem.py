@@ -66,6 +66,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(800, 600))
+        MainWindow.showMaximized()
         #MainWindow.setMaximumSize(QtCore.QSize(1920, 1080))
         MainWindow.setSizeIncrement(QtCore.QSize(15, 14))
         palette = QtGui.QPalette()
