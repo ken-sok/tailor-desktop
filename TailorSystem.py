@@ -1977,135 +1977,134 @@ class Ui_MainWindow(object):
         #get information from database according to customer ID
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
         
+        
 
         #alter view 
         _translate = QtCore.QCoreApplication.translate
         
-        '''
-        #font for date
-        SmallKhmerFont = QtGui.QFont()
-        SmallKhmerFont.setFamily("Khmer OS")
-        SmallKhmerFont.setPointSize(18)
-        '''
+        if (len(OrderDetails) > 0): 
         
-        self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
-        self.PhoneBox.setText(_translate("MainWindow", str(OrderDetails['telephone'])))
-        self.AddressBox.setPlainText(_translate("MainWindow", str(OrderDetails['address'])))
+            self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
+            self.PhoneBox.setText(_translate("MainWindow", str(OrderDetails['telephone'])))
+            self.AddressBox.setPlainText(_translate("MainWindow", str(OrderDetails['address'])))
 
-    
-        self.StaffNameBox.setText(_translate("MainWindow", str(OrderDetails['staff'])))
-        self.DeadlineBox.setText(_translate("MainWindow", str(OrderDetails['deadline'])))
-        deadline = OrderDetails['deadline'].strftime("%d/%m/%Y")
-        self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
-        self.DeadlineSelectedLabel.setText(_translate("MainWindow", deadline))
-
-        self.StyleBox.setText(_translate("MainWindow", str(OrderDetails['style'])))
-        self.MaterialBox.setText(_translate("MainWindow", str(OrderDetails['material'])))
-        self.ColorBox.setText(_translate("MainWindow", str(OrderDetails['color'])))
-        self.SpecialReqBox.setPlainText(_translate("MainWindow", str(OrderDetails['special'])))
         
-        
-        
-        #radio 
-        if OrderDetails['type'] == "សំពត់": 
+            self.StaffNameBox.setText(_translate("MainWindow", str(OrderDetails['staff'])))
+            self.DeadlineBox.setText(_translate("MainWindow", str(OrderDetails['deadline'])))
+            deadline = OrderDetails['deadline'].strftime("%d/%m/%Y")
+            self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
+            self.DeadlineSelectedLabel.setText(_translate("MainWindow", deadline))
+
+            self.StyleBox.setText(_translate("MainWindow", str(OrderDetails['style'])))
+            self.MaterialBox.setText(_translate("MainWindow", str(OrderDetails['material'])))
+            self.ColorBox.setText(_translate("MainWindow", str(OrderDetails['color'])))
+            self.SpecialReqBox.setPlainText(_translate("MainWindow", str(OrderDetails['special'])))
             
-            self.SkirtRadio.setChecked(True)
-
-            self.WaistBox.setText(_translate("MainWindow", str(OrderDetails['skirt_waist'])))
             
-            self.HipBox.setText(_translate("MainWindow", str(OrderDetails['skirt_hip'])))
             
-            self.SkirtLengthBox.setText(_translate("MainWindow", str(OrderDetails['skirt_length'])))
-        
-            
-        elif OrderDetails['type'] == "ខោ":
-            
-            self.PantRadio.setChecked(True)
-                    
-            self.InseamBox.setText(_translate("MainWindow", str(OrderDetails['inseam'])))
-            
-            self.OutseamBox.setText(_translate("MainWindow", str(OrderDetails['outseam'])))
-            
-            self.ThighBox.setText(_translate("MainWindow", str(OrderDetails['pant_thigh'])))
-            
-            self.PantHipBox.setText(_translate("MainWindow", str(OrderDetails['pant_hip'])))
-            
-            self.AnkleBox.setText(_translate("MainWindow", str(OrderDetails['ankle'])))
-            
-            self.CalfBox.setText(_translate("MainWindow", str(OrderDetails['calf'])))
-            
-            self.PantWaistBox.setText(_translate("MainWindow", str(OrderDetails['pant_waist'])))
-
-
-        elif OrderDetails['type'] == "រ៉ូប":
-            
-            self.DressRadio.setChecked(True)
-            
-            self.AroundBustBox.setText(_translate('MainWindow', str(OrderDetails['around_bust'])))
-            
-            self.NeckArmHoldBox.setText(_translate('MainWindow', str(OrderDetails['neck_armhold'])))
-
-            self.WaistBox.setText(_translate('MainWindow', str(OrderDetails['dress_waist'])))
-
-            self.ABBox.setText(_translate('MainWindow', str(OrderDetails['ab'])))
-
-            self.HipBox.setText(_translate('MainWindow', str(OrderDetails['above_bust'])))
-
-            self.AboveBustBox.setText(_translate('MainWindow', str(OrderDetails['center_front'])))
-
-            self.CenterFrontBox.setText(_translate('MainWindow', str(OrderDetails['shoulder'])))
-
-            self.ShoulderBox.setText(_translate('MainWindow', str(OrderDetails['af'])))
-
-            self.AFBox.setText(_translate('MainWindow', str(OrderDetails['center_back'])))
-
-            self.CenterBackBox.setText(_translate('MainWindow', str(OrderDetails['upper_hips'])))
-
-            self.UpperHipsBox.setText(_translate('MainWindow', str(OrderDetails['armpit'])))
-
-            self.ArmpitBox.setText(_translate('MainWindow', str(OrderDetails['sleeve_length'])))
-
-            self.SkirtLengthBox.setText(_translate('MainWindow', str(OrderDetails['bust_height'])))
-
-            self.SleeveLengthBox.setText(_translate('MainWindow', str(OrderDetails['hip'])))
-
-            self.BustHeightBox.setText(_translate('MainWindow', str(OrderDetails['skirt_length'])))
-
-        elif OrderDetails['type'] == "អាវ":
-
-            self.ShirtRadio.setChecked(True)
-
-            self.AroundBustBox.setText(_translate('MainWindow', str(OrderDetails['around_bust'])))
-
-            self.NeckArmHoldBox.setText(_translate('MainWindow', str(OrderDetails['neck_armhold'])))
-
-            self.WaistBox.setText(_translate('MainWindow', str(OrderDetails['dress_waist'])))
-
-            self.ABBox.setText(_translate('MainWindow', str(OrderDetails['ab'])))
-
-            self.AboveBustBox.setText(_translate('MainWindow', str(OrderDetails['above_bust'])))
-
-            self.CenterFrontBox.setText(_translate('MainWindow', str(OrderDetails['center_front'])))
-
-            self.ShoulderBox.setText(_translate('MainWindow', str(OrderDetails['shoulder'])))
-
-            self.AFBox.setText(_translate('MainWindow', str(OrderDetails['af'])))
-
-            self.CenterBackBox.setText(_translate('MainWindow', str(OrderDetails['center_back'])))
-
-            self.UpperHipsBox.setText(_translate('MainWindow', str(OrderDetails['upper_hips'])))
-
-            self.ArmpitBox.setText(_translate('MainWindow', str(OrderDetails['armpit'])))
-
-            self.SleeveLengthBox.setText(_translate('MainWindow', str(OrderDetails['sleeve_length'])))
-
-            self.BustHeightBox.setText(_translate('MainWindow', str(OrderDetails['bust_height'])))
+            #radio 
+            if OrderDetails['type'] == "សំពត់": 
                 
-        
-        self.PriceBox.setText(_translate("MainWindow", str(OrderDetails['price'])))
+                self.SkirtRadio.setChecked(True)
 
-    
-        self.updating = 1
+                self.WaistBox.setText(_translate("MainWindow", str(OrderDetails['skirt_waist'])))
+                
+                self.HipBox.setText(_translate("MainWindow", str(OrderDetails['skirt_hip'])))
+                
+                self.SkirtLengthBox.setText(_translate("MainWindow", str(OrderDetails['skirt_length'])))
+            
+                
+            elif OrderDetails['type'] == "ខោ":
+                
+                self.PantRadio.setChecked(True)
+                        
+                self.InseamBox.setText(_translate("MainWindow", str(OrderDetails['inseam'])))
+                
+                self.OutseamBox.setText(_translate("MainWindow", str(OrderDetails['outseam'])))
+                
+                self.ThighBox.setText(_translate("MainWindow", str(OrderDetails['pant_thigh'])))
+                
+                self.PantHipBox.setText(_translate("MainWindow", str(OrderDetails['pant_hip'])))
+                
+                self.AnkleBox.setText(_translate("MainWindow", str(OrderDetails['ankle'])))
+                
+                self.CalfBox.setText(_translate("MainWindow", str(OrderDetails['calf'])))
+                
+                self.PantWaistBox.setText(_translate("MainWindow", str(OrderDetails['pant_waist'])))
+
+
+            elif OrderDetails['type'] == "រ៉ូប":
+                
+                self.DressRadio.setChecked(True)
+                
+                self.AroundBustBox.setText(_translate('MainWindow', str(OrderDetails['around_bust'])))
+                
+                self.NeckArmHoldBox.setText(_translate('MainWindow', str(OrderDetails['neck_armhold'])))
+
+                self.WaistBox.setText(_translate('MainWindow', str(OrderDetails['dress_waist'])))
+
+                self.ABBox.setText(_translate('MainWindow', str(OrderDetails['ab'])))
+
+                self.HipBox.setText(_translate('MainWindow', str(OrderDetails['above_bust'])))
+
+                self.AboveBustBox.setText(_translate('MainWindow', str(OrderDetails['center_front'])))
+
+                self.CenterFrontBox.setText(_translate('MainWindow', str(OrderDetails['shoulder'])))
+
+                self.ShoulderBox.setText(_translate('MainWindow', str(OrderDetails['af'])))
+
+                self.AFBox.setText(_translate('MainWindow', str(OrderDetails['center_back'])))
+
+                self.CenterBackBox.setText(_translate('MainWindow', str(OrderDetails['upper_hips'])))
+
+                self.UpperHipsBox.setText(_translate('MainWindow', str(OrderDetails['armpit'])))
+
+                self.ArmpitBox.setText(_translate('MainWindow', str(OrderDetails['sleeve_length'])))
+
+                self.SkirtLengthBox.setText(_translate('MainWindow', str(OrderDetails['bust_height'])))
+
+                self.SleeveLengthBox.setText(_translate('MainWindow', str(OrderDetails['hip'])))
+
+                self.BustHeightBox.setText(_translate('MainWindow', str(OrderDetails['skirt_length'])))
+
+            elif OrderDetails['type'] == "អាវ":
+
+                self.ShirtRadio.setChecked(True)
+
+                self.AroundBustBox.setText(_translate('MainWindow', str(OrderDetails['around_bust'])))
+
+                self.NeckArmHoldBox.setText(_translate('MainWindow', str(OrderDetails['neck_armhold'])))
+
+                self.WaistBox.setText(_translate('MainWindow', str(OrderDetails['dress_waist'])))
+
+                self.ABBox.setText(_translate('MainWindow', str(OrderDetails['ab'])))
+
+                self.AboveBustBox.setText(_translate('MainWindow', str(OrderDetails['above_bust'])))
+
+                self.CenterFrontBox.setText(_translate('MainWindow', str(OrderDetails['center_front'])))
+
+                self.ShoulderBox.setText(_translate('MainWindow', str(OrderDetails['shoulder'])))
+
+                self.AFBox.setText(_translate('MainWindow', str(OrderDetails['af'])))
+
+                self.CenterBackBox.setText(_translate('MainWindow', str(OrderDetails['center_back'])))
+
+                self.UpperHipsBox.setText(_translate('MainWindow', str(OrderDetails['upper_hips'])))
+
+                self.ArmpitBox.setText(_translate('MainWindow', str(OrderDetails['armpit'])))
+
+                self.SleeveLengthBox.setText(_translate('MainWindow', str(OrderDetails['sleeve_length'])))
+
+                self.BustHeightBox.setText(_translate('MainWindow', str(OrderDetails['bust_height'])))
+                    
+            
+            self.PriceBox.setText(_translate("MainWindow", str(OrderDetails['price'])))
+
+        
+            self.updating = 1
+        else: 
+            self.orderdialog.Editdlg.close()
+            QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
     
   
 
@@ -2888,109 +2887,112 @@ def FetchOrdersDetailsEdit(customer_id):
     cursor.execute(sql_select_query, record_to_query)
     all_rows = cursor.fetchone()
 
+    if all_rows != None: 
     #add to dict
-   
-    order_details['price'] = all_rows[0]
-    order_details['customer_name'] = all_rows[1]
-    order_details['staff'] = all_rows[2]
-    order_details['deadline'] = all_rows[4]
-    order_details['special'] = all_rows[3]
+        order_details['price'] = all_rows[0]
+        order_details['customer_name'] = all_rows[1]
+        order_details['staff'] = all_rows[2]
+        order_details['deadline'] = all_rows[4]
+        order_details['special'] = all_rows[3]
 
 
-    #telephone, address
-    sql_select_query = 'SELECT address, telephone FROM %s WHERE "ID" = %s'
-    record_to_query = (AsIs("customers"), customer_id)
-    cursor.execute(sql_select_query, record_to_query)
-    all_rows = cursor.fetchone()
+        #telephone, address
+        sql_select_query = 'SELECT address, telephone FROM %s WHERE "ID" = %s'
+        record_to_query = (AsIs("customers"), customer_id)
+        cursor.execute(sql_select_query, record_to_query)
+        all_rows = cursor.fetchone()
 
-    #add to dict
-
-    order_details['address'] = all_rows[0]
-    order_details['telephone'] = all_rows[1]
-    
-    #style, material, color, type
-    sql_select_query = 'SELECT material, color, style, type FROM %s WHERE customer_id = %s'
-    record_to_query = (AsIs("materials"), customer_id)
-    cursor.execute(sql_select_query, record_to_query)
-    all_rows = cursor.fetchone()
-
-   
-    order_details['material'] = all_rows[0]
-    order_details['color'] = all_rows[1]
-    order_details['style'] = all_rows[2]
-    order_details['type'] = all_rows[3]
+        #add to dict
+        
+        
+        order_details['address'] = all_rows[0]
+        order_details['telephone'] = all_rows[1]
+        
+        #style, material, color, type
+        sql_select_query = 'SELECT material, color, style, type FROM %s WHERE customer_id = %s'
+        record_to_query = (AsIs("materials"), customer_id)
+        cursor.execute(sql_select_query, record_to_query)
+        all_rows = cursor.fetchone()
 
     
-    #fetch according to type
-    if order_details['type'] == "រ៉ូប":
-        sql_select_query = 'SELECT around_bust, neck_armhold, dress_waist,ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length FROM %s WHERE customer_id = %s'
-        record_to_query = (AsIs("dress_measurements"), customer_id)
-        cursor.execute(sql_select_query, record_to_query)
-        all_rows = cursor.fetchone()
+        order_details['material'] = all_rows[0]
+        order_details['color'] = all_rows[1]
+        order_details['style'] = all_rows[2]
+        order_details['type'] = all_rows[3]
 
-        order_details['around_bust'] = all_rows[0]
-        order_details['neck_armhold'] = all_rows[1]
-        order_details['dress_waist'] = all_rows[2]
-        order_details['ab'] = all_rows[3]
-        order_details['above_bust'] = all_rows[4]
-        order_details['center_front'] = all_rows[5]
-        order_details['shoulder'] = all_rows[6]
-        order_details['af'] = all_rows[7]
-        order_details['center_back'] = all_rows[8]
-        order_details['upper_hips'] = all_rows[9]
-        order_details['armpit'] = all_rows[10]
-        order_details['sleeve_length'] = all_rows[11]
-        order_details['bust_height'] = all_rows[12]
-        order_details['hip'] = all_rows[13]
-        order_details['skirt_length'] = all_rows[14]
         
-        
-    elif order_details['type'] == "សំពត់":
-        sql_select_query = 'SELECT skirt_length, skirt_waist, skirt_hip FROM %s WHERE customer_id = %s'
-        record_to_query = (AsIs("skirt_measurements"), customer_id)
-        cursor.execute(sql_select_query, record_to_query)
-        all_rows = cursor.fetchone()
+        #fetch according to type
+        if order_details['type'] == "រ៉ូប":
+            sql_select_query = 'SELECT around_bust, neck_armhold, dress_waist,ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length FROM %s WHERE customer_id = %s'
+            record_to_query = (AsIs("dress_measurements"), customer_id)
+            cursor.execute(sql_select_query, record_to_query)
+            all_rows = cursor.fetchone()
 
-        order_details['skirt_length'] = all_rows[0]
-        order_details['skirt_waist'] = all_rows[1]
-        order_details['skirt_hip'] = all_rows[2]
+            order_details['around_bust'] = all_rows[0]
+            order_details['neck_armhold'] = all_rows[1]
+            order_details['dress_waist'] = all_rows[2]
+            order_details['ab'] = all_rows[3]
+            order_details['above_bust'] = all_rows[4]
+            order_details['center_front'] = all_rows[5]
+            order_details['shoulder'] = all_rows[6]
+            order_details['af'] = all_rows[7]
+            order_details['center_back'] = all_rows[8]
+            order_details['upper_hips'] = all_rows[9]
+            order_details['armpit'] = all_rows[10]
+            order_details['sleeve_length'] = all_rows[11]
+            order_details['bust_height'] = all_rows[12]
+            order_details['hip'] = all_rows[13]
+            order_details['skirt_length'] = all_rows[14]
+            
+            
+        elif order_details['type'] == "សំពត់":
+            sql_select_query = 'SELECT skirt_length, skirt_waist, skirt_hip FROM %s WHERE customer_id = %s'
+            record_to_query = (AsIs("skirt_measurements"), customer_id)
+            cursor.execute(sql_select_query, record_to_query)
+            all_rows = cursor.fetchone()
 
-    elif order_details['type'] == "ខោ":
-        
-        sql_select_query = 'SELECT inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist FROM %s WHERE customer_id = %s'
-        record_to_query = (AsIs("pant_measurements"), customer_id)
-        cursor.execute(sql_select_query, record_to_query)
-        all_rows = cursor.fetchone()
-        
-        order_details['inseam'] = all_rows[0]
-        order_details['outseam'] = all_rows[1]
-        order_details['pant_thigh'] = all_rows[2]
-        order_details['pant_hip'] = all_rows[3]
-        order_details['ankle'] = all_rows[4]
-        order_details['calf'] = all_rows[5]
-        order_details['pant_waist'] = all_rows[6]
+            order_details['skirt_length'] = all_rows[0]
+            order_details['skirt_waist'] = all_rows[1]
+            order_details['skirt_hip'] = all_rows[2]
 
-    elif order_details['type'] == "អាវ":
-        
-                
-        sql_select_query = 'SELECT around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height FROM %s WHERE customer_id = %s'
-        record_to_query = (AsIs("shirt_measurements"), customer_id)
-        cursor.execute(sql_select_query, record_to_query)
-        all_rows = cursor.fetchone()
+        elif order_details['type'] == "ខោ":
+            
+            sql_select_query = 'SELECT inseam, outseam,pant_thigh , pant_hip, ankle, calf, pant_waist FROM %s WHERE customer_id = %s'
+            record_to_query = (AsIs("pant_measurements"), customer_id)
+            cursor.execute(sql_select_query, record_to_query)
+            all_rows = cursor.fetchone()
+            
+            order_details['inseam'] = all_rows[0]
+            order_details['outseam'] = all_rows[1]
+            order_details['pant_thigh'] = all_rows[2]
+            order_details['pant_hip'] = all_rows[3]
+            order_details['ankle'] = all_rows[4]
+            order_details['calf'] = all_rows[5]
+            order_details['pant_waist'] = all_rows[6]
 
-        order_details['around_bust'] = all_rows[0]
-        order_details['neck_armhold'] = all_rows[1]
-        order_details['dress_waist'] = all_rows[2]
-        order_details['ab'] = all_rows[3]
-        order_details['above_bust'] = all_rows[4]
-        order_details['center_front'] = all_rows[5]
-        order_details['shoulder'] = all_rows[6]
-        order_details['af'] = all_rows[7]
-        order_details['center_back'] = all_rows[8]
-        order_details['upper_hips'] = all_rows[9]
-        order_details['armpit'] = all_rows[10]
-        order_details['sleeve_length'] = all_rows[11]
-        order_details['bust_height'] = all_rows[12]
+        elif order_details['type'] == "អាវ":
+            
+                    
+            sql_select_query = 'SELECT around_bust, neck_armhold,dress_waist, ab, above_bust, center_front, shoulder, af, center_back, upper_hips, armpit, sleeve_length, bust_height FROM %s WHERE customer_id = %s'
+            record_to_query = (AsIs("shirt_measurements"), customer_id)
+            cursor.execute(sql_select_query, record_to_query)
+            all_rows = cursor.fetchone()
+
+            order_details['around_bust'] = all_rows[0]
+            order_details['neck_armhold'] = all_rows[1]
+            order_details['dress_waist'] = all_rows[2]
+            order_details['ab'] = all_rows[3]
+            order_details['above_bust'] = all_rows[4]
+            order_details['center_front'] = all_rows[5]
+            order_details['shoulder'] = all_rows[6]
+            order_details['af'] = all_rows[7]
+            order_details['center_back'] = all_rows[8]
+            order_details['upper_hips'] = all_rows[9]
+            order_details['armpit'] = all_rows[10]
+            order_details['sleeve_length'] = all_rows[11]
+            order_details['bust_height'] = all_rows[12]
+        return order_details
+    
     return order_details
 
 
