@@ -105,6 +105,7 @@ class Ui_MainWindow(object):
         self.PhoneBox = QtWidgets.QLineEdit()
         self.PhoneBox.setMaximumSize(300, 50)
         self.PhoneBox.setFont(SmallKhmerFont)
+        self.PhoneBox.setValidator(self.onlyInt)
         self.PhoneBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PhoneBox.setObjectName("PhoneBox")
         
@@ -924,8 +925,58 @@ class Ui_MainWindow(object):
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(621, 531)
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
         self.RadioPicLabel.setObjectName("RadioPicLabel")
+
+        #default
+
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+        self.InseamBox.setReadOnly(True)
+        self.InseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.OutseamBox.setReadOnly(True)
+        self.OutseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.ThighBox.setReadOnly(True)
+        self.ThighBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.PantHipBox.setReadOnly(True)
+        self.PantHipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.AnkleBox.setReadOnly(True)
+        self.AnkleBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.CalfBox.setReadOnly(True)
+        self.CalfBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.PantWaistBox.setReadOnly(True)
+        self.PantWaistBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.SkirtLengthBox.setReadOnly(True)
+        self.SkirtLengthBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.HipBox.setReadOnly(True)
+        self.HipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
 
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
         self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
@@ -1462,7 +1513,7 @@ class Ui_MainWindow(object):
             elif (self.clothes_type  == "អាវ"):
                 #shirt
                 self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
-                                #boxes we don't need for dress
+                                #boxes we don't need for shirt
                 self.InseamBox.setReadOnly(True)
                 self.InseamBox.setStyleSheet("QLineEdit"
                                         "{"
@@ -1517,6 +1568,7 @@ class Ui_MainWindow(object):
                 self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
 
 
+                #boxes we don't need for pants
                 self.AroundBustBox.setReadOnly(True)
                 self.AroundBustBox.setStyleSheet("QLineEdit"
                                         "{"
@@ -1853,7 +1905,7 @@ class Ui_MainWindow(object):
         self.StaffNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.StyleLabel.setText(_translate("MainWindow", "រចនាបទ:"))
         self.MaterialsLabel.setText(_translate("MainWindow", "ប្រភេទក្រណាត់:"))
-        self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
+        self.AddressLabel.setText(_translate("MainWindow", "ឤសយដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
         self.Cancel.setText(_translate("MainWindow", "បោះបង់"))
