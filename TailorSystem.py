@@ -17,12 +17,12 @@ START OF Font FORMATTING
 
 SmallKhmerFont = QtGui.QFont()
 SmallKhmerFont.setFamily("Khmer OS")
-SmallKhmerFont.setPointSize(14)
+SmallKhmerFont.setPointSize(11)
 
 BigKhmerFont = QtGui.QFont()
 #BigKhmerFont.setBold(True) #cannot due to some reason
 BigKhmerFont.setFamily("Khmer OS")
-BigKhmerFont.setPointSize(20)
+BigKhmerFont.setPointSize(12)
 
 DeadlineSmallKhmerFont = QtGui.QFont()
 DeadlineSmallKhmerFont.setFamily("Khmer OS")
