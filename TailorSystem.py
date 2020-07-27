@@ -1880,7 +1880,13 @@ class Ui_MainWindow(object):
 
                 insertDressMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, 
                 upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, self.updating)
-                
+
+            #return to all orders list if updating
+            #cannot because user need feedback whether submit is successful 
+            '''
+            if self.updating == 1: 
+                self.clearInput()
+            ''' 
         
 
     def feedbackSubmit(self, completed): 
@@ -2233,7 +2239,10 @@ class Ui_MainWindow(object):
         self.CalfBox.setText(_translate("MainWindow", ''))
         self.PantWaistBox.setText(_translate("MainWindow", ''))
 
+        if self.updating == 1: 
+            self.ViewAllOrders()
         
+
         self.updating = 0
 
 #about-dialog
@@ -2709,9 +2718,6 @@ class appController:
         #About Developer 
         self._view.ActionAbout.triggered.connect(self._view.aboutdeveloper)
 
-        #only for update----go back to all orders view after modified entry
-        self._view.Submit.clicked.connect(self._view.ReturnAllOrders)
-        self._view.Cancel.clicked.connect(self._view.ReturnAllOrders)
         
         
              
