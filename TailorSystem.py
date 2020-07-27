@@ -105,6 +105,7 @@ class Ui_MainWindow(object):
         self.PhoneBox = QtWidgets.QLineEdit()
         self.PhoneBox.setMaximumSize(300, 50)
         self.PhoneBox.setFont(SmallKhmerFont)
+        self.onlyInt = QtGui.QIntValidator()
         self.PhoneBox.setValidator(self.onlyInt)
         self.PhoneBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PhoneBox.setObjectName("PhoneBox")
@@ -986,7 +987,6 @@ class Ui_MainWindow(object):
 
         self.PriceBox = QtWidgets.QLineEdit()
         self.PriceBox.setMaximumSize(300, 50)
-        self.onlyInt = QtGui.QIntValidator()
         self.PriceBox.setValidator(self.onlyInt)
         self.PriceBox.setFont(ENGFont)
         self.PriceBox.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -2023,7 +2023,8 @@ class Ui_MainWindow(object):
         #get information from database according to customer ID
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
         
-        
+        #remove msg from prev trans
+        self.SubmitMsg.setText("")
 
         #alter view 
         _translate = QtCore.QCoreApplication.translate
@@ -2187,10 +2188,6 @@ class Ui_MainWindow(object):
         self.SkirtRadio.setChecked(False)
         self.SkirtRadio.setAutoExclusive(True)
 
-        self.ShirtRadio.setAutoExclusive(False)
-        self.ShirtRadio.setChecked(False)
-        self.ShirtRadio.setAutoExclusive(True)
-
         self.PantRadio.setAutoExclusive(False)
         self.PantRadio.setChecked(False)
         self.PantRadio.setAutoExclusive(True)
@@ -2198,6 +2195,11 @@ class Ui_MainWindow(object):
         self.DressRadio.setAutoExclusive(False)
         self.DressRadio.setChecked(False) 
         self.DressRadio.setAutoExclusive(True)
+
+        
+        self.ShirtRadio.setAutoExclusive(False)
+        self.ShirtRadio.setChecked(True)
+        self.ShirtRadio.setAutoExclusive(True)
 
 
         #clear measurement boxes
