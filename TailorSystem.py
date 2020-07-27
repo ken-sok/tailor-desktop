@@ -2017,11 +2017,6 @@ class Ui_MainWindow(object):
         self.orderdialog.loaddata(customer_name = "")
     
 
-    def ReturnAllOrders(self): 
-
-        if self.updating == 1: 
-            self.ViewAllOrders()
-
     def aboutdeveloper(self):
         '''function to show about developer details'''
         self.aboutdialog = AboutDialog()
@@ -2390,35 +2385,46 @@ class TableView(QDialog):
 
     def loaddata(self, customer_name):
     
-        #print('customername', customer_name)
-        #table_name = 'orders'
-        #print("Table Before updating record ")
+        
+        #list all customers
         if customer_name == "" or customer_name == False : 
             sql_select_query = 'SELECT "ID" , price, customer_name, customer_id, staff, date_ordered, deadline, progress FROM %s'
             record_to_query = (AsIs("orders"),)
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
+
+        #search one customer name 
         else: 
             sql_select_query = 'SELECT "ID" , price, customer_name, customer_id, staff, date_ordered, deadline, progress FROM %s WHERE customer_name = %s'
             record_to_query = (AsIs("orders"), customer_name)
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
 
-        #font here
     
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setFont(SmallKhmerFont)
-
-
         self.tableWidget.setRowCount(0)
-        for row_number, row_data in enumerate(all_rows):
-            self.tableWidget.insertRow(row_number)
-            for column_number, data in enumerate(row_data):
-                item = QTableWidgetItem(str(data))
-                item.setFlags(QtCore.Qt.ItemIsEnabled)
-                item.setTextAlignment(QtCore.Qt.AlignHCenter)
-                self.tableWidget.setItem(row_number, column_number,item)
-                self.tableWidget.setRowHeight(row_number, 50)
+
+        #show all rows/ show searched customer name
+        if len(all_rows) > 0: 
+            for row_number, row_data in enumerate(all_rows):
+                self.tableWidget.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    item = QTableWidgetItem(str(data))
+                    item.setFlags(QtCore.Qt.ItemIsEnabled)
+                    item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                    self.tableWidget.setItem(row_number, column_number,item)
+                    self.tableWidget.setRowHeight(row_number, 50)
+
+        #customer name cannot be found 
+        else: 
+            self.tableWidget.insertRow(0)
+            data = "គ្មានទិន្នន័យ"
+            item = QTableWidgetItem(str(data))
+            item.setFlags(QtCore.Qt.ItemIsEnabled)
+            item.setTextAlignment(QtCore.Qt.AlignHCenter)
+            self.tableWidget.setItem(row_number, column_number,item)
+            self.tableWidget.setRowHeight(row_number, 50)
 
         for row_number in range(0,len(all_rows)): 
             #combo box
