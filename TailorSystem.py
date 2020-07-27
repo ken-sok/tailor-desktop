@@ -1019,7 +1019,7 @@ class Ui_MainWindow(object):
         self.Cancel.setObjectName("Cancel")
 
         self.Submit = QtWidgets.QPushButton()
-        self.Submit.setMaximumSize(100, 50)
+        self.Submit.setMaximumSize(160, 50)
         self.Submit.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Submit.setAutoFillBackground(False)
         self.Submit.setFont(SmallKhmerFont)
@@ -2010,6 +2010,12 @@ class Ui_MainWindow(object):
         self.orderdialog.show()
         self.orderdialog.loaddata(customer_name = "")
     
+
+    def ReturnAllOrders(self): 
+
+        if self.updating == 1: 
+            self.ViewAllOrders()
+
     def aboutdeveloper(self):
         '''function to show about developer details'''
         self.aboutdialog = AboutDialog()
@@ -2690,15 +2696,23 @@ class appController:
         #insert to measurements table
         self._view.Submit.clicked.connect(self._view.insertMeasurementDetails)
 
+
+
         #clear all inputs
         self._view.Cancel.clicked.connect(self._view.clearInput)
         self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
+
         
         #view all orders
         self._view.ActionViewAllOrders.triggered.connect(self._view.ViewAllOrders)
  
         #About Developer 
         self._view.ActionAbout.triggered.connect(self._view.aboutdeveloper)
+
+        #only for update----go back to all orders view after modified entry
+        self._view.Submit.clicked.connect(self._view.ReturnAllOrders)
+        self._view.Cancel.clicked.connect(self._view.ReturnAllOrders)
+        
         
              
         
