@@ -10,6 +10,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import *
 import sys
 
+#add version and author here
 
 '''
 START OF Font FORMATTING
@@ -2157,7 +2158,6 @@ class Ui_MainWindow(object):
         
             self.updating = 1
         else: 
-            self.orderdialog.Editdlg.close()
             QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
     
   
@@ -2343,7 +2343,7 @@ class TableView(QDialog):
         toolbar.setMovable(False)
 
         #var for number of total columns
-        self.NumCol = 8
+        self.NumCol = 9
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
@@ -2356,7 +2356,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ", "លុប/កែសម្រួល"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
@@ -2364,21 +2364,14 @@ class TableView(QDialog):
 
         
         #toolbar buttons
-        
-        btn_ac_delete = QAction(QIcon("icon/d1.png"), "Delete Customer", self) #delete
-        btn_ac_delete.triggered.connect(self.delete)
-        btn_ac_delete.setStatusTip("Delete Customer")
-        toolbar.addAction(btn_ac_delete)
 
+        
         btn_ac_refresh = QAction(QIcon("icon/r3.png"),"Refresh",self)   #refresh icon
         btn_ac_refresh.triggered.connect(self.loaddata)
         btn_ac_refresh.setStatusTip("Refresh Table")
         toolbar.addAction(btn_ac_refresh)
+        
 
-        btn_ac_edit = QAction(QIcon("icon/edit.png"),"Edit",self)   #edit icon
-        btn_ac_edit.triggered.connect(self.edit)
-        btn_ac_edit.setStatusTip("Edit Order")
-        toolbar.addAction(btn_ac_edit)
 
         
         btn_ac_search = QAction(QIcon("icon/s1.png"), "Search", self)  #search icon
@@ -2415,7 +2408,7 @@ class TableView(QDialog):
                 for column_number, data in enumerate(row_data):
                     item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemIsEnabled)
-                    item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                    item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
                     self.tableWidget.setItem(row_number, column_number,item)
                     self.tableWidget.setRowHeight(row_number, 50)
 
@@ -2427,11 +2420,11 @@ class TableView(QDialog):
                 data = "(គ្មានទិន្នន័យ)"
                 item = QTableWidgetItem(str(data))
                 item.setFlags(QtCore.Qt.ItemIsEnabled)
-                item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
                 self.tableWidget.setRowHeight(0, 50)
                 self.tableWidget.setItem(0, i, item)
                 
-
+        #progress percentage
         for row_number in range(0,len(all_rows)): 
             #combo box
             combo_box_options1 = ["0%","25%","50%","75%", "100%"]
@@ -2441,23 +2434,56 @@ class TableView(QDialog):
             combo.addItems(combo_box_options1)
             combo.setCurrentIndex(int(all_rows[row_number][7])) 
             combo.currentIndexChanged.connect(self.UpdateProgressPercent)
+
+
+            #add to table 
             self.tableWidget.setCellWidget(row_number,7,combo)	
+        
+        for row_number in range(0,len(all_rows)): 
+            
+            self.EditAndDeleteButtonsGroup = QGroupBox()
+            EditAndDeleteButtonsLayout = QHBoxLayout()
+
+
+            #create class for push button with icons next ver
+            self.btn_ac_edit = QtWidgets.QPushButton()
+            self.btn_ac_edit.setMaximumSize(30,30)
+            self.btn_ac_edit.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.btn_ac_edit.setAutoFillBackground(False)
+            self.btn_ac_edit.setObjectName("btn_ac_edit")
+            self.btn_ac_edit.setIcon(QtGui.QIcon('icon/edit.png'))
+            size = QtCore.QSize(25, 25)
+            self.btn_ac_edit.setIconSize(size)
+            self.btn_ac_edit.clicked.connect(self.edit)
+
+            
+            self.btn_ac_delete = QtWidgets.QPushButton()
+            self.btn_ac_delete.setMaximumSize(30,30)
+            self.btn_ac_delete.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.btn_ac_delete.setAutoFillBackground(False)
+            self.btn_ac_delete.setObjectName("btn_ac_delete")
+            self.btn_ac_delete.setIcon(QtGui.QIcon('icon/d1.png'))
+            size = QtCore.QSize(25, 25)
+            self.btn_ac_delete.setIconSize(size)
+            self.btn_ac_delete.clicked.connect(self.delete)
+
+
+            EditAndDeleteButtonsLayout.addWidget(self.btn_ac_delete)
+            EditAndDeleteButtonsLayout.addWidget(self.btn_ac_edit)
+
+            self.EditAndDeleteButtonsGroup.setLayout(EditAndDeleteButtonsLayout)
+            
+
+
+            #add to table
+            self.tableWidget.setCellWidget(row_number,8,self.EditAndDeleteButtonsGroup)	
+
 
         #add scrollbar 
         self.tableWidget.resizeRowsToContents()
 
     def UpdateProgressPercent(self, index):
         
-        #print(row_number)
-    
-
-        rows = sorted(set(index.row() for index in
-                        self.tableWidget.selectedIndexes()))
-        for row in rows:
-            print('Row %d is selected' % row)
-            #send new progress to database
-            print(index)
-
         #get customer ID from selected row 
         r = self.tableWidget.currentRow()
         customer_id = self.tableWidget.item(r,3).text()
@@ -2465,14 +2491,55 @@ class TableView(QDialog):
         #update table 
         UpdateProcess(index, customer_id)
 
+
+    #@QtCore.pyqtSlot()
     def delete(self):
-        self.Deletedlg = DeleteDialog()
-        self.Deletedlg.exec_()
+
+        button = self.EditAndDeleteButtonsGroup.sender()
+        if button:
+            row = self.tableWidget.indexAt(button.pos()).row()
+            print(row)
+            #id is at column 3
+            customer_id = self.tableWidget.item(row,3).text()
+            customer_name = self.tableWidget.item(row,2).text()
+            #check if user is sure
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setText(f"Are you sure you want to delete customer {customer_name} with ID: {customer_id} ?")
+            msgBox.setWindowTitle("Delete Customer")
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            
+
+            returnValue = msgBox.exec()
+            if returnValue == QMessageBox.Ok:
+                self.deletecustomer(customer_id=customer_id)
+                    
+            
+
+        #delete from table 
+        
+
+        
+        #refresh automatically
+        self.loaddata(customer_name= "")
     
+    #@QtCore.pyqtSlot()
     def edit(self): 
-        self.Editdlg = EditDialog()
-        self.Editdlg.submitted.connect(self.EditCustomerID)
-        self.Editdlg.exec_()
+
+        button = self.sender()
+        if button:
+            row = self.tableWidget.indexAt(button.pos()).row()
+
+            #customer id is at column 3
+            customer_id = self.tableWidget.item(row,3).text()
+
+            
+        #send customer id to submit order window 
+
+        self.EditCustomerID(customer_id=customer_id)
+
+
+
 
     def search(self):
         self.Searchdlg = SearchDialog()
@@ -2481,51 +2548,19 @@ class TableView(QDialog):
 
     def EditCustomerID(self, customer_id):
         
+        print(customer_id)
         self.customerEditID.emit(
             customer_id
         )
 
         self.close()
 
-#class to delete customer             
-class DeleteDialog(QDialog):
-    
-    def __init__(self, *args, **kwargs):
-        super(DeleteDialog, self).__init__(*args, **kwargs)
 
-        self.setWindowFlags(
-            QtCore.Qt.Window |
-            QtCore.Qt.CustomizeWindowHint |
-            QtCore.Qt.WindowTitleHint |
-            QtCore.Qt.WindowCloseButtonHint |
-            QtCore.Qt.WindowStaysOnTopHint
-            )
-        
-        self.QBtn = QPushButton()
-        self.QBtn.setText("Delete")
-
-        self.setWindowTitle("Delete Customer")
-        self.setFixedWidth(300)
-        self.setFixedHeight(100)
-        self.QBtn.clicked.connect(self.deletecustomer)
-        layout = QVBoxLayout()
-
-        self.deleteinput = QLineEdit()
-        self.onlyInt = QtGui.QIntValidator()
-        self.deleteinput.setValidator(self.onlyInt)
-        self.deleteinput.setFont(SmallKhmerFont)
-        self.deleteinput.setPlaceholderText("លេខអតិធិជន")
-        layout.addWidget(self.deleteinput)
-        layout.addWidget(self.QBtn)
-        self.setLayout(layout)
-
-    def deletecustomer(self):
+    def deletecustomer(self, customer_id):
         
         ''' function to delete all customer details from database'''
 
-        delrol = ""
-        delrol = self.deleteinput.text()
-
+        delrol = customer_id
         if delrol != "":
             try:
                 #delete customer
@@ -2577,63 +2612,17 @@ class DeleteDialog(QDialog):
 
                 
                 
-                self.close()
+                #self.close()
                 QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
 
             except Exception:
 
                 
-                self.close()
+                #self.close()
                 QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
 
 
-#dialog class to edit 1 order's details
-class EditDialog(QDialog):
 
-    submitted = QtCore.pyqtSignal(str)
-    
-    def __init__(self, *args, **kwargs):
-        super(EditDialog, self).__init__(*args, **kwargs)
-        
-        self.setWindowFlags(
-            QtCore.Qt.Window |
-            QtCore.Qt.CustomizeWindowHint |
-            QtCore.Qt.WindowTitleHint |
-            QtCore.Qt.WindowCloseButtonHint |
-            QtCore.Qt.WindowStaysOnTopHint
-            )
-
-
-        self.QBtn = QPushButton()
-        self.QBtn.setText("Edit")
-
-        self.setWindowTitle("Edit Customer")
-        self.setFixedWidth(300)
-        self.setFixedHeight(100)
-        self.QBtn.clicked.connect(self.Editcustomer)
-        layout = QVBoxLayout()
-
-        self.Editinput = QLineEdit()
-        self.onlyInt = QtGui.QIntValidator()
-        self.Editinput.setValidator(self.onlyInt)
-        self.Editinput.setFont(SmallKhmerFont)
-        self.Editinput.setPlaceholderText("លេខអតិធិជន")
-
-
-              
-        
-        layout.addWidget(self.Editinput)
-        layout.addWidget(self.QBtn)
-        self.setLayout(layout)
-
-    def Editcustomer(self):
-        Editrol = ""
-        Editrol = self.Editinput.text()
-        if Editrol != "":
-            self.submitted.emit(
-                Editrol
-            )
-            self.close()
 
 
 #dialog class to search for customer's orders
