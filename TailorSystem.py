@@ -2343,7 +2343,7 @@ class TableView(QDialog):
         toolbar.setMovable(False)
 
         #var for number of total columns
-        self.NumCol = 9
+        self.NumCol = 10
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
@@ -2356,7 +2356,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ", "លុប/កែសម្រួល"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ", "លុប", "កែសម្រួល"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
@@ -2440,43 +2440,37 @@ class TableView(QDialog):
             self.tableWidget.setCellWidget(row_number,7,combo)	
         
         for row_number in range(0,len(all_rows)): 
-            
-            self.EditAndDeleteButtonsGroup = QGroupBox()
-            EditAndDeleteButtonsLayout = QHBoxLayout()
 
 
-            #create class for push button with icons next ver
-            self.btn_ac_edit = QtWidgets.QPushButton()
-            self.btn_ac_edit.setMaximumSize(30,30)
-            self.btn_ac_edit.setLayoutDirection(QtCore.Qt.LeftToRight)
-            self.btn_ac_edit.setAutoFillBackground(False)
-            self.btn_ac_edit.setObjectName("btn_ac_edit")
-            self.btn_ac_edit.setIcon(QtGui.QIcon('icon/edit.png'))
+            btn_ac_delete = QtWidgets.QPushButton()
+            #btn_ac_delete.setMaximumSize(30,30)
+            btn_ac_delete.setLayoutDirection(QtCore.Qt.LeftToRight)
+            btn_ac_delete.setAutoFillBackground(False)
+            btn_ac_delete.setObjectName("btn_ac_delete")
+            btn_ac_delete.setIcon(QtGui.QIcon('icon/d1.png'))
             size = QtCore.QSize(25, 25)
-            self.btn_ac_edit.setIconSize(size)
-            self.btn_ac_edit.clicked.connect(self.edit)
-
-            
-            self.btn_ac_delete = QtWidgets.QPushButton()
-            self.btn_ac_delete.setMaximumSize(30,30)
-            self.btn_ac_delete.setLayoutDirection(QtCore.Qt.LeftToRight)
-            self.btn_ac_delete.setAutoFillBackground(False)
-            self.btn_ac_delete.setObjectName("btn_ac_delete")
-            self.btn_ac_delete.setIcon(QtGui.QIcon('icon/d1.png'))
-            size = QtCore.QSize(25, 25)
-            self.btn_ac_delete.setIconSize(size)
-            self.btn_ac_delete.clicked.connect(self.delete)
-
-
-            EditAndDeleteButtonsLayout.addWidget(self.btn_ac_delete)
-            EditAndDeleteButtonsLayout.addWidget(self.btn_ac_edit)
-
-            self.EditAndDeleteButtonsGroup.setLayout(EditAndDeleteButtonsLayout)
-            
+            btn_ac_delete.setIconSize(size)
+            btn_ac_delete.clicked.connect(self.delete)
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,8,self.EditAndDeleteButtonsGroup)	
+            self.tableWidget.setCellWidget(row_number,8,btn_ac_delete)	
+
+        for row_number in range(0,len(all_rows)): 
+            
+            btn_ac_edit = QtWidgets.QPushButton()
+            #btn_ac_edit.setMaximumSize(30,30)
+            btn_ac_edit.setLayoutDirection(QtCore.Qt.LeftToRight)
+            btn_ac_edit.setAutoFillBackground(False)
+            btn_ac_edit.setObjectName("btn_ac_edit")
+            btn_ac_edit.setIcon(QtGui.QIcon('icon/edit.png'))
+            size = QtCore.QSize(25, 25)
+            btn_ac_edit.setIconSize(size)
+            btn_ac_edit.clicked.connect(self.edit)
+
+
+            #add to table
+            self.tableWidget.setCellWidget(row_number,9,btn_ac_edit)	
 
 
         #add scrollbar 
@@ -2492,27 +2486,26 @@ class TableView(QDialog):
         UpdateProcess(index, customer_id)
 
 
-    #@QtCore.pyqtSlot()
     def delete(self):
 
-        button = self.EditAndDeleteButtonsGroup.sender()
-        if button:
-            row = self.tableWidget.indexAt(button.pos()).row()
-            print(row)
-            #id is at column 3
-            customer_id = self.tableWidget.item(row,3).text()
-            customer_name = self.tableWidget.item(row,2).text()
-            #check if user is sure
-            msgBox = QMessageBox()
-            msgBox.setIcon(QMessageBox.Information)
-            msgBox.setText(f"Are you sure you want to delete customer {customer_name} with ID: {customer_id} ?")
-            msgBox.setWindowTitle("Delete Customer")
-            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            
 
-            returnValue = msgBox.exec()
-            if returnValue == QMessageBox.Ok:
-                self.deletecustomer(customer_id=customer_id)
+        r = self.tableWidget.currentRow()
+        customer_id = self.tableWidget.item(r,3).text()
+        customer_name = self.tableWidget.item(r,2).text()
+        #print(customer_id)
+
+        
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Information)
+        msgBox.setText(f"Are you sure you want to delete customer {customer_name} with ID: {customer_id} ?")
+        msgBox.setWindowTitle("Delete Customer")
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    
+
+        returnValue = msgBox.exec()
+        if returnValue == QMessageBox.Ok:
+            self.deletecustomer(customer_id=customer_id)
+        
                     
             
 
@@ -2526,12 +2519,8 @@ class TableView(QDialog):
     #@QtCore.pyqtSlot()
     def edit(self): 
 
-        button = self.sender()
-        if button:
-            row = self.tableWidget.indexAt(button.pos()).row()
-
-            #customer id is at column 3
-            customer_id = self.tableWidget.item(row,3).text()
+        r = self.tableWidget.currentRow()
+        customer_id = self.tableWidget.item(r,3).text()
 
             
         #send customer id to submit order window 
