@@ -24,10 +24,6 @@ BigKhmerFont = QtGui.QFont()
 BigKhmerFont.setFamily("Khmer OS")
 BigKhmerFont.setPointSize(12)
 
-DeadlineSmallKhmerFont = QtGui.QFont()
-DeadlineSmallKhmerFont.setFamily("Khmer OS")
-DeadlineSmallKhmerFont.setPointSize(14)
-
 ENGFont = QtGui.QFont()
 ENGFont.setFamily("Palatino Linotype")
 ENGFont.setPointSize(15)
@@ -211,8 +207,8 @@ class Ui_MainWindow(object):
         #label to show date chosen
         
         self.DeadlineSelectedLabel = QtWidgets.QLabel()
-        self.DeadlineSelectedLabel.setMaximumSize(200,50)
-        self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
+        self.DeadlineSelectedLabel.setMaximumSize(300,50)
+        self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
         self.DeadlineSelectedLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DeadlineSelectedLabel.setAutoFillBackground(True)
         self.DeadlineSelectedLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -896,6 +892,7 @@ class Ui_MainWindow(object):
 
         self.ShirtRadio = QtWidgets.QRadioButton()
         self.ShirtRadio.setFont(SmallKhmerFont)
+        self.ShirtRadio.setChecked(True)
         
         self.ShirtRadio.setObjectName("ShirtRadio")
 
@@ -927,7 +924,7 @@ class Ui_MainWindow(object):
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(621, 531)
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
         self.RadioPicLabel.setObjectName("RadioPicLabel")
 
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
@@ -1639,6 +1636,8 @@ class Ui_MainWindow(object):
         self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.PantRadio.setStyleSheet("color: black; background-color: light grey")
         self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+
+        #why? 
         self.SkirtRadio.setChecked(False)
         self.ShirtRadio.setChecked(False)
         self.PantRadio.setChecked(False)
@@ -1663,11 +1662,6 @@ class Ui_MainWindow(object):
                 self.MaterialsLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
             if color == "":
                 self.ColorLabel.setStyleSheet("color: red; background-color: #d7dbdd")
-            if clothes_type == "":
-                self.SkirtRadio.setStyleSheet("color: red; background-color: light grey")
-                self.ShirtRadio.setStyleSheet("color: red; background-color: light grey")
-                self.PantRadio.setStyleSheet("color: red; background-color: light grey")
-                self.DressRadio.setStyleSheet("color: red; background-color: light grey")
             self.feedbackSubmit(0)
 
 
@@ -1862,8 +1856,8 @@ class Ui_MainWindow(object):
         self.AddressLabel.setText(_translate("MainWindow", "ឤស័យដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
-        self.Cancel.setText(_translate("MainWindow", "Clear"))
-        self.Submit.setText(_translate("MainWindow", "OK"))
+        self.Cancel.setText(_translate("MainWindow", "បោះបង់"))
+        self.Submit.setText(_translate("MainWindow", "បញ្ចូល"))
         self.PriceBox.setText(_translate("MainWindow", ""))
         self.PriceLabel.setText(_translate("MainWindow", "តម្លៃ: ($)"))
         self.ShirtDressSkirtBox.setTitle(_translate("MainWindow", "អាវ រ៉ូប​ និងសំពត់"))
@@ -1918,7 +1912,7 @@ class Ui_MainWindow(object):
         self.CmThigh.setText(_translate("MainWindow", "cm"))
         self.CmCalf.setText(_translate("MainWindow", "cm"))
         self.CmAnkle.setText(_translate("MainWindow", "cm"))
-        self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
+        self.DeadlineSelectedLabel.setText(_translate("MainWindow", "សូមចុចរូបប្រតិទិន"))
         self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd ")
         self.SubmitMsg.setText(_translate("MainWindow", ""))
         
@@ -1992,7 +1986,7 @@ class Ui_MainWindow(object):
             self.StaffNameBox.setText(_translate("MainWindow", str(OrderDetails['staff'])))
             self.DeadlineBox.setText(_translate("MainWindow", str(OrderDetails['deadline'])))
             deadline = OrderDetails['deadline'].strftime("%d/%m/%Y")
-            self.DeadlineSelectedLabel.setFont(DeadlineSmallKhmerFont)
+            self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
             self.DeadlineSelectedLabel.setText(_translate("MainWindow", deadline))
 
             self.StyleBox.setText(_translate("MainWindow", str(OrderDetails['style'])))
@@ -2295,7 +2289,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិធិជន", "លេខអតិធិជន", "បុគ្គលិកទទួលបន្ទុក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
