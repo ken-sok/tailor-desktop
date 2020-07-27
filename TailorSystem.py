@@ -2342,11 +2342,14 @@ class TableView(QDialog):
 
         toolbar.setMovable(False)
 
+        #var for number of total columns
+        self.NumCol = 8
+
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
         #self.tableWidget.resize(800, 600)
         self.tableWidget.setAlternatingRowColors(True)
-        self.tableWidget.setColumnCount(8)
+        self.tableWidget.setColumnCount(self.NumCol)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
@@ -2419,12 +2422,15 @@ class TableView(QDialog):
         #customer name cannot be found 
         else: 
             self.tableWidget.insertRow(0)
-            data = "គ្មានទិន្នន័យ"
-            item = QTableWidgetItem(str(data))
-            item.setFlags(QtCore.Qt.ItemIsEnabled)
-            item.setTextAlignment(QtCore.Qt.AlignHCenter)
-            self.tableWidget.setItem(row_number, column_number,item)
-            self.tableWidget.setRowHeight(row_number, 50)
+            for i in range(0, self.NumCol): 
+                
+                data = "(គ្មានទិន្នន័យ)"
+                item = QTableWidgetItem(str(data))
+                item.setFlags(QtCore.Qt.ItemIsEnabled)
+                item.setTextAlignment(QtCore.Qt.AlignHCenter)
+                self.tableWidget.setRowHeight(0, 50)
+                self.tableWidget.setItem(0, i, item)
+                
 
         for row_number in range(0,len(all_rows)): 
             #combo box
