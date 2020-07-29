@@ -10,7 +10,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import *
 import sys
 
-#add version and author here
+__version__ = '1.0'
+__author__ = 'Chhaikheang Sok & Panha Teng'
 
 '''
 START OF Font FORMATTING
