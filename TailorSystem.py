@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
     added_customer = 0
     added_order = 0
     added_material = 0 
-    clothes_type = ""
+    clothes_type = "អាវ"
     updating = 0
     customer_id = 0
 
@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         '''
         START OF MAIN WINDOW
         '''
-
+        #MainWindow.setStyleSheet("background-color: cyan")
         MainWindow.setWindowTitle("Tailor Management System")
         #MainWindow.showMaximized()
         MainLayout = QGridLayout()
@@ -78,6 +78,7 @@ class Ui_MainWindow(object):
         self.AddressLabel.setMaximumSize(110,50)
         self.AddressLabel.setAutoFillBackground(False)
         self.AddressLabel.setObjectName("AddressLabel")
+        
 
         #CustomerName
         self.CustomerNameLabel = QtWidgets.QLabel()
@@ -85,6 +86,7 @@ class Ui_MainWindow(object):
         self.CustomerNameLabel.setMaximumSize(110,50)
         self.CustomerNameLabel.setAutoFillBackground(False)
         self.CustomerNameLabel.setObjectName("CustomerNameLabel")
+        self.CustomerNameLabel.setStyleSheet("background-color: #B2E2F2")
 
 
 
@@ -102,6 +104,7 @@ class Ui_MainWindow(object):
         self.CustomerNameBox.setAlignment(Qt.AlignLeft)
         self.CustomerNameBox.setFont(SmallKhmerFont)
         self.CustomerNameBox.setObjectName("CustomerNameBox")
+        self.CustomerNameBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         self.PhoneBox = QtWidgets.QLineEdit()
         self.PhoneBox.setMaximumSize(300, 50)
@@ -110,11 +113,13 @@ class Ui_MainWindow(object):
         self.PhoneBox.setValidator(self.onlyInt)
         self.PhoneBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PhoneBox.setObjectName("PhoneBox")
+        self.PhoneBox.setStyleSheet("background-color: white; border: 1px solid blue;")
         
         self.AddressBox = QtWidgets.QPlainTextEdit()
         self.AddressBox.setMaximumSize(300, 50)
         self.AddressBox.setFont(SmallKhmerFont)
         self.AddressBox.setObjectName("AddressBox")
+        self.AddressBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
 
         '''
@@ -123,7 +128,7 @@ class Ui_MainWindow(object):
         #customer box
 
         self.CustomerBoxGroup = QtWidgets.QGroupBox()
-        self.CustomerBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.CustomerBoxGroup.setStyleSheet("background-color: #B8E2F2;")
         self.CustomerBoxGroup.setMaximumSize(550, 400)
         
         CustomerBoxLayout = QGridLayout()
@@ -145,8 +150,6 @@ class Ui_MainWindow(object):
         self.CustomerBoxGroup.setLayout(CustomerBoxLayout)
 
 
-
-        #MainLayout.addWidget(self.CustomerBoxGroup, 0, 0)
 
         '''
         END OF Customer BOX 
@@ -206,6 +209,7 @@ class Ui_MainWindow(object):
         self.StaffNameBox.setText("")
         self.StaffNameBox.setAlignment(QtCore.Qt.AlignCenter)
         self.StaffNameBox.setObjectName("StaffNameBox")
+        self.StaffNameBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         #label to show date chosen
         
@@ -235,7 +239,7 @@ class Ui_MainWindow(object):
 
         self.StaffBoxGroup = QtWidgets.QGroupBox()
         self.StaffBoxGroup.setMaximumSize(550,400)
-        self.StaffBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.StaffBoxGroup.setStyleSheet("background-color: #B8E2F2; ")
 
         StaffBoxLayout = QGridLayout()
         #StaffBoxLayout.setSpacing(10)
@@ -259,7 +263,7 @@ class Ui_MainWindow(object):
 
         self.StaffBoxGroup.setLayout(StaffBoxLayout)
 
-        #MainLayout.addWidget(self.StaffBoxGroup, 1, 0)
+        
                
         '''
         END OF Staff BOX 
@@ -297,7 +301,7 @@ class Ui_MainWindow(object):
 
         self.MaterialsLabel = QtWidgets.QLabel()
         self.MaterialsLabel.setFont(SmallKhmerFont)
-        self.MaterialsLabel.setMaximumSize(140,50)
+        self.MaterialsLabel.setMaximumSize(110,50)
         self.MaterialsLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.MaterialsLabel.setAutoFillBackground(False)
         self.MaterialsLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -308,16 +312,19 @@ class Ui_MainWindow(object):
         self.MaterialBox.setFont(SmallKhmerFont)
         self.MaterialBox.setMaximumSize(300,50)
         self.MaterialBox.setObjectName("MaterialBox")
+        self.MaterialBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         self.ColorBox = QtWidgets.QLineEdit()
         self.ColorBox.setFont(SmallKhmerFont)
         self.ColorBox.setMaximumSize(300,50)
         self.ColorBox.setObjectName("ColorBox")
+        self.ColorBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         self.StyleBox = QtWidgets.QLineEdit()
         self.StyleBox.setFont(SmallKhmerFont)
         self.StyleBox.setMaximumSize(300,50)
         self.StyleBox.setObjectName("StyleBox")
+        self.StyleBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         
 
@@ -325,7 +332,7 @@ class Ui_MainWindow(object):
         #preferences box
         self.PreferencesBoxGroup = QtWidgets.QGroupBox()
         self.PreferencesBoxGroup.setMaximumSize(550,400)
-        self.PreferencesBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.PreferencesBoxGroup.setStyleSheet("background-color: #B8E2F2; ")
 
         PreferencesBoxLayout = QGridLayout()
 
@@ -370,13 +377,13 @@ class Ui_MainWindow(object):
         self.SpecialReqBox = QtWidgets.QPlainTextEdit()
         self.SpecialReqBox.setFont(SmallKhmerFont)
         self.SpecialReqBox.setObjectName("SpecialReqBox")
-
+        self.SpecialReqBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         #special req box
         
         self.SpecReqBoxGroup = QtWidgets.QGroupBox()
         #self.SpecReqBoxGroup.setMaximumSize(550,400)
-        self.SpecReqBoxGroup.setStyleSheet("background-color: #d7dbdd; ")
+        self.SpecReqBoxGroup.setStyleSheet("background-color: #B8E2F2; ")
 
         SpecReqBoxLayout = QGridLayout()
     
@@ -420,12 +427,12 @@ class Ui_MainWindow(object):
         self.NeckArmHoldBox = QtWidgets.QLineEdit()
         self.NeckArmHoldBox.setAlignment(QtCore.Qt.AlignCenter)
         self.NeckArmHoldBox.setObjectName("NeckArmHoldBox")
-        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldBox, 1, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldBox, 1, 7, 1, 1)
         
         self.WaistBox = QtWidgets.QLineEdit()
         self.WaistBox.setAlignment(QtCore.Qt.AlignCenter)
         self.WaistBox.setObjectName("WaistBox")
-        self.ShirtDressSkirtLayout.addWidget(self.WaistBox, 6, 4, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.WaistBox, 0, 7, 1, 1)
 
         self.ABBox = QtWidgets.QLineEdit()
         self.ABBox.setAlignment(QtCore.Qt.AlignCenter)
@@ -435,13 +442,13 @@ class Ui_MainWindow(object):
         self.DressSkirtWaistLabel = QtWidgets.QLabel()
         self.DressSkirtWaistLabel.setObjectName("DressSkirtWaistLabel")
         self.DressSkirtWaistLabel.setFont(SmallKhmerFont)
-        self.ShirtDressSkirtLayout.addWidget(self.DressSkirtWaistLabel, 6, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.DressSkirtWaistLabel, 0, 6, 1, 1, QtCore.Qt.AlignHCenter)
 
 
         self.UpperHipsLabel = QtWidgets.QLabel()
         self.UpperHipsLabel.setFont(SmallKhmerFont)
         self.UpperHipsLabel.setObjectName("UpperHipsLabel")
-        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsLabel, 3, 6, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsLabel, 5, 6, 1, 1)
         
         self.CmUpperHips = QtWidgets.QLabel()
         self.CmUpperHips.setFont(ENGFont)
@@ -449,7 +456,7 @@ class Ui_MainWindow(object):
         self.CmUpperHips.setAutoFillBackground(False)
         self.CmUpperHips.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmUpperHips.setObjectName("CmUpperHips")
-        self.ShirtDressSkirtLayout.addWidget(self.CmUpperHips, 3, 8, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmUpperHips, 5, 8, 1, 1)
 
 
 
@@ -487,7 +494,7 @@ class Ui_MainWindow(object):
         self.CmNeckArmHold.setAutoFillBackground(False)
         self.CmNeckArmHold.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmNeckArmHold.setObjectName("CmNeckArmHold")
-        self.ShirtDressSkirtLayout.addWidget(self.CmNeckArmHold, 1, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmNeckArmHold, 1, 8, 1, 1)
 
 
         self.NeckArmHoldLabel = QtWidgets.QLabel()
@@ -496,7 +503,7 @@ class Ui_MainWindow(object):
         self.NeckArmHoldLabel.setAutoFillBackground(False)
         self.NeckArmHoldLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.NeckArmHoldLabel.setObjectName("NeckArmHoldLabel")
-        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldLabel, 1, 3, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.NeckArmHoldLabel, 1, 6, 1, 1, QtCore.Qt.AlignHCenter)
         
         
         self.CmAB = QtWidgets.QLabel()
@@ -547,7 +554,7 @@ class Ui_MainWindow(object):
         self.CmAF.setAutoFillBackground(False)
         self.CmAF.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmAF.setObjectName("CmAF")
-        self.ShirtDressSkirtLayout.addWidget(self.CmAF, 6, 2, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmAF, 1, 5, 1, 1,)
 
 
         self.CmShoulder = QtWidgets.QLabel()
@@ -590,7 +597,7 @@ class Ui_MainWindow(object):
         self.CmDressSkirtWaist.setAutoFillBackground(False)
         self.CmDressSkirtWaist.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmDressSkirtWaist.setObjectName("CmDressSkirtWaist")
-        self.ShirtDressSkirtLayout.addWidget(self.CmDressSkirtWaist, 6, 5, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmDressSkirtWaist, 0, 8, 1, 1)
 
 
         self.SleeveLengthLabel = QtWidgets.QLabel()
@@ -599,7 +606,7 @@ class Ui_MainWindow(object):
         self.SleeveLengthLabel.setAutoFillBackground(False)
         self.SleeveLengthLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.SleeveLengthLabel.setObjectName("SleeveLengthLabel")
-        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthLabel, 1, 6, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthLabel, 4, 6, 1, 1, QtCore.Qt.AlignHCenter)
 
 
         self.CmSleeveLength = QtWidgets.QLabel()
@@ -608,7 +615,7 @@ class Ui_MainWindow(object):
         self.CmSleeveLength.setAutoFillBackground(False)
         self.CmSleeveLength.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmSleeveLength.setObjectName("CmSleeveLength")
-        self.ShirtDressSkirtLayout.addWidget(self.CmSleeveLength, 1, 8, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmSleeveLength, 4, 8, 1, 1)
 
         self.AboveBustLabel = QtWidgets.QLabel()
         self.AboveBustLabel.setFont(SmallKhmerFont)
@@ -621,7 +628,7 @@ class Ui_MainWindow(object):
         self.CmArmPit.setAutoFillBackground(False)
         self.CmArmPit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.CmArmPit.setObjectName("CmArmPit")
-        self.ShirtDressSkirtLayout.addWidget(self.CmArmPit, 0, 8, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.CmArmPit, 3, 8, 1, 1)
 
         self.ArmpitLabel = QtWidgets.QLabel()
         self.ArmpitLabel.setFont(SmallKhmerFont)
@@ -629,7 +636,7 @@ class Ui_MainWindow(object):
         self.ArmpitLabel.setAutoFillBackground(False)
         self.ArmpitLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.ArmpitLabel.setObjectName("ArmpitLabel")
-        self.ShirtDressSkirtLayout.addWidget(self.ArmpitLabel, 0, 6, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.ArmpitLabel, 3, 6, 1, 1, QtCore.Qt.AlignHCenter)
 
 
 
@@ -669,7 +676,7 @@ class Ui_MainWindow(object):
         self.AFBox = QtWidgets.QLineEdit()
         self.AFBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AFBox.setObjectName("AFBox")
-        self.ShirtDressSkirtLayout.addWidget(self.AFBox, 6, 1, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.AFBox, 1, 4, 1, 1,)
         
 
         self.CenterBackBox = QtWidgets.QLineEdit()
@@ -682,14 +689,14 @@ class Ui_MainWindow(object):
         self.UpperHipsBox = QtWidgets.QLineEdit()
         self.UpperHipsBox.setAlignment(QtCore.Qt.AlignCenter)
         self.UpperHipsBox.setObjectName("UpperHipsBox")
-        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsBox, 3, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.UpperHipsBox, 5, 7, 1, 1)
 
 
         
         self.ArmpitBox = QtWidgets.QLineEdit()
         self.ArmpitBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ArmpitBox.setObjectName("ArmpitBox")
-        self.ShirtDressSkirtLayout.addWidget(self.ArmpitBox, 0, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.ArmpitBox, 3, 7, 1, 1)
 
         self.SkirtLengthLabel = QtWidgets.QLabel()
         self.SkirtLengthLabel.setObjectName("SkirtLengthLabel")
@@ -704,7 +711,7 @@ class Ui_MainWindow(object):
         self.SleeveLengthBox = QtWidgets.QLineEdit()
         self.SleeveLengthBox.setAlignment(QtCore.Qt.AlignCenter)
         self.SleeveLengthBox.setObjectName("SleeveLengthBox")
-        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthBox, 1, 7, 1, 1)
+        self.ShirtDressSkirtLayout.addWidget(self.SleeveLengthBox, 4, 7, 1, 1)
 
         self.AFLabel = QtWidgets.QLabel()
         self.AFLabel.setFont(SmallKhmerFont)
@@ -712,7 +719,7 @@ class Ui_MainWindow(object):
         self.AFLabel.setAutoFillBackground(False)
         self.AFLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.AFLabel.setObjectName("AFLabel")
-        self.ShirtDressSkirtLayout.addWidget(self.AFLabel, 6, 0, 1, 1, QtCore.Qt.AlignHCenter)
+        self.ShirtDressSkirtLayout.addWidget(self.AFLabel, 1, 3, 1, 1, QtCore.Qt.AlignHCenter)
         
 
 
@@ -736,6 +743,7 @@ class Ui_MainWindow(object):
         self.PantGroupBox.setGeometry(QtCore.QRect(940, 450, 320, 511))
         self.PantGroupBox.setObjectName("PantGroupBox")
         self.PantGroupBox.setFont(BigKhmerFont)
+        
 
         self.PantGroupLayout = QtWidgets.QGridLayout()
         self.PantGroupLayout.setObjectName("PantGroupLayout")
@@ -889,6 +897,7 @@ class Ui_MainWindow(object):
         self.PreviewGroupBox.setFont(BigKhmerFont)
         self.PreviewGroupBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.PreviewGroupBox.setObjectName("PreviewGroupBox")
+        self.PreviewGroupBox.setStyleSheet("background-color: #B8E2F2")
 
 
         self.RadioGroupBoxLayout = QtWidgets.QHBoxLayout()
@@ -896,13 +905,15 @@ class Ui_MainWindow(object):
         self.ShirtRadio = QtWidgets.QRadioButton()
         self.ShirtRadio.setFont(SmallKhmerFont)
         self.ShirtRadio.setChecked(True)
-        
-        self.ShirtRadio.setObjectName("ShirtRadio")
 
+        self.ShirtRadio.setObjectName("ShirtRadio")
+        #self.ShirtRadio.setLayoutDirection(Qt.RightToLeft)
+        
         self.DressRadio = QtWidgets.QRadioButton()
         self.DressRadio.setFont(SmallKhmerFont)
         
         self.DressRadio.setObjectName("DressRadio")
+        
 
         self.PantRadio = QtWidgets.QRadioButton()
         self.PantRadio.setFont(SmallKhmerFont)
@@ -994,6 +1005,7 @@ class Ui_MainWindow(object):
         self.PriceBox.setAutoFillBackground(False)
         self.PriceBox.setAlignment(QtCore.Qt.AlignCenter)
         self.PriceBox.setObjectName("PriceBox")
+        self.PriceBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
     
         self.PriceLabel = QtWidgets.QLabel()
@@ -1018,6 +1030,7 @@ class Ui_MainWindow(object):
         self.Cancel.setAutoFillBackground(False)
         self.Cancel.setFont(SmallKhmerFont)
         self.Cancel.setObjectName("Cancel")
+        self.Cancel.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         self.Submit = QtWidgets.QPushButton()
         self.Submit.setMaximumSize(160, 50)
@@ -1025,6 +1038,7 @@ class Ui_MainWindow(object):
         self.Submit.setAutoFillBackground(False)
         self.Submit.setFont(SmallKhmerFont)
         self.Submit.setObjectName("Submit")
+        self.Submit.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         SubmitCancelLayout.addWidget(self.Cancel)
         SubmitCancelLayout.addWidget(self.Submit)
@@ -1181,7 +1195,9 @@ class Ui_MainWindow(object):
     def select_pic(self):
         
         radioBtn = self.PreviewGroupBox.sender()
-        self.clothes_type = ""
+
+        #default selection
+        self.clothes_type = "អាវ"
 
 
 
@@ -1344,6 +1360,7 @@ class Ui_MainWindow(object):
                                 "}")
 
         self.PantWaistBox.setFont(SmallKhmerFont)
+
         if radioBtn.isChecked():
         
             self.clothes_type = radioBtn.text()
@@ -1677,25 +1694,30 @@ class Ui_MainWindow(object):
       
         #reset color
         self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
-        self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+        self.CustomerNameLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.DeadlineLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.PhoneLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.StyleLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.MaterialsLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+        self.ColorLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
 
         self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.PantRadio.setStyleSheet("color: black; background-color: light grey")
         self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
 
+        '''
         #why? 
+        
         self.SkirtRadio.setChecked(False)
-        self.ShirtRadio.setChecked(False)
         self.PantRadio.setChecked(False)
         self.DressRadio.setChecked(False) 
 
+        #default 
+        self.ShirtRadio.setChecked(True)
+        '''
+        
 
         if (price == "" or customer_name == "" or deadline == "សូមចុចរូបប្រតិទិន" or telephone == "" or style == "" or material == ""  or color == ""
         or clothes_type == ""): 
@@ -1704,17 +1726,17 @@ class Ui_MainWindow(object):
             if price == "": 
                 self.PriceLabel.setStyleSheet("color: red; background-color: light grey") 
             if customer_name == "":
-                self.CustomerNameLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+                self.CustomerNameLabel.setStyleSheet("color: red") 
             if deadline == "សូមចុចរូបប្រតិទិន":
-                self.DeadlineLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+                self.DeadlineLabel.setStyleSheet("color: red") 
             if telephone == "":
-                self.PhoneLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+                self.PhoneLabel.setStyleSheet("color: red") 
             if style == "": 
-                self.StyleLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+                self.StyleLabel.setStyleSheet("color: red") 
             if material == "":
-                self.MaterialsLabel.setStyleSheet("color: red; background-color: #d7dbdd") 
+                self.MaterialsLabel.setStyleSheet("color: red") 
             if color == "":
-                self.ColorLabel.setStyleSheet("color: red; background-color: #d7dbdd")
+                self.ColorLabel.setStyleSheet("color: red")
             self.feedbackSubmit(0)
 
 
@@ -1722,13 +1744,13 @@ class Ui_MainWindow(object):
         else: 
             
             self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
-            self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-            self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+            self.CustomerNameLabel.setStyleSheet("color: #B8E2F2; background-color: #B8E2F2;") 
+            self.DeadlineLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+            self.PhoneLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+            self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+            self.StyleLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+            self.MaterialsLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
+            self.ColorLabel.setStyleSheet("color: black; background-color: #B2E2F2")
             self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
             self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
             self.PantRadio.setStyleSheet("color: black; background-color: light grey")
@@ -1899,7 +1921,7 @@ class Ui_MainWindow(object):
         if (completed): 
             self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការជោគជ័យ!"))
         elif (completed == 0) : 
-            self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការបរាជ័យ!សូមបំពេញព័ត៍មានបន្ថែម"))
+            self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការបរាជ័យ!សូមបំពេញព័ត៌មានបន្ថែម"))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1979,7 +2001,7 @@ class Ui_MainWindow(object):
         #menu buttons
         self.ActionNewOrder.setText(_translate("MainWindow", "កម្មង់ថ្មី"))
         self.ActionAbout.setText(_translate("MainWindow", "អំពីកម្មវិធី"))
-        self.ActionViewAllOrders.setText(_translate("MainWindow", "មើលការកម្មង់ទាំងអស់"))
+        self.ActionViewAllOrders.setText(_translate("MainWindow", "ទិន្នន័យ"))
 
         
         
@@ -2036,7 +2058,7 @@ class Ui_MainWindow(object):
 
         #alter view 
         _translate = QtCore.QCoreApplication.translate
-        
+        print(len(OrderDetails))
         if (len(OrderDetails) > 0): 
         
             self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
@@ -2178,14 +2200,14 @@ class Ui_MainWindow(object):
         self.SubmitMsg.setText(_translate("MainWindow", ''))
         self.SpecialReqBox.setPlainText(_translate("MainWindow", ''))
         self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
-        self.CustomerNameLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.DeadlineLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
-        self.PhoneLabel.setStyleSheet("color: black; background-color: #d7dbdd") 
+        self.CustomerNameLabel.setStyleSheet("color: black") 
+        self.DeadlineLabel.setStyleSheet("color: black") 
+        self.PhoneLabel.setStyleSheet("color: black") 
         self.DeadlineBox.setStyleSheet("color: black; background-color: white")
         self.DeadlineSelectedLabel.setText(_translate("MainWindow", 'សូមចុចរូបប្រតិទិន'))
-        self.StyleLabel.setStyleSheet("color: black; background-color: #d7dbdd")
-        self.MaterialsLabel.setStyleSheet("color: black; background-color: #d7dbdd")
-        self.ColorLabel.setStyleSheet("color: black; background-color: #d7dbdd")
+        self.StyleLabel.setStyleSheet("color: black")
+        self.MaterialsLabel.setStyleSheet("color: black")
+        self.ColorLabel.setStyleSheet("color: black")
         self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.PantRadio.setStyleSheet("color: black; background-color: light grey")
@@ -2281,9 +2303,9 @@ class CalendarWindow(QDialog):
     def __init__(self):
         super(CalendarWindow, self).__init__()
         self.setWindowTitle('Calendar')
-        self.setGeometry(300, 300, 450, 300)
-        self.setMinimumSize(QtCore.QSize(450, 300))
-        self.setMaximumSize(QtCore.QSize(450, 300))
+        self.setGeometry(300, 300, 350, 250)
+        self.setMinimumSize(QtCore.QSize(350, 250))
+        self.setMaximumSize(QtCore.QSize(350, 250))
         self.initUI()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(
@@ -2343,7 +2365,7 @@ class TableView(QDialog):
         toolbar.setMovable(False)
 
         #var for number of total columns
-        self.NumCol = 10
+        self.NumCol = 9
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
@@ -2356,17 +2378,14 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "លេខអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួលកម្មង់", "ថ្ងែកំណត់", "ដំណើរការ", "លុប", "កែសម្រួល"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ", "លុប", "កែសម្រួល"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
+    
         layout.addWidget(self.tableWidget)
 
-        
-        #toolbar buttons
-
-        
-        btn_ac_refresh = QAction(QIcon("icon/r3.png"),"Refresh",self)   #refresh icon
+        btn_ac_refresh = QAction(QIcon("icon/refresh.png"),"Refresh",self)   #refresh icon
         btn_ac_refresh.triggered.connect(self.loaddata)
         btn_ac_refresh.setStatusTip("Refresh Table")
         toolbar.addAction(btn_ac_refresh)
@@ -2374,24 +2393,32 @@ class TableView(QDialog):
 
 
         
-        btn_ac_search = QAction(QIcon("icon/s1.png"), "Search", self)  #search icon
+        btn_ac_search = QAction(QIcon("icon/search.png"), "Search", self)  #search icon
         btn_ac_search.triggered.connect(self.search)
         btn_ac_search.setStatusTip("Search Customer")
         toolbar.addAction(btn_ac_search)
+
+    def rowcolor(tableWidget, rowIndex, color):
+        for r in range(tableWidget.columnCount()):
+            tableWidget.item(rowIndex, r).setBackground(blue)
+        
+        #toolbar buttons
+
+    
 
     def loaddata(self, customer_name):
     
         
         #list all customers
         if customer_name == "" or customer_name == False : 
-            sql_select_query = 'SELECT "ID" , price, customer_name, customer_id, staff, date_ordered, deadline, progress FROM %s'
+            sql_select_query = 'SELECT "ID" , price, customer_name, staff, to_char(date_ordered,\'dd.mm.YYYY\'), to_char(deadline,\'dd.mm.YYYY\'), progress FROM %s'
             record_to_query = (AsIs("orders"),)
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
 
         #search one customer name 
         else: 
-            sql_select_query = 'SELECT "ID" , price, customer_name, customer_id, staff, date_ordered, deadline, progress FROM %s WHERE customer_name = %s'
+            sql_select_query = 'SELECT "ID" , price, customer_name, staff, to_char(date_ordered,\'dd.mm.YYYY\'), to_char(deadline,\'dd.mm.YYYY\'), progress FROM %s WHERE customer_name = %s'
             record_to_query = (AsIs("orders"), customer_name)
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
@@ -2402,10 +2429,15 @@ class TableView(QDialog):
         self.tableWidget.setRowCount(0)
 
         #show all rows/ show searched customer name
+      
         if len(all_rows) > 0: 
             for row_number, row_data in enumerate(all_rows):
                 self.tableWidget.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
+                    
+                    #print(type(data))
+                    
+                    
                     item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemIsEnabled)
                     item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
@@ -2422,7 +2454,7 @@ class TableView(QDialog):
                 item.setFlags(QtCore.Qt.ItemIsEnabled)
                 item.setTextAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignHCenter)
                 self.tableWidget.setRowHeight(0, 50)
-                self.tableWidget.setItem(0, i, item)
+                self.tableWidget.setItem(0, (self.NumCol/2), item)
                 
         #progress percentage
         for row_number in range(0,len(all_rows)): 
@@ -2430,14 +2462,15 @@ class TableView(QDialog):
             combo_box_options1 = ["0%","25%","50%","75%", "100%"]
 
             combo = QComboBox()
+
             #get current index from db
             combo.addItems(combo_box_options1)
-            combo.setCurrentIndex(int(all_rows[row_number][7])) 
+            combo.setCurrentIndex(int(all_rows[row_number][self.NumCol - 3])) 
             combo.currentIndexChanged.connect(self.UpdateProgressPercent)
 
 
             #add to table 
-            self.tableWidget.setCellWidget(row_number,7,combo)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 3),combo)	
         
         for row_number in range(0,len(all_rows)): 
 
@@ -2447,14 +2480,14 @@ class TableView(QDialog):
             btn_ac_delete.setLayoutDirection(QtCore.Qt.LeftToRight)
             btn_ac_delete.setAutoFillBackground(False)
             btn_ac_delete.setObjectName("btn_ac_delete")
-            btn_ac_delete.setIcon(QtGui.QIcon('icon/d1.png'))
+            btn_ac_delete.setIcon(QtGui.QIcon('icon/delete.png'))
             size = QtCore.QSize(25, 25)
             btn_ac_delete.setIconSize(size)
             btn_ac_delete.clicked.connect(self.delete)
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,8,btn_ac_delete)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 2),btn_ac_delete)	
 
         for row_number in range(0,len(all_rows)): 
             
@@ -2470,7 +2503,7 @@ class TableView(QDialog):
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,9,btn_ac_edit)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_edit)	
 
 
         #add scrollbar 
@@ -2480,7 +2513,7 @@ class TableView(QDialog):
         
         #get customer ID from selected row 
         r = self.tableWidget.currentRow()
-        customer_id = self.tableWidget.item(r,3).text()
+        customer_id = self.tableWidget.item(r,0).text()
 
         #update table 
         UpdateProcess(index, customer_id)
@@ -2490,14 +2523,14 @@ class TableView(QDialog):
 
 
         r = self.tableWidget.currentRow()
-        customer_id = self.tableWidget.item(r,3).text()
+        customer_id = self.tableWidget.item(r,0).text()
         customer_name = self.tableWidget.item(r,2).text()
         #print(customer_id)
 
         
         msgBox = QMessageBox()
         msgBox.setIcon(QMessageBox.Information)
-        msgBox.setText(f"Are you sure you want to delete customer {customer_name} with ID: {customer_id} ?")
+        msgBox.setText(f"Are you sure you want to delete customer {customer_name} ?")
         msgBox.setWindowTitle("Delete Customer")
         msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     
@@ -2520,7 +2553,9 @@ class TableView(QDialog):
     def edit(self): 
 
         r = self.tableWidget.currentRow()
-        customer_id = self.tableWidget.item(r,3).text()
+
+        #using as temporary in place of order id
+        customer_id = self.tableWidget.item(r,0).text()
 
             
         #send customer id to submit order window 
@@ -2537,7 +2572,7 @@ class TableView(QDialog):
 
     def EditCustomerID(self, customer_id):
         
-        print(customer_id)
+        #print(customer_id)
         self.customerEditID.emit(
             customer_id
         )
@@ -2557,7 +2592,7 @@ class TableView(QDialog):
                 connection.commit()
                 count = cursor.rowcount
                 cursor.execute(postgres_delete_query)
-                print(count, "Record deleted successfully in customers table")
+                print(count, "Record remaining in customers table after delete")
                 
                 #delete order
                 postgres_delete_query = 'DELETE from orders WHERE customer_id ='+str(delrol)
@@ -2573,7 +2608,7 @@ class TableView(QDialog):
                 sql_select_query = 'SELECT type FROM materials WHERE customer_id ='+str(delrol)
                 cursor.execute(sql_select_query)
                 clothes_type = cursor.fetchone()
-                print('clothe'+ clothes_type[0])
+                #print('clothe'+ clothes_type[0])
 
                 if clothes_type[0] == "សំពត់":
                     table = 'skirt_measurements'

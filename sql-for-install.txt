@@ -32,7 +32,7 @@ CREATE TABLE public.customers
 CREATE TABLE public.orders
 (
     "ID" smallint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
-    price money NOT NULL DEFAULT 0.00,
+    price money NOT NULL,
     customer_name name NOT NULL,
     staff name,
     date_ordered date NOT NULL DEFAULT CURRENT_DATE,
