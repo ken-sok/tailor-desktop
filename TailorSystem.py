@@ -6,9 +6,11 @@ from PyQt5.QtCore import QDate
 from connection import connection, cursor, close_connection
 import picture
 from psycopg2.extensions import AsIs
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import *
 import sys
+import shutil 
+import os
 
 __version__ = '1.0'
 __author__ = 'Chhaikheang Sok & Panha Teng'
@@ -48,6 +50,7 @@ class Ui_MainWindow(object):
     clothes_type = "អាវ"
     updating = 0
     customer_id = 0
+    uploaded_pictures_dir_list = []
 
     def setupUi(self, MainWindow):
 
@@ -194,7 +197,7 @@ class Ui_MainWindow(object):
         self.DateIcon.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.DateIcon.setAutoFillBackground(False)
         self.DateIcon.setObjectName("DateIcon")
-        self.DateIcon.setIcon(QtGui.QIcon('pictures/calendar.png'))
+        self.DateIcon.setIcon(QtGui.QIcon('icon/calendar.png'))
         size = QtCore.QSize(40, 40)
         self.DateIcon.setIconSize(size)
         
@@ -938,8 +941,9 @@ class Ui_MainWindow(object):
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
-        self.RadioPicLabel.setMaximumSize(621, 531)
+        self.RadioPicLabel.setMaximumSize(700, 550)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
+        
 
         #default
 
@@ -992,9 +996,68 @@ class Ui_MainWindow(object):
                                 "background : grey;"
                                 "}")
 
+   
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
         self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
 
+        #uploads group
+        
+        self.UploadGroupLayout = QtWidgets.QHBoxLayout()
+        
+        self.Upload = QtWidgets.QPushButton()
+        self.Upload.setMaximumSize(130, 50)
+        self.Upload.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.Upload.setAutoFillBackground(False)
+        self.Upload.setFont(SmallKhmerFont)
+        self.Upload.setObjectName("Upload")
+        self.Upload.setStyleSheet("background-color: white; border: 1px solid blue;")
+
+        self.UploadButtonOne = UploadPreviewButton()
+        self.UploadButtonOne.setObjectName('UploadButtonOne')
+
+        self.UploadButtonTwo = UploadPreviewButton()
+        self.UploadButtonTwo.setObjectName('UploadButtonTwo')
+
+        self.UploadButtonThree = UploadPreviewButton()
+        self.UploadButtonThree.setObjectName('UploadButtonThree')
+
+        self.UploadButtonFour = UploadPreviewButton()
+        self.UploadButtonFour.setObjectName('UploadButtonFour')
+
+        
+        self.UploadGroupFourButtons = QGroupBox()
+        self.UploadGroupFourButtons.setMaximumSize(300,60)
+        #self.UploadGroupFourButtons.setExclusive(True)
+
+        UploadGroupFourButtonsLayout = QHBoxLayout()
+        
+        UploadGroupFourButtonsLayout.addWidget(self.UploadButtonOne)
+        UploadGroupFourButtonsLayout.addWidget(self.UploadButtonTwo)
+        UploadGroupFourButtonsLayout.addWidget(self.UploadButtonThree)
+        UploadGroupFourButtonsLayout.addWidget(self.UploadButtonFour)
+        
+        self.UploadGroupFourButtons.setLayout(UploadGroupFourButtonsLayout)
+        
+        self.UploadButtonOne.clicked.connect(self.select_upload_pic)
+        self.UploadButtonTwo.clicked.connect(self.select_upload_pic)
+        self.UploadButtonThree.clicked.connect(self.select_upload_pic)
+        self.UploadButtonFour.clicked.connect(self.select_upload_pic)
+    
+
+        #self.UploadGroupFourButtons.buttonClicked.connect(self.select_upload_pic)
+        self.UploadGroupLayout.addWidget(self.Upload)
+        self.UploadGroupLayout.addWidget(self.UploadGroupFourButtons)
+        
+        '''
+        self.UploadGroupLayout.addWidget(self.UploadButtonOne)
+        self.UploadGroupLayout.addWidget(self.UploadButtonTwo)
+        self.UploadGroupLayout.addWidget(self.UploadButtonThree)
+        self.UploadGroupLayout.addWidget(self.UploadButtonFour)
+        '''
+        self.PreviewGroupLayout.addLayout(self.UploadGroupLayout)
+
+
+        #self.PreviewGroupLayout.addWidget(self.Upload)
 
         PriceLayout = QHBoxLayout()
 
@@ -1059,7 +1122,9 @@ class Ui_MainWindow(object):
 
         self.PreviewGroupBox.setLayout(self.PreviewGroupLayout)
         
-
+        '''
+        END OF PREVIEW 
+        '''
 
 
 
@@ -1173,6 +1238,7 @@ class Ui_MainWindow(object):
         self.CustomerNameLabel.raise_()
         self.CustomerPreferencesTitle.raise_()
         self.Cancel.raise_()
+        self.Upload.raise_()
         self.Submit.raise_()
         self.PriceBox.raise_()
         self.PriceLabel.raise_()
@@ -1193,13 +1259,100 @@ class Ui_MainWindow(object):
         self.SpecialReqBox.raise_()
         self.PantGroupBox.raise_()
     
+
+    def ShowUploadPic(self): 
+        
+        #self.RadioPicLabel.setStyleSheet("background-color:green")
+        NumPicUploaded = len(self.uploaded_pictures_dir_list)
+        #print(dest_folder)
+        orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
+        pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+        #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
+        self.RadioPicLabel.setPixmap(pixmap_resized)
+        
+
+        # Optional, resize window to image size
+        #self.resize(pixmap.width(),pixmap.height())
+
+    def SetUploadPreview(self): 
+        
+        #find len of list of destinations
+        NumPicUploaded = len(self.uploaded_pictures_dir_list)
+
+        #set previews
+        if NumPicUploaded == 1: 
+            #set upload preview in button 1
+            self.UploadButtonOne.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+        
+        if NumPicUploaded == 2:
+            self.UploadButtonTwo.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+
+        if NumPicUploaded == 3:
+            self.UploadButtonThree.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+
+        if NumPicUploaded == 4:   
+            self.UploadButtonFour.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+            
+
+    def select_upload_pic(self): 
+        
+        
+        Button = self.UploadGroupFourButtons.sender()
+        Button = Button.objectName()
+        #print('button name:'+Button)
+        '''
+        if Button.isChecked:
+
+            Button = self.UploadGroupFourButtons.checkedId()
+            print(IDButton)
+        
+        if IDButton == 1: 
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[0])
+        
+        
+        elif IDButton == 2: 
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[1])
+
+        elif IDButton == 3:
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[2])
+
+        elif IDButton == 4:  
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[3])
+        
+
+        '''
+
+        if len(self.uploaded_pictures_dir_list) == 0 : 
+            pass
+        else: 
+            #set condition for num pics later
+            if Button == 'UploadButtonOne': 
+                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[0])
+            
+            
+            elif Button == 'UploadButtonTwo': 
+                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[1])
+
+            elif Button == 'UploadButtonThree':
+                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[2])
+
+            elif  Button == 'UploadButtonFour':  
+                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[3])
+            
+
+            pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
+            self.RadioPicLabel.setPixmap(pixmap_resized)
+        
     def select_pic(self):
         
-        radioBtn = self.PreviewGroupBox.sender()
 
+
+        radioBtn = self.PreviewGroupBox.sender()
         #default selection
         self.clothes_type = "អាវ"
-
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
 
 
         self.AroundBustBox.setReadOnly(False)
@@ -1362,14 +1515,15 @@ class Ui_MainWindow(object):
 
         self.PantWaistBox.setFont(SmallKhmerFont)
 
+        
         if radioBtn.isChecked():
         
             self.clothes_type = radioBtn.text()
             if (self.clothes_type  == "សំពត់"):
                 #skirt
                 
-
-                self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
+                if len(self.uploaded_pictures_dir_list) == 0: 
+                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
                 
             
                 #set readonly in boxes we don't need for skirt
@@ -1484,8 +1638,8 @@ class Ui_MainWindow(object):
 
             elif (self.clothes_type  == "រ៉ូប"):
                     #dress
-                
-                self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/dress.jpg);")
+                if len(self.uploaded_pictures_dir_list) == 0: 
+                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/dress.jpg);")
 
         
                 #boxes we don't need for dress
@@ -1531,7 +1685,8 @@ class Ui_MainWindow(object):
                 
             elif (self.clothes_type  == "អាវ"):
                 #shirt
-                self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+                if len(self.uploaded_pictures_dir_list) == 0: 
+                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
                                 #boxes we don't need for shirt
                 self.InseamBox.setReadOnly(True)
                 self.InseamBox.setStyleSheet("QLineEdit"
@@ -1584,7 +1739,8 @@ class Ui_MainWindow(object):
 
             elif (self.clothes_type  == "ខោ"):
                 #pant
-                self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
+                if len(self.uploaded_pictures_dir_list) == 0: 
+                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
 
 
                 #boxes we don't need for pants
@@ -1938,6 +2094,7 @@ class Ui_MainWindow(object):
         self.AddressLabel.setText(_translate("MainWindow", "ឤសយដ្ឋាន:"))
         self.CustomerNameLabel.setText(_translate("MainWindow", "ឈ្មោះ:"))
         self.CustomerPreferencesTitle.setText(_translate("MainWindow", "ជម្រើសអតិថិជន"))
+        self.Upload.setText(_translate("MainWindow","បញ្ចូលរូបភាព"))
         self.Cancel.setText(_translate("MainWindow", "បោះបង់"))
         self.Submit.setText(_translate("MainWindow", "បញ្ចូល"))
         self.PriceBox.setText(_translate("MainWindow", ""))
@@ -2263,6 +2420,115 @@ class Ui_MainWindow(object):
 
         self.updating = 0
 
+    def insertPictureController(self):
+            
+            #try: 
+            OldFile = self.GetPictureDir()   
+
+            #if directory successfully added, show picture in view
+            if OldFile: 
+                self.ShowUploadPic()
+                self.SetUploadPreview()
+
+
+            else: 
+                QMessageBox.warning(QMessageBox(), 'Error', 'Cannot upload Image')
+
+                
+
+
+    
+    def GetPictureDir(self):
+        dialog = UploadDialog()
+        fileName, _ = QFileDialog.getSaveFileName(dialog,"Upload Image","","Images (*.png *jpeg *.jpg *jfif *bmp *gif)")
+        
+        if fileName:
+            NumPicUploaded = len(self.uploaded_pictures_dir_list)
+            if  ( NumPicUploaded < 4 ): 
+                
+                self.uploaded_pictures_dir_list.append(fileName)
+                print("File added to list successfully.")
+
+                OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
+                print(OldFile)
+                return OldFile
+
+            else: 
+                return False
+
+        return False
+                
+        
+
+    def CopyPhotosToDir(self, src): 
+
+
+        #change this later
+        if fileName:
+            print(fileName) 
+            #fileName = str(fileName)
+
+            try: 
+                
+                self.uploaded_pictures_dir_list.append(fileName)
+                print("File copied/added to list successfully.") 
+
+
+
+
+                self.ShowUploadPic(dest_folder=dest_path)
+                self.SetUploadPreview(dest_folder=dest_path)
+                
+            
+            # If source and destination are same 
+            except shutil.SameFileError: 
+                print("Source and destination represents the same file.") 
+            
+            # If destination is a directory. 
+            except IsADirectoryError: 
+                print("Destination is a directory.") 
+            
+            # If there is any permission issue 
+            except PermissionError: 
+                print("Permission denied.") 
+            
+            # For other errors 
+            #except: 
+            #    print("Error occurred while copying file.") 
+
+        dest_path = r"D:\tailor-store-pic\\"
+        dest_path += customer_name
+        dest_path += r"\\"
+        print(dest_path)
+
+        src = src.split('/')
+        src = src[-1]
+
+        dest_path += src
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+        shutil.copy(src, dest_path)
+
+#upload dialog
+class UploadDialog(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt5 file dialogs - pythonspot.com'
+        self.left = 10
+        self.top = 10
+        self.width = 640
+        self.height = 480
+        self.initUI()
+    
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        
+        #self.openFileNameDialog()
+        #self.openFileNamesDialog()
+        #self.saveFileDialog()
+        
+        #self.show()
 #about-dialog
 class AboutDialog(QDialog):
     def __init__ (self):
@@ -2289,6 +2555,19 @@ class AboutDialog(QDialog):
         Vbox.addWidget(Kheang)
         self.setLayout(Vbox)
         #self.btn.clicked.connect(self.ActionAbout)
+
+class UploadPreviewButton(QPushButton): 
+
+    def __init__(self):
+        super(UploadPreviewButton, self).__init__()
+        #self.UploadPictureButton = QtWidgets.QPushButton()
+        self.setMaximumSize(50, 50)
+        self.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.setAutoFillBackground(False)
+        self.setFont(SmallKhmerFont)
+        #self.setObjectName("self.UploadPictureButton")
+        self.setStyleSheet("background-color: white; border: 1px solid blue;")
+        self.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
 
 #calendar class for staff to select deadline
 class CalendarWindow(QDialog):
@@ -2744,6 +3023,8 @@ class appController:
         #About Developer 
         self._view.ActionAbout.triggered.connect(self._view.aboutdeveloper)
 
+        #upload picture
+        self._view.Upload.clicked.connect(self._view.insertPictureController)
         
         
              
