@@ -1330,12 +1330,37 @@ class Ui_MainWindow(object):
     def select_pic(self):
         
 
-
+        #should break down, this function too big
         radioBtn = self.PreviewGroupBox.sender()
         #default selection
         self.clothes_type = "អាវ"
         self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
 
+        #clear text all boxes
+        _translate = QtCore.QCoreApplication.translate
+        self.AroundBustBox.setText(_translate("MainWindow", ''))
+        self.NeckArmHoldBox.setText(_translate("MainWindow", ''))
+        self.WaistBox.setText(_translate("MainWindow", ''))
+        self.ABBox.setText(_translate("MainWindow", ''))
+        self.HipBox.setText(_translate("MainWindow", ''))
+        self.AboveBustBox.setText(_translate("MainWindow", ''))
+        self.CenterFrontBox.setText(_translate("MainWindow", ''))
+        self.ShoulderBox.setText(_translate("MainWindow", ''))
+        self.AFBox.setText(_translate("MainWindow", ''))
+        self.CenterBackBox.setText(_translate("MainWindow", ''))
+        self.UpperHipsBox.setText(_translate("MainWindow", ''))
+        self.ArmpitBox.setText(_translate("MainWindow", ''))
+        self.SkirtLengthBox.setText(_translate("MainWindow", ''))
+        self.SleeveLengthBox.setText(_translate("MainWindow", ''))
+        self.BustHeightBox.setText(_translate("MainWindow", ''))
+
+        self.InseamBox.setText(_translate("MainWindow", ''))
+        self.OutseamBox.setText(_translate("MainWindow", ''))
+        self.ThighBox.setText(_translate("MainWindow", ''))
+        self.PantHipBox.setText(_translate("MainWindow", ''))
+        self.AnkleBox.setText(_translate("MainWindow", ''))
+        self.CalfBox.setText(_translate("MainWindow", ''))
+        self.PantWaistBox.setText(_translate("MainWindow", ''))
 
         self.AroundBustBox.setReadOnly(False)
         self.AroundBustBox.setStyleSheet("QLineEdit"
@@ -1944,7 +1969,7 @@ class Ui_MainWindow(object):
             self.added_order = 1
 
             self.CopyPhotosToDir()
-            #self.InsertUploadDetails()
+            self.InsertUploadDetails()
 
             
 
@@ -2474,7 +2499,7 @@ class Ui_MainWindow(object):
                 i = 1
                 #add img names to database 
                 for old_dir in self.uploaded_pictures_dir_list: 
-            
+
                     #get original image name 
                     old_dir_list = old_dir.split('/')
                     old_img_name = old_dir_list[-1]
@@ -2501,12 +2526,19 @@ class Ui_MainWindow(object):
                     new_img_name = str (i) + '-' + old_img_name 
                     os.rename(dest_path + old_img_name, dest_path + new_img_name)
 
-                    
+                    #add image name to dest_path
+                    dest_path_img = dest_path + new_img_name
+
                     #replace old destination with new ones
-                    self.uploaded_pictures_dir_list[i-1] = dest_path
-                    print(self.uploaded_pictures_dir_list[i-1])
+                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                    print('added dir' + self.uploaded_pictures_dir_list[i-1])
+
                     #add 1 to suffix
                     i+=1
+
+
+
+                    
                     
             
             # If source and destination are same 
@@ -2528,8 +2560,10 @@ class Ui_MainWindow(object):
 
     def InsertUploadDetails(self): 
 
-
+        
         if (self.added_order == 1):
+            customer_id = getCustomerID()
+            customer_id = customer_id[0]
             #add img names to database 
             for new_dir in self.uploaded_pictures_dir_list: 
                 
@@ -2537,8 +2571,9 @@ class Ui_MainWindow(object):
 
                 #add new dir to database 
 
-                #could be a bug here? 
-                InsertUploadDir(new_dir,self.updating)
+                #could be a bug here when update? 
+                 
+                InsertUploadDir(new_dir,customer_id, self.updating)
 
 
 
@@ -3258,18 +3293,18 @@ def insertMaterial(order_id, customer_id, type_clothes, material, color, style, 
         count = cursor.rowcount
         print(count, "Record updated successfully into materials table")
 
-def InsertUploadDir(PicDir, update): 
+def InsertUploadDir(PicDir, customer_id, update): 
     '''this function takes in a picture directory, and inserts it into the uploads column in orders table'''
     
     #table = 'orders'
     if update == 0:
         #add 1 entry to table
-        postgres_insert_query = "UPDATE orders SET uploads = array_cat(uploads, '{ f'{PicDir} }' )"
-        #record_to_insert = (PicDir,)
+        postgres_insert_query = f"UPDATE orders SET uploads = array_cat(uploads, '{{ {PicDir} }}') WHERE customer_id = {customer_id}"
+        #record_to_insert = (PicDir)
         cursor.execute(postgres_insert_query)
         connection.commit()
         count = cursor.rowcount
-        print(count, "picture name inserted successfully into orders table")
+        print(count, "picture dir inserted successfully into orders table")
 
     '''
     else: 
