@@ -47,6 +47,8 @@ class Ui_MainWindow(object):
     added_customer = 0
     added_order = 0
     added_material = 0 
+    added_measurements = 0 
+    #added_uploads = 0 
     clothes_type = "អាវ"
     updating = 0
     customer_id = 0
@@ -941,7 +943,7 @@ class Ui_MainWindow(object):
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
-        self.RadioPicLabel.setMaximumSize(700, 550)
+        self.RadioPicLabel.setMaximumSize(800, 600)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
         
 
@@ -1268,7 +1270,7 @@ class Ui_MainWindow(object):
         orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
         pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
         #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
         self.RadioPicLabel.setPixmap(pixmap_resized)
         
 
@@ -1300,28 +1302,8 @@ class Ui_MainWindow(object):
         
         Button = self.UploadGroupFourButtons.sender()
         Button = Button.objectName()
-        #print('button name:'+Button)
-        '''
-        if Button.isChecked:
 
-            Button = self.UploadGroupFourButtons.checkedId()
-            print(IDButton)
         
-        if IDButton == 1: 
-            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[0])
-        
-        
-        elif IDButton == 2: 
-            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[1])
-
-        elif IDButton == 3:
-            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[2])
-
-        elif IDButton == 4:  
-            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[3])
-        
-
-        '''
 
         if len(self.uploaded_pictures_dir_list) == 0 : 
             pass
@@ -1342,7 +1324,7 @@ class Ui_MainWindow(object):
             
 
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
+            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
             self.RadioPicLabel.setPixmap(pixmap_resized)
         
     def select_pic(self):
@@ -1352,7 +1334,7 @@ class Ui_MainWindow(object):
         radioBtn = self.PreviewGroupBox.sender()
         #default selection
         self.clothes_type = "អាវ"
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; padding: 0% 170% 0% 170%')
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
 
 
         self.AroundBustBox.setReadOnly(False)
@@ -1515,6 +1497,7 @@ class Ui_MainWindow(object):
 
         self.PantWaistBox.setFont(SmallKhmerFont)
 
+        
         
         if radioBtn.isChecked():
         
@@ -1948,6 +1931,7 @@ class Ui_MainWindow(object):
             deadline = self.DeadlineBox.text()
             progress = '0'
             req = self.SpecialReqBox.toPlainText()
+            uploads = self.uploaded_pictures_dir_list
             
             #get customer ID
             if self.updating == 0:
@@ -1956,7 +1940,13 @@ class Ui_MainWindow(object):
                 customer_id = self.customer_id
 
             insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, self.updating)
+
             self.added_order = 1
+
+            self.CopyPhotosToDir()
+            #self.InsertUploadDetails()
+
+            
 
     def insertMaterialDetails(self): 
         '''this function is controller for inserting material details to database'''
@@ -2067,7 +2057,12 @@ class Ui_MainWindow(object):
             if self.updating == 1: 
                 self.clearInput()
             ''' 
-        
+            self.added_measurements = 1
+
+
+            #self.upload = 1
+
+
 
     def feedbackSubmit(self, completed): 
         _translate = QtCore.QCoreApplication.translate
@@ -2420,7 +2415,7 @@ class Ui_MainWindow(object):
 
         self.updating = 0
 
-    def insertPictureController(self):
+    def InsertUploadView(self):
             
             #try: 
             OldFile = self.GetPictureDir()   
@@ -2450,7 +2445,7 @@ class Ui_MainWindow(object):
                 print("File added to list successfully.")
 
                 OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
-                print(OldFile)
+                #print(OldFile)
                 return OldFile
 
             else: 
@@ -2460,25 +2455,59 @@ class Ui_MainWindow(object):
                 
         
 
-    def CopyPhotosToDir(self, src): 
+
+    def CopyPhotosToDir(self): 
 
 
-        #change this later
-        if fileName:
-            print(fileName) 
-            #fileName = str(fileName)
+
+        if (self.added_order == 1) : 
+            order_id = getOrderID()
+            #print('order id' + order_id[0])
+
+
+            dest_path =  "D:/tailor-store-pic/"
+            dest_path += (str(order_id[0])+"/")
+            
 
             try: 
                 
-                self.uploaded_pictures_dir_list.append(fileName)
-                print("File copied/added to list successfully.") 
+                i = 1
+                #add img names to database 
+                for old_dir in self.uploaded_pictures_dir_list: 
+            
+                    #get original image name 
+                    old_dir_list = old_dir.split('/')
+                    old_img_name = old_dir_list[-1]
 
+                    '''
+                    #add suffix to image name to avoid same name error
+                    new_img_name = str (i) + '-' + old_img_name 
 
+                    #add file name to destination path 
+                    dest_path += new_img_name
 
+                    print('dest_path = ' + dest_path)
+                    '''
 
-                self.ShowUploadPic(dest_folder=dest_path)
-                self.SetUploadPreview(dest_folder=dest_path)
-                
+                    #make directory if folder not yet exist, then copy file to new directory
+                    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+                    print(old_dir, dest_path)
+                    shutil.copy(old_dir, dest_path)
+
+                    #rename file
+                    
+                    #add suffix to image name to avoid same name error
+                    new_img_name = str (i) + '-' + old_img_name 
+                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                    
+                    #replace old destination with new ones
+                    self.uploaded_pictures_dir_list[i-1] = dest_path
+                    print(self.uploaded_pictures_dir_list[i-1])
+                    #add 1 to suffix
+                    i+=1
+                    
             
             # If source and destination are same 
             except shutil.SameFileError: 
@@ -2492,21 +2521,26 @@ class Ui_MainWindow(object):
             except PermissionError: 
                 print("Permission denied.") 
             
+            #enable after developement done
             # For other errors 
             #except: 
             #    print("Error occurred while copying file.") 
 
-        dest_path = r"D:\tailor-store-pic\\"
-        dest_path += customer_name
-        dest_path += r"\\"
-        print(dest_path)
+    def InsertUploadDetails(self): 
 
-        src = src.split('/')
-        src = src[-1]
 
-        dest_path += src
-        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-        shutil.copy(src, dest_path)
+        if (self.added_order == 1):
+            #add img names to database 
+            for new_dir in self.uploaded_pictures_dir_list: 
+                
+                print('new_dir_to_db' + new_dir)
+
+                #add new dir to database 
+
+                #could be a bug here? 
+                InsertUploadDir(new_dir,self.updating)
+
+
 
 #upload dialog
 class UploadDialog(QWidget):
@@ -3011,7 +3045,6 @@ class appController:
         self._view.Submit.clicked.connect(self._view.insertMeasurementDetails)
 
 
-
         #clear all inputs
         self._view.Cancel.clicked.connect(self._view.clearInput)
         self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
@@ -3023,8 +3056,11 @@ class appController:
         #About Developer 
         self._view.ActionAbout.triggered.connect(self._view.aboutdeveloper)
 
-        #upload picture
-        self._view.Upload.clicked.connect(self._view.insertPictureController)
+        #show picture in view
+        self._view.Upload.clicked.connect(self._view.InsertUploadView)
+
+        #copy photos to new directory
+        #self._view.Submit.clicked.connect(self._view.CopyPhotosToDir)
         
         
              
@@ -3066,6 +3102,8 @@ def insertOrder(price, customer_name, staff, deadline, progress, customer_id, re
         connection.commit()
         count = cursor.rowcount
         print(count, "Record inserted successfully into orders table")
+
+
     else: 
         postgres_update_query = 'UPDATE %s SET price = %s , customer_name = %s, staff = %s, deadline = %s, requests = %s WHERE customer_id = %s'
         record_to_update = (AsIs(table), price, customer_name, staff, deadline, req, customer_id)
@@ -3220,7 +3258,28 @@ def insertMaterial(order_id, customer_id, type_clothes, material, color, style, 
         count = cursor.rowcount
         print(count, "Record updated successfully into materials table")
 
+def InsertUploadDir(PicDir, update): 
+    '''this function takes in a picture directory, and inserts it into the uploads column in orders table'''
+    
+    #table = 'orders'
+    if update == 0:
+        #add 1 entry to table
+        postgres_insert_query = "UPDATE orders SET uploads = array_cat(uploads, '{ f'{PicDir} }' )"
+        #record_to_insert = (PicDir,)
+        cursor.execute(postgres_insert_query)
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "picture name inserted successfully into orders table")
 
+    '''
+    else: 
+        postgres_update_query = 'UPDATE %s SET skirt_length = %s , skirt_waist = %s, skirt_hip = %s WHERE customer_id = %s'
+        record_to_update = (AsIs(table), skirt_length, skirt_waist, skirt_hip, customer_id)
+        cursor.execute(postgres_update_query, record_to_update)
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "Record updated successfully into skirt table")
+    '''
 
 def getCustomerID(): 
 
@@ -3369,6 +3428,10 @@ def FetchOrdersDetailsEdit(customer_id):
         return order_details
     
     return order_details
+
+
+
+
 
 
 
