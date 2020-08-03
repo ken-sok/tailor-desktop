@@ -20,12 +20,12 @@ START OF Font FORMATTING
 '''
 
 SmallKhmerFont = QtGui.QFont()
-SmallKhmerFont.setFamily("Khmer OS")
+SmallKhmerFont.setFamily("Khmer OS New")
 SmallKhmerFont.setPointSize(11)
 
 BigKhmerFont = QtGui.QFont()
-#BigKhmerFont.setBold(True) #cannot due to some reason
-BigKhmerFont.setFamily("Khmer OS")
+BigKhmerFont.setBold(True) #cannot due to some reason
+BigKhmerFont.setFamily("Khmer OS New")
 BigKhmerFont.setPointSize(12)
 
 ENGFont = QtGui.QFont()
@@ -945,11 +945,12 @@ class Ui_MainWindow(object):
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(800, 600)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
-        
+        #self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
 
         #default
 
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg)")
+        
         self.InseamBox.setReadOnly(True)
         self.InseamBox.setStyleSheet("QLineEdit"
                                 "{"
@@ -1264,14 +1265,21 @@ class Ui_MainWindow(object):
 
     def ShowUploadPic(self): 
         
+        
         #self.RadioPicLabel.setStyleSheet("background-color:green")
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
-        #print(dest_folder)
-        orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
-        pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-        #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-        self.RadioPicLabel.setPixmap(pixmap_resized)
+        
+        
+        if NumPicUploaded > 0: 
+            #print(dest_folder)
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
+            pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+            #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
+            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+            self.RadioPicLabel.setPixmap(pixmap_resized)
+        elif NumPicUploaded == 0:
+            pass 
+
         
 
         # Optional, resize window to image size
@@ -1283,18 +1291,18 @@ class Ui_MainWindow(object):
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
 
         #set previews
-        if NumPicUploaded == 1: 
+        if NumPicUploaded >= 1: 
             #set upload preview in button 1
-            self.UploadButtonOne.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+            self.UploadButtonOne.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[0]))
         
-        if NumPicUploaded == 2:
-            self.UploadButtonTwo.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+        if NumPicUploaded >= 2:
+            self.UploadButtonTwo.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[1]))
 
-        if NumPicUploaded == 3:
-            self.UploadButtonThree.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+        if NumPicUploaded >= 3:
+            self.UploadButtonThree.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[2]))
 
         if NumPicUploaded == 4:   
-            self.UploadButtonFour.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[NumPicUploaded - 1]))
+            self.UploadButtonFour.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[3]))
             
 
     def select_upload_pic(self): 
@@ -1303,29 +1311,37 @@ class Ui_MainWindow(object):
         Button = self.UploadGroupFourButtons.sender()
         Button = Button.objectName()
 
-        
+        num_pic_uploaded = len(self.uploaded_pictures_dir_list)
 
-        if len(self.uploaded_pictures_dir_list) == 0 : 
+        if  num_pic_uploaded == 0 : 
             pass
         else: 
-            #set condition for num pics later
-            if Button == 'UploadButtonOne': 
+            if (Button == 'UploadButtonOne' and num_pic_uploaded >= 1) : 
                 orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[0])
+                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+                self.RadioPicLabel.setPixmap(pixmap_resized)
             
-            
-            elif Button == 'UploadButtonTwo': 
+            elif (Button == 'UploadButtonTwo'and num_pic_uploaded >= 2): 
                 orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[1])
+                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+                self.RadioPicLabel.setPixmap(pixmap_resized)
 
-            elif Button == 'UploadButtonThree':
+            elif (Button == 'UploadButtonThree' and num_pic_uploaded >= 3):
                 orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[2])
+                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+                self.RadioPicLabel.setPixmap(pixmap_resized)
 
-            elif  Button == 'UploadButtonFour':  
+            elif (Button == 'UploadButtonFour'and num_pic_uploaded == 4):  
                 orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[3])
+                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+                self.RadioPicLabel.setPixmap(pixmap_resized)
             
 
-            pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-            self.RadioPicLabel.setPixmap(pixmap_resized)
+
         
     def select_pic(self):
         
@@ -1909,7 +1925,7 @@ class Ui_MainWindow(object):
         else: 
             
             self.PriceLabel.setStyleSheet("color: black; background-color: light grey") 
-            self.CustomerNameLabel.setStyleSheet("color: #B8E2F2; background-color: #B8E2F2;") 
+            self.CustomerNameLabel.setStyleSheet("color: black; background-color: #B8E2F2;") 
             self.DeadlineLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
             self.PhoneLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
             self.DeadlineSelectedLabel.setStyleSheet("color: black; background-color: #B2E2F2") 
@@ -2230,13 +2246,13 @@ class Ui_MainWindow(object):
         self.customer_id = customer_id
         #get information from database according to customer ID
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
-        
+        print(OrderDetails['uploads'])
         #remove msg from prev trans
         self.SubmitMsg.setText("")
 
         #alter view 
         _translate = QtCore.QCoreApplication.translate
-        print(len(OrderDetails))
+        
         if (len(OrderDetails) > 0): 
         
             self.CustomerNameBox.setText(_translate("MainWindow", str(OrderDetails['customer_name'])))
@@ -2354,8 +2370,15 @@ class Ui_MainWindow(object):
                     
             
             self.PriceBox.setText(_translate("MainWindow", str(OrderDetails['price'])))
+            
+            #pictures module
+            self.uploaded_pictures_dir_list = OrderDetails['uploads']
 
-        
+            print('class list', self.uploaded_pictures_dir_list)
+
+            self.ShowUploadPic()
+            self.SetUploadPreview()
+            
             self.updating = 1
         else: 
             QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
@@ -2434,6 +2457,30 @@ class Ui_MainWindow(object):
         self.CalfBox.setText(_translate("MainWindow", ''))
         self.PantWaistBox.setText(_translate("MainWindow", ''))
 
+
+        #picture previews
+        orig_pixmap = QPixmap('pictures/transparent.png')
+        pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+        self.RadioPicLabel.setPixmap(pixmap_resized)
+        #self.RadioPicLabel.show()
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+        
+        self.UploadButtonOne.setStyleSheet("background-color: white; border: 1px solid blue;")
+        self.UploadButtonOne.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
+        self.UploadButtonTwo.setStyleSheet("background-color: white; border: 1px solid blue;")
+        self.UploadButtonTwo.setIcon(QtGui.QIcon('icon/shirt-icon.png'))        
+        self.UploadButtonThree.setStyleSheet("background-color: white; border: 1px solid blue;")
+        self.UploadButtonThree.setIcon(QtGui.QIcon('icon/shirt-icon.png'))        
+        self.UploadButtonFour.setStyleSheet("background-color: white; border: 1px solid blue;")
+        self.UploadButtonFour.setIcon(QtGui.QIcon('icon/shirt-icon.png'))        
+
+        self.uploaded_pictures_dir_list = list()
+        
+        print('list = ', len(self.uploaded_pictures_dir_list))
+
+        
+
         if self.updating == 1: 
             self.ViewAllOrders()
         
@@ -2467,7 +2514,7 @@ class Ui_MainWindow(object):
             if  ( NumPicUploaded < 4 ): 
                 
                 self.uploaded_pictures_dir_list.append(fileName)
-                print("File added to list successfully.")
+                #print("File added to list successfully.")
 
                 OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
                 #print(OldFile)
@@ -2487,7 +2534,7 @@ class Ui_MainWindow(object):
 
         if (self.added_order == 1) : 
             order_id = getOrderID()
-            #print('order id' + order_id[0])
+            
 
 
             dest_path =  "D:/tailor-store-pic/"
@@ -2504,20 +2551,12 @@ class Ui_MainWindow(object):
                     old_dir_list = old_dir.split('/')
                     old_img_name = old_dir_list[-1]
 
-                    '''
-                    #add suffix to image name to avoid same name error
-                    new_img_name = str (i) + '-' + old_img_name 
 
-                    #add file name to destination path 
-                    dest_path += new_img_name
-
-                    print('dest_path = ' + dest_path)
-                    '''
 
                     #make directory if folder not yet exist, then copy file to new directory
                     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
-                    print(old_dir, dest_path)
+                    #print(old_dir, dest_path)
                     shutil.copy(old_dir, dest_path)
 
                     #rename file
@@ -2531,7 +2570,7 @@ class Ui_MainWindow(object):
 
                     #replace old destination with new ones
                     self.uploaded_pictures_dir_list[i-1] = dest_path_img
-                    print('added dir' + self.uploaded_pictures_dir_list[i-1])
+                    #print('added dir' + self.uploaded_pictures_dir_list[i-1])
 
                     #add 1 to suffix
                     i+=1
@@ -2567,7 +2606,7 @@ class Ui_MainWindow(object):
             #add img names to database 
             for new_dir in self.uploaded_pictures_dir_list: 
                 
-                print('new_dir_to_db' + new_dir)
+                #print('new_dir_to_db' + new_dir)
 
                 #add new dir to database 
 
@@ -2714,7 +2753,7 @@ class TableView(QDialog):
         toolbar.setMovable(False)
 
         #var for number of total columns
-        self.NumCol = 9
+        self.NumCol = 10
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
@@ -2727,7 +2766,7 @@ class TableView(QDialog):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ", "លុប", "កែសម្រួល"))
+        self.tableWidget.setHorizontalHeaderLabels(("លេខកម្មង់", "តម្លៃ", "ឈ្មោះអតិថិជន", "ឈ្មោះបុគ្គលិក","ថ្ងែទទួល", "ថ្ងែកំណត់", "ដំណើរការ", "លុប", "កែសម្រួល", "រូបភាព"))
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
@@ -2814,12 +2853,12 @@ class TableView(QDialog):
 
             #get current index from db
             combo.addItems(combo_box_options1)
-            combo.setCurrentIndex(int(all_rows[row_number][self.NumCol - 3])) 
+            combo.setCurrentIndex(int(all_rows[row_number][6])) 
             combo.currentIndexChanged.connect(self.UpdateProgressPercent)
 
 
             #add to table 
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 3),combo)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 4),combo)	
         
         for row_number in range(0,len(all_rows)): 
 
@@ -2836,7 +2875,7 @@ class TableView(QDialog):
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 2),btn_ac_delete)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 3),btn_ac_delete)	
 
         for row_number in range(0,len(all_rows)): 
             
@@ -2852,7 +2891,23 @@ class TableView(QDialog):
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_edit)	
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 2),btn_ac_edit)	
+
+        for row_number in range(0,len(all_rows)): 
+            
+            btn_ac_images = QtWidgets.QPushButton()
+            #btn_ac_images.setMaximumSize(30,30)
+            btn_ac_images.setLayoutDirection(QtCore.Qt.LeftToRight)
+            btn_ac_images.setAutoFillBackground(False)
+            btn_ac_images.setObjectName("btn_ac_images")
+            btn_ac_images.setIcon(QtGui.QIcon('icon/images.png'))
+            size = QtCore.QSize(25, 25)
+            btn_ac_images.setIconSize(size)
+            #btn_ac_images.clicked.connect(self.edit)
+        
+
+            #add to table
+            self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_images)	
 
 
         #add scrollbar 
@@ -3351,7 +3406,7 @@ def FetchOrdersDetailsEdit(customer_id):
     order_details = dict()
 
 
-    sql_select_query = 'SELECT price, customer_name, staff, requests, deadline FROM %s WHERE customer_id = %s'
+    sql_select_query = 'SELECT price, customer_name, staff, requests, deadline, uploads FROM %s WHERE customer_id = %s'
     record_to_query = (AsIs("orders"), customer_id )
     cursor.execute(sql_select_query, record_to_query)
     all_rows = cursor.fetchone()
@@ -3363,6 +3418,7 @@ def FetchOrdersDetailsEdit(customer_id):
         order_details['staff'] = all_rows[2]
         order_details['deadline'] = all_rows[4]
         order_details['special'] = all_rows[3]
+        order_details['uploads'] = all_rows[5]
 
 
         #telephone, address
@@ -3480,9 +3536,10 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
 
     
-    #import font
-    _id = QtGui.QFontDatabase.addApplicationFont("font/KhmerOS.ttf")
-    print(QtGui.QFontDatabase.applicationFontFamilies(_id))
+    #import fonts
+    _id1 = QtGui.QFontDatabase.addApplicationFont("font/KhmerOSNew-Regular.ttf")
+    _id2 = QtGui.QFontDatabase.addApplicationFont("font/KhmerOSNew-Bold.ttf")
+    print(QtGui.QFontDatabase.applicationFontFamilies(_id1))
 
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
