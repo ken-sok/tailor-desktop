@@ -2787,6 +2787,7 @@ class Ui_MainWindow(object):
 
             # If source and destination are same 
             except shutil.SameFileError: 
+                #need this line to combat my naming system caveat
                 print("Source and destination represents the same file. edittttt") 
             
             # If destination is a directory. 
