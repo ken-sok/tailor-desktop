@@ -1291,7 +1291,7 @@ class Ui_MainWindow(object):
 
     def ShowUploadPic(self): 
         
-        
+        '''show last uploaded picture'''
         #self.RadioPicLabel.setStyleSheet("background-color:green")
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
         
@@ -1300,19 +1300,16 @@ class Ui_MainWindow(object):
             #print(dest_folder)
             orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-            #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
             self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
             self.RadioPicLabel.setPixmap(pixmap_resized)
-
 
             self.selected_pic = NumPicUploaded - 1
         elif NumPicUploaded == 0:
             pass 
 
-        
 
-        # Optional, resize window to image size
-        #self.resize(pixmap.width(),pixmap.height())
+
+        
 
     def SetUploadPreview(self): 
         
@@ -1401,14 +1398,20 @@ class Ui_MainWindow(object):
     def DeleteUploadPicController(self, PicNum, PicDir): 
 
 
-        #delete from db
-        if (self.updating == 1 and self.customer_id != None): 
+        #delete from database if in edit mode and clicked insert
+        #might remove something that is not there
+        if (self.updating == 1): 
+            print('modified list in db')
             pic_dir = self.uploaded_pictures_dir_list[PicNum]
             DeleteUploadPic(pic_dir, self.customer_id)
         
-        #delete from list
-        self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
 
+        #delete from list of directories
+        self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
+        print('removed:', self.uploaded_pictures_dir_list)
+
+
+        #reset views
         #reset icon to default
         self.reset_icon()
 
@@ -2095,8 +2098,8 @@ class Ui_MainWindow(object):
 
 
             #bug starts here
-            self.CopyPhotosToDir()
-            self.InsertUploadDetails()
+            self.CopyPhotosToDirEdit()
+            #self.InsertUploadDetails()
 
             
 
@@ -2357,7 +2360,9 @@ class Ui_MainWindow(object):
         self.customer_id = customer_id
         #get information from database according to customer ID
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
-        print(OrderDetails['uploads'])
+        print('from database:', OrderDetails['uploads'])
+
+
         #remove msg from prev trans
         self.SubmitMsg.setText("")
 
@@ -2484,12 +2489,16 @@ class Ui_MainWindow(object):
             
             #pictures module
             self.uploaded_pictures_dir_list = OrderDetails['uploads']
+            
+            #reset selected picture
+            self.selected_pic = 0 
 
-            #print('class list', self.uploaded_pictures_dir_list)
-
-            self.ShowUploadPic()
+            #also called in insert picture in view
+            
+            self.show_pic_preview(pic_num=0)
             self.SetUploadPreview()
             
+
             self.updating = 1
         else: 
             QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
@@ -2615,7 +2624,6 @@ class Ui_MainWindow(object):
                 self.ShowUploadPic()
                 self.SetUploadPreview()
 
-
             else: 
                 QMessageBox.warning(QMessageBox(), 'Error', 'Cannot upload Image')
 
@@ -2642,18 +2650,90 @@ class Ui_MainWindow(object):
 
         return False
                 
+    
+    def CopyPhotosToDirEdit(self): 
         
+        '''to copy & rename only new photos into list'''
+
+        if (self.updating == 1 and self.added_order == 1) : 
+            
+            order_id = self.customer_id
+            
+            dest_path =  "D:/tailor-store-pic/"
+            dest_path += (str(order_id[0])+"/")
+            
+            try: 
+                i = 1
+                
+                for old_dir in self.uploaded_pictures_dir_list: 
+
+                    #break this into a function later
+
+                    #get original image name 
+                    old_dir_list = old_dir.split('/')
+                    old_img_name = old_dir_list[-1]
+
+                    #cannot use suffix here
+                    if '-' in old_img_name: 
+                        pass
+
+                    else: 
+
+                        suffix = str (i) + '-'
+                        #make directory if folder not yet exist, then copy file to new directory
+                        #os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+                        #print(old_dir, dest_path)
+
+                        #copy file from old dir to new dir
+                        shutil.copy(old_dir, dest_path)
+
+                        #rename file
+                        
+                        #add suffix to image name to avoid same name error
+                        new_img_name = suffix + old_img_name 
+                        os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                        #add image name to dest_path
+                        dest_path_img = dest_path + new_img_name
+
+                        #replace old destination with new ones
+                        self.uploaded_pictures_dir_list[i-1] = dest_path_img
+
+                        #add 1 to suffix
+                        i+=1
+
+            # If source and destination are same 
+            except shutil.SameFileError: 
+                print("Source and destination represents the same file.") 
+            
+            # If destination is a directory. 
+            except IsADirectoryError: 
+                print("Destination is a directory.") 
+            
+            # If there is any permission issue 
+            except PermissionError: 
+                print("Permission denied.") 
+            
+            #enable after developement done
+            # For other errors 
+            #except: 
+            #    print("Error occurred while copying file.") 
+            print('list with 1 new img', self.uploaded_pictures_dir_list)
+
+        
+
+
 
 
     def CopyPhotosToDir(self): 
 
+        '''copy and rename all inserted photo dirs in list'''
 
-
+        #should break this donw to smaller func
         if (self.added_order == 1) : 
             order_id = getOrderID()
             
-
-
             dest_path =  "D:/tailor-store-pic/"
             dest_path += (str(order_id[0])+"/")
             
@@ -2661,14 +2741,12 @@ class Ui_MainWindow(object):
             try: 
                 
                 i = 1
-                #add img names to database 
+                
                 for old_dir in self.uploaded_pictures_dir_list: 
 
                     #get original image name 
                     old_dir_list = old_dir.split('/')
                     old_img_name = old_dir_list[-1]
-
-
 
                     #make directory if folder not yet exist, then copy file to new directory
                     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
@@ -2692,11 +2770,6 @@ class Ui_MainWindow(object):
                     #add 1 to suffix
                     i+=1
 
-
-
-                    
-                    
-            
             # If source and destination are same 
             except shutil.SameFileError: 
                 print("Source and destination represents the same file.") 
