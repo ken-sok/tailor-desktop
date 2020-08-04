@@ -53,6 +53,7 @@ class Ui_MainWindow(object):
     updating = 0
     customer_id = 0
     uploaded_pictures_dir_list = []
+    new_pic_added_in_edit_list = []
     selected_pic = 0
 
     def setupUi(self, MainWindow):
@@ -1425,7 +1426,9 @@ class Ui_MainWindow(object):
         if len(self.uploaded_pictures_dir_list) >= 1:
             self.selected_pic = 0
         else: 
-            self.ResetRadioButtons()
+            #self.ResetRadioButtons()
+            #cannot reset button => mess up tyype of clothes in edit
+            pass
 
         
 
@@ -1448,7 +1451,7 @@ class Ui_MainWindow(object):
             self.RadioPicLabel.setPixmap(pixmap_resized)
         else: 
             
-            self.ResetRadioButtons()
+            #self.ResetRadioButtons()
 
             #index for delete
             self.selected_pic = 0
@@ -2098,8 +2101,8 @@ class Ui_MainWindow(object):
 
 
             #bug starts here
-            self.CopyPhotosToDirEdit()
-            #self.InsertUploadDetails()
+            self.CopyPhotosToDir()
+            self.InsertUploadDetails()
 
             
 
@@ -2570,7 +2573,7 @@ class Ui_MainWindow(object):
 
         self.uploaded_pictures_dir_list = list()
         self.selected_pic = 0 
-        
+        self.new_pic_added_in_edit_list = list()
 
         self.ResetRadioButtons()
         
@@ -2650,88 +2653,13 @@ class Ui_MainWindow(object):
 
         return False
                 
-    
-    def CopyPhotosToDirEdit(self): 
-        
-        '''to copy & rename only new photos into list'''
-
-        if (self.updating == 1 and self.added_order == 1) : 
-            
-            order_id = self.customer_id
-            
-            dest_path =  "D:/tailor-store-pic/"
-            dest_path += (str(order_id[0])+"/")
-            
-            try: 
-                i = 1
-                
-                for old_dir in self.uploaded_pictures_dir_list: 
-
-                    #break this into a function later
-
-                    #get original image name 
-                    old_dir_list = old_dir.split('/')
-                    old_img_name = old_dir_list[-1]
-
-                    #cannot use suffix here
-                    if '-' in old_img_name: 
-                        pass
-
-                    else: 
-
-                        suffix = str (i) + '-'
-                        #make directory if folder not yet exist, then copy file to new directory
-                        #os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-
-                        #print(old_dir, dest_path)
-
-                        #copy file from old dir to new dir
-                        shutil.copy(old_dir, dest_path)
-
-                        #rename file
-                        
-                        #add suffix to image name to avoid same name error
-                        new_img_name = suffix + old_img_name 
-                        os.rename(dest_path + old_img_name, dest_path + new_img_name)
-
-                        #add image name to dest_path
-                        dest_path_img = dest_path + new_img_name
-
-                        #replace old destination with new ones
-                        self.uploaded_pictures_dir_list[i-1] = dest_path_img
-
-                        #add 1 to suffix
-                        i+=1
-
-            # If source and destination are same 
-            except shutil.SameFileError: 
-                print("Source and destination represents the same file.") 
-            
-            # If destination is a directory. 
-            except IsADirectoryError: 
-                print("Destination is a directory.") 
-            
-            # If there is any permission issue 
-            except PermissionError: 
-                print("Permission denied.") 
-            
-            #enable after developement done
-            # For other errors 
-            #except: 
-            #    print("Error occurred while copying file.") 
-            print('list with 1 new img', self.uploaded_pictures_dir_list)
-
-        
-
-
-
 
     def CopyPhotosToDir(self): 
 
         '''copy and rename all inserted photo dirs in list'''
 
         #should break this donw to smaller func
-        if (self.added_order == 1) : 
+        if ((self.added_order == 1) and (self.updating == 0)) : 
             order_id = getOrderID()
             
             dest_path =  "D:/tailor-store-pic/"
@@ -2787,17 +2715,110 @@ class Ui_MainWindow(object):
             #except: 
             #    print("Error occurred while copying file.") 
 
+        elif (self.updating == 1 and self.added_order == 1) : 
+            
+            order_id = self.customer_id
+            print('order id', order_id)
+            dest_path =  "D:/tailor-store-pic/"
+            dest_path += (str(order_id)+"/")
+            
+            try: 
+                i = 1
+                
+                for old_dir in self.uploaded_pictures_dir_list: 
+                    print('i=', i)
+                    print('old_dir', old_dir)
+                    #break this into a function later
+
+                    #get original image name 
+                    old_dir_list = old_dir.split('/')
+                    old_img_name = old_dir_list[-1]
+                    suffix = str (i) + '-'
+                    #cannot use suffix here
+                    if suffix in old_img_name: 
+                        pass
+
+                    else: 
+                        
+                        #make directory if folder not yet exist, then copy file to new directory
+                        #os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+                        #print(old_dir, dest_path)
+
+                        #copy file from old dir to new dir
+                        shutil.copy(old_dir, dest_path)
+
+                        #rename file
+                        
+                        #add suffix to image name to avoid same name error
+                        new_img_name = suffix + old_img_name 
+                        os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                        #add image name to dest_path
+                        dest_path_img = dest_path + new_img_name
+
+                        #replace old destination with new ones
+                        #using i-1 can cause output errors
+                        index = i - 1
+                        self.uploaded_pictures_dir_list[index] = dest_path_img
+                        print('dest_img', dest_path_img)
+                        print('list with 1 new img', self.uploaded_pictures_dir_list)
+                          
+
+                        #note index of new dir
+                        
+                        self.new_pic_added_in_edit_list.append(index)
+                        #add 1 to suffix
+                    
+                    
+                    i+=1
+
+            # If source and destination are same 
+            except shutil.SameFileError: 
+                print("Source and destination represents the same file. edittttt") 
+            
+            # If destination is a directory. 
+            except IsADirectoryError: 
+                print("Destination is a directory.") 
+            
+            # If there is any permission issue 
+            except PermissionError: 
+                print("Permission denied.") 
+            
+            #enable after developement done
+            # For other errors 
+            #except: 
+            #    print("Error occurred while copying file.") 
+        
+        
+
     def InsertUploadDetails(self): 
 
-        
-        if (self.added_order == 1):
+        #for new insert
+        if ((self.added_order == 1) and (self.updating == 0)):
+            
             customer_id = getCustomerID()
             customer_id = customer_id[0]
 
             #add img names to database 
             for new_dir in self.uploaded_pictures_dir_list: 
-                                 
-                InsertUploadDir(new_dir,customer_id, self.updating)
+                InsertUploadDir(new_dir,customer_id)
+
+
+        #for edit
+        elif ((self.added_order == 1) and (self.updating == 1)): 
+            customer_id = self.customer_id
+
+            for i in self.new_pic_added_in_edit_list: 
+                InsertUploadDir(self.uploaded_pictures_dir_list[i],customer_id)
+
+                print('inserted new dir', self.uploaded_pictures_dir_list[i])
+
+            
+            #empty list of new pic added in edit
+            self.new_pic_added_in_edit_list = list()
+
+
 
 
 
@@ -3334,8 +3355,6 @@ class appController:
         #show picture in view
         self._view.Upload.clicked.connect(self._view.InsertUploadView)
 
-        #copy photos to new directory
-        #self._view.Submit.clicked.connect(self._view.CopyPhotosToDir)
 
         #delete photos
         self._view.DeletePictureShownButton.clicked.connect(self._view.DeleteUploadPicMain)
@@ -3536,18 +3555,17 @@ def insertMaterial(order_id, customer_id, type_clothes, material, color, style, 
         count = cursor.rowcount
         print(count, "Record updated successfully into materials table")
 
-def InsertUploadDir(PicDir, customer_id, update): 
+def InsertUploadDir(PicDir, customer_id): 
     '''this function takes in a picture directory, and inserts it into the uploads column in orders table'''
     
-    #table = 'orders'
-    if update == 0:
-        #add 1 entry to table
-        postgres_insert_query = f"UPDATE orders SET uploads = array_cat(uploads, '{{ {PicDir} }}') WHERE customer_id = {customer_id}"
-        #record_to_insert = (PicDir)
-        cursor.execute(postgres_insert_query)
-        connection.commit()
-        count = cursor.rowcount
-        print(count, "picture dir inserted successfully into orders table")
+  
+    #add 1 entry to table
+    postgres_insert_query = f"UPDATE orders SET uploads = array_cat(uploads, '{{ {PicDir} }}') WHERE customer_id = {customer_id}"
+    #record_to_insert = (PicDir)
+    cursor.execute(postgres_insert_query)
+    connection.commit()
+    count = cursor.rowcount
+    print(count, "picture dir inserted successfully into orders table")
 
     '''
     else: 
