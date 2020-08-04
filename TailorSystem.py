@@ -1407,10 +1407,22 @@ class Ui_MainWindow(object):
             DeleteUploadPic(pic_dir, self.customer_id)
         
 
+        #delete locally
+        #Remove the specified  
+        #file path 
+        try: 
+            os.remove(self.uploaded_pictures_dir_list[PicNum])
+            print("% s removed successfully" % self.uploaded_pictures_dir_list[PicNum]) 
+        except OSError as error: 
+            print(error) 
+            print("File path can not be removed") 
+        
+
         #delete from list of directories
         self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
         print('removed:', self.uploaded_pictures_dir_list)
 
+       
 
         #reset views
         #reset icon to default
