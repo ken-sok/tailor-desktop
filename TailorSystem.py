@@ -1399,6 +1399,12 @@ class Ui_MainWindow(object):
                 self.DeleteUploadPicController(PicNum=PicNum,PicDir=self.uploaded_pictures_dir_list[PicNum])
     
     def DeleteUploadPicController(self, PicNum, PicDir): 
+
+
+        #delete from db
+        if (self.updating == 1 and self.customer_id != None): 
+            pic_dir = self.uploaded_pictures_dir_list[PicNum]
+            DeleteUploadPic(pic_dir, self.customer_id)
         
         #delete from list
         self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
@@ -1412,11 +1418,14 @@ class Ui_MainWindow(object):
         #reset picture preview with 1st picture
         self.show_pic_preview(pic_num=0)
         
-        #delete from db
-        if (self.updating == 1 and self.customer_id != None): 
+        #reset selected pic to 1st pic or reset to default img
+        if len(self.uploaded_pictures_dir_list) >= 1:
+            self.selected_pic = 0
+        else: 
+            self.ResetRadioButtons()
 
-            pic_dir = self.uploaded_pictures_dir_list[PicNum]
-            DeleteUploadPic(pic_dir, self.customer_id)
+        
+
 
             
     def reset_icon(self): 
@@ -2084,6 +2093,8 @@ class Ui_MainWindow(object):
 
             self.added_order = 1
 
+
+            #bug starts here
             self.CopyPhotosToDir()
             self.InsertUploadDetails()
 
@@ -3489,7 +3500,7 @@ def getCustomerID():
 
 def DeleteUploadPic(pic_dir, customer_id): 
 
-    postgres_delete_query = f"UPDATE orders SET uploads = array_remove(uploads, {pic_dir}) WHERE customer_id = {customer_id}"
+    postgres_delete_query = f"UPDATE orders SET uploads = array_remove(uploads, '{pic_dir}') WHERE customer_id = {customer_id}"
     connection.commit()
     count = cursor.rowcount
     cursor.execute(postgres_delete_query)
