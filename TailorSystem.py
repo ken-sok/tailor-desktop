@@ -2971,7 +2971,7 @@ class TableView(QDialog):
         toolbar.setMovable(False)
 
         #var for number of total columns
-        self.NumCol = 10
+        self.NumCol = 9
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
@@ -3076,7 +3076,7 @@ class TableView(QDialog):
 
 
             #add to table 
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 4),combo)	
+            self.tableWidget.setCellWidget(row_number,6,combo)	
         
         for row_number in range(0,len(all_rows)): 
 
@@ -3093,7 +3093,7 @@ class TableView(QDialog):
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 3),btn_ac_delete)	
+            self.tableWidget.setCellWidget(row_number,7,btn_ac_delete)	
 
         for row_number in range(0,len(all_rows)): 
             
@@ -3109,8 +3109,9 @@ class TableView(QDialog):
 
 
             #add to table
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 2),btn_ac_edit)	
+            self.tableWidget.setCellWidget(row_number,8,btn_ac_edit)	
 
+        '''
         for row_number in range(0,len(all_rows)): 
             
             btn_ac_images = QtWidgets.QPushButton()
@@ -3126,7 +3127,7 @@ class TableView(QDialog):
 
             #add to table
             self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_images)	
-
+        '''
 
         #add scrollbar 
         self.tableWidget.resizeRowsToContents()
