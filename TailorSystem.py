@@ -53,6 +53,7 @@ class Ui_MainWindow(object):
     updating = 0
     customer_id = 0
     uploaded_pictures_dir_list = []
+    selected_pic = 0
 
     def setupUi(self, MainWindow):
 
@@ -940,13 +941,16 @@ class Ui_MainWindow(object):
 
         self.PreviewGroupLayout = QtWidgets.QVBoxLayout()
 
+        #layout for picture and delete button
+        self.PictureAndDeleteLayout = QHBoxLayout()
+
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(800, 600)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
         #self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-
+        
         #default
 
         self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg)")
@@ -999,9 +1003,30 @@ class Ui_MainWindow(object):
                                 "background : grey;"
                                 "}")
 
-   
+
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
+
+
+        #btn_ac_delete.setMaximumSize(30,30)
+
+        #btn_ac_delete.clicked.connect(self.delete)
+        self.DeletePictureShownButton = QtWidgets.QPushButton()
+        self.DeletePictureShownButton.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.DeletePictureShownButton.setAutoFillBackground(False)
+        self.DeletePictureShownButton.setObjectName("DeletePictureShownButton")
+        self.DeletePictureShownButton.setIcon(QtGui.QIcon('icon/delete.png'))
+        size = QtCore.QSize(25, 25)
+        self.DeletePictureShownButton.setIconSize(size)
+        self.DeletePictureShownButton.setMaximumSize(size)
+
+        
+        #self.PictureAndDeleteLayout.addWidget(self.RadioPicLabel)
+        #self.PictureAndDeleteLayout.addWidget(self.DeletePictureShownButton)
+
+        #self.PreviewGroupLayout.addLayout(self.PictureAndDeleteLayout)
+        self.PreviewGroupLayout.addWidget(self.DeletePictureShownButton)
         self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
+        
 
         #uploads group
         
@@ -1261,6 +1286,7 @@ class Ui_MainWindow(object):
         self.StyleBox.raise_()
         self.SpecialReqBox.raise_()
         self.PantGroupBox.raise_()
+        self.DeletePictureShownButton.raise_()
     
 
     def ShowUploadPic(self): 
@@ -1277,6 +1303,9 @@ class Ui_MainWindow(object):
             #pixmap_resized = orig_pixmap.scaled(64, 64, QtCore.Qt.KeepAspectRatio)
             self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
             self.RadioPicLabel.setPixmap(pixmap_resized)
+
+
+            self.selected_pic = NumPicUploaded - 1
         elif NumPicUploaded == 0:
             pass 
 
@@ -1291,6 +1320,7 @@ class Ui_MainWindow(object):
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
 
         #set previews
+            
         if NumPicUploaded >= 1: 
             #set upload preview in button 1
             self.UploadButtonOne.setIcon(QtGui.QIcon(self.uploaded_pictures_dir_list[0]))
@@ -1317,30 +1347,99 @@ class Ui_MainWindow(object):
             pass
         else: 
             if (Button == 'UploadButtonOne' and num_pic_uploaded >= 1) : 
-                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[0])
-                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-                self.RadioPicLabel.setPixmap(pixmap_resized)
+
+                self.show_pic_preview(pic_num = 0)
+
+                #index for delete
+                self.selected_pic = 0
             
             elif (Button == 'UploadButtonTwo'and num_pic_uploaded >= 2): 
-                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[1])
-                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-                self.RadioPicLabel.setPixmap(pixmap_resized)
+                
+                self.show_pic_preview(pic_num = 1)
+
+                #index for delete
+                self.selected_pic = 1
 
             elif (Button == 'UploadButtonThree' and num_pic_uploaded >= 3):
-                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[2])
-                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-                self.RadioPicLabel.setPixmap(pixmap_resized)
+                
+                self.show_pic_preview(pic_num = 2)
+
+                #index for delete
+                self.selected_pic = 2
 
             elif (Button == 'UploadButtonFour'and num_pic_uploaded == 4):  
-                orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[3])
-                pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-                self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-                self.RadioPicLabel.setPixmap(pixmap_resized)
-            
+                
+                self.show_pic_preview(pic_num = 3)
 
+                #index for delete
+                self.selected_pic = 3
+    
+
+    def DeleteUploadPicMain(self): 
+        
+
+        num_pic_uploaded = len(self.uploaded_pictures_dir_list)
+        print(num_pic_uploaded)
+        if  num_pic_uploaded == 0 : 
+            pass
+        else: 
+            
+            PicNum = self.selected_pic
+            
+            if PicNum == 0 : 
+                self.DeleteUploadPicController(PicNum=PicNum,PicDir=self.uploaded_pictures_dir_list[PicNum])
+            
+            elif PicNum == 1: 
+                self.DeleteUploadPicController(PicNum=PicNum,PicDir=self.uploaded_pictures_dir_list[PicNum])
+
+            elif PicNum == 2:
+                self.DeleteUploadPicController(PicNum=PicNum,PicDir=self.uploaded_pictures_dir_list[PicNum])
+
+            elif PicNum == 3:  
+                self.DeleteUploadPicController(PicNum=PicNum,PicDir=self.uploaded_pictures_dir_list[PicNum])
+    
+    def DeleteUploadPicController(self, PicNum, PicDir): 
+        
+        #delete from list
+        self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
+
+        #reset icon to default
+        self.reset_icon()
+
+        #reset preview icons according to remaining pictures
+        self.SetUploadPreview()
+
+        #reset picture preview with 1st picture
+        self.show_pic_preview(pic_num=0)
+        
+        #delete from db
+        if (self.updating == 1 and self.customer_id != None): 
+
+            pic_dir = self.uploaded_pictures_dir_list[PicNum]
+            DeleteUploadPic(pic_dir, self.customer_id)
+
+            
+    def reset_icon(self): 
+        self.UploadButtonOne.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
+        self.UploadButtonTwo.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
+        self.UploadButtonThree.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
+        self.UploadButtonFour.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
+
+
+    def show_pic_preview(self, pic_num): 
+        
+        
+        if len(self.uploaded_pictures_dir_list) > 0: 
+            orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[pic_num])
+            pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+            self.RadioPicLabel.setPixmap(pixmap_resized)
+        else: 
+            
+            self.ResetRadioButtons()
+
+            #index for delete
+            self.selected_pic = 0
 
         
     def select_pic(self):
@@ -1348,6 +1447,7 @@ class Ui_MainWindow(object):
 
         #should break down, this function too big
         radioBtn = self.PreviewGroupBox.sender()
+
         #default selection
         self.clothes_type = "អាវ"
         self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
@@ -2374,7 +2474,7 @@ class Ui_MainWindow(object):
             #pictures module
             self.uploaded_pictures_dir_list = OrderDetails['uploads']
 
-            print('class list', self.uploaded_pictures_dir_list)
+            #print('class list', self.uploaded_pictures_dir_list)
 
             self.ShowUploadPic()
             self.SetUploadPreview()
@@ -2409,27 +2509,8 @@ class Ui_MainWindow(object):
         self.StyleLabel.setStyleSheet("color: black")
         self.MaterialsLabel.setStyleSheet("color: black")
         self.ColorLabel.setStyleSheet("color: black")
-        self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
-        self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
-        self.PantRadio.setStyleSheet("color: black; background-color: light grey")
-        self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
-        
-        self.SkirtRadio.setAutoExclusive(False)
-        self.SkirtRadio.setChecked(False)
-        self.SkirtRadio.setAutoExclusive(True)
 
-        self.PantRadio.setAutoExclusive(False)
-        self.PantRadio.setChecked(False)
-        self.PantRadio.setAutoExclusive(True)
 
-        self.DressRadio.setAutoExclusive(False)
-        self.DressRadio.setChecked(False) 
-        self.DressRadio.setAutoExclusive(True)
-
-        
-        self.ShirtRadio.setAutoExclusive(False)
-        self.ShirtRadio.setChecked(True)
-        self.ShirtRadio.setAutoExclusive(True)
 
 
         #clear measurement boxes
@@ -2457,14 +2538,6 @@ class Ui_MainWindow(object):
         self.CalfBox.setText(_translate("MainWindow", ''))
         self.PantWaistBox.setText(_translate("MainWindow", ''))
 
-
-        #picture previews
-        orig_pixmap = QPixmap('pictures/transparent.png')
-        pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
-        self.RadioPicLabel.setPixmap(pixmap_resized)
-        #self.RadioPicLabel.show()
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
         
         self.UploadButtonOne.setStyleSheet("background-color: white; border: 1px solid blue;")
         self.UploadButtonOne.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
@@ -2476,9 +2549,10 @@ class Ui_MainWindow(object):
         self.UploadButtonFour.setIcon(QtGui.QIcon('icon/shirt-icon.png'))        
 
         self.uploaded_pictures_dir_list = list()
+        self.selected_pic = 0 
         
-        print('list = ', len(self.uploaded_pictures_dir_list))
 
+        self.ResetRadioButtons()
         
 
         if self.updating == 1: 
@@ -2486,6 +2560,39 @@ class Ui_MainWindow(object):
         
 
         self.updating = 0
+    
+    def ResetRadioButtons(self): 
+        
+        self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
+        self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
+        self.PantRadio.setStyleSheet("color: black; background-color: light grey")
+        self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
+        
+        self.SkirtRadio.setAutoExclusive(False)
+        self.SkirtRadio.setChecked(False)
+        self.SkirtRadio.setAutoExclusive(True)
+
+        self.PantRadio.setAutoExclusive(False)
+        self.PantRadio.setChecked(False)
+        self.PantRadio.setAutoExclusive(True)
+
+        self.DressRadio.setAutoExclusive(False)
+        self.DressRadio.setChecked(False) 
+        self.DressRadio.setAutoExclusive(True)
+
+        
+        self.ShirtRadio.setAutoExclusive(False)
+        self.ShirtRadio.setChecked(True)
+        self.ShirtRadio.setAutoExclusive(True)
+
+        
+        #picture previews
+        orig_pixmap = QPixmap('pictures/transparent.png')
+        pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+        self.RadioPicLabel.setPixmap(pixmap_resized)
+        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+
 
     def InsertUploadView(self):
             
@@ -2514,10 +2621,9 @@ class Ui_MainWindow(object):
             if  ( NumPicUploaded < 4 ): 
                 
                 self.uploaded_pictures_dir_list.append(fileName)
-                #print("File added to list successfully.")
 
                 OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
-                #print(OldFile)
+
                 return OldFile
 
             else: 
@@ -2603,15 +2709,10 @@ class Ui_MainWindow(object):
         if (self.added_order == 1):
             customer_id = getCustomerID()
             customer_id = customer_id[0]
+
             #add img names to database 
             for new_dir in self.uploaded_pictures_dir_list: 
-                
-                #print('new_dir_to_db' + new_dir)
-
-                #add new dir to database 
-
-                #could be a bug here when update? 
-                 
+                                 
                 InsertUploadDir(new_dir,customer_id, self.updating)
 
 
@@ -3151,6 +3252,9 @@ class appController:
 
         #copy photos to new directory
         #self._view.Submit.clicked.connect(self._view.CopyPhotosToDir)
+
+        #delete photos
+        self._view.DeletePictureShownButton.clicked.connect(self._view.DeleteUploadPicMain)
         
         
              
@@ -3382,6 +3486,14 @@ def getCustomerID():
     print(customerID, 'is customer ID for this order')
 
     return customerID
+
+def DeleteUploadPic(pic_dir, customer_id): 
+
+    postgres_delete_query = f"UPDATE orders SET uploads = array_remove(uploads, {pic_dir}) WHERE customer_id = {customer_id}"
+    connection.commit()
+    count = cursor.rowcount
+    cursor.execute(postgres_delete_query)
+    print(count, "picture dir remaining in customers table after delete")
 
 
 
