@@ -1669,7 +1669,7 @@ class Ui_MainWindow(object):
             if (self.clothes_type  == "សំពត់"):
                 #skirt
                 
-                if len(self.uploaded_pictures_dir_list) == 0: 
+                if self.uploaded_pictures_dir_list != None: 
                     self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/skirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
                 
             
@@ -1785,7 +1785,7 @@ class Ui_MainWindow(object):
 
             elif (self.clothes_type  == "រ៉ូប"):
                     #dress
-                if len(self.uploaded_pictures_dir_list) == 0: 
+                if self.uploaded_pictures_dir_list != None: 
                     self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/dress.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
 
         
@@ -1832,7 +1832,7 @@ class Ui_MainWindow(object):
                 
             elif (self.clothes_type  == "អាវ"):
                 #shirt
-                if len(self.uploaded_pictures_dir_list) == 0: 
+                if self.uploaded_pictures_dir_list != None: 
                     self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
                                 #boxes we don't need for shirt
                 self.InseamBox.setReadOnly(True)
@@ -1886,7 +1886,7 @@ class Ui_MainWindow(object):
 
             elif (self.clothes_type  == "ខោ"):
                 #pant
-                if len(self.uploaded_pictures_dir_list) == 0: 
+                if self.uploaded_pictures_dir_list != None: 
                     self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/pant.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
 
 
@@ -2371,7 +2371,7 @@ class Ui_MainWindow(object):
         self.customer_id = customer_id
         #get information from database according to customer ID
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
-        print('from database:', OrderDetails['uploads'])
+        #print('from database:', OrderDetails['uploads'])
 
 
         #remove msg from prev trans
@@ -2506,8 +2506,12 @@ class Ui_MainWindow(object):
 
             #also called in insert picture in view
             
-            self.show_pic_preview(pic_num=0)
-            self.SetUploadPreview()
+            #in case there are existing pictures
+            if self.uploaded_pictures_dir_list: 
+                self.show_pic_preview(pic_num=0)
+                self.SetUploadPreview()
+            else: 
+                pass
             
 
             self.updating = 1
@@ -2624,8 +2628,7 @@ class Ui_MainWindow(object):
         orig_pixmap = QPixmap('pictures/transparent.png')
         pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
         #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
-        self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2")
-        self.RadioPicLabel.setScaledContents(True)
+        self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2")
         self.RadioPicLabel.setPixmap(pixmap_resized)
         
     
@@ -3744,7 +3747,6 @@ def FetchOrdersDetailsEdit(customer_id):
      
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
 
