@@ -1405,22 +1405,21 @@ class Ui_MainWindow(object):
             print('modified list in db')
             pic_dir = self.uploaded_pictures_dir_list[PicNum]
             DeleteUploadPic(pic_dir, self.customer_id)
-        
 
-        #delete locally
-        #Remove the specified  
-        #file path 
-        try: 
-            os.remove(self.uploaded_pictures_dir_list[PicNum])
-            print("% s removed successfully" % self.uploaded_pictures_dir_list[PicNum]) 
-        except OSError as error: 
-            print(error) 
-            print("File path can not be removed") 
+            #delete locally
+            #Remove the specified  
+            #file path 
+            try: 
+                os.remove(self.uploaded_pictures_dir_list[PicNum])
+                print("% s removed successfully" % self.uploaded_pictures_dir_list[PicNum]) 
+            except OSError as error: 
+                print(error) 
+                print("File path can not be removed") 
         
 
         #delete from list of directories
         self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
-        print('removed:', self.uploaded_pictures_dir_list)
+        print('removed list:', self.uploaded_pictures_dir_list)
 
        
 
@@ -2683,32 +2682,12 @@ class Ui_MainWindow(object):
             
             order_id = self.customer_id
 
-            #print('order id', order_id)
-
             dest_path =  "D:/tailor-store-pic/"
             dest_path += (str(order_id)+"/")
             
-
-            i = 1
-            Suffix = 'MODEL_'
-            for old_dir in self.uploaded_pictures_dir_list: 
-
-                #get original image name 
-                old_dir_list = old_dir.split('/')
-                old_img_name = old_dir_list[-1]
-                
-                #cannot use suffix here
-                if Suffix in old_img_name: 
-                    pass
-
-                else: 
-                    self.CopyNewPhotosToDir(dest_path = dest_path)
+            self.CopyNewPhotosToDir(dest_path = dest_path)
                     
-                    #note index of new dir in list
-                    index = i - 1
-                    self.new_pic_added_in_edit_list.append(index)
 
-                i+=1
 
           
         
@@ -2719,56 +2698,70 @@ class Ui_MainWindow(object):
             
             for old_dir in self.uploaded_pictures_dir_list: 
                 Suffix = 'MODEL_'
+
                 #get original image name 
                 old_dir_list = old_dir.split('/')
                 old_img_name = old_dir_list[-1]
 
-                #make directory, if folder not yet exist, then copy file to new directory
-                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+                print(old_dir)
+                print(dest_path)
 
-                #copy files from old folder to new folder
-                shutil.copy(old_dir, dest_path)
-
-                #rename file
-
-                try: 
-                    #add suffix to image name to avoid same name error
-                    new_img_name = Suffix + old_img_name 
-                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
-
-                    #add image name to dest_path
-                    dest_path_img = dest_path + new_img_name
-                    
-                    #replace old destination with new ones
-                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
-                    
-                    #add 1 to suffix
-                    i+=1
                 
-                except FileExistsError: 
-                    TryAgain = True
+                if Suffix in old_img_name: 
+                    #print('here')
+                    pass
+
+                else: 
                     
-                    while TryAgain: 
-                        try: 
-                            Suffix += 'SameFileName_'
-                            #add suffix to image name to avoid same name error
-                            new_img_name = Suffix + old_img_name 
-                            os.rename(dest_path + old_img_name, dest_path + new_img_name)
-                            TryAgain = False
-                        except FileExistsError: 
-                            print('file exist error')
-                            TryAgain = True
-                         
+                    #note index of new dir in list
+                    index = i - 1
+                    self.new_pic_added_in_edit_list.append(index)
+
+                    #make directory, if folder not yet exist, then copy file to new directory
+                    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+                    #copy files from old folder to new folder
+                    shutil.copy(old_dir, dest_path)
+
+                    #rename file
+
+                    try: 
+                        #add suffix to image name to avoid same name error
+                        new_img_name = Suffix + old_img_name 
+                        os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                        #add image name to dest_path
+                        dest_path_img = dest_path + new_img_name
                         
-
-                    #add image name to dest_path
-                    dest_path_img = dest_path + new_img_name
-
-                    #replace old destination with new ones
-                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                        #replace old destination with new ones
+                        self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                        
+                        #add 1 to suffix
+                        i+=1
                     
-                    #add 1 to suffix
-                    i+=1
+                    except FileExistsError: 
+                        TryAgain = True
+                        
+                        while TryAgain: 
+                            try: 
+                                Suffix += 'SameFileName_'
+                                #add suffix to image name to avoid same name error
+                                new_img_name = Suffix + old_img_name 
+                                os.rename(dest_path + old_img_name, dest_path + new_img_name)
+                                TryAgain = False
+                            except FileExistsError: 
+                                print('file exist error')
+                                TryAgain = True
+                            
+                            
+                        #add image name to dest_path
+                        dest_path_img = dest_path + new_img_name
+
+                        #replace old destination with new ones
+                        self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                        
+                        #add 1 to suffix
+                        i+=1
 
             
         # If source and destination are same 
