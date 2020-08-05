@@ -2151,7 +2151,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         
         '''this function set the text display in Mainwindow'''
-        
+
         _translate = QtCore.QCoreApplication.translate
         self.StaffTitle.setText(_translate("MainWindow", "ព័ត៌មានបុគ្គលិក"))
         self.PhoneLabel.setText(_translate("MainWindow", "លេខទូរស័ព្ទ:"))
@@ -2237,7 +2237,7 @@ class Ui_MainWindow(object):
     
     def PrintDate(self, day, month, year):
         
-        '''function to print date in submit order page'''
+        '''Get date inputs from calendar dialog, format, then print date in MainWindow as dd/mm/yyyy'''
 
         _translate = QtCore.QCoreApplication.translate
         
@@ -2246,14 +2246,14 @@ class Ui_MainWindow(object):
         
     def getDate(self, day, month, year): 
 
-        '''function to get date for sending to database'''
+        '''Get date inputs from calendar dialog for sending to database'''
 
         _translate = QtCore.QCoreApplication.translate
         self.DeadlineBox.setText(_translate("MainWindow", f'{year}/{month}/{day}'))
         
     def EditDate(self):
         
-        '''function to get deadline from calendar dialog'''
+        '''function to open calendar dialog, and get deadline from user'''
         
         self.dialog = CalendarWindow()
         self.dialog.submitted.connect(self.PrintDate)
@@ -2262,7 +2262,7 @@ class Ui_MainWindow(object):
 
     def ViewAllOrders(self):
 
-        '''function to view all orders order inside tableview dialog & help send customer ID for editing order'''
+        '''function to view all orders inside tableview dialog and help send customer ID for editing order'''
         self.orderdialog = TableView()
         self.orderdialog.customerEditID.connect(self.GetOrderDetails)        
         self.orderdialog.show()
@@ -2270,7 +2270,9 @@ class Ui_MainWindow(object):
     
 
     def aboutdeveloper(self):
+
         '''function to show about developer details'''
+
         self.aboutdialog = AboutDialog()
         self.aboutdialog.show()
 
@@ -2279,9 +2281,8 @@ class Ui_MainWindow(object):
         '''controller function to fetch order details using customer id, and put into boxes for staff to edit'''
 
         self.customer_id = customer_id
-        #get information from database according to customer ID
+
         OrderDetails = FetchOrdersDetailsEdit(customer_id)
-        #print('from database:', OrderDetails['uploads'])
 
 
         #remove msg from prev trans
@@ -2417,7 +2418,6 @@ class Ui_MainWindow(object):
             #reset selected picture
             self.selected_pic = 0 
 
-            #also called in insert picture in view
             
             #in case there are existing pictures
             if self.uploaded_pictures_dir_list: 
@@ -2437,11 +2437,15 @@ class Ui_MainWindow(object):
             QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
     
     def NewOrder(self): 
+        '''clear input when new order menu button is clicked'''
         self.clearInput(ClearClicked = 0)
+
     def CancelOrder(self): 
+        '''clear input when clear order button is clicked'''
         self.clearInput(ClearClicked = 1)
 
     def clearInput(self, ClearClicked): 
+
         '''function to clear all inputs by staff'''
 
         _translate = QtCore.QCoreApplication.translate
@@ -2511,6 +2515,7 @@ class Ui_MainWindow(object):
         self.ResetRadioButtons()
         
 
+        #return to view orders dialog if clear button is clicked
         if (self.updating == 1 and ClearClicked == 1): 
             self.ViewAllOrders()
         
@@ -2518,6 +2523,8 @@ class Ui_MainWindow(object):
         self.updating = 0
     
     def ResetRadioButtons(self): 
+
+        '''function to set radio button to default value when clearInput is called'''
         
         self.SkirtRadio.setStyleSheet("color: black; background-color: light grey")
         self.ShirtRadio.setStyleSheet("color: black; background-color: light grey")
@@ -2548,13 +2555,14 @@ class Ui_MainWindow(object):
         #picture previews
         orig_pixmap = QPixmap('pictures/transparent.png')
         pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-        #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
         self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2")
         self.RadioPicLabel.setPixmap(pixmap_resized)
         
     
 
     def InsertUploadView(self):
+
+            '''controller function to ask for location of picture to upload, and show it in radiopiclabel'''
             
             #try: 
             OldFile = self.GetPictureDir()   
@@ -2572,39 +2580,35 @@ class Ui_MainWindow(object):
 
     
     def GetPictureDir(self):
+        
+        '''function to open a dialog to copy picture to tailor store pictures folder'''
+
         dialog = UploadDialog()
         fileName, _ = QFileDialog.getSaveFileName(dialog,"Upload Image","","Images (*.png *jpeg *.jpg *jfif *bmp *gif)")
         
         if fileName:
-
-            if (self.uploaded_pictures_dir_list): 
-                
-                NumPicUploaded = len(self.uploaded_pictures_dir_list)
             
-                if ( NumPicUploaded < 4 ): 
-                
-                    self.uploaded_pictures_dir_list.append(fileName)
+            NumPicUploaded = len(self.uploaded_pictures_dir_list)
 
-                    OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
-
-                    return OldFile
-
-            else: 
-                
+            #a limit of 4 pictures is set
+            if ( NumPicUploaded < 4 ): 
+            
                 self.uploaded_pictures_dir_list.append(fileName)
 
-                OldFile = self.uploaded_pictures_dir_list[0]
+                OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
 
                 return OldFile
-
 
         return False
 
     def CopyNewPhotosToDirController(self): 
 
-        '''copy and rename all inserted photo dirs in list'''
+        '''controller to copy and rename all newly inserted photo directory
+        this function also sets the location of tailor store picture folder, and use order id as 
+        name of copied pictures'''
 
         if ((self.added_order == 1) and (self.updating == 0)) : 
+
             order_id = getOrderID()
             
             dest_path =  "D:/tailor-store-pic/"
@@ -2615,6 +2619,9 @@ class Ui_MainWindow(object):
         
         elif (self.updating == 1 and self.added_order == 1) : 
             
+            #customer id is same as order id
+            #this is because customer id is autogenerated when each order is added
+            #will change it to make customer id the same for the same customer in later versions
             order_id = self.customer_id
 
             dest_path =  "D:/tailor-store-pic/"
@@ -2624,9 +2631,10 @@ class Ui_MainWindow(object):
                     
 
 
-          
         
     def CopyNewPhotosToDir(self, dest_path): 
+
+        '''copies photos from old directory to tailor store photos folder'''
 
         try:         
             i = 1
@@ -2643,7 +2651,7 @@ class Ui_MainWindow(object):
 
                 
                 if Suffix in old_img_name: 
-                    #print('here')
+
                     pass
 
                 else: 
@@ -2670,8 +2678,7 @@ class Ui_MainWindow(object):
                         
                         #replace old destination with new ones
                         self.uploaded_pictures_dir_list[i-1] = dest_path_img
-                        
-                        #add 1 to suffix
+
                         i+=1
                     
                     except FileExistsError: 
@@ -2694,8 +2701,7 @@ class Ui_MainWindow(object):
 
                         #replace old destination with new ones
                         self.uploaded_pictures_dir_list[i-1] = dest_path_img
-                        
-                        #add 1 to suffix
+
                         i+=1
 
             
@@ -2724,6 +2730,9 @@ class Ui_MainWindow(object):
 
     def InsertUploadDetails(self): 
 
+        '''this function controls the flow of adding photo directory to
+        database'''
+
         #for new insert
         if ((self.added_order == 1) and (self.updating == 0)):
             
@@ -2737,13 +2746,12 @@ class Ui_MainWindow(object):
 
         #for edit
         elif ((self.added_order == 1) and (self.updating == 1)): 
+
             customer_id = self.customer_id
 
+            #insert only new pictures that are selected
             for i in self.new_pic_added_in_edit_list: 
                 InsertUploadDir(self.uploaded_pictures_dir_list[i],customer_id)
-
-                print('inserted new dir', self.uploaded_pictures_dir_list[i])
-
             
             #empty list of new pic added in edit
             self.new_pic_added_in_edit_list = list()
@@ -2752,12 +2760,14 @@ class Ui_MainWindow(object):
 
 
 
-#upload dialog
+
 class UploadDialog(QWidget):
+
+    '''dialog for relocating photos'''
 
     def __init__(self):
         super().__init__()
-        self.title = 'PyQt5 file dialogs - pythonspot.com'
+        self.title = 'Upload Image'
         self.left = 10
         self.top = 10
         self.width = 640
@@ -2767,14 +2777,12 @@ class UploadDialog(QWidget):
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        
-        #self.openFileNameDialog()
-        #self.openFileNamesDialog()
-        #self.saveFileDialog()
-        
-        #self.show()
-#about-dialog
+
+
 class AboutDialog(QDialog):
+    
+    '''dialog about developer information'''
+
     def __init__ (self):
         super(AboutDialog, self).__init__()
         self.setWindowTitle("About Dev")
@@ -2802,19 +2810,21 @@ class AboutDialog(QDialog):
 
 class UploadPreviewButton(QPushButton): 
 
+    '''button class that can store small picture previews as icons
+    after picture is uploaded'''
+
     def __init__(self):
         super(UploadPreviewButton, self).__init__()
-        #self.UploadPictureButton = QtWidgets.QPushButton()
         self.setMaximumSize(50, 50)
         self.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.setAutoFillBackground(False)
         self.setFont(SmallKhmerFont)
-        #self.setObjectName("self.UploadPictureButton")
         self.setStyleSheet("background-color: white; border: 1px solid blue;")
         self.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
 
-#calendar class for staff to select deadline
+
 class CalendarWindow(QDialog):
+    '''calendar class for staff to select deadline'''
     global currentYear, currentMonth, currentDay
 
     currentDay = datetime.now().day
@@ -2854,6 +2864,9 @@ class CalendarWindow(QDialog):
         self.calendar.clicked.connect(self.sendDateMainWindow)
 
     def sendDateMainWindow(self, qDate):
+
+        '''function to send date selected by user in this dialog to mainwindow'''
+
         date = self.calendar.selectedDate()
         self.datelabel.setText(date.toString())
         
@@ -2861,8 +2874,10 @@ class CalendarWindow(QDialog):
             qDate.day(), qDate.month(), qDate.year()
         )
 
-#class to view all orders, delete, edit, and search for all orders of one customer
+
 class TableView(QDialog):
+
+    '''dialog to view all orders, delete, edit, and search for all orders of one customer'''
 
     customerEditID = QtCore.pyqtSignal(str)
 
@@ -2871,10 +2886,9 @@ class TableView(QDialog):
     def __init__(self):
         super(TableView, self).__init__()
         self.setWindowTitle('All Orders')
-        #self.setGeometry(300, 300, 450, 300)
+        
         self.setMinimumSize(QtCore.QSize(1200, 800))
         self.showMaximized()
-        #self.setMaximumSize(QtCore.QSize(450, 300))
         self.initUI()
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlag(Qt.WindowMinimizeButtonHint, True)
@@ -2893,7 +2907,6 @@ class TableView(QDialog):
 
         layout.addWidget(toolbar)
         self.tableWidget = QTableWidget(self)
-        #self.tableWidget.resize(800, 600)
         self.tableWidget.setAlternatingRowColors(True)
         self.tableWidget.setColumnCount(self.NumCol)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
@@ -2906,34 +2919,30 @@ class TableView(QDialog):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
+
         #add scrollbar 
         self.tableWidget.resizeRowsToContents()
     
         layout.addWidget(self.tableWidget)
 
-        btn_ac_refresh = QAction(QIcon("icon/refresh.png"),"Refresh",self)   #refresh icon
+        #refresh icon
+        btn_ac_refresh = QAction(QIcon("icon/refresh.png"),"Refresh",self)  
         btn_ac_refresh.triggered.connect(self.loaddata)
         btn_ac_refresh.setStatusTip("Refresh Table")
         toolbar.addAction(btn_ac_refresh)
         
 
-
-        
-        btn_ac_search = QAction(QIcon("icon/search.png"), "Search", self)  #search icon
+        #search icon
+        btn_ac_search = QAction(QIcon("icon/search.png"), "Search", self)  
         btn_ac_search.triggered.connect(self.search)
         btn_ac_search.setStatusTip("Search Customer")
         toolbar.addAction(btn_ac_search)
 
-    def rowcolor(tableWidget, rowIndex, color):
-        for r in range(tableWidget.columnCount()):
-            tableWidget.item(rowIndex, r).setBackground(blue)
         
-        #toolbar buttons
-
-    
 
     def loaddata(self, customer_name):
-    
+        
+        '''function that receive customer_name as input, and query the database for some order details'''
         
         #list all customers
         if customer_name == "" or customer_name == False : 
@@ -2949,20 +2958,16 @@ class TableView(QDialog):
             cursor.execute(sql_select_query, record_to_query)
             all_rows = cursor.fetchall()
 
-    
+        #set font 
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setFont(SmallKhmerFont)
         self.tableWidget.setRowCount(0)
 
         #show all rows/ show searched customer name
-      
         if len(all_rows) > 0: 
             for row_number, row_data in enumerate(all_rows):
                 self.tableWidget.insertRow(row_number)
                 for column_number, data in enumerate(row_data):
-                    
-                    #print(type(data))
-                    
                     
                     item = QTableWidgetItem(str(data))
                     item.setFlags(QtCore.Qt.ItemIsEnabled)
@@ -2994,15 +2999,14 @@ class TableView(QDialog):
             combo.setCurrentIndex(int(all_rows[row_number][6])) 
             combo.currentIndexChanged.connect(self.UpdateProgressPercent)
 
-
             #add to table 
             self.tableWidget.setCellWidget(row_number,6,combo)	
         
+        #add delete button for each row
         for row_number in range(0,len(all_rows)): 
 
 
             btn_ac_delete = QtWidgets.QPushButton()
-            #btn_ac_delete.setMaximumSize(30,30)
             btn_ac_delete.setLayoutDirection(QtCore.Qt.LeftToRight)
             btn_ac_delete.setAutoFillBackground(False)
             btn_ac_delete.setObjectName("btn_ac_delete")
@@ -3011,14 +3015,13 @@ class TableView(QDialog):
             btn_ac_delete.setIconSize(size)
             btn_ac_delete.clicked.connect(self.delete)
 
-
             #add to table
             self.tableWidget.setCellWidget(row_number,7,btn_ac_delete)	
 
+        #add edit button for each row
         for row_number in range(0,len(all_rows)): 
             
             btn_ac_edit = QtWidgets.QPushButton()
-            #btn_ac_edit.setMaximumSize(30,30)
             btn_ac_edit.setLayoutDirection(QtCore.Qt.LeftToRight)
             btn_ac_edit.setAutoFillBackground(False)
             btn_ac_edit.setObjectName("btn_ac_edit")
@@ -3027,31 +3030,13 @@ class TableView(QDialog):
             btn_ac_edit.setIconSize(size)
             btn_ac_edit.clicked.connect(self.edit)
 
-
             #add to table
             self.tableWidget.setCellWidget(row_number,8,btn_ac_edit)	
 
-        '''
-        for row_number in range(0,len(all_rows)): 
-            
-            btn_ac_images = QtWidgets.QPushButton()
-            #btn_ac_images.setMaximumSize(30,30)
-            btn_ac_images.setLayoutDirection(QtCore.Qt.LeftToRight)
-            btn_ac_images.setAutoFillBackground(False)
-            btn_ac_images.setObjectName("btn_ac_images")
-            btn_ac_images.setIcon(QtGui.QIcon('icon/images.png'))
-            size = QtCore.QSize(25, 25)
-            btn_ac_images.setIconSize(size)
-            #btn_ac_images.clicked.connect(self.edit)
-        
-
-            #add to table
-            self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_images)	
-        '''
-
-
 
     def UpdateProgressPercent(self, index):
+
+        '''this function gets row number of table as input, and update the progress percentages when user changes it'''
         
         #get customer ID from selected row 
         r = self.tableWidget.currentRow()
@@ -3063,12 +3048,11 @@ class TableView(QDialog):
 
     def delete(self):
 
+        '''this function deletes an order's details using customer'''
 
         r = self.tableWidget.currentRow()
         customer_id = self.tableWidget.item(r,0).text()
         customer_name = self.tableWidget.item(r,2).text()
-        #print(customer_id)
-
         
         msgBox = QMessageBox()
         msgBox.setIcon(QMessageBox.Information)
@@ -3076,23 +3060,20 @@ class TableView(QDialog):
         msgBox.setWindowTitle("Delete Customer")
         msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     
-
+                
+        #delete from database
         returnValue = msgBox.exec()
         if returnValue == QMessageBox.Ok:
             self.deletecustomer(customer_id=customer_id)
         
-                    
-            
 
-        #delete from table 
-        
-
-        
         #refresh automatically
         self.loaddata(customer_name= "")
     
 
     def edit(self): 
+
+        '''this function gets the customer id of row selected and send it to MainWindow'''
 
         r = self.tableWidget.currentRow()
 
@@ -3107,13 +3088,18 @@ class TableView(QDialog):
 
 
     def search(self):
+
+        '''this function shows search dialog for user to input customer name and sends it to 
+        view orders dialog for searching'''
+
         self.Searchdlg = SearchDialog()
         self.Searchdlg.customer_name.connect(self.loaddata)
         self.Searchdlg.exec_()
 
     def EditCustomerID(self, customer_id):
+
+        ''' this function recieves customer id as input, and relays it to another function'''
         
-        #print(customer_id)
         self.customerEditID.emit(
             customer_id
         )
@@ -3149,7 +3135,6 @@ class TableView(QDialog):
                 sql_select_query = 'SELECT type FROM materials WHERE customer_id ='+str(delrol)
                 cursor.execute(sql_select_query)
                 clothes_type = cursor.fetchone()
-                #print('clothe'+ clothes_type[0])
 
                 if clothes_type[0] == "សំពត់":
                     table = 'skirt_measurements'
@@ -3175,23 +3160,19 @@ class TableView(QDialog):
                 cursor.execute(postgres_delete_query)
                 print(count, "Record deleted successfully in materials table")
 
-                
-                
-                #self.close()
                 QMessageBox.information(QMessageBox(),'Successful','Deleted From Table Successful')
 
             except Exception:
 
-                
-                #self.close()
                 QMessageBox.warning(QMessageBox(), 'Error', 'Could not Delete customer from the database.')
 
 
 
 
 
-#dialog class to search for customer's orders
+
 class SearchDialog(QDialog):
+    '''dialog class to search for customer's orders'''
 
     customer_name = QtCore.pyqtSignal(str)
 
@@ -3216,8 +3197,6 @@ class SearchDialog(QDialog):
         layout = QVBoxLayout()
 
         self.searchinput = QLineEdit()
-        #self.onlyInt = QtGui.QIntValidator()
-        #self.searchinput.setValidator(self.onlyInt)
         self.searchinput.setFont(SmallKhmerFont)
         self.searchinput.setPlaceholderText("ឈ្មោះអតិធិជន")
         layout.addWidget(self.searchinput)
@@ -3239,22 +3218,22 @@ class SearchDialog(QDialog):
 
             self.close()
 
-# Create a Controller class to connect the GUI and database
+
 class appController:
-    """Controller class."""
+
+    """Controller class to receive signal from MainWindow, and connect to functions in MainWindow"""
+
     def __init__(self, view):
         """Controller initializer."""
         
         self._view = view
+
         # Connect signals and slots
         self._connectSignals()
 
-        #interact with database here
- 
 
-            
     def _connectSignals(self):
-        """Connect signals and slots."""
+        """Connect signals and slots in MainWindow"""
     
         #check that all required inputs are entered by user
         self._view.Submit.clicked.connect(self._view.checkRequiredInputs)	
@@ -3382,6 +3361,7 @@ def insertDressMeasurements(order_id, customer_id, around_bust, neck_armhold,dre
     upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, update):
 
     '''function to insert Order details to dress_measurement tables'''
+
     table = 'dress_measurements'
     
     if update == 0:
@@ -3411,6 +3391,7 @@ def insertShirtMeasurements(order_id, customer_id, around_bust, neck_armhold,dre
     upper_hips, armpit, sleeve_length, bust_height, update):
 
     '''function to insert Order details to shirt_measurement tables'''
+
     table = 'shirt_measurements'
     
     if update == 0:
@@ -3487,26 +3468,16 @@ def insertMaterial(order_id, customer_id, type_clothes, material, color, style, 
         print(count, "Record updated successfully into materials table")
 
 def InsertUploadDir(PicDir, customer_id): 
+
     '''this function takes in a picture directory, and inserts it into the uploads column in orders table'''
     
-  
     #add 1 entry to table
     postgres_insert_query = f"UPDATE orders SET uploads = array_cat(uploads, '{{ {PicDir} }}') WHERE customer_id = {customer_id}"
-    #record_to_insert = (PicDir)
     cursor.execute(postgres_insert_query)
     connection.commit()
     count = cursor.rowcount
     print(count, "picture dir inserted successfully into orders table")
 
-    '''
-    else: 
-        postgres_update_query = 'UPDATE %s SET skirt_length = %s , skirt_waist = %s, skirt_hip = %s WHERE customer_id = %s'
-        record_to_update = (AsIs(table), skirt_length, skirt_waist, skirt_hip, customer_id)
-        cursor.execute(postgres_update_query, record_to_update)
-        connection.commit()
-        count = cursor.rowcount
-        print(count, "Record updated successfully into skirt table")
-    '''
 
 def getCustomerID(): 
 
@@ -3516,17 +3487,19 @@ def getCustomerID():
     record_to_getID = ('customers', 'ID')
     cursor.execute(postgres_getID_query, record_to_getID)
     customerID = cursor.fetchone()
-    print(customerID, 'is customer ID for this order')
+    #print(customerID, 'is customer ID for this order')
 
     return customerID
 
 def DeleteUploadPic(pic_dir, customer_id): 
+    
+    '''function to delete one picture directory given using given customer id'''
 
     postgres_delete_query = f"UPDATE orders SET uploads = array_remove(uploads, '{pic_dir}') WHERE customer_id = {customer_id}"
     connection.commit()
     count = cursor.rowcount
     cursor.execute(postgres_delete_query)
-    print(count, "picture dir remaining in customers table after delete")
+    print(count, "picture directory deleted")
 
 
 
@@ -3539,13 +3512,14 @@ def getOrderID():
     record_to_getID = ('orders', 'ID')
     cursor.execute(postgres_getID_query, record_to_getID)
     orderID = cursor.fetchone()
-    print(orderID, 'is order ID for this order')
+    #print(orderID, 'is order ID for this order')
 
     return orderID
 
 def FetchOrdersDetailsEdit(customer_id): 
     
-    '''this function takes in customer ID, and then fetch one order's detail with that customer ID into a dictionary and returns the dictionary with all details'''
+    '''this function takes in customer ID, and then fetch one order's detail with that customer ID into a dictionary 
+    and returns the dictionary with all details'''
 
     #dictionary to store 1 order details
     order_details = dict()
@@ -3557,7 +3531,8 @@ def FetchOrdersDetailsEdit(customer_id):
     all_rows = cursor.fetchone()
 
     if all_rows != None: 
-    #add to dict
+
+        #add to dict
         order_details['price'] = all_rows[0]
         order_details['customer_name'] = all_rows[1]
         order_details['staff'] = all_rows[2]
@@ -3573,8 +3548,6 @@ def FetchOrdersDetailsEdit(customer_id):
         all_rows = cursor.fetchone()
 
         #add to dict
-        
-        
         order_details['address'] = all_rows[0]
         order_details['telephone'] = all_rows[1]
         
@@ -3665,16 +3638,6 @@ def FetchOrdersDetailsEdit(customer_id):
     
     return order_details
 
-
-
-
-
-
-
-    
-    
-     
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -3683,6 +3646,7 @@ if __name__ == "__main__":
     #import fonts
     _id1 = QtGui.QFontDatabase.addApplicationFont("font/KhmerOSNew-Regular.ttf")
     _id2 = QtGui.QFontDatabase.addApplicationFont("font/KhmerOSNew-Bold.ttf")
+    #print font that is used in console
     print(QtGui.QFontDatabase.applicationFontFamilies(_id1))
 
     ui = Ui_MainWindow()
