@@ -950,12 +950,11 @@ class Ui_MainWindow(object):
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(800, 600)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
-        #self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
         
         #default
 
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg)")
-        
+        self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
+        self.RadioPicLabel.setScaledContents(True)
         self.InseamBox.setReadOnly(True)
         self.InseamBox.setStyleSheet("QLineEdit"
                                 "{"
@@ -1301,7 +1300,7 @@ class Ui_MainWindow(object):
             #print(dest_folder)
             orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+            self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
             self.RadioPicLabel.setPixmap(pixmap_resized)
 
             self.selected_pic = NumPicUploaded - 1
@@ -1458,12 +1457,9 @@ class Ui_MainWindow(object):
         if len(self.uploaded_pictures_dir_list) > 0: 
             orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[pic_num])
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-            self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
             self.RadioPicLabel.setPixmap(pixmap_resized)
         else: 
             
-            #self.ResetRadioButtons()
-
             #index for delete
             self.selected_pic = 0
 
@@ -1476,7 +1472,8 @@ class Ui_MainWindow(object):
 
         #default selection
         self.clothes_type = "អាវ"
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+        self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
+        #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2")
 
         #clear text all boxes
         _translate = QtCore.QCoreApplication.translate
@@ -1673,7 +1670,7 @@ class Ui_MainWindow(object):
                 #skirt
                 
                 if len(self.uploaded_pictures_dir_list) == 0: 
-                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/skirt.jpg);")
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/skirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
                 
             
                 #set readonly in boxes we don't need for skirt
@@ -1789,7 +1786,7 @@ class Ui_MainWindow(object):
             elif (self.clothes_type  == "រ៉ូប"):
                     #dress
                 if len(self.uploaded_pictures_dir_list) == 0: 
-                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/dress.jpg);")
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/dress.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
 
         
                 #boxes we don't need for dress
@@ -1836,7 +1833,7 @@ class Ui_MainWindow(object):
             elif (self.clothes_type  == "អាវ"):
                 #shirt
                 if len(self.uploaded_pictures_dir_list) == 0: 
-                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
                                 #boxes we don't need for shirt
                 self.InseamBox.setReadOnly(True)
                 self.InseamBox.setStyleSheet("QLineEdit"
@@ -1890,7 +1887,7 @@ class Ui_MainWindow(object):
             elif (self.clothes_type  == "ខោ"):
                 #pant
                 if len(self.uploaded_pictures_dir_list) == 0: 
-                    self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/pant.jpg);")
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/pant.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
 
 
                 #boxes we don't need for pants
@@ -2221,7 +2218,7 @@ class Ui_MainWindow(object):
                 upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, self.updating)
 
             #return to all orders list if updating
-            #cannot because user need feedback whether submit is successful 
+            #cannot use clear input because user need feedback whether submit is successful 
             '''
             if self.updating == 1: 
                 self.clearInput()
@@ -2517,9 +2514,12 @@ class Ui_MainWindow(object):
         else: 
             QMessageBox.warning(QMessageBox(), 'Error', 'Could not find customer from the database.')
     
-  
+    def NewOrder(self): 
+        self.clearInput(ClearClicked = 0)
+    def CancelOrder(self): 
+        self.clearInput(ClearClicked = 1)
 
-    def clearInput(self): 
+    def clearInput(self, ClearClicked): 
         '''function to clear all inputs by staff'''
 
         _translate = QtCore.QCoreApplication.translate
@@ -2589,7 +2589,7 @@ class Ui_MainWindow(object):
         self.ResetRadioButtons()
         
 
-        if self.updating == 1: 
+        if (self.updating == 1 and ClearClicked == 1): 
             self.ViewAllOrders()
         
 
@@ -2623,10 +2623,12 @@ class Ui_MainWindow(object):
         #picture previews
         orig_pixmap = QPixmap('pictures/transparent.png')
         pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
-        self.RadioPicLabel.setStyleSheet('background-color: #B2E2F2; margin-left: 125%')
+        #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
+        self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2")
+        self.RadioPicLabel.setScaledContents(True)
         self.RadioPicLabel.setPixmap(pixmap_resized)
-        self.RadioPicLabel.setStyleSheet("\n""image: url(:/newPrefix/shirt.jpg);")
-
+        
+    
 
     def InsertUploadView(self):
             
@@ -3339,8 +3341,8 @@ class appController:
 
 
         #clear all inputs
-        self._view.Cancel.clicked.connect(self._view.clearInput)
-        self._view.ActionNewOrder.triggered.connect(self._view.clearInput)
+        self._view.Cancel.clicked.connect(self._view.CancelOrder)
+        self._view.ActionNewOrder.triggered.connect(self._view.NewOrder)
 
         
         #view all orders
