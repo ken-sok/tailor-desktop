@@ -24,14 +24,13 @@ SmallKhmerFont.setFamily("Khmer OS New")
 SmallKhmerFont.setPointSize(11)
 
 BigKhmerFont = QtGui.QFont()
-BigKhmerFont.setBold(True) #cannot due to some reason
+BigKhmerFont.setBold(True)
 BigKhmerFont.setFamily("Khmer OS New")
 BigKhmerFont.setPointSize(12)
 
 ENGFont = QtGui.QFont()
 ENGFont.setFamily("Palatino Linotype")
 ENGFont.setPointSize(15)
-
 
 
 '''
@@ -41,31 +40,36 @@ END OF Font FORMATTING
 
 class Ui_MainWindow(object):
 
-    #class variables for adding to database
+    #class variables for setting control flow to add to database
     #DO NOT MOVE
-    complete_input = 0
-    added_customer = 0
-    added_order = 0
-    added_material = 0 
-    added_measurements = 0 
-    #added_uploads = 0 
-    clothes_type = "អាវ"
-    updating = 0
-    customer_id = 0
-    uploaded_pictures_dir_list = []
-    new_pic_added_in_edit_list = []
-    selected_pic = 0
+    complete_input = 0 #tells when all required inputs are completed by user
+    added_customer = 0 #tells when successfully added customer
+    added_order = 0 #tells when successfully added order
+    added_material = 0  #tells when successfully added material
+    added_measurements = 0 #tells when successfully added measurements
+    clothes_type = "អាវ" #tell which clothes type is selected by user
+    updating = 0 #tell when order is being edited
+    customer_id = 0 #store customer id 
+    uploaded_pictures_dir_list = [] #list to add photo directories
+    new_pic_added_in_edit_list = [] #tell index of new photo to copy to local database folder
+    selected_pic = 0 #tell which photo is selected for viewing
 
     def setupUi(self, MainWindow):
+
+        ''' 
+        this function inherits from MainWindow class
+        and UI is setup
+        '''
 
         '''
         START OF MAIN WINDOW
         '''
-        #MainWindow.setStyleSheet("background-color: cyan")
         MainWindow.setWindowTitle("Tailor Management System")
-        #MainWindow.showMaximized()
         MainLayout = QGridLayout()
         MainLayout.setContentsMargins(10,10,10,10)
+
+
+
         '''
         START OF CUSTOMER BOX
         '''
@@ -78,16 +82,13 @@ class Ui_MainWindow(object):
         self.CustomerInfoTitle.setAutoFillBackground(False)
         self.CustomerInfoTitle.setObjectName("CustomerInfoTitle")
         
-
-
         #CustomerAddress
         self.AddressLabel = QtWidgets.QLabel()
         self.AddressLabel.setFont(SmallKhmerFont)
         self.AddressLabel.setMaximumSize(110,50)
         self.AddressLabel.setAutoFillBackground(False)
         self.AddressLabel.setObjectName("AddressLabel")
-        
-
+    
         #CustomerName
         self.CustomerNameLabel = QtWidgets.QLabel()
         self.CustomerNameLabel.setFont(SmallKhmerFont)
@@ -95,8 +96,6 @@ class Ui_MainWindow(object):
         self.CustomerNameLabel.setAutoFillBackground(False)
         self.CustomerNameLabel.setObjectName("CustomerNameLabel")
         self.CustomerNameLabel.setStyleSheet("background-color: #B2E2F2")
-
-
 
         #CustomerTelephone
         self.PhoneLabel = QtWidgets.QLabel()
@@ -133,15 +132,14 @@ class Ui_MainWindow(object):
         '''
         add to main layout
         '''
-        #customer box
 
+        #customer box
         self.CustomerBoxGroup = QtWidgets.QGroupBox()
         self.CustomerBoxGroup.setStyleSheet("background-color: #B8E2F2;")
         self.CustomerBoxGroup.setMaximumSize(550, 400)
         
         CustomerBoxLayout = QGridLayout()
-        #CustomerBoxLayout.setSpacing(10)
-        
+
         CustomerBoxLayout.addWidget(self.CustomerInfoTitle, 0, 0, 1, 1)
         
         CustomerBoxLayout.addWidget(self.CustomerNameLabel, 1, 0)
@@ -153,19 +151,11 @@ class Ui_MainWindow(object):
         CustomerBoxLayout.addWidget(self.PhoneBox, 2, 1)
         CustomerBoxLayout.addWidget(self.AddressBox, 3, 1)
 
-        
-
         self.CustomerBoxGroup.setLayout(CustomerBoxLayout)
-
-
 
         '''
         END OF Customer BOX 
         '''
-
-        
-      
-
 
         '''
         START OF Staff BOX 
@@ -206,7 +196,6 @@ class Ui_MainWindow(object):
         self.DateIcon.setIconSize(size)
         
 
-
         #user input name of staff
         self.StaffNameBox = QtWidgets.QLineEdit()
         self.StaffNameBox.setMaximumSize(300,50)
@@ -220,7 +209,6 @@ class Ui_MainWindow(object):
         self.StaffNameBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
         #label to show date chosen
-        
         self.DeadlineSelectedLabel = QtWidgets.QLabel()
         self.DeadlineSelectedLabel.setMaximumSize(300,50)
         self.DeadlineSelectedLabel.setFont(SmallKhmerFont)
@@ -228,7 +216,6 @@ class Ui_MainWindow(object):
         self.DeadlineSelectedLabel.setAutoFillBackground(True)
         self.DeadlineSelectedLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.DeadlineSelectedLabel.setObjectName("DeadlineSelectedLabel")
-
 
         #label to send date to database
         #not in Ui
@@ -241,16 +228,12 @@ class Ui_MainWindow(object):
         self.DeadlineBox.setObjectName("DeadlineBox")
         #not in Ui
 
-
-
         #staff box 
-
         self.StaffBoxGroup = QtWidgets.QGroupBox()
         self.StaffBoxGroup.setMaximumSize(550,400)
         self.StaffBoxGroup.setStyleSheet("background-color: #B8E2F2; ")
 
         StaffBoxLayout = QGridLayout()
-        #StaffBoxLayout.setSpacing(10)
         
         StaffBoxLayout.addWidget(self.StaffTitle, 0, 0)
         
@@ -271,16 +254,15 @@ class Ui_MainWindow(object):
 
         self.StaffBoxGroup.setLayout(StaffBoxLayout)
 
-        
                
         '''
         END OF Staff BOX 
         '''
 
+
         '''
         START OF CUSTOMER PREFERENCES BOX
         '''
-
 
         self.CustomerPreferencesTitle = QtWidgets.QLabel()
         self.CustomerPreferencesTitle.setMaximumSize(200,50)
@@ -334,9 +316,7 @@ class Ui_MainWindow(object):
         self.StyleBox.setObjectName("StyleBox")
         self.StyleBox.setStyleSheet("background-color: white; border: 1px solid blue;")
 
-        
-
-                
+    
         #preferences box
         self.PreferencesBoxGroup = QtWidgets.QGroupBox()
         self.PreferencesBoxGroup.setMaximumSize(550,400)
@@ -356,8 +336,6 @@ class Ui_MainWindow(object):
 
         self.PreferencesBoxGroup.setLayout(PreferencesBoxLayout)
 
-        #MainLayout.addWidget(self.PreferencesBoxGroup, 0, 1)
-
         self.TopColGroup = QHBoxLayout()
         self.TopColGroup.addWidget(self.CustomerBoxGroup)
         self.TopColGroup.addWidget(self.PreferencesBoxGroup)
@@ -374,7 +352,6 @@ class Ui_MainWindow(object):
         START OF SPECIAL REQ BOX
         '''
 
-
         self.SpecialReqTitle = QtWidgets.QLabel()
         self.SpecialReqTitle.setFont(BigKhmerFont)
         self.SpecialReqTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -390,12 +367,10 @@ class Ui_MainWindow(object):
         #special req box
         
         self.SpecReqBoxGroup = QtWidgets.QGroupBox()
-        #self.SpecReqBoxGroup.setMaximumSize(550,400)
         self.SpecReqBoxGroup.setStyleSheet("background-color: #B8E2F2; ")
 
         SpecReqBoxLayout = QGridLayout()
     
-
         SpecReqBoxLayout.addWidget(self.SpecialReqTitle, 0, 0)
         SpecReqBoxLayout.addWidget(self.SpecialReqBox, 1, 0)
         
@@ -685,22 +660,18 @@ class Ui_MainWindow(object):
         self.AFBox.setAlignment(QtCore.Qt.AlignCenter)
         self.AFBox.setObjectName("AFBox")
         self.ShirtDressSkirtLayout.addWidget(self.AFBox, 1, 4, 1, 1,)
-        
-
+    
         self.CenterBackBox = QtWidgets.QLineEdit()
         self.CenterBackBox.setAlignment(QtCore.Qt.AlignCenter)
         self.CenterBackBox.setObjectName("CenterBackBox")
         self.ShirtDressSkirtLayout.addWidget(self.CenterBackBox, 4, 1, 1, 1)
         
 
-        
         self.UpperHipsBox = QtWidgets.QLineEdit()
         self.UpperHipsBox.setAlignment(QtCore.Qt.AlignCenter)
         self.UpperHipsBox.setObjectName("UpperHipsBox")
         self.ShirtDressSkirtLayout.addWidget(self.UpperHipsBox, 5, 7, 1, 1)
 
-
-        
         self.ArmpitBox = QtWidgets.QLineEdit()
         self.ArmpitBox.setAlignment(QtCore.Qt.AlignCenter)
         self.ArmpitBox.setObjectName("ArmpitBox")
@@ -729,8 +700,6 @@ class Ui_MainWindow(object):
         self.AFLabel.setObjectName("AFLabel")
         self.ShirtDressSkirtLayout.addWidget(self.AFLabel, 1, 3, 1, 1, QtCore.Qt.AlignHCenter)
         
-
-
         self.CenterBackLabel = QtWidgets.QLabel()
         self.CenterBackLabel.setFont(SmallKhmerFont)
         self.CenterBackLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -752,10 +721,8 @@ class Ui_MainWindow(object):
         self.PantGroupBox.setObjectName("PantGroupBox")
         self.PantGroupBox.setFont(BigKhmerFont)
         
-
         self.PantGroupLayout = QtWidgets.QGridLayout()
         self.PantGroupLayout.setObjectName("PantGroupLayout")
-
 
         self.ThighLabel = QtWidgets.QLabel()
         self.ThighLabel.setFont(SmallKhmerFont)
@@ -776,6 +743,7 @@ class Ui_MainWindow(object):
         self.InseamLabel.setFont(SmallKhmerFont)
         self.InseamLabel.setObjectName("InseamLabel")
         self.PantGroupLayout.addWidget(self.InseamLabel, 3, 0, 1, 1)
+
         self.InseamBox = QtWidgets.QLineEdit()
         self.InseamBox.setAlignment(QtCore.Qt.AlignCenter)
         self.InseamBox.setObjectName("InseamBox")
@@ -887,7 +855,6 @@ class Ui_MainWindow(object):
         self.PantGroupBox.setLayout(self.PantGroupLayout)
 
 
-                
         #measurements group
         
         MainLayout.addWidget(self.ShirtDressSkirtBox, 2, 0)
@@ -913,24 +880,20 @@ class Ui_MainWindow(object):
         self.ShirtRadio = QtWidgets.QRadioButton()
         self.ShirtRadio.setFont(SmallKhmerFont)
         self.ShirtRadio.setChecked(True)
-
         self.ShirtRadio.setObjectName("ShirtRadio")
-        #self.ShirtRadio.setLayoutDirection(Qt.RightToLeft)
-        
+
+    
         self.DressRadio = QtWidgets.QRadioButton()
         self.DressRadio.setFont(SmallKhmerFont)
-        
         self.DressRadio.setObjectName("DressRadio")
         
 
         self.PantRadio = QtWidgets.QRadioButton()
         self.PantRadio.setFont(SmallKhmerFont)
-        
         self.PantRadio.setObjectName("PantRadio")
 
         self.SkirtRadio = QtWidgets.QRadioButton()
         self.SkirtRadio.setFont(SmallKhmerFont)
-        
         self.SkirtRadio.setObjectName("SkirtRadio")
         
         self.RadioGroupBoxLayout.addWidget(self.ShirtRadio)
@@ -938,21 +901,17 @@ class Ui_MainWindow(object):
         self.RadioGroupBoxLayout.addWidget(self.PantRadio)
         self.RadioGroupBoxLayout.addWidget(self.SkirtRadio)
 
-        
-
         self.PreviewGroupLayout = QtWidgets.QVBoxLayout()
 
         #layout for picture and delete button
         self.PictureAndDeleteLayout = QHBoxLayout()
-
 
         #add widgets for 4 pictures
         self.RadioPicLabel = QtWidgets.QLabel()
         self.RadioPicLabel.setMaximumSize(800, 600)
         self.RadioPicLabel.setObjectName("RadioPicLabel")
         
-        #default
-
+        #default settings for picture preview
         self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
         self.RadioPicLabel.setScaledContents(True)
         self.InseamBox.setReadOnly(True)
@@ -1007,9 +966,6 @@ class Ui_MainWindow(object):
         self.PreviewGroupLayout.addLayout(self.RadioGroupBoxLayout)
 
 
-        #btn_ac_delete.setMaximumSize(30,30)
-
-        #btn_ac_delete.clicked.connect(self.delete)
         self.DeletePictureShownButton = QtWidgets.QPushButton()
         self.DeletePictureShownButton.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.DeletePictureShownButton.setAutoFillBackground(False)
@@ -1019,17 +975,12 @@ class Ui_MainWindow(object):
         self.DeletePictureShownButton.setIconSize(size)
         self.DeletePictureShownButton.setMaximumSize(size)
 
-        
-        #self.PictureAndDeleteLayout.addWidget(self.RadioPicLabel)
-        #self.PictureAndDeleteLayout.addWidget(self.DeletePictureShownButton)
 
-        #self.PreviewGroupLayout.addLayout(self.PictureAndDeleteLayout)
         self.PreviewGroupLayout.addWidget(self.DeletePictureShownButton)
         self.PreviewGroupLayout.addWidget(self.RadioPicLabel)
         
 
         #uploads group
-        
         self.UploadGroupLayout = QtWidgets.QHBoxLayout()
         
         self.Upload = QtWidgets.QPushButton()
@@ -1055,7 +1006,6 @@ class Ui_MainWindow(object):
         
         self.UploadGroupFourButtons = QGroupBox()
         self.UploadGroupFourButtons.setMaximumSize(300,60)
-        #self.UploadGroupFourButtons.setExclusive(True)
 
         UploadGroupFourButtonsLayout = QHBoxLayout()
         
@@ -1071,21 +1021,10 @@ class Ui_MainWindow(object):
         self.UploadButtonThree.clicked.connect(self.select_upload_pic)
         self.UploadButtonFour.clicked.connect(self.select_upload_pic)
     
-
-        #self.UploadGroupFourButtons.buttonClicked.connect(self.select_upload_pic)
         self.UploadGroupLayout.addWidget(self.Upload)
         self.UploadGroupLayout.addWidget(self.UploadGroupFourButtons)
         
-        '''
-        self.UploadGroupLayout.addWidget(self.UploadButtonOne)
-        self.UploadGroupLayout.addWidget(self.UploadButtonTwo)
-        self.UploadGroupLayout.addWidget(self.UploadButtonThree)
-        self.UploadGroupLayout.addWidget(self.UploadButtonFour)
-        '''
         self.PreviewGroupLayout.addLayout(self.UploadGroupLayout)
-
-
-        #self.PreviewGroupLayout.addWidget(self.Upload)
 
         PriceLayout = QHBoxLayout()
 
@@ -1147,7 +1086,6 @@ class Ui_MainWindow(object):
 
         ''' END OF Submit & Cancel '''
 
-
         self.PreviewGroupBox.setLayout(self.PreviewGroupLayout)
         
         '''
@@ -1160,12 +1098,7 @@ class Ui_MainWindow(object):
         MainLayout.addWidget(self.PreviewGroupBox, 0, 2, 3, 2)
 
         
-       
-
-        
-
-
-        #column strech
+        #column streches
         MainLayout.setColumnStretch(0,1)
         MainLayout.setRowStretch(2, 3)
         MainLayout.setColumnStretch(1,2)
@@ -1178,15 +1111,10 @@ class Ui_MainWindow(object):
         widget.setLayout(MainLayout)
         MainWindow.setCentralWidget(widget)
 
-        #####show all widgets above
-        #MainWindow.RaiseWidgets()
-        
-  
-
 
         #menu bar
 
-        #action 
+        #actions in menubar
         self.ActionNewOrder = QtWidgets.QAction(MainWindow)
         self.ActionNewOrder.setObjectName("ActionNewOrder")
         self.ActionNewOrder.setFont(SmallKhmerFont)
@@ -1200,18 +1128,14 @@ class Ui_MainWindow(object):
         self.ActionAbout.setFont(SmallKhmerFont)
         self.ActionAbout = QtWidgets.QAction(MainWindow)
         
-        
-
         #create menubar
 
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 20))
         self.menubar.setObjectName("menubar")
         self.menubar.setFont(SmallKhmerFont)
-    
-
-        
-        #add actions to
+            
+        #add actions to menubar
 
         self.menubar.addAction(self.ActionNewOrder)
         self.menubar.addAction(self.ActionViewAllOrders)
@@ -1220,7 +1144,7 @@ class Ui_MainWindow(object):
         #put menubar into main window
         MainWindow.setMenuBar(self.menubar)
 
-    
+
 
         '''
         START OF connect slots and signals for Ui 
@@ -1239,65 +1163,16 @@ class Ui_MainWindow(object):
         '''
         END OF connect slots and signals
         '''
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     
-    def RaiseWidgets(self): 
-        self.DeadlineBox.raise_()
-        self.SpecialReqBackground.raise_()
-        self.StaffInfoBackground.raise_()
-        self.CustomerPrefGroupBackground.raise_()
-        self.CustomerInfoGroupBackground.raise_()
-        self.StaffNameBox.raise_()
-        self.DeadlineSelectedLabel.raise_()
-        self.DateIcon.raise_()
-        self.ShirtDressSkirtBox.raise_()
-        self.StaffTitle.raise_()
-        self.PhoneLabel.raise_()
-        self.DeadlineLabel.raise_()
-        self.MeasurementTitle.raise_()
-        self.CustomerInfoTitle.raise_()
-        self.ColorLabel.raise_()
-        self.StaffNameLabel.raise_()
-        self.StyleLabel.raise_()
-        self.MaterialsLabel.raise_()
-        self.AddressLabel.raise_()
-        self.CustomerNameLabel.raise_()
-        self.CustomerPreferencesTitle.raise_()
-        self.Cancel.raise_()
-        self.Upload.raise_()
-        self.Submit.raise_()
-        self.PriceBox.raise_()
-        self.PriceLabel.raise_()
-        self.HorizLine.raise_()
-        self.SpecialReqTitle.raise_()
-        #self.PreviewTitle.raise_()
-        self.ShirtRadio.raise_()
-        self.DressRadio.raise_()
-        self.PantRadio.raise_()
-        self.line_2.raise_()
-        self.SkirtRadio.raise_()
-        self.CustomerNameBox.raise_()
-        self.PhoneBox.raise_()
-        self.AddressBox.raise_()
-        self.MaterialBox.raise_()
-        self.ColorBox.raise_()
-        self.StyleBox.raise_()
-        self.SpecialReqBox.raise_()
-        self.PantGroupBox.raise_()
-        self.DeletePictureShownButton.raise_()
-    
-
     def ShowUploadPic(self): 
         
-        '''show last uploaded picture'''
-        #self.RadioPicLabel.setStyleSheet("background-color:green")
+        '''shows last uploaded picture in radiopiclabel'''
+
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
         
-        
         if NumPicUploaded > 0: 
-            #print(dest_folder)
             orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[NumPicUploaded - 1])
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
             self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
@@ -1307,12 +1182,10 @@ class Ui_MainWindow(object):
         elif NumPicUploaded == 0:
             pass 
 
-
-
-        
-
     def SetUploadPreview(self): 
         
+        '''shows small picture previews in 4 boxes below radiopiclabel'''
+
         #find len of list of destinations
         NumPicUploaded = len(self.uploaded_pictures_dir_list)
 
@@ -1334,7 +1207,8 @@ class Ui_MainWindow(object):
 
     def select_upload_pic(self): 
         
-        
+        '''displays picture when a preview icon is clicked'''
+
         Button = self.UploadGroupFourButtons.sender()
         Button = Button.objectName()
 
@@ -1374,6 +1248,7 @@ class Ui_MainWindow(object):
 
     def DeleteUploadPicMain(self): 
         
+        '''this is the main function that calls the another function (controller function) to delete selected picture'''
 
         num_pic_uploaded = len(self.uploaded_pictures_dir_list)
         print(num_pic_uploaded)
@@ -1397,17 +1272,14 @@ class Ui_MainWindow(object):
     
     def DeleteUploadPicController(self, PicNum, PicDir): 
 
+        '''this is the controller function to manage flow of program when user deletes a picture they selected'''
 
-        #delete from database if in edit mode and clicked insert
-        #might remove something that is not there
+        #delete from database if in edit mode and clicked submit
         if (self.updating == 1): 
-            print('modified list in db')
             pic_dir = self.uploaded_pictures_dir_list[PicNum]
             DeleteUploadPic(pic_dir, self.customer_id)
 
-            #delete locally
-            #Remove the specified  
-            #file path 
+            #delete local pictures
             try: 
                 os.remove(self.uploaded_pictures_dir_list[PicNum])
                 print("% s removed successfully" % self.uploaded_pictures_dir_list[PicNum]) 
@@ -1415,21 +1287,18 @@ class Ui_MainWindow(object):
                 print(error) 
                 print("File path can not be removed") 
         
-
         #delete from list of directories
         self.uploaded_pictures_dir_list.remove(self.uploaded_pictures_dir_list[PicNum])
-        print('removed list:', self.uploaded_pictures_dir_list)
-
-       
 
         #reset views
+
         #reset icon to default
         self.reset_icon()
 
         #reset preview icons according to remaining pictures
         self.SetUploadPreview()
 
-        #reset picture preview with 1st picture
+        #reset picture preview as 1st picture
         self.show_pic_preview(pic_num=0)
         
         #reset selected pic to 1st pic or reset to default img
@@ -1440,11 +1309,11 @@ class Ui_MainWindow(object):
             #cannot reset button => mess up tyype of clothes in edit
             pass
 
-        
-
-
             
     def reset_icon(self): 
+
+        '''reset picture icons to default icon picture'''
+
         self.UploadButtonOne.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
         self.UploadButtonTwo.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
         self.UploadButtonThree.setIcon(QtGui.QIcon('icon/shirt-icon.png'))
@@ -1453,28 +1322,379 @@ class Ui_MainWindow(object):
 
     def show_pic_preview(self, pic_num): 
         
-        
+        '''
+        this function takes in the index of the picture that is selected and shows it in radiopiclabel. 
+        If no picture exists, a blank radiopiclabel is shown. 
+        '''
+
         if len(self.uploaded_pictures_dir_list) > 0: 
+
             orig_pixmap = QPixmap(self.uploaded_pictures_dir_list[pic_num])
             pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
             self.RadioPicLabel.setPixmap(pixmap_resized)
+
+        #make radiopiclabel transparent if there are no pictures uploaded
         else: 
             
-            #index for delete
+            orig_pixmap = QPixmap('pictures/transparent.png')
+            pixmap_resized = orig_pixmap.scaled(self.RadioPicLabel.width(), self.RadioPicLabel.height(), QtCore.Qt.KeepAspectRatio)
+            #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
+            #self.select_pic()
+            self.RadioPicLabel.setPixmap(pixmap_resized)
+
             self.selected_pic = 0
 
         
     def select_pic(self):
         
+        '''
+        this function takes in a signal from radiobuttons, and shows a default picture 
+        if not pictures are uploaded
+        '''
 
         #should break down, this function too big
         radioBtn = self.PreviewGroupBox.sender()
 
         #default selection
         self.clothes_type = "អាវ"
-        self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2; margin: 0 30% 0 30%")
-        #self.RadioPicLabel.setStyleSheet("background-color: #B2E2F2")
+       
+        self.ResetInfoRadioChanged()
 
+        if (radioBtn.isChecked()):
+        
+            self.clothes_type = radioBtn.text()
+            if (self.clothes_type  == "សំពត់"):
+                #skirt
+                
+                if len(self.uploaded_pictures_dir_list) == 0 : 
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/skirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
+                
+                self.SetSkirtInputOnly()
+
+
+            elif (self.clothes_type  == "រ៉ូប"):
+                #dress
+                
+                if len(self.uploaded_pictures_dir_list) == 0 : 
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/dress.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
+
+                self.SetDressInputOnly()
+        
+        
+            elif (self.clothes_type  == "អាវ"):
+                #shirt
+                
+                if len(self.uploaded_pictures_dir_list) == 0 : 
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
+
+                self.SetShirtInputOnly()  
+
+            elif (self.clothes_type  == "ខោ"):
+                #pant
+                
+                if len(self.uploaded_pictures_dir_list) == 0 : 
+                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/pant.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
+
+                self.SetPantInputOnly()
+
+    def SetPantInputOnly(self): 
+        
+        '''this function sets unneeded user input boxes to readonly when pant radio button is selected'''
+        
+        self.AroundBustBox.setReadOnly(True)
+        self.AroundBustBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+
+        self.NeckArmHoldBox.setReadOnly(True)
+        self.NeckArmHoldBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+
+        self.WaistBox.setReadOnly(True)
+        self.WaistBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.ABBox.setReadOnly(True)
+        self.ABBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.HipBox.setReadOnly(True)
+        self.HipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.AboveBustBox.setReadOnly(True)
+        self.AboveBustBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.CenterFrontBox.setReadOnly(True)
+        self.CenterFrontBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.ShoulderBox.setReadOnly(True)
+        self.ShoulderBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.AFBox.setReadOnly(True)
+        self.AFBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.CenterBackBox.setReadOnly(True)
+        self.CenterBackBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.UpperHipsBox.setReadOnly(True)
+        self.UpperHipsBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.ArmpitBox.setReadOnly(True)
+        self.ArmpitBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.SkirtLengthBox.setReadOnly(True)
+        self.SkirtLengthBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+
+        self.SleeveLengthBox.setReadOnly(True)
+        self.SleeveLengthBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.BustHeightBox.setReadOnly(True)
+        self.BustHeightBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+
+    def SetShirtInputOnly(self): 
+        
+        '''this function sets unneeded user input boxes to readonly when shirt radio button is selected'''
+
+        self.InseamBox.setReadOnly(True)
+        self.InseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.OutseamBox.setReadOnly(True)
+        self.OutseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.ThighBox.setReadOnly(True)
+        self.ThighBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.PantHipBox.setReadOnly(True)
+        self.PantHipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.AnkleBox.setReadOnly(True)
+        self.AnkleBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.CalfBox.setReadOnly(True)
+        self.CalfBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.PantWaistBox.setReadOnly(True)
+        self.PantWaistBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.SkirtLengthBox.setReadOnly(True)
+        self.SkirtLengthBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.HipBox.setReadOnly(True)
+        self.HipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+
+    def SetDressInputOnly(self): 
+
+        '''this function sets unneeded user input boxes to readonly when dress radio button is selected'''
+
+        self.InseamBox.setReadOnly(True)
+        self.InseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.OutseamBox.setReadOnly(True)
+        self.OutseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.ThighBox.setReadOnly(True)
+        self.ThighBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.PantHipBox.setReadOnly(True)
+        self.PantHipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.AnkleBox.setReadOnly(True)
+        self.AnkleBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        self.CalfBox.setReadOnly(True)
+        self.CalfBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+        
+        self.PantWaistBox.setReadOnly(True)
+        self.PantWaistBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : grey;"
+                                "}")
+
+    
+    def SetSkirtInputOnly(self): 
+
+        '''this function sets unneeded user input boxes to readonly when skirt radio button is selected'''
+        
+        #set readonly in boxes we don't need for skirt
+        self.AroundBustBox.setReadOnly(True)
+        self.AroundBustBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        
+
+        self.NeckArmHoldBox.setReadOnly(True)
+        self.NeckArmHoldBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+
+        self.ABBox.setReadOnly(True)
+        self.ABBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+
+        
+        self.AboveBustBox.setReadOnly(True)
+        self.AboveBustBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        
+        self.CenterFrontBox.setReadOnly(True)
+        self.CenterFrontBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        
+        self.ShoulderBox.setReadOnly(True)
+        self.ShoulderBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.AFBox.setReadOnly(True)
+        self.AFBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.CenterBackBox.setReadOnly(True)
+        self.CenterBackBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.UpperHipsBox.setReadOnly(True)
+        self.UpperHipsBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.ArmpitBox.setReadOnly(True)
+        self.ArmpitBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+    
+
+        self.SleeveLengthBox.setReadOnly(True)
+        self.SleeveLengthBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.BustHeightBox.setReadOnly(True)
+        self.BustHeightBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        
+
+        self.InseamBox.setReadOnly(True)
+        self.InseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.OutseamBox.setReadOnly(True)
+        self.OutseamBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.ThighBox.setReadOnly(True)
+        self.ThighBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.PantHipBox.setReadOnly(True)
+        self.PantHipBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.AnkleBox.setReadOnly(True)
+        self.AnkleBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        self.CalfBox.setReadOnly(True)
+        self.CalfBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+        
+        self.PantWaistBox.setReadOnly(True)
+        self.PantWaistBox.setStyleSheet("QLineEdit"
+                                "{"
+                                "background : gray;"
+                                "}")
+    def ResetInfoRadioChanged(self): 
+
+        '''this function resets all input boxes to empty when another clothes type is selected 
+        by user'''
+        
         #clear text all boxes
         _translate = QtCore.QCoreApplication.translate
         self.AroundBustBox.setText(_translate("MainWindow", ''))
@@ -1662,319 +1882,6 @@ class Ui_MainWindow(object):
         self.PantWaistBox.setFont(SmallKhmerFont)
 
         
-        
-        if radioBtn.isChecked():
-        
-            self.clothes_type = radioBtn.text()
-            if (self.clothes_type  == "សំពត់"):
-                #skirt
-                
-                if self.uploaded_pictures_dir_list != None: 
-                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/skirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
-                
-            
-                #set readonly in boxes we don't need for skirt
-                self.AroundBustBox.setReadOnly(True)
-                self.AroundBustBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                
-
-                self.NeckArmHoldBox.setReadOnly(True)
-                self.NeckArmHoldBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-
-                self.ABBox.setReadOnly(True)
-                self.ABBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-
-                
-                self.AboveBustBox.setReadOnly(True)
-                self.AboveBustBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                
-                self.CenterFrontBox.setReadOnly(True)
-                self.CenterFrontBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                
-                self.ShoulderBox.setReadOnly(True)
-                self.ShoulderBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.AFBox.setReadOnly(True)
-                self.AFBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.CenterBackBox.setReadOnly(True)
-                self.CenterBackBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.UpperHipsBox.setReadOnly(True)
-                self.UpperHipsBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.ArmpitBox.setReadOnly(True)
-                self.ArmpitBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-            
-
-                self.SleeveLengthBox.setReadOnly(True)
-                self.SleeveLengthBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.BustHeightBox.setReadOnly(True)
-                self.BustHeightBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                
-
-                self.InseamBox.setReadOnly(True)
-                self.InseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.OutseamBox.setReadOnly(True)
-                self.OutseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.ThighBox.setReadOnly(True)
-                self.ThighBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.PantHipBox.setReadOnly(True)
-                self.PantHipBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.AnkleBox.setReadOnly(True)
-                self.AnkleBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                self.CalfBox.setReadOnly(True)
-                self.CalfBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-                
-                self.PantWaistBox.setReadOnly(True)
-                self.PantWaistBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : gray;"
-                                        "}")
-
-
-            elif (self.clothes_type  == "រ៉ូប"):
-                    #dress
-                if self.uploaded_pictures_dir_list != None: 
-                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/dress.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
-
-        
-                #boxes we don't need for dress
-                self.InseamBox.setReadOnly(True)
-                self.InseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.OutseamBox.setReadOnly(True)
-                self.OutseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.ThighBox.setReadOnly(True)
-                self.ThighBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.PantHipBox.setReadOnly(True)
-                self.PantHipBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.AnkleBox.setReadOnly(True)
-                self.AnkleBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.CalfBox.setReadOnly(True)
-                self.CalfBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.PantWaistBox.setReadOnly(True)
-                self.PantWaistBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-
-
-                
-                
-            elif (self.clothes_type  == "អាវ"):
-                #shirt
-                if self.uploaded_pictures_dir_list != None: 
-                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/shirt.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
-                                #boxes we don't need for shirt
-                self.InseamBox.setReadOnly(True)
-                self.InseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.OutseamBox.setReadOnly(True)
-                self.OutseamBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.ThighBox.setReadOnly(True)
-                self.ThighBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.PantHipBox.setReadOnly(True)
-                self.PantHipBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.AnkleBox.setReadOnly(True)
-                self.AnkleBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.CalfBox.setReadOnly(True)
-                self.CalfBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.PantWaistBox.setReadOnly(True)
-                self.PantWaistBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.SkirtLengthBox.setReadOnly(True)
-                self.SkirtLengthBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.HipBox.setReadOnly(True)
-                self.HipBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-            
-
-            elif (self.clothes_type  == "ខោ"):
-                #pant
-                if self.uploaded_pictures_dir_list != None: 
-                    self.RadioPicLabel.setStyleSheet("image: url(:/newPrefix/pant.jpg);background-color: #B2E2F2; margin: 0 30% 0 30%")
-
-
-                #boxes we don't need for pants
-                self.AroundBustBox.setReadOnly(True)
-                self.AroundBustBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-
-                self.NeckArmHoldBox.setReadOnly(True)
-                self.NeckArmHoldBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-
-                self.WaistBox.setReadOnly(True)
-                self.WaistBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.ABBox.setReadOnly(True)
-                self.ABBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.HipBox.setReadOnly(True)
-                self.HipBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.AboveBustBox.setReadOnly(True)
-                self.AboveBustBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.CenterFrontBox.setReadOnly(True)
-                self.CenterFrontBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                
-                self.ShoulderBox.setReadOnly(True)
-                self.ShoulderBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.AFBox.setReadOnly(True)
-                self.AFBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.CenterBackBox.setReadOnly(True)
-                self.CenterBackBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.UpperHipsBox.setReadOnly(True)
-                self.UpperHipsBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.ArmpitBox.setReadOnly(True)
-                self.ArmpitBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.SkirtLengthBox.setReadOnly(True)
-                self.SkirtLengthBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-
-                self.SleeveLengthBox.setReadOnly(True)
-                self.SleeveLengthBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-                self.BustHeightBox.setReadOnly(True)
-                self.BustHeightBox.setStyleSheet("QLineEdit"
-                                        "{"
-                                        "background : grey;"
-                                        "}")
-            
-
     def checkRequiredInputs(self): 
 
         '''This function is for checking that all required fields are given by user before interaction with database'''
@@ -2011,18 +1918,8 @@ class Ui_MainWindow(object):
         self.PantRadio.setStyleSheet("color: black; background-color: light grey")
         self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
 
-        '''
-        #why? 
-        
-        self.SkirtRadio.setChecked(False)
-        self.PantRadio.setChecked(False)
-        self.DressRadio.setChecked(False) 
 
-        #default 
-        self.ShirtRadio.setChecked(True)
-        '''
         
-
         if (price == "" or customer_name == "" or deadline == "សូមចុចរូបប្រតិទិន" or telephone == "" or style == "" or material == ""  or color == ""
         or clothes_type == ""): 
 
@@ -2073,12 +1970,17 @@ class Ui_MainWindow(object):
             address = self.AddressBox.toPlainText()
             telephone = self.PhoneBox.text()
             
+            
             if self.updating == 0: 
+
+                #dummy customer id for inserting 
                 customer_id = 0 
+
             else: 
                 customer_id = self.customer_id
 
             insertCustomer(customer_name, address, telephone, self.updating, customer_id)
+
             self.added_customer = 1
 
 
@@ -2086,6 +1988,9 @@ class Ui_MainWindow(object):
     def insertOrderDetails(self): 
         
         '''this function is controller for inserting order details to database'''
+
+        #check that all required inputs are given by user, and customer is added to database before
+        #adding order
 
         if ((self.complete_input == 1) and (self.added_customer == 1)): 
             
@@ -2100,16 +2005,19 @@ class Ui_MainWindow(object):
             #get customer ID
             if self.updating == 0:
                 customer_id = getCustomerID()
+
             else: 
+                #use customer id gotten by FetchOrderDetails() when updating
                 customer_id = self.customer_id
 
             insertOrder(price, customer_name, staff, deadline, progress, customer_id, req, self.updating)
 
             self.added_order = 1
 
-
-            #bug starts here
+            #copy new photos to an organized folder for tailor shop pictures only
             self.CopyNewPhotosToDirController()
+
+            #insert directory of pictures to database
             self.InsertUploadDetails()
 
             
@@ -2117,6 +2025,7 @@ class Ui_MainWindow(object):
     def insertMaterialDetails(self): 
         '''this function is controller for inserting material details to database'''
         
+        #check if all required inputs are given, order and customer is added before inserting material details to database
         if ((self.complete_input == 1) and (self.added_order == 1) and (self.added_customer == 1)): 
         
             clothes_type = self.clothes_type
@@ -2124,17 +2033,18 @@ class Ui_MainWindow(object):
             color = self.ColorBox.text()
             material = self.MaterialBox.text()
             
-            #get order id
+            #get order and customer id 
             if self.updating == 0:
                 order_id = getOrderID()
                 customer_id = getCustomerID()
             else: 
+
+                #use customer id gotten by FetchOrderDetails() when updating
                 customer_id = self.customer_id
+                #pass dummy order id when updating
                 order_id = 0
             
-            #pass dummy order id when updating
-            
-
+           
             insertMaterial(order_id, customer_id, clothes_type, material, color, style, self.updating)
             self.added_material = 1
 
@@ -2145,15 +2055,17 @@ class Ui_MainWindow(object):
         #get clothes type 
         clothes_type = self.clothes_type
         
-        #make sure all required inputs are complete
+        #make sure all required inputs are complete, and order, customer, materials details are added
         if ((self.complete_input == 1) and (self.added_order == 1) and (self.added_customer == 1) and (self.added_material == 1)): 
 
-            #check if we are updating or inserting new entry
+            #get customer & order id
             if self.updating == 0:
                 order_id = getOrderID()
                 customer_id = getCustomerID()
             else: 
+                #dummy order id
                 order_id = 0
+                #use customer id gotten by FetchOrderDetails() when updating
                 customer_id = self.customer_id
 
             if clothes_type == "សំពត់":
@@ -2217,20 +2129,15 @@ class Ui_MainWindow(object):
                 insertDressMeasurements(order_id, customer_id, around_bust, neck_armhold,dress_waist,ab, above_bust, center_front, shoulder, af, center_back, 
                 upper_hips, armpit, sleeve_length, bust_height, hip, skirt_length, self.updating)
 
-            #return to all orders list if updating
-            #cannot use clear input because user need feedback whether submit is successful 
-            '''
-            if self.updating == 1: 
-                self.clearInput()
-            ''' 
             self.added_measurements = 1
 
-
-            #self.upload = 1
 
 
 
     def feedbackSubmit(self, completed): 
+        
+        '''this functions gets the status if user has completed all required information(completed), and give feedback to user'''
+
         _translate = QtCore.QCoreApplication.translate
         
         #clear old messages
@@ -2242,6 +2149,9 @@ class Ui_MainWindow(object):
             self.SubmitMsg.setText(_translate("MainWindow", "ប្រតិបត្តិការបរាជ័យ!សូមបំពេញព័ត៌មានបន្ថែម"))
 
     def retranslateUi(self, MainWindow):
+        
+        '''this function set the text display in Mainwindow'''
+        
         _translate = QtCore.QCoreApplication.translate
         self.StaffTitle.setText(_translate("MainWindow", "ព័ត៌មានបុគ្គលិក"))
         self.PhoneLabel.setText(_translate("MainWindow", "លេខទូរស័ព្ទ:"))
@@ -2499,7 +2409,10 @@ class Ui_MainWindow(object):
             self.PriceBox.setText(_translate("MainWindow", str(OrderDetails['price'])))
             
             #pictures module
-            self.uploaded_pictures_dir_list = OrderDetails['uploads']
+            if OrderDetails['uploads'] != None: 
+                self.uploaded_pictures_dir_list = OrderDetails['uploads']
+            else: 
+                self.uploaded_pictures_dir_list = list()
             
             #reset selected picture
             self.selected_pic = 0 
@@ -2513,6 +2426,11 @@ class Ui_MainWindow(object):
             else: 
                 pass
             
+            
+            self.ShirtRadio.setEnabled(False)
+            self.DressRadio.setEnabled(False)
+            self.SkirtRadio.setEnabled(False)
+            self.PantRadio.setEnabled(False)
 
             self.updating = 1
         else: 
@@ -2606,19 +2524,22 @@ class Ui_MainWindow(object):
         self.PantRadio.setStyleSheet("color: black; background-color: light grey")
         self.DressRadio.setStyleSheet("color: black; background-color: light grey") 
         
+        self.SkirtRadio.setEnabled(True)
         self.SkirtRadio.setAutoExclusive(False)
         self.SkirtRadio.setChecked(False)
         self.SkirtRadio.setAutoExclusive(True)
 
+        self.PantRadio.setEnabled(True)
         self.PantRadio.setAutoExclusive(False)
         self.PantRadio.setChecked(False)
         self.PantRadio.setAutoExclusive(True)
 
+        self.DressRadio.setEnabled(True)
         self.DressRadio.setAutoExclusive(False)
         self.DressRadio.setChecked(False) 
         self.DressRadio.setAutoExclusive(True)
 
-        
+        self.ShirtRadio.setEnabled(True)
         self.ShirtRadio.setAutoExclusive(False)
         self.ShirtRadio.setChecked(True)
         self.ShirtRadio.setAutoExclusive(True)
@@ -2655,20 +2576,29 @@ class Ui_MainWindow(object):
         fileName, _ = QFileDialog.getSaveFileName(dialog,"Upload Image","","Images (*.png *jpeg *.jpg *jfif *bmp *gif)")
         
         if fileName:
-            NumPicUploaded = len(self.uploaded_pictures_dir_list)
-            if  ( NumPicUploaded < 4 ): 
+
+            if (self.uploaded_pictures_dir_list): 
+                
+                NumPicUploaded = len(self.uploaded_pictures_dir_list)
+            
+                if ( NumPicUploaded < 4 ): 
+                
+                    self.uploaded_pictures_dir_list.append(fileName)
+
+                    OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
+
+                    return OldFile
+
+            else: 
                 
                 self.uploaded_pictures_dir_list.append(fileName)
 
-                OldFile = self.uploaded_pictures_dir_list[NumPicUploaded - 1]
+                OldFile = self.uploaded_pictures_dir_list[0]
 
                 return OldFile
 
-            else: 
-                return False
 
         return False
-                
 
     def CopyNewPhotosToDirController(self): 
 
@@ -3161,7 +3091,7 @@ class TableView(QDialog):
         #refresh automatically
         self.loaddata(customer_name= "")
     
-    #@QtCore.pyqtSlot()
+
     def edit(self): 
 
         r = self.tableWidget.currentRow()
@@ -3169,7 +3099,6 @@ class TableView(QDialog):
         #using as temporary in place of order id
         customer_id = self.tableWidget.item(r,0).text()
 
-            
         #send customer id to submit order window 
 
         self.EditCustomerID(customer_id=customer_id)
