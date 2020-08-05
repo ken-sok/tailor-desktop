@@ -2113,7 +2113,7 @@ class Ui_MainWindow(object):
 
 
             #bug starts here
-            self.CopyPhotosToDir()
+            self.CopyNewPhotosToDirController()
             self.InsertUploadDetails()
 
             
@@ -2666,7 +2666,7 @@ class Ui_MainWindow(object):
         return False
                 
 
-    def CopyPhotosToDir(self): 
+    def CopyNewPhotosToDirController(self): 
 
         '''copy and rename all inserted photo dirs in list'''
 
@@ -2676,57 +2676,10 @@ class Ui_MainWindow(object):
             
             dest_path =  "D:/tailor-store-pic/"
             dest_path += (str(order_id[0])+"/")
+            self.CopyNewPhotosToDir(dest_path = dest_path)
             
-
-            try: 
-                
-                i = 1
-                
-                for old_dir in self.uploaded_pictures_dir_list: 
-
-                    #get original image name 
-                    old_dir_list = old_dir.split('/')
-                    old_img_name = old_dir_list[-1]
-
-                    #make directory if folder not yet exist, then copy file to new directory
-                    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-
-                    #print(old_dir, dest_path)
-                    shutil.copy(old_dir, dest_path)
-
-                    #rename file
-                    
-                    #add suffix to image name to avoid same name error
-                    new_img_name = str (i) + '-' + old_img_name 
-                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
-
-                    #add image name to dest_path
-                    dest_path_img = dest_path + new_img_name
-
-                    #replace old destination with new ones
-                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
-                    #print('added dir' + self.uploaded_pictures_dir_list[i-1])
-
-                    #add 1 to suffix
-                    i+=1
-
-            # If source and destination are same 
-            except shutil.SameFileError: 
-                print("Source and destination represents the same file.") 
             
-            # If destination is a directory. 
-            except IsADirectoryError: 
-                print("Destination is a directory.") 
-            
-            # If there is any permission issue 
-            except PermissionError: 
-                print("Permission denied.") 
-            
-            #enable after developement done
-            # For other errors 
-            #except: 
-            #    print("Error occurred while copying file.") 
-
+        '''
         elif (self.updating == 1 and self.added_order == 1) : 
             
             order_id = self.customer_id
@@ -2736,8 +2689,10 @@ class Ui_MainWindow(object):
             
             try: 
                 i = 1
-                
+                Suffix = 'MODEL_'
                 for old_dir in self.uploaded_pictures_dir_list: 
+
+                    
                     print('i=', i)
                     print('old_dir', old_dir)
                     #break this into a function later
@@ -2745,16 +2700,18 @@ class Ui_MainWindow(object):
                     #get original image name 
                     old_dir_list = old_dir.split('/')
                     old_img_name = old_dir_list[-1]
-                    suffix = str (i) + '-'
+                    
+
+
                     #cannot use suffix here
-                    if suffix in old_img_name: 
+                    if Suffix in old_img_name: 
                         pass
 
                     else: 
                         
                         #make directory if folder not yet exist, then copy file to new directory
                         #os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-
+                        
                         #print(old_dir, dest_path)
 
                         #copy file from old dir to new dir
@@ -2763,7 +2720,7 @@ class Ui_MainWindow(object):
                         #rename file
                         
                         #add suffix to image name to avoid same name error
-                        new_img_name = suffix + old_img_name 
+                        new_img_name = Suffix + old_img_name 
                         os.rename(dest_path + old_img_name, dest_path + new_img_name)
 
                         #add image name to dest_path
@@ -2802,7 +2759,79 @@ class Ui_MainWindow(object):
             # For other errors 
             #except: 
             #    print("Error occurred while copying file.") 
+        '''
+    def CopyNewPhotosToDir(self, dest_path): 
+
+        try:         
+            i = 1
+            Suffix = 'MODEL_'
+            for old_dir in self.uploaded_pictures_dir_list: 
+
+                #get original image name 
+                old_dir_list = old_dir.split('/')
+                old_img_name = old_dir_list[-1]
+
+                #make directory, if folder not yet exist, then copy file to new directory
+                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+                #copy files from old folder to new folder
+                shutil.copy(old_dir, dest_path)
+
+                #rename file
+
+                try: 
+                    #add suffix to image name to avoid same name error
+                    new_img_name = Suffix + old_img_name 
+                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                    #add image name to dest_path
+                    dest_path_img = dest_path + new_img_name
+                    
+                    #replace old destination with new ones
+                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                    
+
+                    #add 1 to suffix
+                    i+=1
+                
+                except FileExistsError: 
+                    Suffix += 'SameFileName_'
+                    #add suffix to image name to avoid same name error
+                    new_img_name = Suffix + old_img_name 
+                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
+
+                    #add image name to dest_path
+                    dest_path_img = dest_path + new_img_name
+
+                    #replace old destination with new ones
+                    self.uploaded_pictures_dir_list[i-1] = dest_path_img
+                    
+
+                    #add 1 to suffix
+                    i+=1
+
+            
+        # If source and destination are same 
+        except shutil.SameFileError: 
+            print("Source and destination represents the same file.") 
         
+        # If destination is a directory. 
+        except IsADirectoryError: 
+            print("Destination is a directory.") 
+        
+        # If there is any permission issue 
+        except PermissionError: 
+            print("Permission denied.") 
+        
+        #enable after developement done
+        # For other errors 
+        #except: 
+        #    print("Error occurred while copying file.") 
+        
+
+            
+            
+            
         
 
     def InsertUploadDetails(self): 
@@ -2980,7 +3009,7 @@ class TableView(QDialog):
         self.tableWidget.setAlternatingRowColors(True)
         self.tableWidget.setColumnCount(self.NumCol)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(True)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
@@ -2989,6 +3018,8 @@ class TableView(QDialog):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setFont(BigKhmerFont)
         self.tableWidget.setSortingEnabled(True)
+        #add scrollbar 
+        self.tableWidget.resizeRowsToContents()
     
         layout.addWidget(self.tableWidget)
 
@@ -3130,8 +3161,7 @@ class TableView(QDialog):
             self.tableWidget.setCellWidget(row_number,(self.NumCol - 1),btn_ac_images)	
         '''
 
-        #add scrollbar 
-        self.tableWidget.resizeRowsToContents()
+
 
     def UpdateProgressPercent(self, index):
         
