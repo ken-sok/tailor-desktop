@@ -2670,7 +2670,6 @@ class Ui_MainWindow(object):
 
         '''copy and rename all inserted photo dirs in list'''
 
-        #should break this donw to smaller func
         if ((self.added_order == 1) and (self.updating == 0)) : 
             order_id = getOrderID()
             
@@ -2679,94 +2678,47 @@ class Ui_MainWindow(object):
             self.CopyNewPhotosToDir(dest_path = dest_path)
             
             
-        '''
+        
         elif (self.updating == 1 and self.added_order == 1) : 
             
             order_id = self.customer_id
-            print('order id', order_id)
+
+            #print('order id', order_id)
+
             dest_path =  "D:/tailor-store-pic/"
             dest_path += (str(order_id)+"/")
             
-            try: 
-                i = 1
-                Suffix = 'MODEL_'
-                for old_dir in self.uploaded_pictures_dir_list: 
 
-                    
-                    print('i=', i)
-                    print('old_dir', old_dir)
-                    #break this into a function later
-
-                    #get original image name 
-                    old_dir_list = old_dir.split('/')
-                    old_img_name = old_dir_list[-1]
-                    
-
-
-                    #cannot use suffix here
-                    if Suffix in old_img_name: 
-                        pass
-
-                    else: 
-                        
-                        #make directory if folder not yet exist, then copy file to new directory
-                        #os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-                        
-                        #print(old_dir, dest_path)
-
-                        #copy file from old dir to new dir
-                        shutil.copy(old_dir, dest_path)
-
-                        #rename file
-                        
-                        #add suffix to image name to avoid same name error
-                        new_img_name = Suffix + old_img_name 
-                        os.rename(dest_path + old_img_name, dest_path + new_img_name)
-
-                        #add image name to dest_path
-                        dest_path_img = dest_path + new_img_name
-
-                        #replace old destination with new ones
-                        #using i-1 can cause output errors
-                        index = i - 1
-                        self.uploaded_pictures_dir_list[index] = dest_path_img
-                        print('dest_img', dest_path_img)
-                        print('list with 1 new img', self.uploaded_pictures_dir_list)
-                          
-
-                        #note index of new dir
-                        
-                        self.new_pic_added_in_edit_list.append(index)
-                        #add 1 to suffix
-                    
-                    
-                    i+=1
-
-            # If source and destination are same 
-            except shutil.SameFileError: 
-                #need this line to combat my naming system caveat
-                print("Source and destination represents the same file. edittttt") 
-            
-            # If destination is a directory. 
-            except IsADirectoryError: 
-                print("Destination is a directory.") 
-            
-            # If there is any permission issue 
-            except PermissionError: 
-                print("Permission denied.") 
-            
-            #enable after developement done
-            # For other errors 
-            #except: 
-            #    print("Error occurred while copying file.") 
-        '''
-    def CopyNewPhotosToDir(self, dest_path): 
-
-        try:         
             i = 1
             Suffix = 'MODEL_'
             for old_dir in self.uploaded_pictures_dir_list: 
 
+                #get original image name 
+                old_dir_list = old_dir.split('/')
+                old_img_name = old_dir_list[-1]
+                
+                #cannot use suffix here
+                if Suffix in old_img_name: 
+                    pass
+
+                else: 
+                    self.CopyNewPhotosToDir(dest_path = dest_path)
+                    
+                    #note index of new dir in list
+                    index = i - 1
+                    self.new_pic_added_in_edit_list.append(index)
+
+                i+=1
+
+          
+        
+    def CopyNewPhotosToDir(self, dest_path): 
+
+        try:         
+            i = 1
+            
+            for old_dir in self.uploaded_pictures_dir_list: 
+                Suffix = 'MODEL_'
                 #get original image name 
                 old_dir_list = old_dir.split('/')
                 old_img_name = old_dir_list[-1]
@@ -2790,15 +2742,24 @@ class Ui_MainWindow(object):
                     #replace old destination with new ones
                     self.uploaded_pictures_dir_list[i-1] = dest_path_img
                     
-
                     #add 1 to suffix
                     i+=1
                 
                 except FileExistsError: 
-                    Suffix += 'SameFileName_'
-                    #add suffix to image name to avoid same name error
-                    new_img_name = Suffix + old_img_name 
-                    os.rename(dest_path + old_img_name, dest_path + new_img_name)
+                    TryAgain = True
+                    
+                    while TryAgain: 
+                        try: 
+                            Suffix += 'SameFileName_'
+                            #add suffix to image name to avoid same name error
+                            new_img_name = Suffix + old_img_name 
+                            os.rename(dest_path + old_img_name, dest_path + new_img_name)
+                            TryAgain = False
+                        except FileExistsError: 
+                            print('file exist error')
+                            TryAgain = True
+                         
+                        
 
                     #add image name to dest_path
                     dest_path_img = dest_path + new_img_name
@@ -2806,7 +2767,6 @@ class Ui_MainWindow(object):
                     #replace old destination with new ones
                     self.uploaded_pictures_dir_list[i-1] = dest_path_img
                     
-
                     #add 1 to suffix
                     i+=1
 
