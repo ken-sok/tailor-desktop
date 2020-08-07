@@ -17,13 +17,13 @@ This is a tailor store application to help make a Cambodian tailor store record 
   
 ## Achknowledgements
   - [delfstack](https://www.delftstack.com/tutorial/pyqt5)
-  - (learnpyqt)[https://www.learnpyqt.com]
-  - (realpython)[https://realpython.com/pyinstaller-python/]
-  - (postgretutorial)[https://www.postgresqltutorial.com/postgresql-python/insert/]
+  - [learnpyqt](https://www.learnpyqt.com)
+  - [realpython](https://realpython.com/pyinstaller-python/)
+  - [postgretutorial](https://www.postgresqltutorial.com/postgresql-python/insert/)
   
 ## Demo
 
-[!new order page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(247).png)
-[!view all orders page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(249).png)
+![new order page)(https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(247).png)
+![view all orders page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(249).png)
   
 
