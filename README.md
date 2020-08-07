@@ -8,7 +8,7 @@ This is a tailor store application to help make a Cambodian tailor store record 
   - PyQt5 GUI
   
 ## Features
-  - Create, view, edit, delete orders
+  - Create, view, search, edit, delete orders
   - input measurements for different women clothes type: shirt, dress, skirt, pants
   - upload 4 sketches/model pictures for order
   - set deadline for order
