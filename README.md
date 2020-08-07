@@ -1,5 +1,6 @@
-# tailor-desktop
-This is a Cambodian tailor store management application written for a Windows Desktop. 
+# tailor-store-management-appilcation
+
+This is a tailor store application to help make a Cambodian tailor store record their orders digitally. 
 
 ## Techstack
   - PostgreSQL
@@ -22,7 +23,7 @@ This is a Cambodian tailor store management application written for a Windows De
   
 ## Demo
 
-[!new order page]()
-[!view all orders page]()
+[!new order page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(247).png)
+[!view all orders page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(249).png)
   
 
