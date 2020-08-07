@@ -2,9 +2,9 @@
 This is a Cambodian tailor store management application written for a Windows Desktop. 
 
 ## Techstack
-  -PostgreSQL
-  -Python 
-  -PyQt5 GUI
+  - PostgreSQL
+  - Python 
+  - PyQt5 GUI
   
 ## Features
   -Create, view, edit, delete orders
