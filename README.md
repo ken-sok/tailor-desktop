@@ -16,7 +16,7 @@ This is a tailor store application to help make a Cambodian tailor store record 
   
   
 ## Achknowledgements
-  - (delfstack)[https://www.delftstack.com/tutorial/pyqt5]
+  - !(delfstack)[https://www.delftstack.com/tutorial/pyqt5]
   - (learnpyqt)[https://www.learnpyqt.com]
   - (realpython)[https://realpython.com/pyinstaller-python/]
   - (postgretutorial)[https://www.postgresqltutorial.com/postgresql-python/insert/]
