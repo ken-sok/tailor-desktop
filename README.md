@@ -23,7 +23,10 @@ This is a tailor store application to help make a Cambodian tailor store record 
   
 ## Demo
 
-![new order page)(https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(247).png)
+### New order Page
+![new order page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(247).png)
+
+### View orders page
 ![view all orders page](https://github.com/ken-sok/tailor-desktop/blob/master/Screenshot%20(249).png)
   
 
